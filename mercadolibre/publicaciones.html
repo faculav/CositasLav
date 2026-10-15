@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Publicaciones MercadoLibre</title>
+<style>
+  :root {
+    --bg: #f6f5f2; --card: #fff; --ink: #1a1a1a; --mute: #6b6b6b; --line: #e3e1dc;
+    --accent: #2d3277; --ok: #1f7a3d; --warn: #b5541c; --ml: #ffe600;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { position: sticky; top: 0; z-index: 5; background: var(--card); border-bottom: 1px solid var(--line); padding: 14px 16px; }
+  .bar { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; }
+  h1 { font-size: 17px; margin: 0; margin-right: auto; }
+  label.inline { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--mute); }
+  input[type=number] { width: 70px; padding: 5px 7px; border: 1px solid var(--line); border-radius: 6px; font: inherit; }
+  input.price { width: 90px; font-weight: 600; }
+  input[type=search] { padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px; font: inherit; min-width: 180px; }
+  button { font: inherit; cursor: pointer; border: 1px solid var(--line); background: var(--card); border-radius: 6px; padding: 5px 10px; }
+  button:hover { border-color: var(--ink); }
+  button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  button.copied { background: var(--ok); color: #fff; border-color: var(--ok); }
+  main { max-width: 1100px; margin: 0 auto; padding: 16px; }
+  .intro { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; }
+  .intro h2 { font-size: 14px; margin: 0 0 6px; }
+  .intro ol, .intro ul { margin: 4px 0 8px; padding-left: 20px; }
+  .progress { font-size: 13px; color: var(--mute); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 16px; margin-bottom: 14px; display: grid; grid-template-columns: 150px 1fr; gap: 16px; }
+  .card.done { opacity: .55; }
+  .card.out { opacity: .4; }
+  .photos { display: flex; flex-direction: column; gap: 6px; }
+  .photos img { width: 150px; height: 150px; object-fit: cover; border-radius: 6px; background: #eee; }
+  .photos .more { display: flex; gap: 4px; }
+  .photos .more img { width: 47px; height: 47px; }
+  .fname { font-size: 11px; color: var(--mute); word-break: break-all; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; }
+  .sku { font: 600 11px ui-monospace, monospace; background: var(--bg); padding: 2px 6px; border-radius: 4px; }
+  .title { font-size: 16px; font-weight: 600; }
+  .count { font-size: 11px; color: var(--mute); }
+  .count.bad { color: var(--warn); font-weight: 600; }
+  .meta { font-size: 13px; color: var(--mute); }
+  .meta b { color: var(--ink); font-weight: 600; }
+  .tag { font-size: 11px; padding: 1px 7px; border-radius: 10px; background: var(--ml); color: #333; }
+  .tag.warn { background: #fbe3d4; color: var(--warn); }
+  pre.desc { white-space: pre-wrap; font: 13px/1.55 system-ui, sans-serif; background: var(--bg); border-radius: 6px; padding: 10px 12px; margin: 6px 0 0; max-height: 170px; overflow: auto; }
+  .done-toggle { margin-left: auto; font-size: 13px; display: flex; gap: 6px; align-items: center; }
+  @media (max-width: 640px) {
+    .card { grid-template-columns: 1fr; }
+    .photos { flex-direction: row; flex-wrap: wrap; }
+    .photos img { width: 110px; height: 110px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <h1>Un Amargo → MercadoLibre</h1>
+    <label class="inline">Comisión ML estimada
+      <input type="number" id="fee" min="0" max="40" step="0.5" value="13" />%
+    </label>
+    <input type="search" id="q" placeholder="Buscar producto…" />
+    <label class="inline"><input type="checkbox" id="hideDone" /> Ocultar publicados</label>
+    <button class="primary" id="csvBtn">Descargar CSV</button>
+  </div>
+</header>
+
+<main>
+  <section class="intro">
+    <h2>Cómo usar esta página</h2>
+    <ol>
+      <li>En MercadoLibre: <b>Vender → Publicar producto</b>. Escribí el título (botón <i>Copiar título</i>) y ML te sugiere la categoría.</li>
+      <li>Subí las fotos que figuran en cada tarjeta (están en la carpeta <code>images/</code> del proyecto).</li>
+      <li>Pegá precio y descripción con los botones. Marcá <b>Publicado</b> para llevar la cuenta.</li>
+    </ol>
+    <ul class="meta">
+      <li><b>Precio ML</b> = precio web ÷ (1 − comisión), redondeado a terminación 90, para que te quede lo mismo que en la web. Verificá la comisión actual en ML (<i>Costos de vender</i>) y ajustala arriba. Podés editar cada precio a mano.</li>
+      <li>Las descripciones no llevan teléfonos, WhatsApp, web ni redes: ML lo prohíbe y puede pausar la publicación.</li>
+      <li>ML te va a pedir <b>medidas y peso del paquete</b> para Mercado Envíos, y en mates la <b>capacidad</b>. Esos datos no están en el sitio: tenelos a mano.</li>
+    </ul>
+    <div class="progress" id="progress"></div>
+  </section>
+  <div id="list"></div>
+</main>
+
+<script>
+const IMG = '../images/';
+
+const CURADO_CALABAZA = 'Curado (antes del primer uso): llenalo con yerba usada y agua tibia, dejalo reposar 24 horas, vacialo y raspá suavemente el interior. Repetí 2 o 3 días.';
+const CUIDADO_CALABAZA = 'Después de cada uso, vacialo y dejalo secar boca abajo. Evitá el detergente.';
+const CUIDADO_MADERA = 'Secar boca abajo después de cada uso. Evitar detergente y dejarlo en remojo.';
+const ARTESANAL = 'Al ser artesanal, cada pieza es única: la veta, el tono y la forma pueden variar levemente respecto de la foto.';
+const CUIDADO_ECO = 'Limpiar con paño húmedo.';
+
+// Un registro por publicación en ML. price = precio web en UYU.
+const LISTINGS = [
+  { sku:'UA-001', cat:'Mates', price:1990,
+    title:'Mate Algarrobo Ranchero Artesanal Madera Pintado A Mano',
+    photos:['Mate Algarrobo Ranchero frente.jpg','algarrobo-ranchero-espalda.jpg','ALGARROBO RANCHERO 3.jpg'],
+    intro:'Nuestra pieza estrella. Tallado en madera maciza de algarrobo, pintado y lijado a mano para lograr una terminación suave y uniforme. La combinación de la veta natural de la madera con el pintado exterior lo hace único en cada pieza. Liviano para el día a día, estable para que no se vuelque.',
+    feats:['Material: madera de algarrobo','Terminación: pintado y lijado a mano','Liviano y estable'],
+    care:[CUIDADO_MADERA], notes:[ARTESANAL] },
+
+  { sku:'UA-002', cat:'Mates', price:1990,
+    title:'Mate Algarrobo Oscuro Artesanal Madera Lijado A Mano',
+    photos:['algarrobo-brown.jpg'],
+    intro:'La misma madera de algarrobo del Ranchero, con una terminación más oscura que resalta la veta natural. Lijado y pintado a mano: cada pieza tiene su propio dibujo.',
+    feats:['Material: madera de algarrobo','Terminación: oscura, pintado y lijado a mano'],
+    care:[CUIDADO_MADERA], notes:[ARTESANAL] },
+
+  { sku:'UA-003', cat:'Mates', price:490,
+    title:'Mate Camionero Calabaza Natural Boca Ancha Clásico',
+    photos:['camionero-new.jpg'],
+    intro:'La calabaza de toda la vida: boca ancha para un cebado fácil, liviano en la mano y con la forma redondeada que reconoce cualquier mateador. Sin agregados, sin vueltas.',
+    feats:['Material: calabaza natural','Boca ancha','Liviano y fácil de cebar'],
+    care:[CURADO_CALABAZA, CUIDADO_CALABAZA], notes:[ARTESANAL] },
+
+  { sku:'UA-004', cat:'Mates', price:690,
+    title:'Mate Camionero Calabaza Pulida Boca Ancha Artesanal',
+    photos:['camionero-pulido.jpg'],
+    intro:'La versión tratada del clásico camionero. Calabaza seleccionada, pulida a mano para un acabado limpio y mayor durabilidad. Ideal para el uso diario.',
+    feats:['Material: calabaza pulida','Tipo: camionero, boca ancha','Pulido a mano'],
+    care:[CURADO_CALABAZA, CUIDADO_CALABAZA], notes:[ARTESANAL] },
+
+  { sku:'UA-005', cat:'Mates', price:690,
+    title:'Mate Camionero Con Virola De Alpaca Calabaza Boca Ancha',
+    photos:['camionero-virola-negro.jpg','camionero-virola-marron.jpg'],
+    variants:['Negro','Marrón'],
+    intro:'La calabaza clásica con terminación. La virola de alpaca en la boca protege el borde y le da un acabado limpio y duradero. Misma forma amplia y liviana del camionero, con ese toque que lo distingue.',
+    feats:['Material: calabaza + virola de alpaca','Boca ancha','Colores: negro o marrón'],
+    care:[CURADO_CALABAZA, CUIDADO_CALABAZA], notes:[ARTESANAL] },
+
+  { sku:'UA-006', cat:'Mates', price:450,
+    title:'Mate Porongo Calabaza Natural Clásico Tradicional',
+    photos:['porongo-clasico.jpg'],
+    intro:'La calabaza clásica en su forma más pura. Liviano, cómodo y de buen tamaño para el cebado diario. Sin adornos, sin vueltas.',
+    feats:['Material: calabaza natural','Tipo: porongo'],
+    care:[CURADO_CALABAZA, CUIDADO_CALABAZA], notes:[ARTESANAL] },
+
+  { sku:'UA-007', cat:'Mates', price:690,
+    title:'Mate Porongo Calabaza Pulida Artesanal',
+    photos:['porongo-pulido.jpg'],
+    intro:'Mate de calabaza tratada y pulida a mano. Su forma amplia y su boca cómoda lo hacen ideal para cebar a diario. Un mate simple, honesto y de buena factura.',
+    feats:['Material: calabaza pulida','Tipo: porongo','Pulido a mano'],
+    care:[CURADO_CALABAZA, CUIDADO_CALABAZA], notes:[ARTESANAL] },
+
+  { sku:'UA-008', cat:'Mates', price:750,
+    title:'Mate Porongo Calabaza Con Virola Chata Artesanal',
+    photos:['porongo-virola-chata.jpg'],
+    intro:'La forma clásica del porongo con una virola chata que le da un acabado más prolijo y moderno. Cómodo para cebar, fácil de limpiar y de buena presencia.',
+    feats:['Material: calabaza','Virola chata'],
+    care:[CURADO_CALABAZA, CUIDADO_CALABAZA], notes:[ARTESANAL] },
+
+  { sku:'UA-009', cat:'Mates', price:690,
+    title:'Mate Torpedo Calabaza Con Virola Artesanal',
+    photos:['torpedo-virola-negro.jpg','torpedo-virola-marron.jpg'],
+    variants:['Negro','Marrón'],
+    intro:'La forma alargada del torpedo con una virola que protege la boca y le da un acabado prolijo. Clásico, firme y con buen acabado.',
+    feats:['Material: calabaza + virola','Forma: torpedo','Colores: negro o marrón'],
+    care:[CURADO_CALABAZA, CUIDADO_CALABAZA], notes:[ARTESANAL] },
+
+  { sku:'UA-010', cat:'Mates', price:2490,
+    title:'Mate Torpedo Forrado En Cuero De Vaca Virola De Alpaca',
+    photos:['torpedo-cuero-new.jpg'],
+    intro:'Una pieza de trabajo real. El torpedo natural va recubierto con cuero de vaca cosido a mano y remata con una virola de alpaca lacrada. La virola tiene su trabajo propio: lijada, lacada y ajustada a mano. Cada pieza es única.',
+    feats:['Material: calabaza torpedo + cuero de vaca','Virola: alpaca lacrada','Cuero cosido a mano'],
+    care:['Cuero: acondicionar con grasa natural.','Virola: no sumergir en agua.', CUIDADO_CALABAZA], notes:[ARTESANAL] },
+
+  { sku:'UA-011', cat:'Mates', price:1290,
+    title:'Combo Mate Galleta + Posamate Cuero Crudo Cosido A Mano',
+    photos:['combo-galleta-new.jpg'],
+    intro:'El mate galleta tradicional junto a un posamate de cuero crudo cosido a mano. Una combinación con la textura y el carácter de lo artesanal en cada detalle. Ideal para regalar o completar tu equipo.',
+    feats:['Incluye: mate galleta + posamate','Mate: calabaza galleta','Posamate: cuero crudo con costura'],
+    care:[CURADO_CALABAZA, CUIDADO_CALABAZA], notes:[ARTESANAL] },
+
+  { sku:'UA-012', cat:'Mates', price:850,
+    title:'Combo Mate Porongo + Posamate Artesanal Calabaza',
+    photos:['combo-porongo-posamate-v2.jpg'],
+    intro:'El clásico porongo de calabaza con un posamate hecho a mano. Una combinación simple y completa para empezar bien o regalar con criterio.',
+    feats:['Incluye: porongo + posamate','Material: calabaza + cuero','Hecho a mano'],
+    care:[CURADO_CALABAZA, CUIDADO_CALABAZA], notes:[ARTESANAL] },
+
+  { sku:'UA-013', cat:'Mates', price:990,
+    title:'Combo Mate Porongo Pulido + Posamate Artesanal',
+    photos:['combo-porongo-pulido-posamate.jpg'],
+    intro:'Porongo de calabaza pulida a mano con un posamate artesanal. Combo completo para el día a día o para regalar.',
+    feats:['Incluye: porongo pulido + posamate','Material: calabaza + cuero','Hecho a mano'],
+    care:[CURADO_CALABAZA, CUIDADO_CALABAZA], notes:[ARTESANAL] },
+
+  { sku:'UA-014', cat:'Mates', price:990,
+    title:'Combo Mate Porongo Virola Chata + Posamate Artesanal',
+    photos:['combo-porongo-virola-chata-posamate.jpg'],
+    intro:'El porongo con virola chata y un posamate hecho a mano. Todo lo que necesitás para empezar bien.',
+    feats:['Incluye: porongo virola chata + posamate','Material: calabaza + cuero','Hecho a mano'],
+    care:[CURADO_CALABAZA, CUIDADO_CALABAZA], notes:[ARTESANAL] },
+
+  { sku:'UA-015', cat:'Mates', price:890,
+    title:'Combo Mate Camionero + Posamate Artesanal Calabaza',
+    photos:['combo-camionero-posamate-v2.jpg'],
+    intro:'El camionero de calabaza con un posamate artesanal. Práctico, completo y con el carácter de lo hecho a mano. El combo del día a día.',
+    feats:['Incluye: camionero + posamate','Material: calabaza + cuero','Hecho a mano'],
+    care:[CURADO_CALABAZA, CUIDADO_CALABAZA], notes:[ARTESANAL] },
+
+  { sku:'UA-016', cat:'Mates', price:990,
+    title:'Combo Mate Camionero Pulido + Posamate Artesanal',
+    photos:['combo-camionero-pulido-posamate.jpg'],
+    intro:'Camionero de calabaza pulida a mano con un posamate artesanal. Acabado limpio y durable, listo para usar o regalar.',
+    feats:['Incluye: camionero pulido + posamate','Material: calabaza + cuero','Hecho a mano'],
+    care:[CURADO_CALABAZA, CUIDADO_CALABAZA], notes:[ARTESANAL] },
+
+  { sku:'UA-017', cat:'Mates', price:990,
+    title:'Combo Mate Camionero Con Virola + Posamate Artesanal',
+    photos:['combo-camionero-virola-posamate-v2.jpg'],
+    intro:'El camionero con virola de alpaca junto a un posamate artesanal. Un combo con presencia, hecho para durar.',
+    feats:['Incluye: camionero con virola + posamate','Material: calabaza + alpaca + cuero','Hecho a mano'],
+    care:[CURADO_CALABAZA, CUIDADO_CALABAZA], notes:[ARTESANAL] },
+
+  { sku:'UA-018', cat:'Bombillas', price:790,
+    title:'Bombillón Acero Inoxidable Con Diseño Grabado',
+    photos:['bombillon-diseno.jpg'],
+    intro:'No es solo una bombilla, es una pieza de identidad. Diseños grabados, terminación pulida y estilo propio. Para el que quiere que cada detalle cuente.',
+    feats:['Material: acero inoxidable','Boca ancha','Terminación pulida con diseño grabado'],
+    care:['Enjuagar con agua caliente después de usar. Se puede limpiar con cepillo fino.'], notes:[] },
+
+  { sku:'UA-019', cat:'Bombillas', price:690,
+    title:'Bombilla Acero Inoxidable Con Apliques Decorativos',
+    photos:['bombilla-apliques.jpg'],
+    intro:'Funcionalidad con detalle. Los apliques le dan presencia sin restarle practicidad. Hecha para durar y distinguirse.',
+    feats:['Material: acero inoxidable','Terminación: con apliques decorativos'],
+    care:['Enjuagar con agua caliente después de usar. Se puede limpiar con cepillo fino.'], notes:[] },
+
+  { sku:'UA-020', cat:'Bombillas', price:990,
+    title:'Bombillón Pico De Loro Dorado Acero Inoxidable',
+    photos:['bombillon-pico-loro-dorado.jpg'],
+    intro:'La forma clásica del pico de loro con una terminación dorada que lo distingue. Funcional, cómodo y con una presencia que se nota en cada cebada.',
+    feats:['Material: acero inoxidable','Terminación: dorada','Tipo: pico de loro'],
+    care:['Enjuagar con agua caliente después de usar. Se puede limpiar con cepillo fino.'], notes:[] },
+
+  { sku:'UA-021', cat:'Bombillas', price:890,
+    title:'Bombillón Liso Acero Inoxidable Recto Tradicional',
+    photos:['bombillon-liso.jpg'],
+    intro:'Para quienes valoran la comodidad y la tradición bien servida. Limpio, recto y funcional. Sin vueltas, sin adornos.',
+    feats:['Material: acero inoxidable','Terminación: lisa','Boca ancha, tradicional'],
+    care:['Enjuagar con agua caliente después de usar. Se puede limpiar con cepillo fino.'], notes:[] },
+
+  { sku:'UA-022', cat:'Bombillas', price:1090,
+    title:'Bombillón Dorado Acero Inoxidable',
+    photos:['bombillon-dorado.jpg'],
+    intro:'Terminación dorada que lo distingue sin perder funcionalidad. Para el que quiere algo diferente en su equipo.',
+    feats:['Material: acero inoxidable','Terminación: dorada'],
+    care:['Enjuagar con agua caliente después de usar. Se puede limpiar con cepillo fino.'], notes:[] },
+
+  { sku:'UA-023', cat:'Bombillas', price:1090,
+    title:'Bombillón Recto Premium Dorado Acero Inoxidable',
+    photos:['bombillón recto premium dorado frente.jpg','bombillón recto premium dorado inclinado.jpg','bombillón recto premium dorado acostado.jpg'],
+    intro:'Línea recta y limpia con una terminación dorada de acabado superior. Cómodo para cebar, fácil de limpiar y con una presencia que se distingue en cualquier equipo.',
+    feats:['Material: acero inoxidable','Terminación: dorada premium','Forma: recta'],
+    care:['Enjuagar con agua caliente después de usar. Se puede limpiar con cepillo fino.'], notes:[] },
+
+  { sku:'UA-024', cat:'Materos', price:1790,
+    title:'Matera Canasta Ecocuero Para Termo Mate Y Bombilla',
+    photos:['matera-canasta.jpg'],
+    intro:'Hecha para el que se mueve con el mate encima. Ecocuero resistente, diseño canasta y el espacio justo para termo, mate y bombilla. Simple, duradera, sin adornos.',
+    feats:['Material: ecocuero','Diseño: canasta','Espacio para termo + mate + bombilla'],
+    care:[CUIDADO_ECO], notes:['No incluye termo, mate ni bombilla.'] },
+
+  { sku:'UA-025', cat:'Materos', price:990,
+    title:'Matera Dividida Ecocuero Termo Y Mate Separados',
+    photos:['matera-dividida.jpg'],
+    intro:'Un compartimiento para el termo y otro para el mate, así viajan separados y no se golpean. Liviana, fácil de llevar, pensada para el día a día.',
+    feats:['Material: ecocuero','Compartimientos separados para termo y mate'],
+    care:[CUIDADO_ECO], notes:['No incluye termo ni mate.'] },
+
+  { sku:'UA-026', cat:'Materos', price:2390,
+    title:'Matera Cuero Crudo Trenzada Artesanal Hecha A Mano',
+    photos:['Matera cuero crudo trenzada.jpg'],
+    intro:'Hecha a mano con cuero crudo natural. El trenzado le da resistencia y un acabado artesanal que la distingue. Para el que valora lo bien hecho.',
+    feats:['Material: cuero crudo','Terminación: trenzada','Hecha a mano'],
+    care:['Mantener seca. Se puede acondicionar con grasa natural para cuero.'], notes:[ARTESANAL, 'No incluye termo ni mate.'] },
+
+  { sku:'UA-027', cat:'Materos', price:2390,
+    title:'Matera Cuero Crudo Cosida Con Tiento Artesanal',
+    photos:['Matera cuero crudo cocida con tiento.jpg'],
+    intro:'Trabajo artesanal en cuero crudo, cosida con tiento natural. Resistente, con carácter, pensada para durar.',
+    feats:['Material: cuero crudo','Terminación: cosida con tiento','Hecha a mano'],
+    care:['Mantener seca. Se puede acondicionar con grasa natural para cuero.'], notes:[ARTESANAL, 'No incluye termo ni mate.'] },
+
+  { sku:'UA-028', cat:'Yerberas', price:490,
+    title:'Yerbero Un Amargo Para Yerba Mate',
+    photos:['yerbero Un Amargo.jpg','yerbero Un Amargo1.jpg','yerbero Un Amargo2.jpg','yerbero Un Amargo3.jpg'],
+    intro:'El complemento para tu equipo de mate. Diseñado con la identidad de Un Amargo, práctico y resistente para el día a día.',
+    feats:['Marca: Un Amargo'],
+    care:[], notes:['No incluye yerba.'] },
+
+  { sku:'UA-029', cat:'Accesorios de mate', price:349,
+    title:'Base Reposamate Inclinada Negra Soporte Para Mate',
+    photos:['base-reposamate.jpg'],
+    intro:'Mantiene el mate firme y en ángulo, listo para la próxima cebada. Terminación negra mate con el logo de Un Amargo grabado en relieve. Simple, estable y pensada para el uso diario.',
+    feats:['Color: negro','Logo grabado en relieve','Apoyo inclinado para el mate'],
+    care:[], notes:['No incluye mate.'] },
+
+  { sku:'UA-030', cat:'Accesorios de mate', price:349,
+    title:'Secador Para Mate Y Bombilla Escurridor Negro',
+    photos:['secamate.jpg'],
+    intro:'Resuelve el después de la cebada. El soporte central sostiene el mate boca abajo para que escurra y se seque bien por dentro, y el orificio lateral deja la bombilla parada secándose al lado. Las divisiones mantienen todo en su lugar y el agua contenida.',
+    feats:['Color: negro','Soporte para mate + lugar para bombilla','Secado boca abajo'],
+    care:[], notes:['No incluye mate ni bombilla.'] },
+
+  // Agotados en la web: quedan listos para cuando haya stock.
+  { sku:'UA-031', cat:'Mates', price:1990, out:true,
+    title:'Mate Imperial Algarrobo Artesanal Boca Ancha',
+    photos:['imperial-algarrobo-new.jpg','imperial-sin-base.jpg'],
+    intro:'La forma más amplia y la capacidad más generosa de la línea. Ideal para el cebado largo y pausado. Madera de algarrobo trabajada a mano.',
+    feats:['Material: madera de algarrobo','Forma: imperial, boca ancha'],
+    care:[CUIDADO_MADERA], notes:[ARTESANAL] },
+
+  { sku:'UA-032', cat:'Mates', price:2490, out:true,
+    title:'Mate Imperial Algarrobo Zebra Veta Cebrada Artesanal',
+    photos:['imperial-zebra.jpg'],
+    intro:'Algarrobo imperial con una veta cebrada natural que lo hace inconfundible. Lijado y terminado a mano: cada uno tiene su propio dibujo. Forma amplia, cómodo para cebar largo.',
+    feats:['Material: madera de algarrobo','Forma: imperial, boca ancha','Veta cebrada natural'],
+    care:[CUIDADO_MADERA], notes:[ARTESANAL] },
+];
+
+function buildDesc(l) {
+  const out = [l.title.toUpperCase(), '', l.intro, '', 'CARACTERÍSTICAS'];
+  l.feats.forEach(f => out.push('• ' + f));
+  if (l.variants) out.push('• Elegí el color al comprar');
+  if (l.care.length) { out.push('', 'CUIDADOS'); l.care.forEach(c => out.push('• ' + c)); }
+  out.push('', 'IMPORTANTE');
+  l.notes.forEach(n => out.push('• ' + n));
+  out.push('• Producto nuevo, enviado desde Montevideo.');
+  out.push('', '¿Dudas? Escribinos en Preguntas, respondemos rápido.');
+  return out.join('\n');
+}
+
+const store = {
+  get(k, d) { try { const v = localStorage.getItem('ml-' + k); return v === null ? d : JSON.parse(v); } catch { return d; } },
+  set(k, v) { try { localStorage.setItem('ml-' + k, JSON.stringify(v)); } catch {} },
+};
+let done = store.get('done', {});
+let overrides = store.get('prices', {});
+const feeInput = document.getElementById('fee');
+feeInput.value = store.get('fee', 13);
+
+function suggested(webPrice) {
+  const fee = Math.min(Math.max(parseFloat(feeInput.value) || 0, 0), 40) / 100;
+  const raw = webPrice / (1 - fee);
+  return Math.ceil((raw + 10) / 100) * 100 - 10; // termina en 90
+}
+const mlPrice = l => overrides[l.sku] ?? suggested(l.price);
+
+async function copy(text, btn) {
+  try { await navigator.clipboard.writeText(text); }
+  catch {
+    const t = document.createElement('textarea'); t.value = text; document.body.appendChild(t);
+    t.select(); document.execCommand('copy'); t.remove();
+  }
+  const old = btn.textContent; btn.textContent = 'Copiado ✓'; btn.classList.add('copied');
+  setTimeout(() => { btn.textContent = old; btn.classList.remove('copied'); }, 1200);
+}
+
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function render() {
+  const q = document.getElementById('q').value.trim().toLowerCase();
+  const hideDone = document.getElementById('hideDone').checked;
+  const list = document.getElementById('list');
+  list.innerHTML = '';
+  LISTINGS.forEach(l => {
+    if (q && !(l.title + ' ' + l.sku + ' ' + l.cat).toLowerCase().includes(q)) return;
+    if (hideDone && done[l.sku]) return;
+    const desc = buildDesc(l);
+    const len = l.title.length;
+    const card = document.createElement('article');
+    card.className = 'card' + (done[l.sku] ? ' done' : '') + (l.out ? ' out' : '');
+    card.innerHTML = `
+      <div class="photos">
+        <img src="${IMG + encodeURI(l.photos[0])}" alt="" loading="lazy">
+        ${l.photos.length > 1 ? `<div class="more">${l.photos.slice(1).map(p => `<img src="${IMG + encodeURI(p)}" alt="" loading="lazy">`).join('')}</div>` : ''}
+        <div class="fname">${l.photos.map(esc).join('<br>')}</div>
+      </div>
+      <div>
+        <div class="row">
+          <span class="sku">${l.sku}</span>
+          <span class="tag">${esc(l.cat)}</span>
+          ${l.variants ? `<span class="tag">Variantes: ${l.variants.join(' / ')}</span>` : ''}
+          ${l.out ? '<span class="tag warn">Agotado — no publicar todavía</span>' : ''}
+          <label class="done-toggle"><input type="checkbox" ${done[l.sku] ? 'checked' : ''} data-done> Publicado</label>
+        </div>
+        <div class="row">
+          <span class="title">${esc(l.title)}</span>
+          <span class="count ${len > 60 ? 'bad' : ''}">${len}/60</span>
+          <button data-copy="title">Copiar título</button>
+        </div>
+        <div class="row meta">
+          Web: <b>$${l.price.toLocaleString('es-UY')}</b> →
+          Precio ML: $<input type="number" class="price" step="10" value="${mlPrice(l)}" data-price>
+          <button data-copy="price">Copiar precio</button>
+          <button data-reset title="Volver al precio sugerido">↺</button>
+          · Condición: <b>Nuevo</b> · Moneda: <b>$ (UYU)</b>
+        </div>
+        <div class="row"><button data-copy="desc">Copiar descripción</button></div>
+        <pre class="desc">${esc(desc)}</pre>
+      </div>`;
+    card.querySelector('[data-copy=title]').onclick = e => copy(l.title, e.target);
+    card.querySelector('[data-copy=desc]').onclick = e => copy(desc, e.target);
+    card.querySelector('[data-copy=price]').onclick = e => copy(String(mlPrice(l)), e.target);
+    card.querySelector('[data-price]').onchange = e => {
+      const v = parseInt(e.target.value, 10);
+      if (v > 0) overrides[l.sku] = v; else delete overrides[l.sku];
+      store.set('prices', overrides);
+    };
+    card.querySelector('[data-reset]').onclick = () => { delete overrides[l.sku]; store.set('prices', overrides); render(); };
+    card.querySelector('[data-done]').onchange = e => {
+      if (e.target.checked) done[l.sku] = true; else delete done[l.sku];
+      store.set('done', done); render();
+    };
+    list.appendChild(card);
+  });
+  const active = LISTINGS.filter(l => !l.out);
+  const n = active.filter(l => done[l.sku]).length;
+  document.getElementById('progress').textContent = `Progreso: ${n} de ${active.length} publicados (más ${LISTINGS.length - active.length} agotados en espera).`;
+}
+
+function downloadCSV() {
+  const cols = ['SKU','Título','Categoría sugerida','Precio web UYU','Precio ML UYU','Moneda','Condición','Stock','Variantes (color)','Fotos','Descripción'];
+  const q = v => '"' + String(v).replace(/"/g, '""') + '"';
+  const rows = LISTINGS.filter(l => !l.out).map(l => [
+    l.sku, l.title, l.cat, l.price, mlPrice(l), 'UYU', 'Nuevo', '', (l.variants || []).join(' / '), l.photos.join(' | '), buildDesc(l),
+  ].map(q).join(';'));
+  const blob = new Blob(['﻿' + [cols.map(q).join(';'), ...rows].join('\r\n')], { type: 'text/csv;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'un-amargo-mercadolibre.csv'; a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+feeInput.oninput = () => { store.set('fee', feeInput.value); render(); };
+document.getElementById('q').oninput = render;
+document.getElementById('hideDone').onchange = render;
+document.getElementById('csvBtn').onclick = downloadCSV;
+render();
+</script>
+</body>
+</html>

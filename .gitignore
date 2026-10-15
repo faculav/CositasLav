@@ -1,0 +1,12 @@
+# Backups y archivos pesados (GitHub rechaza archivos > 100 MB)
+*.zip
+*.bak
+images_originales/
+
+# Config local de Claude Code (permisos de esta PC)
+.claude/settings.local.json
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store

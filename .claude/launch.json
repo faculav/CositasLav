@@ -1,0 +1,29 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "patria",
+      "runtimeExecutable": "powershell",
+      "runtimeArgs": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "C:\\Users\\facul\\AppData\\Local\\Temp\\claude\\C--Users-facul-OneDrive-Desktop-claude-code-unamargo\\35e64552-4b85-4ecb-a251-4b2835ed274c\\scratchpad\\serve.ps1"
+      ],
+      "port": 8099
+    },
+    {
+      "name": "unamargo",
+      "runtimeExecutable": "powershell",
+      "runtimeArgs": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "C:\\Users\\facul\\OneDrive\\Desktop\\claude code unamargo\\.claude\\serve.ps1"
+      ],
+      "port": 3000
+    }
+  ]
+}

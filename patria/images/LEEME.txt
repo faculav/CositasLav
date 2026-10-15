@@ -1,0 +1,83 @@
+FOTOS DE PATRIA
+===============
+
+Mientras estos archivos no existan, la web muestra un placeholder en tonos
+cuero con el nombre de la pieza. Apenas subas el archivo con el nombre exacto
+de abajo, el placeholder desaparece solo (no hay que tocar codigo).
+
+Formato recomendado: JPG, calidad 80, ancho 1600 px como maximo.
+
+
+LOGO (lo unico que falta para que la marca aparezca)
+----------------------------------------------------
+logo.svg          version oscura (marron), para el header sobre fondo blanco.
+logo-claro.svg    version crema, para el footer sobre fondo marron.
+
+Si solo tenes PNG, sirve igual: guardalo como logo.png / logo-claro.png y
+cambia la extension en index.html (buscar "logo.svg"). Que sea PNG con fondo
+TRANSPARENTE y unos 600 px de ancho como minimo.
+Mientras no esten, la web escribe PATRIA en Inter bold como reemplazo.
+
+
+FOTOS YA CARGADAS (copiadas desde tu carpeta de Descargas)
+-----------------------------------------------------------
+cat-brazaletes.png   brazaletes sobre madera   (POST1 Patria2.png)
+taller.png           caballo en el box         (POST1 Patria1.png)
+ig-1.png             brazaletes sobre el caballo con el sombrero
+ig-2.png             sombreros en el cielo     (POST1 Patria.png)
+
+OJO: pesan entre 2 y 8 MB cada una. Andan bien, pero conviene
+pasarlas a JPG de calidad 80 antes de publicar el sitio.
+
+
+FALTA: LA FOTO DEL HERO
+-----------------------
+Es la del logo PATRIA grabado en el cuero con pelo. No la encontre
+en la compu, asi que guardala vos en esta carpeta como:  hero.jpg
+El hero ya esta armado para esa imagen: el titulo va abajo a la
+izquierda para no taparle el grabado.
+
+
+HERO Y EDITORIAL
+----------------
+hero.jpg              horizontal, 1920x1080 aprox. Ambiente / producto en uso.
+taller.jpg            vertical, 1200x1500 aprox. Manos trabajando, herramientas.
+
+
+CATEGORIAS (vertical 4:5, ej. 800x1000)
+---------------------------------------
+cat-llaveros.jpg
+cat-brazaletes.jpg
+cat-collares.jpg
+cat-cintos.jpg
+cat-monederos.jpg
+cat-sobres.jpg
+
+
+INSTAGRAM (cuadradas 1:1, ej. 600x600)
+--------------------------------------
+ig-1.jpg  ig-2.jpg  ig-3.jpg  ig-4.jpg  ig-5.jpg  ig-6.jpg
+
+
+PRODUCTOS (vertical 4:5, ej. 800x1000)
+--------------------------------------
+El nombre sale del campo "img" de cada producto en productos.js.
+La terminada en "b" es la segunda foto: aparece al pasar el mouse por encima.
+
+prod-lla-01.jpg / prod-lla-01b.jpg    Llavero Campo
+prod-lla-02.jpg                       Llavero Nudo
+prod-lla-03.jpg                       Llavero Mosqueton
+prod-bra-01.jpg / prod-bra-01b.jpg    Brazalete Trenza
+prod-bra-02.jpg                       Brazalete Llanura
+prod-bra-03.jpg                       Brazalete Doble
+prod-col-01.jpg / prod-col-01b.jpg    Collar Sur
+prod-col-02.jpg                       Collar Raiz
+prod-cin-01.jpg / prod-cin-01b.jpg    Cinto Estancia
+prod-cin-02.jpg                       Cinto Clasico
+prod-cin-03.jpg                       Cinto Tabaco
+prod-mon-01.jpg / prod-mon-01b.jpg    Monedero Ronda
+prod-mon-02.jpg                       Monedero Broche
+prod-mon-03.jpg                       Monedero Tarjetero
+prod-sob-01.jpg / prod-sob-01b.jpg    Sobre Cordillera
+prod-sob-02.jpg                       Sobre Noche
+prod-sob-03.jpg                       Sobre Notebook 13
