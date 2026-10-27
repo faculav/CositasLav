@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cómo cebar un buen amargo — Un Amargo</title>
+  <meta name="description" content="El ritual del mate, paso a paso: yerba, montañita, agua tibia, bombilla y a cebar." />
+  <style>
+    :root {
+      --ink: #111;
+      --ink-soft: #555;
+      --accent: #9a5a2c;
+      --bg: #efeeeb;
+      --btn-bg: #111;
+      --btn-ink: #fff;
+      --ease: cubic-bezier(.22, .61, .36, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      transition: background-color 900ms var(--ease), color 600ms var(--ease);
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+
+    /* Final step flips to deep yerba green */
+    body.is-dark {
+      --ink: #f4f2ec;
+      --ink-soft: rgba(244, 242, 236, .72);
+      --accent: #f4f2ec;
+      --btn-bg: #f4f2ec;
+      --btn-ink: #1d3a2b;
+    }
+
+    /* ── 3D STAGE ─────────────────────────────────────────── */
+    #stage {
+      position: fixed; inset: 0;
+      width: 100%; height: 100%;
+      display: block;
+      z-index: 0;
+    }
+    .fallback {
+      position: fixed; right: 6vw; top: 50%;
+      transform: translateY(-50%);
+      width: min(38vw, 420px);
+      border-radius: 24px;
+      display: none;
+      z-index: 0;
+    }
+    .no-webgl .fallback { display: block; }
+
+    /* ── CHROME ───────────────────────────────────────────── */
+    .top {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 10;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px clamp(16px, 4vw, 48px);
+    }
+    .top svg { height: 30px; width: auto; display: block; }
+    .top svg path { fill: currentColor; }
+    .top-link { font-size: 14px; transition: opacity 180ms; }
+    .top-link:hover { opacity: .55; }
+
+    .dots {
+      position: fixed; right: clamp(16px, 3vw, 40px); top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .dots button {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: currentColor; opacity: .22;
+      transition: opacity 300ms, transform 300ms var(--ease);
+    }
+    .dots button:hover { opacity: .5; }
+    .dots button[aria-current="step"] { opacity: 1; transform: scale(1.25); }
+
+    .bottom {
+      position: fixed; left: 0; right: 0; bottom: 0;
+      z-index: 10;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 22px clamp(16px, 4vw, 48px);
+      font-size: 13px;
+    }
+    .bottom button, .bottom a { display: inline-flex; gap: 8px; align-items: center; transition: opacity 300ms; }
+    .bottom button:hover, .bottom a:hover { opacity: .55; }
+    .bottom .hidden { opacity: 0; pointer-events: none; }
+    .bottom .arrow { display: inline-block; animation: nudge 1.8s var(--ease) infinite; }
+    @keyframes nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+
+    /* ── COPY ─────────────────────────────────────────────── */
+    .copy {
+      position: fixed;
+      left: clamp(16px, 7vw, 120px);
+      top: 50%;
+      transform: translateY(-50%);
+      width: min(440px, 40vw);
+      z-index: 5;
+      pointer-events: none;
+    }
+    .step-copy {
+      position: absolute; left: 0; top: 50%;
+      width: 100%;
+      transform: translateY(-50%);
+      opacity: 0;
+      filter: blur(10px);
+      transition: opacity 600ms var(--ease), filter 600ms var(--ease), transform 600ms var(--ease);
+    }
+    .step-copy.before { transform: translateY(calc(-50% + 18px)); }
+    .step-copy.after  { transform: translateY(calc(-50% - 18px)); }
+    .step-copy.active {
+      opacity: 1; filter: blur(0);
+      transform: translateY(-50%);
+      pointer-events: auto;
+      transition-delay: 120ms;
+    }
+    .eyebrow {
+      font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 18px;
+    }
+    .step-copy h1, .step-copy h2 {
+      font-size: clamp(40px, 5.4vw, 78px);
+      font-weight: 500;
+      line-height: .98;
+      letter-spacing: -.04em;
+    }
+    .step-copy h1 em, .step-copy h2 em {
+      font-style: normal;
+      color: var(--accent);
+      display: block;
+      transition: color 600ms var(--ease);
+    }
+    .step-copy p {
+      margin-top: 22px;
+      font-size: 15px; line-height: 1.55;
+      color: var(--ink-soft);
+      max-width: 340px;
+    }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 32px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 22px;
+      padding: 15px 22px 15px 24px;
+      border-radius: 100px;
+      background: var(--btn-bg); color: var(--btn-ink);
+      font-size: 14px; font-weight: 500;
+      transition: transform 250ms var(--ease), background-color 600ms, color 600ms;
+    }
+    .pill:hover { transform: translateY(-2px); }
+    .pill.ghost {
+      background: transparent; color: var(--ink);
+      box-shadow: inset 0 0 0 1.5px currentColor;
+    }
+
+    /* ── SCROLL SNAP SECTIONS ─────────────────────────────── */
+    .steps { position: relative; z-index: 1; pointer-events: none; }
+    .steps section {
+      height: 100vh; height: 100svh;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    /* ── MOBILE: mate arriba, texto abajo ─────────────────── */
+    @media (max-width: 760px) {
+      .copy {
+        top: auto; bottom: 74px; transform: none;
+        width: auto; right: 48px; left: 16px;
+        height: 42vh;
+      }
+      .step-copy { top: auto; bottom: 0; transform: none; }
+      .step-copy.before { transform: translateY(18px); }
+      .step-copy.after  { transform: translateY(-18px); }
+      .step-copy.active { transform: none; }
+      .step-copy h1, .step-copy h2 { font-size: clamp(36px, 11vw, 48px); }
+      .step-copy p { margin-top: 14px; font-size: 14px; }
+      .actions { margin-top: 22px; }
+      .eyebrow { margin-bottom: 12px; }
+      .dots { right: 16px; top: 34%; gap: 12px; }
+      .fallback { left: 50%; right: auto; top: 26%; transform: translate(-50%, -50%); width: 56vw; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .step-copy { filter: none; transition-duration: 200ms; }
+      .bottom .arrow { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="stage" aria-hidden="true"></canvas>
+<img class="fallback" src="./images/camionero-virola.jpg" alt="Mate camionero de calabaza con virola de acero" />
+
+<header class="top">
+  <a href="./index.html" aria-label="Un Amargo — inicio">
+    <svg viewBox="0 0 8256 7030" xmlns="http://www.w3.org/2000/svg">
+      <path d="M231 568.104C722.281 434.795 779.775 708.583 1260.46 1308.71C1549.24 1416.81 1649.63 1531.52 1625.83 1913.55C1851.2 2129.57 1856.88 2247.24 1949.23 2543.08C2001.47 2690.95 2010 2793.07 2035.630 2924.46C2035.3 2938.06 2134.65 3773.31 2134.71 3773.88V4623.29C2134.71 4893.33 2191.14 5092.84 2303.99 5221.81C2420.87 5346.76 2584.11 5409.23 2793.69 5409.23C2938.79 5409.23 3067.76 5379 3180.61 5318.54C3293.47 5254.06 3382.14 5157.33 3446.62 5028.35C3511.11 4895.35 3543.35 4730.1 3543.35 4532.61C3543.35 3264.32 3987.14 3015.38 4881.9 3015.38C4232.85 3579.44 4118.53 5318.54 5087.97 6177.03H3591.72V5795.92C3502.75 5901.18 3395.95 5987.91 3271.3 6056.12C3061.72 6168.97 2831.98 6225.39 2582.09 6225.39C2312.05 6225.39 2070.23 6173 1856.61 6068.21C1647.03 5963.42 1483.8 5804.21 1366.92 5590.6C1250.03 5372.95 1191.59 5096.87 1191.59 4762.34L1314 3234.24C1333.59 2900.93 1176.55 2409.5 1041.08 2093.77C762.856 1968.86 714.738 1845.23 784.329 1545.71L231 568.104Z"/>
+      <path d="M7742.17 3362.67C9380.18 7296.92 3294.86 7056.75 4987.41 3362.67C6033.4 3619.39 6644.56 3620.22 7742.17 3362.67ZM7397.48 2832C7385.45 2984.99 7407.52 3053.74 7532.24 3127.07C6621.47 3327.26 6110.83 3327.41 5200.06 3127.07C5347.36 3048.85 5384.17 2981.89 5389.65 2832C6139.29 3002.67 6587.05 3001.46 7397.48 2832Z"/>
+    </svg>
+  </a>
+  <a href="./index.html#tienda" class="top-link">Tienda</a>
+</header>
+
+<nav class="dots" id="dots" aria-label="Pasos"></nav>
+
+<div class="copy" id="copy">
+  <div class="step-copy">
+    <p class="eyebrow">El ritual</p>
+    <h1>Cómo cebar <em>un buen amargo.</em></h1>
+    <p>Un ritual, paso a paso.</p>
+    <div class="actions">
+      <button class="pill" data-go="1">Empezar <span aria-hidden="true">↗</span></button>
+    </div>
+  </div>
+  <div class="step-copy">
+    <p class="eyebrow">Paso 1 de 5</p>
+    <h2>Primero, <em>la yerba.</em></h2>
+    <p>Llená el mate hasta tres cuartas partes.</p>
+  </div>
+  <div class="step-copy">
+    <p class="eyebrow">Paso 2 de 5</p>
+    <h2>Hacé la <em>montañita.</em></h2>
+    <p>Tapá la boca con la mano, agitá y dejá caer la yerba hacia un costado. Que quede un hueco del otro lado.</p>
+  </div>
+  <div class="step-copy">
+    <p class="eyebrow">Paso 3 de 5</p>
+    <h2>Un poco de <em>agua tibia.</em></h2>
+    <p>Mojá el hueco con agua a unos 50&nbsp;°C y dejá que la yerba se hinche un minuto.</p>
+  </div>
+  <div class="step-copy">
+    <p class="eyebrow">Paso 4 de 5</p>
+    <h2>Ahora, <em>la bombilla.</em></h2>
+    <p>Tapala con el dedo y clavala en la parte húmeda, hasta el fondo. Después, no la muevas más.</p>
+  </div>
+  <div class="step-copy">
+    <p class="eyebrow">Paso 5 de 5</p>
+    <h2>Cebá. <em>Sin apuro.</em></h2>
+    <p>Agua a 70–80&nbsp;°C, nunca hervida. Vertí despacio, siempre en el mismo lugar, junto a la bombilla.</p>
+  </div>
+  <div class="step-copy">
+    <p class="eyebrow">Y por último</p>
+    <h2>El mejor paso: <em>compartirlo.</em></h2>
+    <p>Volvé a cebar y que siga la ronda.</p>
+    <div class="actions">
+      <button class="pill" data-go="1">Otra ronda <span aria-hidden="true">↺</span></button>
+      <a class="pill ghost" href="./index.html#tienda">Ver mates <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</div>
+
+<footer class="bottom">
+  <button id="prev" class="hidden"><span aria-hidden="true">↑</span> Anterior</button>
+  <button id="next"><span id="nextLabel">Deslizá para empezar</span> <span class="arrow" aria-hidden="true">↓</span></button>
+</footer>
+
+<main class="steps" id="steps">
+  <section id="paso-0"></section>
+  <section id="paso-1"></section>
+  <section id="paso-2"></section>
+  <section id="paso-3"></section>
+  <section id="paso-4"></section>
+  <section id="paso-5"></section>
+  <section id="paso-6"></section>
+</main>
+
+<script>
+  // ── Navegación por pasos (independiente del 3D) ───────────
+  (function () {
+    const BG = ['#efeeeb', '#eceeea', '#e8ece6', '#e3eae3', '#dde7e0', '#d6e3dc', '#1d3a2b'];
+    const sections = [...document.querySelectorAll('.steps section')];
+    const copies = [...document.querySelectorAll('.step-copy')];
+    const dots = document.getElementById('dots');
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+    const nextLabel = document.getElementById('nextLabel');
+    const last = sections.length - 1;
+    let current = -1;
+
+    sections.forEach((_, i) => {
+      const b = document.createElement('button');
+      b.setAttribute('aria-label', i === 0 ? 'Inicio' : i === last ? 'Compartir' : 'Paso ' + i);
+      b.addEventListener('click', () => go(i));
+      dots.appendChild(b);
+    });
+
+    function go(i) {
+      i = Math.max(0, Math.min(last, i));
+      sections[i].scrollIntoView({ behavior: 'smooth' });
+    }
+    document.querySelectorAll('[data-go]').forEach(b =>
+      b.addEventListener('click', () => go(+b.dataset.go)));
+    prev.addEventListener('click', () => go(current - 1));
+    next.addEventListener('click', () => current === last ? (location.href = './index.html#tienda') : go(current + 1));
+
+    function setStep(i) {
+      if (i === current) return;
+      const from = current;
+      current = i;
+      copies.forEach((c, k) => {
+        c.classList.toggle('active', k === i);
+        c.classList.toggle('before', k > i);
+        c.classList.toggle('after', k < i);
+        c.inert = k !== i;
+      });
+      [...dots.children].forEach((d, k) =>
+        k === i ? d.setAttribute('aria-current', 'step') : d.removeAttribute('aria-current'));
+      document.body.style.backgroundColor = BG[i];
+      document.body.classList.toggle('is-dark', i === last);
+      prev.classList.toggle('hidden', i === 0);
+      nextLabel.textContent = i === 0 ? 'Deslizá para empezar' : i === last ? 'Ver la tienda' : 'Seguí bajando';
+      history.replaceState(null, '', '#paso-' + i);
+      window.dispatchEvent(new CustomEvent('ritual:step', { detail: { step: i, from } }));
+    }
+
+    function onScroll() {
+      setStep(Math.max(0, Math.min(last, Math.round(scrollY / innerHeight))));
+    }
+    addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', onScroll);
+
+    const start = /^#paso-(\d)$/.exec(location.hash);
+    if (start) sections[+start[1]].scrollIntoView();
+    window.ritualStep = () => current;
+    onScroll();
+  })();
+</script>
+
+<script type="importmap">
+  { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  } }
+</script>
+<script type="module">
+  import * as THREE from 'three';
+  import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+  const canvas = document.getElementById('stage');
+  let renderer;
+  try {
+    renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  } catch (e) {
+    document.documentElement.classList.add('no-webgl');
+    throw e;
+  }
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 0.92;
+
+  const scene = new THREE.Scene();
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromScene(new RoomEnvironment(renderer), 0.04).texture;
+
+  const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 100);
+  const key = new THREE.DirectionalLight(0xffffff, 1.6);
+  key.position.set(-3, 6, 4);
+  scene.add(key, new THREE.AmbientLight(0xffffff, 0.25));
+
+  // ── Texturas procedurales ─────────────────────────────────
+  function rand(seed) { return () => (seed = (seed * 16807) % 2147483647) / 2147483647; }
+
+  function gourdTexture() {
+    const c = document.createElement('canvas');
+    c.width = 1024; c.height = 512;
+    const g = c.getContext('2d');
+    // v=0 abajo, v=1 arriba: la base algo más tostada, como el camionero de la tienda
+    const grad = g.createLinearGradient(0, 512, 0, 0);
+    grad.addColorStop(0, '#4f260c');
+    grad.addColorStop(0.3, '#83461a');
+    grad.addColorStop(0.65, '#9c5a22');
+    grad.addColorStop(1, '#8e5020');
+    g.fillStyle = grad; g.fillRect(0, 0, 1024, 512);
+    const r = rand(7);
+    for (let i = 0; i < 1400; i++) {
+      const x = r() * 1024, y = r() * 512, s = 1 + r() * 12;
+      g.fillStyle = `rgba(${r() < .6 ? '70,32,10' : '200,140,70'},${0.03 + r() * 0.06})`;
+      g.beginPath(); g.ellipse(x, y, s, s * (0.5 + r()), r() * 3, 0, Math.PI * 2); g.fill();
+    }
+    const t = new THREE.CanvasTexture(c);
+    t.colorSpace = THREE.SRGBColorSpace;
+    t.wrapS = THREE.RepeatWrapping;
+    t.anisotropy = 4;
+    return t;
+  }
+
+  function shadowTexture() {
+    const c = document.createElement('canvas');
+    c.width = c.height = 256;
+    const g = c.getContext('2d');
+    const grad = g.createRadialGradient(128, 128, 0, 128, 128, 128);
+    grad.addColorStop(0, 'rgba(0,0,0,.42)');
+    grad.addColorStop(0.45, 'rgba(0,0,0,.16)');
+    grad.addColorStop(1, 'rgba(0,0,0,0)');
+    g.fillStyle = grad; g.fillRect(0, 0, 256, 256);
+    return new THREE.CanvasTexture(c);
+  }
+
+  // ── El mate (camionero de calabaza con virola) ───────────
+  const PROFILE = [
+    [0.001, 0.0], [0.34, 0.03], [0.62, 0.15], [0.80, 0.34], [0.885, 0.58], [0.88, 0.82],
+    [0.81, 1.07], [0.71, 1.29], [0.645, 1.46], [0.65, 1.58], [0.70, 1.68]
+  ];
+  const profileCurve = new THREE.SplineCurve(PROFILE.map(([r, y]) => new THREE.Vector2(r, y)));
+  const outer = profileCurve.getSpacedPoints(80);
+  const radiusAt = (y) => {
+    for (let i = 1; i < outer.length; i++) {
+      if (outer[i].y >= y) {
+        const a = outer[i - 1], b = outer[i];
+        return a.x + (b.x - a.x) * ((y - a.y) / (b.y - a.y || 1));
+      }
+    }
+    return outer[outer.length - 1].x;
+  };
+  const innerRadiusAt = (y) => radiusAt(y) * 0.92;
+
+  const rig = new THREE.Group();     // posición / escala por paso
+  const mate = new THREE.Group();    // inclinación (montañita)
+  rig.add(mate);
+  scene.add(rig);
+
+  const gourdTex = gourdTexture();
+  const gourd = new THREE.Mesh(
+    new THREE.LatheGeometry(outer, 96),
+    new THREE.MeshPhysicalMaterial({
+      map: gourdTex, bumpMap: gourdTex, bumpScale: 0.25,
+      roughness: 0.55, clearcoat: 0.25, clearcoatRoughness: 0.45
+    })
+  );
+  const inside = new THREE.Mesh(
+    new THREE.LatheGeometry(outer.map(p => new THREE.Vector2(p.x * 0.92, Math.max(p.y, 0.06))), 96),
+    new THREE.MeshStandardMaterial({ color: 0x3a2412, roughness: 0.9, side: THREE.BackSide })
+  );
+  const steel = new THREE.MeshStandardMaterial({ color: 0xc4c8cc, metalness: 1, roughness: 0.16 });
+  const virolaPts = [
+    [0.63, 1.62], [0.69, 1.63], [0.72, 1.68], [0.78, 1.77], [0.815, 1.81], [0.81, 1.835],
+    [0.77, 1.84], [0.70, 1.82], [0.65, 1.76], [0.63, 1.70], [0.63, 1.62]
+  ].map(([r, y]) => new THREE.Vector2(r, y));
+  const virola = new THREE.Mesh(new THREE.LatheGeometry(virolaPts, 96), steel);
+  virola.material.side = THREE.DoubleSide;
+  mate.add(gourd, inside, virola);
+
+  // Superficie de yerba: se recalcula con llenado, pendiente (montañita) y humedad
+  const RINGS = 22, SEGS = 72;
+  const yerbaGeo = new THREE.BufferGeometry();
+  const yPos = new Float32Array((RINGS + 1) * (SEGS + 1) * 3);
+  const yCol = new Float32Array((RINGS + 1) * (SEGS + 1) * 3);
+  const grain = new Float32Array((RINGS + 1) * (SEGS + 1));
+  { const r = rand(11); for (let i = 0; i < grain.length; i++) grain[i] = r(); }
+  const idx = [];
+  for (let i = 0; i < RINGS; i++) for (let j = 0; j < SEGS; j++) {
+    const a = i * (SEGS + 1) + j, b = a + SEGS + 1;
+    idx.push(a, b, a + 1, b, b + 1, a + 1);
+  }
+  yerbaGeo.setIndex(idx);
+  yerbaGeo.setAttribute('position', new THREE.BufferAttribute(yPos, 3));
+  yerbaGeo.setAttribute('color', new THREE.BufferAttribute(yCol, 3));
+  const yerba = new THREE.Mesh(yerbaGeo, new THREE.MeshStandardMaterial({
+    vertexColors: true, roughness: 1, side: THREE.DoubleSide
+  }));
+  mate.add(yerba);
+
+  const DRY = new THREE.Color('#8a9f58'), DRY2 = new THREE.Color('#62783a');
+  const WET = new THREE.Color('#3f5524'), WET2 = new THREE.Color('#2c3d18');
+  const tmpC = new THREE.Color(), tmpW = new THREE.Color();
+  const HUECO_X = -0.32;
+  const yerbaTop = (fill) => 0.25 + fill * 1.27;   // altura media del colchón
+
+  function updateYerba(fill, slope, wet) {
+    yerba.visible = fill > 0.01;
+    if (!yerba.visible) return;
+    const base = yerbaTop(fill);
+    let k = 0;
+    for (let i = 0; i <= RINGS; i++) {
+      const rho = i / RINGS;
+      for (let j = 0; j <= SEGS; j++, k++) {
+        const th = (j / SEGS) * Math.PI * 2;
+        const cx = Math.cos(th), cz = Math.sin(th);
+        let R = innerRadiusAt(base), y = base;
+        for (let it = 0; it < 3; it++) {
+          const x = rho * R * cx;
+          // montañita: alta del lado +x, hueco del lado -x
+          const well = slope * 0.55 * Math.exp(-((x - HUECO_X) ** 2 + (rho * R * cz) ** 2) / 0.05);
+          y = base + slope * (x * 0.55 + 0.04) - well + (grain[k] - 0.5) * 0.018;
+          y = Math.min(y, 1.6);
+          R = innerRadiusAt(y) * 0.985;
+        }
+        yPos[k * 3] = rho * R * cx; yPos[k * 3 + 1] = y; yPos[k * 3 + 2] = rho * R * cz;
+        const x = rho * R * cx;
+        const wetMask = wet * THREE.MathUtils.smoothstep(0.3 - x * 0.9, 0, 0.6);
+        tmpW.copy(WET).lerp(WET2, grain[k]);
+        tmpC.copy(DRY).lerp(DRY2, grain[k] * 0.8).lerp(tmpW, wetMask);
+        yCol[k * 3] = tmpC.r; yCol[k * 3 + 1] = tmpC.g; yCol[k * 3 + 2] = tmpC.b;
+      }
+    }
+    yerbaGeo.attributes.position.needsUpdate = true;
+    yerbaGeo.attributes.color.needsUpdate = true;
+    yerbaGeo.computeVertexNormals();
+  }
+
+  // Bombilla de acero con pico curvo
+  const bombilla = new THREE.Group();
+  const bPath = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(-0.30, 0.42, 0.02),
+    new THREE.Vector3(-0.36, 1.30, 0.03),
+    new THREE.Vector3(-0.46, 2.35, 0.05),
+    new THREE.Vector3(-0.56, 2.72, 0.06),
+    new THREE.Vector3(-0.78, 2.86, 0.06)
+  ]);
+  bombilla.add(new THREE.Mesh(new THREE.TubeGeometry(bPath, 80, 0.034, 16), steel));
+  const filtro = new THREE.Mesh(new THREE.SphereGeometry(0.11, 24, 16), steel);
+  filtro.scale.set(1, 0.55, 1); filtro.position.set(-0.30, 0.42, 0.02);
+  const pico = new THREE.Mesh(new THREE.SphereGeometry(0.036, 12, 8), steel);
+  pico.position.copy(bPath.getPoint(1));
+  bombilla.add(filtro, pico);
+  mate.add(bombilla);
+
+  // Termo
+  const termo = new THREE.Group();
+  const termoBody = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.3, 0.3, 1.8, 48, 1),
+    new THREE.MeshPhysicalMaterial({ color: 0x1c2024, roughness: 0.42, clearcoat: 0.5, clearcoatRoughness: 0.3 })
+  );
+  const termoCap = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.26, 0.3, 0.36, 48),
+    new THREE.MeshStandardMaterial({ color: 0xf2f2ef, roughness: 0.35 })
+  );
+  termoCap.position.y = 1.08;
+  const termoSpout = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.1, 0.14, 24), termoCap.material);
+  termoSpout.position.y = 1.33;
+  const spoutTip = new THREE.Object3D(); spoutTip.position.y = 1.41;
+  const termoRing = new THREE.Mesh(new THREE.CylinderGeometry(0.305, 0.305, 0.05, 48), steel);
+  termoRing.position.y = 0.89;
+  termo.add(termoBody, termoCap, termoSpout, spoutTip, termoRing);
+  termo.rotation.z = 2.35;
+  rig.add(termo);
+  const TERMO_IN = new THREE.Vector3(0.95, 3.45, 0.1), TERMO_OUT = new THREE.Vector3(3.8, 4.2, 0.1);
+
+  // Chorro de agua
+  const stream = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.028, 0.034, 1, 12, 1, true),
+    new THREE.MeshPhysicalMaterial({ color: 0xdff1f5, roughness: 0.05, transparent: true, opacity: 0.6 })
+  );
+  scene.add(stream);
+
+  // Lluvia de yerba (paso 1)
+  const N = 520;
+  const pPos = new Float32Array(N * 3), pVel = new Float32Array(N), pLife = new Float32Array(N).fill(-1);
+  const pGeo = new THREE.BufferGeometry();
+  pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+  const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({ color: 0x6f8544, size: 0.05 }));
+  particles.frustumCulled = false;
+  mate.add(particles);
+  const pr = rand(3);
+
+  // Sombra de contacto
+  const shadow = new THREE.Mesh(
+    new THREE.PlaneGeometry(3.4, 3.4),
+    new THREE.MeshBasicMaterial({ map: shadowTexture(), transparent: true, depthWrite: false })
+  );
+  shadow.rotation.x = -Math.PI / 2; shadow.position.y = 0.002;
+  rig.add(shadow);
+
+  // ── Tweens por parámetro ──────────────────────────────────
+  const S = { fill: 1, slope: 0.6, wet: 1, bomb: 1, termo: 0, head: 0, tail: 0, tilt: 0, scale: 1, x: 0, y: 0, rain: 0 };
+  const tweens = {};
+  const ease = (t) => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  let clock = 0;
+  function to(key, value, dur = 0.8, delay = 0) {
+    (tweens[key] ||= []).push({ from: null, to: value, start: clock + delay, dur: reduceMotion ? Math.min(dur, 0.25) : dur });
+  }
+  function tick(dt) {
+    clock += dt;
+    for (const key in tweens) {
+      const q = tweens[key];
+      while (q.length) {
+        const tw = q[0];
+        if (clock < tw.start) break;
+        if (tw.from === null) tw.from = S[key];
+        const t = tw.dur ? Math.min(1, (clock - tw.start) / tw.dur) : 1;
+        S[key] = tw.from + (tw.to - tw.from) * ease(t);
+        if (t < 1) break;
+        q.shift();
+      }
+    }
+  }
+
+  function enterStep(step) {
+    for (const k in tweens) tweens[k].length = 0;
+    S.head = S.tail = 0;                    // el chorro nunca queda colgado entre pasos
+    const pour = (start, end) => { to('head', 1, 0.35, start); to('tail', 1, 0.35, end); };
+    switch (step) {
+      case 0:
+        to('fill', 1); to('slope', 0.6); to('wet', 1); to('bomb', 1, 0.9, 0.2); to('termo', 0, 0.6);
+        to('tilt', 0); to('scale', 1); to('x', 0); to('y', 0); to('rain', 0, 0.2);
+        break;
+      case 1:
+        to('bomb', 0, 0.5); to('termo', 0, 0.6); to('tilt', 0); to('wet', 0, 0.5); to('slope', 0, 0.5);
+        to('fill', 0, 0.45); to('rain', 1, 0.1, 0.45); to('fill', 1, 2.6, 0.55); to('rain', 0, 0.3, 2.8);
+        to('scale', 1.12); to('x', 0.05); to('y', -0.15);
+        break;
+      case 2:
+        to('fill', 1, 0.4); to('bomb', 0, 0.5); to('termo', 0, 0.6); to('wet', 0, 0.5); to('rain', 0, 0.2);
+        to('tilt', 0.55, 0.7); to('slope', 0.6, 0.9, 0.35); to('tilt', 0, 0.8, 0.9);
+        to('scale', 1.1); to('x', 0); to('y', -0.1);
+        break;
+      case 3:
+        to('fill', 1, 0.4); to('slope', 0.6, 0.4); to('bomb', 0, 0.5); to('tilt', 0); to('rain', 0, 0.2);
+        to('termo', 1, 0.9); pour(0.9, 2.7); to('wet', 0.65, 1.6, 1.0);
+        to('scale', 0.86); to('x', -0.55); to('y', -0.35);
+        break;
+      case 4:
+        to('fill', 1, 0.4); to('slope', 0.6, 0.4); to('termo', 0, 0.6); to('tilt', 0); to('rain', 0, 0.2);
+        to('wet', Math.max(S.wet, 0.65), 0.6); to('bomb', 1, 1.1, 0.3);
+        to('scale', 1.1); to('x', 0); to('y', -0.15);
+        break;
+      case 5:
+        to('fill', 1, 0.4); to('slope', 0.6, 0.4); to('bomb', 1, 0.6); to('tilt', 0); to('rain', 0, 0.2);
+        to('termo', 1, 0.9); pour(0.9, 3.0); to('wet', 1, 1.8, 1.0);
+        to('scale', 0.86); to('x', -0.55); to('y', -0.35);
+        break;
+      case 6:
+        to('fill', 1, 0.4); to('slope', 0.6, 0.4); to('bomb', 1, 0.6); to('wet', 1, 0.6); to('termo', 0, 0.7);
+        to('tilt', 0); to('rain', 0, 0.2); to('scale', 1.02); to('x', 0); to('y', -0.05);
+        break;
+    }
+  }
+  addEventListener('ritual:step', (e) => enterStep(e.detail.step));
+  enterStep(window.ritualStep() ?? 0);
+
+  // ── Layout ────────────────────────────────────────────────
+  let mobile = false;
+  function resize() {
+    const w = innerWidth, h = innerHeight;
+    mobile = w <= 760;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.position.set(0, mobile ? 6.2 : 5.0, mobile ? 12.5 : 9.6);
+    camera.lookAt(0, 1.2, 0);
+    // corre el mate a la derecha (escritorio) o arriba (celular), dejando lugar al texto
+    if (mobile) camera.setViewOffset(w, h, 0, h * 0.2, w, h);
+    else camera.setViewOffset(w, h, -w * 0.2, h * 0.02, w, h);
+    camera.updateProjectionMatrix();
+  }
+  addEventListener('resize', resize);
+  resize();
+
+  const pointer = { x: 0, y: 0 }, look = { x: 0, y: 0 };
+  addEventListener('pointermove', (e) => {
+    pointer.x = e.clientX / innerWidth - 0.5;
+    pointer.y = e.clientY / innerHeight - 0.5;
+  });
+
+  // ── Loop ─────────────────────────────────────────────────
+  const a = new THREE.Vector3(), b = new THREE.Vector3(), up = new THREE.Vector3(0, 1, 0), mid = new THREE.Vector3();
+  const hueco = new THREE.Vector3();
+  let last = performance.now(), elapsed = 0, spawnAcc = 0;
+
+  function frame(now) {
+    const dt = Math.min(0.05, (now - last) / 1000);
+    last = now; elapsed += dt;
+    tick(dt);
+
+    look.x += (pointer.x - look.x) * 0.05;
+    look.y += (pointer.y - look.y) * 0.05;
+    const idle = reduceMotion ? 0 : 1;
+    rig.position.set(S.x, S.y + Math.sin(elapsed * 0.9) * 0.03 * idle, 0);
+    rig.scale.setScalar(S.scale);
+    rig.rotation.y = 0.25 + Math.sin(elapsed * 0.35) * 0.12 * idle + look.x * 0.35;
+    rig.rotation.x = look.y * 0.08;
+    // inclinación con un leve vaivén mientras se "agita"
+    mate.rotation.z = S.tilt + (S.tilt > 0.05 ? Math.sin(elapsed * 22) * 0.025 * S.tilt : 0);
+    shadow.scale.setScalar(1 - S.tilt * 0.15);
+
+    updateYerba(S.fill, S.slope, S.wet);
+
+    // bombilla entra desde arriba siguiendo su propio eje
+    bombilla.visible = S.bomb > 0.01;
+    bombilla.position.set(-0.22 * (1 - S.bomb), 2.4 * (1 - S.bomb), 0);
+
+    termo.visible = S.termo > 0.01;
+    termo.position.lerpVectors(TERMO_OUT, TERMO_IN, S.termo);
+    termo.rotation.z = 2.35 - (1 - S.termo) * 0.6 + (S.head - S.tail) * 0.12;
+
+    // chorro: de la boca del termo al hueco de la montañita
+    const flowing = S.head - S.tail > 0.001 && termo.visible;
+    stream.visible = flowing;
+    if (flowing) {
+      scene.updateMatrixWorld();
+      spoutTip.getWorldPosition(a);
+      hueco.set(HUECO_X, yerbaTop(S.fill) - 0.05, 0.02);
+      mate.localToWorld(b.copy(hueco));
+      const p0 = a.clone().lerp(b, S.tail), p1 = a.clone().lerp(b, S.head);
+      const len = p0.distanceTo(p1);
+      mid.addVectors(p0, p1).multiplyScalar(0.5);
+      stream.position.copy(mid);
+      stream.scale.set(S.scale, Math.max(len, 0.001), S.scale);
+      stream.quaternion.setFromUnitVectors(up, p1.clone().sub(p0).normalize());
+    }
+
+    // partículas de yerba cayendo dentro del mate
+    const floor = yerbaTop(S.fill);
+    spawnAcc += S.rain * dt * 260;
+    for (let i = 0; i < N; i++) {
+      if (pLife[i] < 0) {
+        if (spawnAcc >= 1) {
+          spawnAcc--;
+          const r = Math.sqrt(pr()) * 0.32, t = pr() * Math.PI * 2;
+          pPos[i * 3] = Math.cos(t) * r; pPos[i * 3 + 1] = 2.5 + pr() * 0.8; pPos[i * 3 + 2] = Math.sin(t) * r;
+          pVel[i] = 0.5 + pr() * 0.8; pLife[i] = 1;
+        } else { pPos[i * 3 + 1] = -99; continue; }
+      }
+      pVel[i] += 9 * dt;
+      pPos[i * 3 + 1] -= pVel[i] * dt;
+      if (pPos[i * 3 + 1] < floor) { pLife[i] = -1; pPos[i * 3 + 1] = -99; }
+    }
+    spawnAcc = Math.min(spawnAcc, 5);
+    pGeo.attributes.position.needsUpdate = true;
+
+    renderer.render(scene, camera);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+</script>
+</body>
+</html>
