@@ -9,8 +9,9 @@ Tienda de mates artesanales (Uruguay). La venta se cierra por WhatsApp (`5989702
 - `index.html` — tienda: hero, catálogo ("La tienda"), personalizados, empresas,
   "Cómo recibís", modal de producto y carrito (guardado en `localStorage`).
 - `como-cebar.html` — "Cómo cebar un buen amargo": recorrido de 7 pasos con scroll y un mate 3D
-  (three.js desde CDN, sin fotos): calabaza natural, bombilla pico de loro y termo negro con pico rojo.
-  Estética blanco y negro con Geist, como test.unamargo.com. Inspirado en el concepto "ritual" de @made_byfede. Enlazado desde
+  (three.js desde CDN). La calabaza se tornea con la silueta de `images/mate-calabaza.jpg` y lleva esa
+  foto proyectada encima; bombillón de acero y termo negro de 1 L a escala real.
+  Estética blanco y negro, Helvetica con interlineado negativo (bold + regular). Inspirado en el concepto "ritual" de @made_byfede. Enlazado desde
   el menú y el footer de la tienda. Si el navegador no tiene WebGL muestra `images/camionero-virola.jpg`.
 - `admin.html` — panel interno local: ventas, stock, gastos, dinero en cuenta, respaldo.
 - `panel-compartido/` — el mismo panel en Google Apps Script + Google Sheets para usar entre los 3
