@@ -506,13 +506,51 @@
   yerbaGeo.setIndex(idx);
   yerbaGeo.setAttribute('position', new THREE.BufferAttribute(yPos, 3));
   yerbaGeo.setAttribute('color', new THREE.BufferAttribute(yCol, 3));
+  const yUv = new Float32Array((RINGS + 1) * (SEGS + 1) * 2);
+  yerbaGeo.setAttribute('uv', new THREE.BufferAttribute(yUv, 2));
+
+  // textura de yerba canchada: hojas picadas en verdes oliva y palitos claros
+  function yerbaTexture() {
+    const c = document.createElement('canvas');
+    c.width = c.height = 1024;
+    const g = c.getContext('2d');
+    g.fillStyle = '#56603a'; g.fillRect(0, 0, 1024, 1024);
+    const r = rand(17);
+    const leaf = ['#7b8350', '#677144', '#8f945e', '#525c33', '#a0a06c', '#717c45', '#868b5c', '#5e6739'];
+    for (let i = 0; i < 3000; i++) {
+      const x = r() * 1024, y = r() * 1024, s = 14 + r() * 34, n = 3 + Math.floor(r() * 4), a0 = r() * 6.28;
+      g.fillStyle = leaf[Math.floor(r() * leaf.length)];
+      g.beginPath();
+      for (let k = 0; k < n; k++) {
+        const a = a0 + (k / n) * 6.28, rr = s * (0.5 + r() * 0.6);
+        g[k ? 'lineTo' : 'moveTo'](x + Math.cos(a) * rr, y + Math.sin(a) * rr * (0.5 + r() * 0.5));
+      }
+      g.closePath(); g.fill();
+    }
+    for (let i = 0; i < 70; i++) {                        // palitos
+      const x = r() * 1024, y = r() * 1024, len = 40 + r() * 80, w = 8 + r() * 8, a = r() * 6.28;
+      g.save(); g.translate(x, y); g.rotate(a);
+      g.fillStyle = r() < .5 ? '#d9cfab' : '#c7b98f'; g.fillRect(-len / 2, -w / 2, len, w);
+      g.fillStyle = 'rgba(90,75,40,.35)'; g.fillRect(-len / 2, w / 2 - 1.5, len, 1.5);
+      g.restore();
+    }
+    for (let i = 0; i < 1800; i++) {                      // polvo
+      g.fillStyle = r() < .5 ? 'rgba(40,45,20,.35)' : 'rgba(210,205,160,.25)';
+      g.fillRect(r() * 1024, r() * 1024, 2 + r() * 3, 2 + r() * 3);
+    }
+    const t = new THREE.CanvasTexture(c);
+    t.colorSpace = THREE.SRGBColorSpace;
+    t.anisotropy = 8;
+    return t;
+  }
+  const yerbaTex = yerbaTexture();
   const yerba = new THREE.Mesh(yerbaGeo, new THREE.MeshStandardMaterial({
-    vertexColors: true, roughness: 1, side: THREE.DoubleSide
+    map: yerbaTex, bumpMap: yerbaTex, bumpScale: 2, vertexColors: true, roughness: 1, side: THREE.DoubleSide
   }));
   mate.add(yerba);
 
-  const DRY = new THREE.Color('#8a9f58'), DRY2 = new THREE.Color('#62783a');
-  const WET = new THREE.Color('#3f5524'), WET2 = new THREE.Color('#2c3d18');
+  const DRY = new THREE.Color('#e4e6d6'), DRY2 = new THREE.Color('#c4c8b2');
+  const WET = new THREE.Color('#6d7458'), WET2 = new THREE.Color('#565c44');
   const tmpC = new THREE.Color(), tmpW = new THREE.Color();
   const HUECO_X = -0.32;
   const yerbaTop = (fill) => 0.25 + fill * 1.27;   // altura media del colchón
@@ -532,8 +570,8 @@
           const x = rho * R * cx;
           // montañita: alta del lado +x, hueco del lado -x
           const well = slope * 0.55 * Math.exp(-((x - HUECO_X) ** 2 + (rho * R * cz) ** 2) / 0.05);
-          y = base + slope * (x * 0.55 + 0.04) - well + (grain[k] - 0.5) * 0.018;
-          y = Math.min(y, 1.6);
+          y = base + slope * (x * 0.7 + 0.04) - well + (grain[k] - 0.5) * 0.018;
+          y = Math.min(y, 1.74);
           R = innerRadiusAt(y) * 0.99;
         }
         yPos[k * 3] = rho * R * cx; yPos[k * 3 + 1] = y; yPos[k * 3 + 2] = rho * R * cz;
@@ -542,6 +580,7 @@
         tmpW.copy(WET).lerp(WET2, grain[k]);
         tmpC.copy(DRY).lerp(DRY2, grain[k] * 0.8).lerp(tmpW, wetMask);
         yCol[k * 3] = tmpC.r; yCol[k * 3 + 1] = tmpC.g; yCol[k * 3 + 2] = tmpC.b;
+        yUv[k * 2] = x * 0.62 + 0.5; yUv[k * 2 + 1] = rho * R * cz * 0.62 + 0.5;
       }
     }
     yerbaGeo.attributes.position.needsUpdate = true;
@@ -627,50 +666,61 @@
   const pPos = new Float32Array(N * 3), pVel = new Float32Array(N), pLife = new Float32Array(N).fill(-1);
   const pGeo = new THREE.BufferGeometry();
   pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
-  const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({ color: 0x6f8544, size: 0.05 }));
+  const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({ color: 0x7a8248, size: 0.05 }));
   particles.frustumCulled = false;
   mate.add(particles);
   const pr = rand(3);
 
-  // Espuma de los primeros mates: burbujas que nacen donde cae el agua y se abren hacia afuera
-  const FOAM_N = 320;
-  const foam = new THREE.InstancedMesh(
-    new THREE.SphereGeometry(1, 14, 10),
-    new THREE.MeshStandardMaterial({ color: 0xdfe2b4, roughness: 0.3, emissive: 0x1c1d12 }),
-    FOAM_N
+  // Espuma de los primeros mates: es la superficie del agua, plana y a nivel. Llena el hueco y el lado
+  // bajo; donde la montañita queda más alta, la yerba la tapa sola (por profundidad), como en un mate real.
+  function foamTexture() {
+    const c = document.createElement('canvas');
+    c.width = c.height = 1024;
+    const g = c.getContext('2d');
+    g.fillStyle = '#9fa384'; g.fillRect(0, 0, 1024, 1024);
+    const r = rand(29);
+    for (let i = 0; i < 260; i++) {                       // manchas de tono
+      const x = r() * 1024, y = r() * 1024, s = 30 + r() * 90;
+      const rg = g.createRadialGradient(x, y, 0, x, y, s);
+      const tone = r() < .5 ? '150,156,120' : '222,224,204';
+      rg.addColorStop(0, `rgba(${tone},.35)`); rg.addColorStop(1, `rgba(${tone},0)`);
+      g.fillStyle = rg; g.fillRect(x - s, y - s, s * 2, s * 2);
+    }
+    for (let i = 0; i < 1100; i++) {                      // burbujitas: borde oscuro, centro claro y un brillo
+      const x = r() * 1024, y = r() * 1024, s = 5 + Math.pow(r(), 2.5) * 34;
+      g.fillStyle = 'rgba(205,210,186,.45)';
+      g.beginPath(); g.arc(x, y, s, 0, 6.283); g.fill();
+      g.strokeStyle = 'rgba(95,100,75,.55)'; g.lineWidth = Math.max(1, s * 0.18);
+      g.beginPath(); g.arc(x, y, s, 0, 6.283); g.stroke();
+      g.fillStyle = 'rgba(255,255,255,.8)';
+      g.beginPath(); g.arc(x - s * 0.35, y - s * 0.35, Math.max(0.8, s * 0.22), 0, 6.283); g.fill();
+    }
+    const leaf = ['#6d7a3f', '#8b934f', '#59652f'];
+    for (let i = 0; i < 70; i++) {                        // algo de yerba flotando
+      g.fillStyle = leaf[i % 3];
+      g.fillRect(r() * 1024, r() * 1024, 4 + r() * 10, 3 + r() * 7);
+    }
+    const t = new THREE.CanvasTexture(c);
+    t.colorSpace = THREE.SRGBColorSpace;
+    t.anisotropy = 8;
+    return t;
+  }
+  const foamTex = foamTexture();
+  const foam = new THREE.Mesh(
+    new THREE.CircleGeometry(1, 96),
+    new THREE.MeshStandardMaterial({ map: foamTex, bumpMap: foamTex, bumpScale: 2, color: 0xc2c5b0, roughness: 0.25, metalness: 0 })
   );
-  foam.frustumCulled = false;
+  foam.rotation.x = -Math.PI / 2;
   mate.add(foam);
-  const foamData = [];
-  {
-    const fr = rand(21);
-    while (foamData.length < FOAM_N) {
-      const r = Math.pow(fr(), 0.6) * 0.38, a = fr() * Math.PI * 2;
-      const x = HUECO_X + 0.07 + Math.cos(a) * r, z = 0.03 + Math.sin(a) * r * 0.9;
-      if (Math.hypot(x, z) > 0.52) continue;           // que no se salga de la boca
-      foamData.push({ x, z, r, size: 0.022 + fr() * 0.05 * (1 - r / 0.45), delay: (r / 0.38) * 0.6 + fr() * 0.15, phase: fr() * 6.28 });
-    }
-  }
-  const dummy = new THREE.Object3D();
-  function yerbaHeightAt(x, z) {
-    // la superficie de la yerba sin el pozo del hueco: la espuma lo llena y queda arriba
-    return yerbaTop(S.fill) + S.slope * (x * 0.55 + 0.04);
-  }
-  function updateFoam(t) {
-    foam.visible = S.foam > 0.01;
+  function updateFoam() {
+    foam.visible = S.foam > 0.01 && S.fill > 0.5;
     if (!foam.visible) return;
-    for (let i = 0; i < FOAM_N; i++) {
-      const d = foamData[i];
-      const grow = THREE.MathUtils.smoothstep(S.foam * 1.7 - d.delay, 0, 1);
-      const size = d.size * grow * (1 + Math.sin(t * 1.3 + d.phase) * 0.05);
-      // la espuma se amontona en el hueco: más alta en el centro que en el borde
-      const lift = (1 - d.r / 0.38) * 0.1 * S.foam;
-      dummy.position.set(d.x, yerbaHeightAt(d.x, d.z) + lift + size * 0.35, d.z);
-      dummy.scale.set(size, size * 0.8, size);
-      dummy.updateMatrix();
-      foam.setMatrixAt(i, dummy.matrix);
-    }
-    foam.instanceMatrix.needsUpdate = true;
+    // sube desde el fondo del hueco hasta el pie de la montañita
+    const low = yerbaTop(S.fill) + S.slope * (-0.45 * 0.7 + 0.04) - 0.12;
+    const full = yerbaTop(S.fill) + S.slope * 0.04 - 0.015;
+    const level = low + (full - low) * S.foam;
+    foam.position.y = level;
+    foam.scale.setScalar(innerRadiusAt(level) * 0.995);
   }
 
   // Sombra de contacto
@@ -741,7 +791,7 @@
         to('fill', 1, 0.4); to('slope', 0.6, 0.4); to('bomb', 1, 0.6); to('tilt', 0); to('rain', 0, 0.2);
         // ceba, la espuma sube mientras termina de llenar y el termo se retira igual que entró
         to('termo', 1, 0.9); pour(0.9, 3.0); to('wet', 1, 1.8, 1.0);
-        to('foam', 1, 1.8, 1.9); to('termo', 0, 0.9, 3.5);
+        to('foam', 1, 2.0, 1.4); to('termo', 0, 0.9, 3.5);
         to('scale', 0.8); to('x', -0.75); to('y', -0.45);
         break;
       case 6:
@@ -843,7 +893,7 @@
       stream.quaternion.setFromUnitVectors(up, p1.clone().sub(p0).normalize());
     }
 
-    updateFoam(elapsed);
+    updateFoam();
 
     // partículas de yerba cayendo dentro del mate
     const floor = yerbaTop(S.fill);
