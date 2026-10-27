@@ -235,12 +235,12 @@
   <div class="step-copy">
     <p class="eyebrow">Paso 2 de 5</p>
     <h2>Hacé la <em>montañita.</em></h2>
-    <p>Tapá la boca con la mano, agitá y dejá caer la yerba hacia un costado. Que quede un hueco del otro lado.</p>
+    <p>Tapá la boca con la mano, agitá y dejá el mate de costado: la yerba se junta de un lado y queda un hueco del otro.</p>
   </div>
   <div class="step-copy">
     <p class="eyebrow">Paso 3 de 5</p>
     <h2>Un poco de <em>agua tibia.</em></h2>
-    <p>Mojá el hueco con agua a unos 50&nbsp;°C y dejá que la yerba se hinche un minuto.</p>
+    <p>Con el mate todavía de costado, mojá el hueco con agua a unos 50&nbsp;°C y dejá reposar unos minutos.</p>
   </div>
   <div class="step-copy">
     <p class="eyebrow">Paso 4 de 5</p>
@@ -376,14 +376,14 @@
   function rand(seed) { return () => (seed = (seed * 16807) % 2147483647) / 2147483647; }
 
   function filterTexture() {
-    // paleta de la bombilla: acero con agujeritos
+    // vaina del filtro: acero liso arriba y agujeritos en la punta (v=0 abajo)
     const c = document.createElement('canvas');
     c.width = 256; c.height = 256;
     const g = c.getContext('2d');
     g.fillStyle = '#fff'; g.fillRect(0, 0, 256, 256);
-    g.fillStyle = '#2a2a2a';
-    for (let y = 14; y < 256; y += 18) for (let x = 10 + (y / 18 % 2) * 9; x < 256; x += 18) {
-      g.beginPath(); g.arc(x, y, 3, 0, Math.PI * 2); g.fill();
+    g.fillStyle = '#1e1e1e';
+    for (let y = 150; y < 250; y += 14) for (let x = 6 + (y / 14 % 2) * 7; x < 256; x += 14) {
+      g.beginPath(); g.arc(x, y, 2.6, 0, Math.PI * 2); g.fill();
     }
     return new THREE.CanvasTexture(c);
   }
@@ -398,6 +398,23 @@
     grad.addColorStop(1, 'rgba(0,0,0,0)');
     g.fillStyle = grad; g.fillRect(0, 0, 256, 256);
     return new THREE.CanvasTexture(c);
+  }
+
+  function knurlTexture() {
+    // moleteado del anillo: rayado cruzado fino
+    const c = document.createElement('canvas');
+    c.width = c.height = 128;
+    const g = c.getContext('2d');
+    g.fillStyle = '#fff'; g.fillRect(0, 0, 128, 128);
+    g.strokeStyle = '#555'; g.lineWidth = 2;
+    for (let i = -128; i < 256; i += 8) {
+      g.beginPath(); g.moveTo(i, 0); g.lineTo(i + 128, 128); g.stroke();
+      g.beginPath(); g.moveTo(i + 128, 0); g.lineTo(i, 128); g.stroke();
+    }
+    const t = new THREE.CanvasTexture(c);
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    t.repeat.set(6, 1);
+    return t;
   }
 
   // ── El mate: la calabaza de la foto ────────────────────────
@@ -563,35 +580,66 @@
     yerbaGeo.computeVertexNormals();
   }
 
-  // Bombillón de acero: cuchara con agujeros, tubo grueso y pico aplanado. Escala real: ~19 cm y 9 mm de diámetro
+  // Bombilla de acero como la de referencia (~19 cm): vaina de filtro biselada con agujeritos,
+  // tubo grueso, anillo moleteado, curva arriba y pico aplanado con corte en diagonal
   const bombilla = new THREE.Group();   // se desliza al entrar
   const bombAxis = new THREE.Group();   // inclinada hacia el hueco
   bombilla.add(bombAxis);
-  const BOMB_TILT = 0.14;
+  const BOMB_TILT = 0.12;
   bombAxis.rotation.z = BOMB_TILT;
   bombAxis.position.set(-0.27, 0.3, 0.02);
   {
-    const spoonMat = steel.clone();
-    spoonMat.map = filterTexture();
-    const spoon = new THREE.Mesh(new THREE.SphereGeometry(1, 48, 24), spoonMat);
-    spoon.scale.set(0.2, 0.28, 0.05); spoon.position.y = 0.28;
-    const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.11, 0.16, 32), steel);
-    neck.position.y = 0.6;
-    const tube = new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.075, 2.25, 40), steel);
-    tube.position.y = 1.8;
-    // pico: se ensancha y se aplana hacia la boca, con el corte apenas en diagonal
-    const picoGeo = new THREE.CylinderGeometry(0.075, 0.075, 0.42, 40, 10);
-    const pp = picoGeo.attributes.position;
-    for (let i = 0; i < pp.count; i++) {
-      const t = (pp.getY(i) + 0.21) / 0.42;
-      pp.setX(i, pp.getX(i) * (1 + 0.45 * t));
-      pp.setZ(i, pp.getZ(i) * (1 - 0.55 * t));
-      if (t > 0.99) pp.setY(i, pp.getY(i) + pp.getX(i) * 0.35);
+    // vaina del filtro: más ancha que el tubo y cortada en bisel abajo
+    const sleeveMat = steel.clone();
+    sleeveMat.map = filterTexture();
+    const sleeveGeo = new THREE.CylinderGeometry(0.115, 0.115, 0.85, 40, 12, true);
+    {
+      const sp = sleeveGeo.attributes.position;
+      for (let i = 0; i < sp.count; i++) {
+        const x = sp.getX(i), y = sp.getY(i), t = (0.425 - y) / 0.85;   // 0 arriba, 1 abajo
+        sp.setZ(i, sp.getZ(i) * (1 - 0.22 * t));                         // se aplana hacia la punta
+        if (t > 0.99) sp.setY(i, y + (0.115 - x) * 1.2);                 // bisel
+      }
+      sleeveGeo.computeVertexNormals();
     }
-    picoGeo.computeVertexNormals();
+    const sleeve = new THREE.Mesh(sleeveGeo, sleeveMat);
+    sleeve.position.y = 0.43;
+    const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.115, 0.06, 40), steel);
+    cap.position.y = 0.88;
+
+    // tubo: recto hasta el anillo y después la curva hacia afuera
+    const path = new THREE.CurvePath();
+    path.add(new THREE.LineCurve3(new THREE.Vector3(0, 0.88, 0), new THREE.Vector3(0, 2.2, 0)));
+    path.add(new THREE.QuadraticBezierCurve3(
+      new THREE.Vector3(0, 2.2, 0), new THREE.Vector3(0, 2.68, 0), new THREE.Vector3(-0.34, 2.9, 0)));
+    const tube = new THREE.Mesh(new THREE.TubeGeometry(path, 120, 0.075, 32), steel);
+
+    const knurlMat = steel.clone();
+    knurlMat.map = knurlTexture();
+    knurlMat.bumpMap = knurlMat.map; knurlMat.bumpScale = 1.5;
+    const knurl = new THREE.Mesh(new THREE.CylinderGeometry(0.088, 0.088, 0.17, 40), knurlMat);
+    knurl.position.y = 2.06;
+    const joint = new THREE.Mesh(new THREE.CylinderGeometry(0.082, 0.082, 0.025, 40), steel);
+    joint.position.y = 1.96;
+
+    // pico: sigue la tangente final de la curva, se aplana y termina en diagonal
+    const picoGeo = new THREE.CylinderGeometry(0.075, 0.075, 0.42, 32, 8);
+    {
+      const pp = picoGeo.attributes.position;
+      for (let i = 0; i < pp.count; i++) {
+        const t = (pp.getY(i) + 0.21) / 0.42;
+        pp.setX(i, pp.getX(i) * (1 + 0.25 * t));
+        pp.setZ(i, pp.getZ(i) * (1 - 0.5 * t));
+        if (t > 0.99) pp.setY(i, pp.getY(i) - (pp.getX(i) + 0.09) * 0.9);
+      }
+      picoGeo.computeVertexNormals();
+    }
     const pico = new THREE.Mesh(picoGeo, steel);
-    pico.position.y = 3.13;
-    bombAxis.add(spoon, neck, tube, pico);
+    const end = new THREE.Vector3(-0.34, 2.9, 0);
+    const tan = path.getTangent(1).normalize();
+    pico.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), tan);
+    pico.position.copy(end).addScaledVector(tan, 0.2);
+    bombAxis.add(sleeve, cap, tube, knurl, joint, pico);
   }
   const BOMB_DIR = new THREE.Vector3(-Math.sin(BOMB_TILT), Math.cos(BOMB_TILT), 0);
   mate.add(bombilla);
@@ -632,9 +680,10 @@
   termo.rotation.z = TERMO_ROT;
   rig.add(termo);
   // ubica el termo para que el pico quede justo arriba del hueco; el cuerpo sale de cuadro
-  const TERMO_IN = new THREE.Vector3(HUECO_X + 0.22, 2.55, 0.1)
-    .sub(spoutTip.position.clone().multiplyScalar(TERMO_SCALE).applyAxisAngle(new THREE.Vector3(0, 0, 1), TERMO_ROT));
-  const TERMO_OUT = TERMO_IN.clone().add(new THREE.Vector3(3.2, 3.2, 0));
+  const Z = new THREE.Vector3(0, 0, 1);
+  const SPOUT_OFF = spoutTip.position.clone().multiplyScalar(TERMO_SCALE).applyAxisAngle(Z, TERMO_ROT);
+  const TERMO_IN = new THREE.Vector3(), TERMO_OUT = new THREE.Vector3(), huecoRig = new THREE.Vector3();
+  const OUT_SHIFT = new THREE.Vector3(3.2, 3.2, 0);
 
   // Chorro de agua
   const stream = new THREE.Mesh(
@@ -662,7 +711,7 @@
   rig.add(shadow);
 
   // ── Tweens por parámetro ──────────────────────────────────
-  const S = { fill: 1, slope: 0.6, wet: 1, bomb: 1, termo: 0, head: 0, tail: 0, tilt: 0, scale: 1, x: 0, y: 0, rain: 0 };
+  const S = { fill: 1, slope: 0.6, wet: 1, bomb: 1, termo: 0, head: 0, tail: 0, tilt: 0, shake: 0, scale: 1, x: 0, y: 0, rain: 0 };
   const tweens = {};
   const ease = (t) => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   let clock = 0;
@@ -701,12 +750,14 @@
         break;
       case 2:
         to('fill', 1, 0.4); to('bomb', 0, 0.5); to('termo', 0, 0.6); to('wet', 0, 0.5); to('rain', 0, 0.2);
-        to('tilt', 0.55, 0.7); to('slope', 0.6, 0.9, 0.35); to('tilt', 0, 0.8, 0.9);
+        // se agita inclinado y queda de costado: la yerba se junta del lado bajo (+x) y el hueco queda arriba (-x)
+        to('tilt', -1.0, 0.7); to('shake', 1, 0.15); to('shake', 0, 0.3, 1.2);
+        to('slope', 0.6, 0.9, 0.35); to('tilt', -0.8, 0.7, 1.3);
         to('scale', 1.1); to('x', 0); to('y', -0.1);
         break;
       case 3:
-        to('fill', 1, 0.4); to('slope', 0.6, 0.4); to('bomb', 0, 0.5); to('tilt', 0); to('rain', 0, 0.2);
-        to('termo', 1, 0.9); pour(0.9, 2.7); to('wet', 0.65, 1.6, 1.0);
+        to('fill', 1, 0.4); to('slope', 0.6, 0.4); to('bomb', 0, 0.5); to('rain', 0, 0.2);
+        to('termo', 1, 0.9); pour(0.9, 2.7); to('wet', 0.65, 1.6, 1.0); to('tilt', -0.7, 0.6);
         to('scale', 0.8); to('x', -0.75); to('y', -0.45);
         break;
       case 4:
@@ -770,8 +821,20 @@
     // la foto está proyectada de frente: el mate apenas gira para no delatar el truco
     rig.rotation.y = Math.sin(elapsed * 0.35) * 0.03 * idle + look.x * 0.06;
     // inclinación con un leve vaivén mientras se "agita"
-    mate.rotation.z = S.tilt + (S.tilt > 0.05 ? Math.sin(elapsed * 22) * 0.025 * S.tilt : 0);
-    shadow.scale.setScalar(1 - S.tilt * 0.15);
+    mate.rotation.z = S.tilt + Math.sin(elapsed * 22) * 0.04 * S.shake;
+    mate.rotation.x = -S.tilt * 0.45;   // de costado, con la boca un poco hacia quien mira
+    // al inclinarse se apoya sobre la panza: se levanta lo justo para que el punto más bajo toque la mesa
+    {
+      const sn = Math.sin(mate.rotation.z), cs = Math.cos(mate.rotation.z);
+      let low = 0, lowX = 0;
+      for (const p of outer) for (const x of [p.x, -p.x]) {
+        const y = x * sn + p.y * cs;
+        if (y < low) { low = y; lowX = x * cs - p.y * sn; }
+      }
+      mate.position.y = -low;
+      shadow.position.x = lowX * 0.7;
+    }
+    shadow.scale.setScalar(1 - Math.abs(S.tilt) * 0.15);
 
     updateYerba(S.fill, S.slope, S.wet);
 
@@ -780,6 +843,10 @@
     bombilla.position.copy(BOMB_DIR).multiplyScalar(2.6 * (1 - S.bomb));
 
     termo.visible = S.termo > 0.01;
+    // pico del termo siempre un poco arriba del hueco, siga el mate derecho o inclinado
+    huecoRig.set(HUECO_X, yerbaTop(S.fill), 0).applyAxisAngle(Z, mate.rotation.z);
+    TERMO_IN.set(huecoRig.x + 0.22, huecoRig.y + 1.05, 0.1).sub(SPOUT_OFF);
+    TERMO_OUT.copy(TERMO_IN).add(OUT_SHIFT);
     termo.position.lerpVectors(TERMO_OUT, TERMO_IN, S.termo);
     termo.rotation.z = TERMO_ROT - (1 - S.termo) * 0.5;
 
