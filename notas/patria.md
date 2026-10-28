@@ -15,6 +15,8 @@ sobres de cuero genuino hechos a mano en Uruguay. Las ventas se cierran por What
 - `patria/images/LEEME.txt` — lista exacta de nombres de foto que espera la web.
 
 ## Decisiones
+- Estructura tipo delsurleather.com (según lo que contó el usuario; el sitio está bloqueado en la red de la sesión): sin barra de promociones, logo a la izquierda, hamburguesa a la derecha (panel desde la derecha), header transparente sobre la portada y blanco al bajar.
+- Portada = video a pantalla completa (`images/hero.mp4`, poster `hero.jpg`) con el texto encima.
 - Si una foto falta, la web muestra un placeholder con el nombre de la pieza (no se rompe).
 - Logo: `images/logo.png` (marrón, header) y `images/logo-claro.png` (crema, footer), sacados del logo de Tirra con forma de Uruguay. Si faltan, escribe "TIRRA" en Inter bold.
 - El hero está pensado para la foto del logo grabado en cuero con pelo (título abajo a la izquierda).
@@ -26,6 +28,7 @@ sobres de cuero genuino hechos a mano en Uruguay. Las ventas se cierran por What
 - [x] Logo de Tirra cargado (PNG marrón y crema).
 - [ ] Rediseño estilo delsurleather.com (hay que habilitar ese dominio en la red de la sesión o pasar capturas).
 - [ ] ¿Renombrar carpeta `patria/` a `tirra/`?
+- [ ] Video de intro: el usuario pasa fotos de caballos y se arma `hero.mp4` cinemático.
 - [ ] Subir `hero.jpg` (antes era el logo PATRIA grabado en cuero; ver si hay foto nueva con Tirra).
 - [ ] Fotos de categorías (`cat-*.jpg`), Instagram (`ig-1..6.jpg`) y productos (`prod-*.jpg`).
 - [ ] Pasar los PNG actuales (2–8 MB) a JPG calidad 80.

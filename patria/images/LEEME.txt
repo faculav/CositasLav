@@ -35,6 +35,14 @@ El hero ya esta armado para esa imagen: el titulo va abajo a la
 izquierda para no taparle el grabado.
 
 
+VIDEO DE INTRO (portada a pantalla completa)
+--------------------------------------------
+hero.mp4              video de caballos corriendo, en loop y sin sonido.
+hero.webm             (opcional) misma version en webm, mas liviana.
+hero.jpg              foto que se ve mientras carga el video.
+El texto va encima, abajo a la izquierda.
+
+
 HERO Y EDITORIAL
 ----------------
 hero.jpg              horizontal, 1920x1080 aprox. Ambiente / producto en uso.

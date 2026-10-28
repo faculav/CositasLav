@@ -130,29 +130,41 @@
     });
   });
 
-  /* ---------- menú móvil ---------- */
+  /* ---------- menú hamburguesa (panel desde la derecha) ---------- */
   var burger = document.getElementById("burger");
   var menu = document.getElementById("menuMovil");
+  var fondo = document.getElementById("menuFondo");
+  function abrirMenu(abierto) {
+    menu.classList.toggle("is-abierto", abierto);
+    if (fondo) fondo.classList.toggle("is-abierto", abierto);
+    burger.classList.toggle("is-abierto", abierto);
+    document.body.classList.toggle("menu-abierto", abierto);
+    burger.setAttribute("aria-expanded", String(abierto));
+    burger.setAttribute("aria-label", abierto ? "Cerrar menú" : "Abrir menú");
+  }
   if (burger && menu) {
     burger.addEventListener("click", function () {
-      var abierto = menu.classList.toggle("is-abierto");
-      burger.classList.toggle("is-abierto", abierto);
-      burger.setAttribute("aria-expanded", String(abierto));
+      abrirMenu(!menu.classList.contains("is-abierto"));
     });
     menu.addEventListener("click", function (e) {
-      if (e.target.tagName === "A") {
-        menu.classList.remove("is-abierto");
-        burger.classList.remove("is-abierto");
-        burger.setAttribute("aria-expanded", "false");
-      }
+      if (e.target.tagName === "A") abrirMenu(false);
+    });
+    if (fondo) fondo.addEventListener("click", function () { abrirMenu(false); });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") abrirMenu(false);
     });
   }
 
-  /* ---------- sombra del header ---------- */
+  /* ---------- header: transparente sobre el video, blanco al bajar ---------- */
   var header = document.getElementById("header");
-  window.addEventListener("scroll", function () {
-    header.classList.toggle("is-scroll", window.scrollY > 10);
-  }, { passive: true });
+  var hero = document.querySelector(".hero");
+  function revisarHeader() {
+    var limite = hero ? hero.offsetHeight - header.offsetHeight : 10;
+    header.classList.toggle("is-scroll", window.scrollY > Math.max(limite, 10));
+  }
+  window.addEventListener("scroll", revisarHeader, { passive: true });
+  window.addEventListener("resize", revisarHeader);
+  revisarHeader();
 
   /* ---------- animación de entrada ---------- */
   var io = null;
