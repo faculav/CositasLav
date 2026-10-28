@@ -7,6 +7,7 @@
 const CONFIG = {
   // TODO: poné el número real de WhatsApp (formato internacional, sin + ni espacios)
   whatsapp: "59899000000",
+  // TODO: Instagram y email de Tirra (se usan en toda la página)
   instagram: "somospatria.uy",
   email: "hola@patria.uy",
   // Mensaje que se autocompleta al tocar un producto

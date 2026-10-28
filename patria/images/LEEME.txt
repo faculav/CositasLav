@@ -16,15 +16,15 @@ Salen del logo de Tirra (forma de Uruguay). Si cambia el logo, reemplaza
 estos dos archivos con el mismo nombre (PNG con fondo transparente).
 
 
-FOTOS YA CARGADAS (copiadas desde tu carpeta de Descargas)
------------------------------------------------------------
-cat-brazaletes.png   brazaletes sobre madera   (POST1 Patria2.png)
-taller.png           caballo en el box         (POST1 Patria1.png)
-ig-1.png             brazaletes sobre el caballo con el sombrero
-ig-2.png             sombreros en el cielo     (POST1 Patria.png)
-
-OJO: pesan entre 2 y 8 MB cada una. Andan bien, pero conviene
-pasarlas a JPG de calidad 80 antes de publicar el sitio.
+FOTOS YA CARGADAS (ya pasadas a JPG livianos)
+---------------------------------------------
+cat-brazaletes.jpg   brazaletes sobre madera   (tambien en "Nuestro cuero")
+taller.jpg           caballo en el box         (banner "Pedidos a medida")
+                     OJO: tiene un cartel que dice PATRIA.
+ig-1.jpg             brazaletes sobre el caballo con el sombrero
+                     (fondo de la portada mientras no este el video,
+                     y bloque "Cuidado del cuero")
+ig-2.jpg             sombreros en el cielo. NO SE USA: dice "florece Patria".
 
 
 FALTA: LA FOTO DEL HERO
@@ -49,7 +49,7 @@ hero.jpg              horizontal, 1920x1080 aprox. Ambiente / producto en uso.
 taller.jpg            vertical, 1200x1500 aprox. Manos trabajando, herramientas.
 
 
-CATEGORIAS (vertical 4:5, ej. 800x1000)
+CATEGORIAS "Nuestro estilo" (horizontal 7:5, ej. 1400x1000)
 ---------------------------------------
 cat-llaveros.jpg
 cat-brazaletes.jpg
@@ -59,12 +59,14 @@ cat-monederos.jpg
 cat-sobres.jpg
 
 
-INSTAGRAM (cuadradas 1:1, ej. 600x600)
---------------------------------------
-ig-1.jpg  ig-2.jpg  ig-3.jpg  ig-4.jpg  ig-5.jpg  ig-6.jpg
+"MAS TIRRA" (cuadradas 1:1, ej. 800x800)
+----------------------------------------
+ig-3.jpg   Seguinos en Instagram
+ig-4.jpg   Cuidado del cuero
+ig-5.jpg   Pedidos a medida
 
 
-PRODUCTOS (vertical 4:5, ej. 800x1000)
+PRODUCTOS (cuadradas 1:1, ej. 1000x1000, mejor con fondo blanco)
 --------------------------------------
 El nombre sale del campo "img" de cada producto en productos.js.
 La terminada en "b" es la segunda foto: aparece al pasar el mouse por encima.

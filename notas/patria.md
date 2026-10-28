@@ -15,8 +15,13 @@ sobres de cuero genuino hechos a mano en Uruguay. Las ventas se cierran por What
 - `patria/images/LEEME.txt` — lista exacta de nombres de foto que espera la web.
 
 ## Decisiones
-- Estructura tipo delsurleather.com (según lo que contó el usuario; el sitio está bloqueado en la red de la sesión): sin barra de promociones, logo a la izquierda, hamburguesa a la derecha (panel desde la derecha), header transparente sobre la portada y blanco al bajar.
-- Portada = video a pantalla completa (`images/hero.mp4`, poster `hero.jpg`) con el texto encima.
+- Copia la estructura de delsurleather.com (WebFetch no la abre, pero `curl` y Playwright con el proxy sí):
+  header blanco (compu: Contacto | Inicio Productos [logo] Nuestro cuero Nosotros | IG; celu: logo izq + hamburguesa der),
+  hero 650px (400px en celu) con título centrado, "Espíritu Tirra", "Nuestro estilo" (categorías), "Esenciales Tirra"
+  (productos, 8 + "Ver más"), banner "Pedidos a medida", "Nuestro cuero", "Cuidado del cuero", "Calidad Tirra" (sellos),
+  "Más Tirra", footer gris oscuro. Tipografía Raleway, botones de línea finos.
+- Portada = video `images/hero.mp4` (loop, mudo). Mientras falte, se ve `ig-1.jpg` de fondo.
+- Instagram, email y WhatsApp salen sólo de `CONFIG` en `productos.js`.
 - Si una foto falta, la web muestra un placeholder con el nombre de la pieza (no se rompe).
 - Logo: `images/logo.png` (marrón, header) y `images/logo-claro.png` (crema, footer), sacados del logo de Tirra con forma de Uruguay. Si faltan, escribe "TIRRA" en Inter bold.
 - El hero está pensado para la foto del logo grabado en cuero con pelo (título abajo a la izquierda).
@@ -26,10 +31,11 @@ sobres de cuero genuino hechos a mano en Uruguay. Las ventas se cierran por What
 - [ ] Instagram y email nuevos de Tirra (hoy siguen `somospatria.uy` y `hola@patria.uy`).
 - [ ] Reemplazar productos y precios de ejemplo por los reales.
 - [x] Logo de Tirra cargado (PNG marrón y crema).
-- [ ] Rediseño estilo delsurleather.com (hay que habilitar ese dominio en la red de la sesión o pasar capturas).
+- [x] Rediseño estilo delsurleather.com.
 - [ ] ¿Renombrar carpeta `patria/` a `tirra/`?
 - [ ] Video de intro: el usuario pasa fotos de caballos y se arma `hero.mp4` cinemático.
 - [ ] Subir `hero.jpg` (antes era el logo PATRIA grabado en cuero; ver si hay foto nueva con Tirra).
 - [ ] Fotos de categorías (`cat-*.jpg`), Instagram (`ig-1..6.jpg`) y productos (`prod-*.jpg`).
-- [ ] Pasar los PNG actuales (2–8 MB) a JPG calidad 80.
+- [x] Fotos pasadas a JPG (de ~16 MB a ~1 MB).
+- [ ] `taller.jpg` tiene un cartel "PATRIA" e `ig-2.jpg` dice "florece Patria": reemplazar.
 - [ ] Publicar el sitio (definir hosting y dominio).
