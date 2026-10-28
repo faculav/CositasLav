@@ -842,6 +842,7 @@
   // ── Tweens por parámetro ──────────────────────────────────
   const S = { fill: 1, slope: 0.6, wet: 1, bomb: 1, termo: 0, head: 0, tail: 0, tilt: 0, shake: 0, scale: 1, x: 0, y: 0, rain: 0, foam: 0, vaso: 0, vasoWater: 1, yerbera: 0, spout: 0 };
   const tweens = {};
+  const REST = { shake: 0, rain: 0, head: 0, tail: 0, vaso: 0, yerbera: 0, spout: 0 };
   const ease = (t) => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   let clock = 0;
   function to(key, value, dur = 0.8, delay = 0) {
@@ -867,7 +868,7 @@
     for (const k in tweens) tweens[k].length = 0;
     S.head = S.tail = 0;                    // el chorro nunca queda colgado entre pasos
     const pour = (start, end) => { to('head', 1, 0.35, start); to('tail', 1, 0.35, end); };
-    if (step !== 3) { to('vaso', 0, 0.6); S.vasoWater = 1; }
+    if (step !== 3) { to('vaso', 0, 0.6); to('vasoWater', 1, 0.01, 0.7); }   // se rellena ya fuera de cuadro
     if (step !== 1) { to('yerbera', 0, 0.6); to('spout', 0, 0.3); }
     if (step < 5) to('foam', 0, 0.4);
     switch (step) {
@@ -914,6 +915,9 @@
         to('tilt', 0); to('rain', 0, 0.2); to('scale', 1.02); to('x', 0); to('y', -0.05);
         break;
     }
+    // red de seguridad: si un paso se interrumpe a la mitad, sus movimientos pasajeros (sacudida, chorro,
+    // lluvia de yerba, vaso, yerbera y su pico) vuelven siempre a reposo en vez de quedar congelados
+    for (const k in REST) if (!tweens[k] || tweens[k].length === 0) to(k, REST[k], 0.3);
   }
   addEventListener('ritual:step', (e) => enterStep(e.detail.step));
   enterStep(window.ritualStep() ?? 0);
@@ -941,6 +945,7 @@
 
   const pointer = { x: 0, y: 0 }, look = { x: 0, y: 0 };
   addEventListener('pointermove', (e) => {
+    if (e.pointerType !== 'mouse') return;            // con el dedo se está scrolleando: el mate no lo sigue
     pointer.x = e.clientX / innerWidth - 0.5;
     pointer.y = e.clientY / innerHeight - 0.5;
   });
