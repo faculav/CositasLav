@@ -733,7 +733,8 @@
     const lid = new THREE.Mesh(new THREE.LatheGeometry([
       [0.001, 0.36], [0.5, 0.35], [0.8, 0.31], [YB_R + 0.025, 0.26], [YB_R + 0.03, 0.02], [YB_R + 0.02, 0]
     ].map(([r, y]) => new THREE.Vector2(r, y)), 96),
-      new THREE.MeshPhysicalMaterial({ color: 0xf3f3f0, roughness: 0.28, clearcoat: 0.6, clearcoatRoughness: 0.3 }));
+      // blanca de todos lados: al volcar, la cara de arriba mira lejos de la luz y no debe agrisarse
+      new THREE.MeshPhysicalMaterial({ color: 0xf3f3f0, emissive: 0xc9c9c6, roughness: 0.28, clearcoat: 0.6, clearcoatRoughness: 0.3, side: THREE.DoubleSide }));
     lid.position.y = YB_H;
     yerbera.add(body, inner, bottom, topRim, baseRim, lid);
   }
