@@ -696,7 +696,7 @@
   const VASO_IN = new THREE.Vector3(), VASO_OUT = new THREE.Vector3();
   const lipWorld = new THREE.Vector3();
 
-  // Yerbera Un Amargo (paso 1): la lata de la foto, sin la tapa. ~10 cm de diámetro y 15 cm de alto.
+  // Yerbera Un Amargo (paso 1): la lata de la foto con su tapa y el pico vertedor. ~10 cm de diámetro y 15 cm de alto.
   // Como el mate, se tornea y se le proyecta la foto de frente (images/yerbera.jpg, recorte de 390 × 645 px).
   const YB_R = 0.85, YB_H = 2.58;
   const yerbera = new THREE.Group();
@@ -729,16 +729,34 @@
     topRim.rotation.x = Math.PI / 2; topRim.position.y = YB_H;
     const baseRim = new THREE.Mesh(new THREE.TorusGeometry(YB_R + 0.004, 0.022, 12, 96), brass);
     baseRim.rotation.x = Math.PI / 2; baseRim.position.y = 0.02;
-    yerbera.add(body, inner, bottom, topRim, baseRim);
+    // tapa blanca, apenas abombada
+    const lid = new THREE.Mesh(new THREE.LatheGeometry([
+      [0.001, 0.36], [0.5, 0.35], [0.8, 0.31], [YB_R + 0.025, 0.26], [YB_R + 0.03, 0.02], [YB_R + 0.02, 0]
+    ].map(([r, y]) => new THREE.Vector2(r, y)), 96),
+      new THREE.MeshPhysicalMaterial({ color: 0xf3f3f0, roughness: 0.28, clearcoat: 0.6, clearcoatRoughness: 0.3 }));
+    lid.position.y = YB_H;
+    yerbera.add(body, inner, bottom, topRim, baseRim, lid);
   }
+  // pico vertedor de acero: una canaleta que sale de la tapa al servir y se guarda después
+  const SPOUT_LEN = 1.0, SPOUT_TILT = 0.55;
+  const spout = new THREE.Group();
+  {
+    const g = new THREE.CylinderGeometry(0.27, 0.36, SPOUT_LEN, 32, 1, true, Math.PI, Math.PI);   // media caña ancha
+    g.translate(0, SPOUT_LEN / 2, 0);
+    const steelMat = new THREE.MeshStandardMaterial({ color: 0xdadcde, metalness: 1, roughness: 0.28, side: THREE.DoubleSide });
+    spout.add(new THREE.Mesh(g, steelMat));
+  }
+  spout.position.set(-0.42, YB_H + 0.2, 0);
+  spout.rotation.z = SPOUT_TILT;
+  yerbera.add(spout);
   const ybLip = new THREE.Object3D();
-  ybLip.position.set(-YB_R, YB_H, 0);                   // borde por donde cae la yerba al volcarla
-  yerbera.add(ybLip);
+  ybLip.position.set(0, SPOUT_LEN, 0);                  // la punta del pico: de ahí cae la yerba
+  spout.add(ybLip);
   const YB_ROT = 2.05;
   yerbera.rotation.z = YB_ROT;
   rig.add(yerbera);
-  const YB_LIP_OFF = ybLip.position.clone().applyAxisAngle(Z, YB_ROT);
-  const YB_IN = new THREE.Vector3(0.05, 2.25, 0.05).sub(YB_LIP_OFF);
+  const YB_LIP_OFF = new THREE.Vector3(0, SPOUT_LEN, 0).applyAxisAngle(Z, SPOUT_TILT).add(spout.position).applyAxisAngle(Z, YB_ROT);
+  const YB_IN = new THREE.Vector3(0.0, 2.3, 0.05).sub(YB_LIP_OFF);
   const YB_OUT = YB_IN.clone().add(new THREE.Vector3(3.6, 2.4, 0));
   const ybLipMate = new THREE.Vector3();
 
@@ -820,7 +838,7 @@
   rig.add(shadow);
 
   // ── Tweens por parámetro ──────────────────────────────────
-  const S = { fill: 1, slope: 0.6, wet: 1, bomb: 1, termo: 0, head: 0, tail: 0, tilt: 0, shake: 0, scale: 1, x: 0, y: 0, rain: 0, foam: 0, vaso: 0, vasoWater: 1, yerbera: 0 };
+  const S = { fill: 1, slope: 0.6, wet: 1, bomb: 1, termo: 0, head: 0, tail: 0, tilt: 0, shake: 0, scale: 1, x: 0, y: 0, rain: 0, foam: 0, vaso: 0, vasoWater: 1, yerbera: 0, spout: 0 };
   const tweens = {};
   const ease = (t) => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   let clock = 0;
@@ -848,7 +866,7 @@
     S.head = S.tail = 0;                    // el chorro nunca queda colgado entre pasos
     const pour = (start, end) => { to('head', 1, 0.35, start); to('tail', 1, 0.35, end); };
     if (step !== 3) { to('vaso', 0, 0.6); S.vasoWater = 1; }
-    if (step !== 1) to('yerbera', 0, 0.6);
+    if (step !== 1) { to('yerbera', 0, 0.6); to('spout', 0, 0.3); }
     if (step < 5) to('foam', 0, 0.4);
     switch (step) {
       case 0:
@@ -858,8 +876,9 @@
       case 1:
         to('bomb', 0, 0.5); to('termo', 0, 0.6); to('tilt', 0); to('wet', 0, 0.5); to('slope', 0, 0.5);
         // entra la yerbera, vuelca la yerba hasta las tres cuartas partes y se retira igual que entró
-        to('fill', 0, 0.45); to('yerbera', 1, 1.0);
-        to('rain', 1, 0.15, 1.0); to('fill', 1, 2.6, 1.1); to('rain', 0, 0.3, 3.5); to('yerbera', 0, 1.0, 3.8);
+        to('fill', 0, 0.45); to('yerbera', 1, 1.0); to('spout', 1, 0.45, 0.85);
+        to('rain', 1, 0.15, 1.3); to('fill', 1, 2.5, 1.4); to('rain', 0, 0.3, 3.8);
+        to('spout', 0, 0.4, 4.1); to('yerbera', 0, 1.0, 4.5);
         to('scale', 0.85); to('x', -0.6); to('y', -0.4);
         break;
       case 2:
@@ -1008,7 +1027,9 @@
     yerbera.visible = S.yerbera > 0.01;
     yerbera.position.lerpVectors(YB_OUT, YB_IN, S.yerbera);
     yerbera.rotation.z = YB_ROT - (1 - S.yerbera) * 1.6;
-    const fromLip = yerbera.visible && S.yerbera > 0.85;
+    spout.visible = S.spout > 0.02;
+    spout.scale.set(1, Math.max(S.spout, 0.02), 1);      // se desliza hacia afuera desde la tapa
+    const fromLip = yerbera.visible && S.yerbera > 0.85 && S.spout > 0.9;
     if (fromLip) {
       yerbera.updateMatrixWorld(true);
       mate.updateMatrixWorld(true);
@@ -1023,9 +1044,9 @@
         if (spawnAcc >= 1) {
           spawnAcc--;
           if (fromLip) {
-            pPos[i * 3] = Math.min(0.3, Math.max(-0.3, ybLipMate.x + (pr() - 0.5) * 0.3));
-            pPos[i * 3 + 1] = ybLipMate.y - pr() * 0.12;
-            pPos[i * 3 + 2] = (pr() - 0.5) * 0.36;
+            pPos[i * 3] = Math.min(0.3, Math.max(-0.3, ybLipMate.x + (pr() - 0.5) * 0.18));
+            pPos[i * 3 + 1] = ybLipMate.y - pr() * 0.1;
+            pPos[i * 3 + 2] = (pr() - 0.5) * 0.2;
             pVel[i] = 0.2 + pr() * 0.6;
           } else {
             const r = Math.sqrt(pr()) * 0.32, t = pr() * Math.PI * 2;
