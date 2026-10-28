@@ -1,5 +1,5 @@
 /* =========================================================
-   PATRIA — datos editables
+   TIRRA — datos editables
    Este es el ÚNICO archivo que necesitás tocar para cambiar
    el contenido de la tienda: teléfono, productos y precios.
    ========================================================= */
@@ -10,7 +10,7 @@ const CONFIG = {
   instagram: "somospatria.uy",
   email: "hola@patria.uy",
   // Mensaje que se autocompleta al tocar un producto
-  mensajeBase: "¡Hola PATRIA! Me interesa "
+  mensajeBase: "¡Hola TIRRA! Me interesa "
 };
 
 /* ---------------------------------------------------------

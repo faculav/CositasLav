@@ -1,5 +1,5 @@
 /* =========================================================
-   PATRIA — comportamiento
+   TIRRA — comportamiento
    ========================================================= */
 (function () {
   "use strict";
@@ -23,7 +23,7 @@
       '</linearGradient></defs>' +
       '<rect width="800" height="1000" fill="url(#g)"/>' +
       '<text x="400" y="492" font-family="Inter,Helvetica,Arial,sans-serif" font-weight="700" ' +
-      'font-size="36" fill="#4b3729" text-anchor="middle" letter-spacing="-1">PATRIA</text>' +
+      'font-size="36" fill="#4b3729" text-anchor="middle" letter-spacing="-1">TIRRA</text>' +
       '<text x="400" y="534" font-family="Inter,Helvetica,Arial,sans-serif" font-size="19" ' +
       'fill="#7d6f64" text-anchor="middle" letter-spacing="1">' + texto + '</text>' +
       '</svg>';
@@ -31,7 +31,7 @@
   }
 
   /* ---------- logo ----------
-     Si no existe images/logo.svg (o .png), se muestra el
+     Si no existe images/logo.png (o .png), se muestra el
      wordmark de texto en vez de un placeholder.            */
   document.querySelectorAll("[data-logo]").forEach(function (img) {
     img.addEventListener("error", function () {
@@ -61,7 +61,7 @@
     return "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(mensaje);
   }
   document.querySelectorAll("[data-whatsapp]").forEach(function (a) {
-    a.href = linkWhatsapp("¡Hola PATRIA! Quería hacerles una consulta.");
+    a.href = linkWhatsapp("¡Hola TIRRA! Quería hacerles una consulta.");
   });
 
   /* ---------- render de productos ---------- */

@@ -1,5 +1,5 @@
-FOTOS DE PATRIA
-===============
+FOTOS DE TIRRA
+==============
 
 Mientras estos archivos no existan, la web muestra un placeholder en tonos
 cuero con el nombre de la pieza. Apenas subas el archivo con el nombre exacto
@@ -8,15 +8,12 @@ de abajo, el placeholder desaparece solo (no hay que tocar codigo).
 Formato recomendado: JPG, calidad 80, ancho 1600 px como maximo.
 
 
-LOGO (lo unico que falta para que la marca aparezca)
-----------------------------------------------------
-logo.svg          version oscura (marron), para el header sobre fondo blanco.
-logo-claro.svg    version crema, para el footer sobre fondo marron.
-
-Si solo tenes PNG, sirve igual: guardalo como logo.png / logo-claro.png y
-cambia la extension en index.html (buscar "logo.svg"). Que sea PNG con fondo
-TRANSPARENTE y unos 600 px de ancho como minimo.
-Mientras no esten, la web escribe PATRIA en Inter bold como reemplazo.
+LOGO (ya cargado)
+-----------------
+logo.png          version marron, para el header sobre fondo blanco.
+logo-claro.png    version crema, para el footer sobre fondo marron.
+Salen del logo de Tirra (forma de Uruguay). Si cambia el logo, reemplaza
+estos dos archivos con el mismo nombre (PNG con fondo transparente).
 
 
 FOTOS YA CARGADAS (copiadas desde tu carpeta de Descargas)
@@ -32,7 +29,7 @@ pasarlas a JPG de calidad 80 antes de publicar el sitio.
 
 FALTA: LA FOTO DEL HERO
 -----------------------
-Es la del logo PATRIA grabado en el cuero con pelo. No la encontre
+Es la del logo grabado en el cuero con pelo. No la encontre
 en la compu, asi que guardala vos en esta carpeta como:  hero.jpg
 El hero ya esta armado para esa imagen: el titulo va abajo a la
 izquierda para no taparle el grabado.
