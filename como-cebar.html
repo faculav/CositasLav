@@ -738,15 +738,16 @@
     yerbera.add(body, inner, bottom, topRim, baseRim, lid);
   }
   // pico vertedor de acero: una canaleta que sale de la tapa al servir y se guarda después
-  const SPOUT_LEN = 1.0, SPOUT_TILT = 0.55;
+  const SPOUT_LEN = 1.2, SPOUT_TILT = 0.5;
   const spout = new THREE.Group();
   {
-    const g = new THREE.CylinderGeometry(0.27, 0.36, SPOUT_LEN, 32, 1, true, Math.PI, Math.PI);   // media caña ancha
+    // media caña ancha con el lomo hacia cámara: el interior de la canaleta queda del lado de atrás
+    const g = new THREE.CylinderGeometry(0.27, 0.36, SPOUT_LEN, 32, 1, true, -Math.PI / 2, Math.PI);
     g.translate(0, SPOUT_LEN / 2, 0);
     const steelMat = new THREE.MeshStandardMaterial({ color: 0xdadcde, metalness: 1, roughness: 0.28, side: THREE.DoubleSide });
     spout.add(new THREE.Mesh(g, steelMat));
   }
-  spout.position.set(-0.42, YB_H + 0.2, 0);
+  spout.position.set(-0.38, YB_H - 0.05, -0.32);       // nace detrás del frente, dentro de la tapa: la lata tapa su arranque
   spout.rotation.z = SPOUT_TILT;
   yerbera.add(spout);
   const ybLip = new THREE.Object3D();
