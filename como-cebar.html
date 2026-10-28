@@ -742,8 +742,8 @@
   const SPOUT_LEN = 1.0, SPOUT_TILT = 0.38;
   const spout = new THREE.Group();
   {
-    // media caña ancha con el lomo hacia cámara: el interior de la canaleta queda del lado de atrás
-    const g = new THREE.CylinderGeometry(0.27, 0.36, SPOUT_LEN, 32, 1, true, -Math.PI / 2, Math.PI);
+    // media caña angosta que se afina hacia la punta, con el lomo hacia cámara
+    const g = new THREE.CylinderGeometry(0.15, 0.3, SPOUT_LEN, 32, 1, true, -Math.PI / 2, Math.PI);
     g.translate(0, SPOUT_LEN / 2, 0);
     const steelMat = new THREE.MeshStandardMaterial({ color: 0xdadcde, metalness: 1, roughness: 0.28, side: THREE.DoubleSide });
     spout.add(new THREE.Mesh(g, steelMat));
