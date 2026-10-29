@@ -176,13 +176,11 @@
 
     /* ── MOBILE: mate arriba, texto abajo ─────────────────── */
     @media (max-width: 760px) {
-      /* la escena ocupa la mitad de arriba y el texto la de abajo: nunca se pisan */
-      #stage { height: 60svh; }
-      .copy {
-        top: calc(60svh + 2px); bottom: 60px; transform: none;
-        width: auto; right: 16px; left: 16px;
-      }
-      .step-copy { top: 0; transform: none; }
+      /* una sola escena a pantalla completa: el mate, su sombra y el texto comparten el mismo fondo.
+         El texto va abajo o arriba según el paso, y la escena se corre hacia la zona libre */
+      .copy { top: 0; bottom: 0; left: 16px; right: 16px; width: auto; transform: none; }
+      .step-copy { top: auto; bottom: 64px; transform: none; }
+      .step-copy[data-pos="top"] { top: 78px; bottom: auto; }
       .step-copy.before { transform: translateY(14px); }
       .step-copy.after  { transform: translateY(-14px); }
       .step-copy.active { transform: none; }
@@ -191,14 +189,14 @@
       .actions { margin-top: 20px; }
       .pill { padding: 14px 22px; font-size: 15px; }
       .eyebrow { margin-bottom: 12px; font-size: 12px; }
-      .dots { right: 12px; top: 30svh; gap: 10px; }
+      .dots { right: 12px; gap: 10px; }
       .bottom { padding-block: 16px; }
-      .fallback { left: 50%; right: auto; top: 30svh; transform: translate(-50%, -50%); width: 52vw; }
+      .fallback { left: 50%; right: auto; top: 36%; transform: translate(-50%, -50%); width: 52vw; }
     }
     @media (max-width: 760px) and (max-height: 700px) {
-      /* teléfonos bajos (iPhone SE y similares): un poco menos de escena para que entre el texto */
-      #stage { height: 56svh; }
-      .copy { top: calc(56svh + 2px); bottom: 54px; }
+      /* teléfonos bajos (iPhone SE y similares): texto un poco más compacto */
+      .step-copy { bottom: 56px; }
+      .step-copy[data-pos="top"] { top: 70px; }
       .step-copy p { font-size: 14px; margin-top: 10px; }
       .step-copy h1, .step-copy h2 { font-size: clamp(32px, 9.6vw, 42px); }
       .actions { margin-top: 14px; }
@@ -231,7 +229,7 @@
 <nav class="dots" id="dots" aria-label="Pasos"></nav>
 
 <div class="copy" id="copy">
-  <div class="step-copy">
+  <div class="step-copy" data-pos="bottom">
     <p class="eyebrow">El ritual</p>
     <h1>Cómo cebar <em>un buen amargo.</em></h1>
     <p>Un ritual, paso a paso.</p>
@@ -239,32 +237,32 @@
       <button class="pill" data-go="1">Empezar <span aria-hidden="true">↗</span></button>
     </div>
   </div>
-  <div class="step-copy">
+  <div class="step-copy" data-pos="bottom">
     <p class="eyebrow">Paso 1 de 5</p>
     <h2>Primero, <em>la yerba.</em></h2>
     <p>Llená el mate hasta tres cuartas partes.</p>
   </div>
-  <div class="step-copy">
+  <div class="step-copy" data-pos="top">
     <p class="eyebrow">Paso 2 de 5</p>
     <h2>Hacé la <em>montañita.</em></h2>
     <p>Tapá la boca con la mano, agitá y dejá el mate de costado: la yerba se junta de un lado y queda un hueco del otro.</p>
   </div>
-  <div class="step-copy">
+  <div class="step-copy" data-pos="bottom">
     <p class="eyebrow">Paso 3 de 5</p>
     <h2>Un poco de <em>agua fría.</em></h2>
     <p>Con el mate todavía de costado, mojá el hueco con un poco de agua fría o a temperatura ambiente y dejá reposar unos minutos.</p>
   </div>
-  <div class="step-copy">
+  <div class="step-copy" data-pos="bottom">
     <p class="eyebrow">Paso 4 de 5</p>
     <h2>Ahora, <em>la bombilla.</em></h2>
     <p>Tapala con el dedo y clavala en la parte húmeda, hasta el fondo. Después, no la muevas más.</p>
   </div>
-  <div class="step-copy">
+  <div class="step-copy" data-pos="bottom">
     <p class="eyebrow">Paso 5 de 5</p>
     <h2>Cebá. <em>Sin apuro.</em></h2>
     <p>Agua a 70–80&nbsp;°C, nunca hervida. Vertí despacio, siempre en el mismo lugar, junto a la bombilla.</p>
   </div>
-  <div class="step-copy">
+  <div class="step-copy" data-pos="top">
     <p class="eyebrow">Y por último</p>
     <h2>El mejor paso: <em>compartirlo.</em></h2>
     <p>Volvé a cebar y que siga la ronda.</p>
@@ -845,8 +843,10 @@
   rig.add(shadow);
 
   // ── Tweens por parámetro ──────────────────────────────────
-  const S = { fill: 1, slope: 0.6, wet: 1, bomb: 1, termo: 0, head: 0, tail: 0, tilt: 0, shake: 0, scale: 1, x: 0, y: 0, rain: 0, foam: 0, vaso: 0, vasoWater: 1, yerbera: 0, spout: 0 };
+  const S = { fill: 1, slope: 0.6, wet: 1, bomb: 1, termo: 0, head: 0, tail: 0, tilt: 0, shake: 0, scale: 1, x: 0, y: 0, rain: 0, foam: 0, vaso: 0, vasoWater: 1, yerbera: 0, spout: 0, vy: 1 };
   const tweens = {};
+  // celular: 1 = texto abajo (la escena sube), -1 = texto arriba (la escena baja)
+  const POS = [...document.querySelectorAll('.step-copy')].map((c) => (c.dataset.pos === 'top' ? -1 : 1));
   const REST = { shake: 0, rain: 0, head: 0, tail: 0, vaso: 0, yerbera: 0, spout: 0 };
   const ease = (t) => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   let clock = 0;
@@ -876,6 +876,7 @@
     if (step !== 3) { to('vaso', 0, 0.6); to('vasoWater', 1, 0.01, 0.7); }   // se rellena ya fuera de cuadro
     if (step !== 1) { to('yerbera', 0, 0.6); to('spout', 0, 0.3); }
     if (step < 5) to('foam', 0, 0.4);
+    to('vy', POS[step] ?? 1, 0.9);
     switch (step) {
       case 0:
         to('fill', 1); to('slope', 0.6); to('wet', 1); to('bomb', 1, 0.9, 0.2); to('termo', 0, 0.6);
@@ -937,12 +938,11 @@
     mobile = innerWidth <= 760;
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
-    const dist = mobile ? 13.5 : 13, el = THREE.MathUtils.degToRad(19), aim = mobile ? 2.9 : 2.15;
+    const dist = mobile ? 13.5 * 844 / 506 : 13, el = THREE.MathUtils.degToRad(19), aim = mobile ? 2.9 : 2.15;
     camera.position.set(0, aim + Math.sin(el) * dist, Math.cos(el) * dist);
     camera.lookAt(0, aim, 0);
     // escritorio: el mate a la derecha, dejando lugar al texto
-    if (mobile) camera.clearViewOffset();
-    else camera.setViewOffset(w, h, -w * 0.2, h * 0.02, w, h);
+    if (!mobile) camera.setViewOffset(w, h, -w * 0.2, h * 0.02, w, h);
     camera.updateProjectionMatrix();
   }
   addEventListener('resize', resize);
@@ -970,7 +970,7 @@
     const idle = reduceMotion ? 0 : 1;
     // en celular el encuadre es angosto: los corrimientos laterales de cada paso van a la mitad
     // y el mate de costado se corre hacia el centro para no cortarse contra el borde
-    rig.position.set(mobile ? S.x * 0.5 + S.tilt * 1.05 : S.x, S.y + Math.sin(elapsed * 0.9) * 0.03 * idle, 0);
+    rig.position.set(mobile ? S.x * 0.5 + S.tilt * 1.05 : S.x, S.y * (mobile ? 0.4 : 1) + Math.sin(elapsed * 0.9) * 0.03 * idle, 0);
     // en celular el mate no pasa de un tamaño, así la bombilla nunca se mete en el encabezado
     rig.scale.setScalar(mobile ? Math.min(S.scale, 1) * 1.45 : S.scale * 1.3);
     // la foto está proyectada de frente: el mate apenas gira para no delatar el truco
@@ -990,6 +990,11 @@
       shadow.position.x = lowX * 0.7;
     }
     shadow.scale.setScalar(1 - Math.abs(S.tilt) * 0.15);
+
+    if (mobile) {
+      camera.setViewOffset(lastW, lastH, 0, S.vy * (S.vy > 0 ? 0.15 : 0.12) * lastH, lastW, lastH);
+      camera.updateProjectionMatrix();
+    }
 
     updateYerba(S.fill, S.slope, S.wet);
 
