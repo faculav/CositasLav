@@ -13,6 +13,9 @@ Tienda de mates artesanales (Uruguay). La venta se cierra por WhatsApp (`5989702
   foto proyectada encima; bombillón de acero y termo negro de 1 L a escala real.
   Estética blanco y negro, Helvetica con interlineado negativo (bold + regular). Inspirado en el concepto "ritual" de @made_byfede. Enlazado desde
   el menú y el footer de la tienda. Si el navegador no tiene WebGL muestra `images/camionero-virola.jpg`.
+- `como-curar.html` — "Cómo curar tu mate": misma base que `como-cebar.html`, con selector de mate
+  (calabaza o algarrobo ranchero) que cambia el modelo 3D, los textos y la animación de cada paso.
+  Usa `images/mate-ranchero.jpg` y `images/mate-ranchero-interior.jpg` además de las del cebado.
 - `admin.html` — panel interno local: ventas, stock, gastos, dinero en cuenta, respaldo.
 - `panel-compartido/` — el mismo panel en Google Apps Script + Google Sheets para usar entre los 3
   (instalación en `panel-compartido/INSTRUCCIONES.md`).

@@ -161,6 +161,7 @@
       transition: transform 250ms var(--ease), background-color 600ms, color 600ms;
     }
     .pill:hover { transform: translateY(-2px); }
+    .inline-link { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; pointer-events: auto; }
     .pill.ghost {
       background: transparent; color: var(--ink);
       box-shadow: inset 0 0 0 1.5px currentColor;
@@ -265,7 +266,7 @@
   <div class="step-copy" data-pos="top">
     <p class="eyebrow">Y por último</p>
     <h2>El mejor paso: <em>compartirlo.</em></h2>
-    <p>Volvé a cebar y que siga la ronda.</p>
+    <p>Volvé a cebar y que siga la ronda. ¿Mate nuevo? <a class="inline-link" href="./como-curar.html">Primero curalo</a>.</p>
     <div class="actions">
       <button class="pill" data-go="1">Otra ronda <span aria-hidden="true">↺</span></button>
       <a class="pill ghost" href="./index.html#tienda">Ver mates <span aria-hidden="true">→</span></a>
