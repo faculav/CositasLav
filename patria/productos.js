@@ -20,7 +20,7 @@ const CONFIG = {
 
    id        : identificador corto, sin espacios
    nombre    : cómo se llama la pieza
-   cat       : collares | brazaletes | pulseras
+   cat       : pecheras | collares | brazaletes | pulseras
    desc      : una línea corta (material, color, detalle)
    precio    : número en pesos uruguayos (sin puntos),
                o null para mostrar "Consultar precio"
@@ -34,6 +34,8 @@ const CONFIG = {
 
 // TODO: faltan los precios reales (hoy todos dicen "Consultar precio")
 const PRODUCTOS = [
+  { id:"pec-cria",    nombre:"Pechera Cría",       cat:"pecheras",   desc:"Gamuza marrón, cordones y bolsillo cebra con tachas", precio:1990, antes:null, tag:"Nuevo", img:"images/prod-pec-cria.jpg", img2:"images/prod-pec-cria-b.jpg" },
+
   { id:"col-tierra",  nombre:"Collar Tierra",      cat:"collares",   desc:"Cuero vacuno + piedra natural",       precio:null, antes:null, tag:"Nuevo", img:"images/prod-col-tierra-blanco.jpg", img2:"images/prod-col-tierra.jpg" },
   { id:"col-pampa",   nombre:"Collar Pampa",       cat:"collares",   desc:"Cuero vacuno + dije de nácar",        precio:null, antes:null, tag:"Nuevo", img:"images/prod-col-pampa-blanco.jpg",  img2:"images/prod-col-pampa.jpg" },
   { id:"col-ocre",    nombre:"Collar Ocre",        cat:"collares",   desc:"Cuero vacuno + piedra natural",       precio:null, antes:null, tag:null,    img:"images/prod-col-ocre-blanco.jpg",   img2:"images/prod-col-ocre.jpg" },

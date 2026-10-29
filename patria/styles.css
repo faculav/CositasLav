@@ -146,7 +146,7 @@ body.menu-abierto .wa, body.menu-abierto .arriba{ opacity:0; pointer-events:none
 .espiritu p{ color:var(--gris-txt); font-size:15px; line-height:2; margin:0 auto; max-width:780px; }
 
 /* tarjetas de estilo / categorías */
-.estilos{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(18px,3vw,40px) clamp(16px,3vw,40px); }
+.estilos{ display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(18px,3vw,40px) clamp(16px,3vw,40px); }
 .mas{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,3vw,40px); }
 .estilo{ display:block; text-align:center; }
 .estilo__img{
@@ -330,7 +330,7 @@ body.menu-abierto .wa, body.menu-abierto .arriba{ opacity:0; pointer-events:none
   .titulo{ font-size:32px; }
 }
 @media (max-width:560px){
-  .estilos, .mas{ grid-template-columns:1fr; }
+  .mas{ grid-template-columns:1fr; }
   .productos{ grid-template-columns:repeat(2,1fr); }
   .producto__consulta{ transform:none; font-size:10px; letter-spacing:.1em; padding:8px; }
   .espiritu p, .duo__texto p{ font-size:14px; }

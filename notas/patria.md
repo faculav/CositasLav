@@ -33,7 +33,8 @@ sobres de cuero genuino hechos a mano en Uruguay. Las ventas se cierran por What
 - [x] Instagram de Tirra: `tirra.uy`.
 - [ ] Email de Tirra (hoy sigue `hola@patria.uy`).
 - [x] Productos reales (del Figma "UnAmargoMates", página TIRRA, nodo 1769:2): Collares Tierra, Pampa, Ocre, Greda; Brazaletes Origen, Brava, Sombra; Pulseras Tierra, Raíces, Savia. Categorías ahora: collares | brazaletes | pulseras.
-- [ ] Precios reales (hoy `precio:null` → "Consultar precio").
+- [ ] Precios reales del resto (hoy `precio:null` → "Consultar precio"). Pechera Cría: $1990.
+- [x] Nueva categoría Pecheras: Pechera Cría (fotos del usuario recortadas a fondo blanco: frente = principal, espalda = al pasar el mouse). El usuario va a ir pasando más productos.
 - [ ] Foto de Pulsera Savia.
 - [x] Collares en fondo blanco (`prod-col-*-blanco.jpg`): piedra real recortada con OpenCV (GrabCut) + cordón/argolla dibujados. Ideal a futuro: fotos reales de estudio.
 - [x] Logo de Tirra cargado (PNG marrón y crema).
