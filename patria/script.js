@@ -75,7 +75,7 @@
   var todosVisibles = false;
 
   function precio(n) {
-    return "$ " + n.toLocaleString("es-UY");
+    return n == null ? "Consultar precio" : "$ " + n.toLocaleString("es-UY");
   }
 
   function tarjeta(p, i) {
@@ -83,7 +83,8 @@
     var a = document.createElement("a");
     a.className = "producto reveal";
     a.dataset.cat = p.cat;
-    a.href = linkWhatsapp(CONFIG.mensajeBase + p.nombre + " (" + precio(p.precio) + "). ¿Está disponible?");
+    a.href = linkWhatsapp(CONFIG.mensajeBase + p.nombre +
+      (p.precio == null ? "" : " (" + precio(p.precio) + ")") + ". ¿Está disponible?");
     a.target = "_blank";
     a.rel = "noopener";
 

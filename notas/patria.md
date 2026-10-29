@@ -30,7 +30,9 @@ sobres de cuero genuino hechos a mano en Uruguay. Las ventas se cierran por What
 - [ ] Poner el WhatsApp real en `productos.js` (hoy `59899000000`).
 - [x] Instagram de Tirra: `tirra.uy`.
 - [ ] Email de Tirra (hoy sigue `hola@patria.uy`).
-- [ ] Reemplazar productos y precios de ejemplo por los reales.
+- [x] Productos reales (del Figma "UnAmargoMates", página TIRRA, nodo 1769:2): Collares Tierra, Pampa, Ocre, Greda; Brazaletes Origen, Brava, Sombra; Pulseras Tierra, Raíces, Savia. Categorías ahora: collares | brazaletes | pulseras.
+- [ ] Precios reales (hoy `precio:null` → "Consultar precio").
+- [ ] Foto de Pulsera Savia y una foto limpia del Collar Greda.
 - [x] Logo de Tirra cargado (PNG marrón y crema).
 - [x] Rediseño estilo delsurleather.com.
 - [ ] ¿Renombrar carpeta `patria/` a `tirra/`?
@@ -39,5 +41,8 @@ sobres de cuero genuino hechos a mano en Uruguay. Las ventas se cierran por What
 - [ ] Subir `hero.jpg` (antes era el logo PATRIA grabado en cuero; ver si hay foto nueva con Tirra).
 - [ ] Fotos de categorías (`cat-*.jpg`), Instagram (`ig-1..6.jpg`) y productos (`prod-*.jpg`).
 - [x] Fotos pasadas a JPG (de ~16 MB a ~1 MB).
-- [ ] `taller.jpg` tiene un cartel "PATRIA" e `ig-2.jpg` dice "florece Patria": reemplazar.
+- [x] Fotos con PATRIA reemplazadas por las de Tirra del Figma (box con cartel TIRRA, caballo con la marca).
 - [ ] Publicar el sitio (definir hosting y dominio).
+
+## Figma
+- Archivo `odW6QtxGYJebJXcswZqBB5` (UnAmargoMates), página TIRRA `1769:2`. El plan Starter de Figma tiene un límite chico de pedidos por MCP.

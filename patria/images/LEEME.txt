@@ -16,15 +16,17 @@ Salen del logo de Tirra (forma de Uruguay). Si cambia el logo, reemplaza
 estos dos archivos con el mismo nombre (PNG con fondo transparente).
 
 
-FOTOS YA CARGADAS (ya pasadas a JPG livianos)
----------------------------------------------
-cat-brazaletes.jpg   brazaletes sobre madera   (tambien en "Nuestro cuero")
-taller.jpg           caballo en el box         (banner "Pedidos a medida")
-                     OJO: tiene un cartel que dice PATRIA.
-ig-1.jpg             brazaletes sobre el caballo con el sombrero
-                     (fondo de la portada mientras no este el video,
-                     y bloque "Cuidado del cuero")
-ig-2.jpg             sombreros en el cielo. NO SE USA: dice "florece Patria".
+FOTOS YA CARGADAS (sacadas del Figma "UnAmargoMates", pagina TIRRA)
+--------------------------------------------------------------------
+cat-collares.jpg     collar Ocre puesto          (categoria Collares)
+cat-brazaletes.jpg   brazaletes sobre madera     (categoria Brazaletes)
+ig-1.jpg             pulseras sobre el caballo   (categoria Pulseras y "Cuidado del cuero")
+taller-tirra.jpg     caballo en el box, cartel TIRRA   (banner "Pedidos a medida")
+caballo-tirra.jpg    caballo con la marca TIRRA en el anca ("Nuestro cuero")
+ig-3.jpg / ig-4.jpg / ig-5.jpg   tarjetas de "Mas Tirra"
+prod-*.jpg           fotos de cada producto (ver productos.js)
+FALTA: prod-pul-savia.jpg (Pulsera Savia). La de Collar Greda tiene el texto
+del post encima: si hay una foto limpia, mejor reemplazarla.
 
 
 FALTA: LA FOTO DEL HERO
@@ -54,41 +56,11 @@ taller.jpg            vertical, 1200x1500 aprox. Manos trabajando, herramientas.
 
 
 CATEGORIAS "Nuestro estilo" (horizontal 7:5, ej. 1400x1000)
----------------------------------------
-cat-llaveros.jpg
-cat-brazaletes.jpg
-cat-collares.jpg
-cat-cintos.jpg
-cat-monederos.jpg
-cat-sobres.jpg
-
-
-"MAS TIRRA" (cuadradas 1:1, ej. 800x800)
-----------------------------------------
-ig-3.jpg   Seguinos en Instagram
-ig-4.jpg   Cuidado del cuero
-ig-5.jpg   Pedidos a medida
+-----------------------------------------------------------
+cat-collares.jpg  cat-brazaletes.jpg  y ig-1.jpg para Pulseras
 
 
 PRODUCTOS (cuadradas 1:1, ej. 1000x1000, mejor con fondo blanco)
---------------------------------------
+----------------------------------------------------------------
 El nombre sale del campo "img" de cada producto en productos.js.
-La terminada en "b" es la segunda foto: aparece al pasar el mouse por encima.
-
-prod-lla-01.jpg / prod-lla-01b.jpg    Llavero Campo
-prod-lla-02.jpg                       Llavero Nudo
-prod-lla-03.jpg                       Llavero Mosqueton
-prod-bra-01.jpg / prod-bra-01b.jpg    Brazalete Trenza
-prod-bra-02.jpg                       Brazalete Llanura
-prod-bra-03.jpg                       Brazalete Doble
-prod-col-01.jpg / prod-col-01b.jpg    Collar Sur
-prod-col-02.jpg                       Collar Raiz
-prod-cin-01.jpg / prod-cin-01b.jpg    Cinto Estancia
-prod-cin-02.jpg                       Cinto Clasico
-prod-cin-03.jpg                       Cinto Tabaco
-prod-mon-01.jpg / prod-mon-01b.jpg    Monedero Ronda
-prod-mon-02.jpg                       Monedero Broche
-prod-mon-03.jpg                       Monedero Tarjetero
-prod-sob-01.jpg / prod-sob-01b.jpg    Sobre Cordillera
-prod-sob-02.jpg                       Sobre Noche
-prod-sob-03.jpg                       Sobre Notebook 13
+La terminada en "-b" es la segunda foto: aparece al pasar el mouse.
