@@ -132,9 +132,10 @@ body.menu-abierto .wa, body.menu-abierto .arriba{ opacity:0; pointer-events:none
 .hero__titulo{
   position:relative; z-index:2; max-width:720px; padding:0 var(--pad);
   color:#fff; text-align:center;
-  font-size:60px; line-height:1.2; font-weight:500;
+  font-size:60px; line-height:.96; font-weight:400; letter-spacing:-.5px;
   animation:aparecer 1.4s ease .2s both;
 }
+.hero__titulo strong{ font-weight:700; }
 @keyframes aparecer{ from{ opacity:0; transform:translateY(24px); } to{ opacity:1; transform:none; } }
 
 /* ---------- secciones ---------- */
@@ -178,6 +179,7 @@ body.menu-abierto .wa, body.menu-abierto .arriba{ opacity:0; pointer-events:none
   position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
   transition:opacity .5s ease, transform 1s cubic-bezier(.2,.7,.3,1);
 }
+.producto__media img.a{ background:#fff; }
 .producto__media img.b{ opacity:0; }
 .producto:hover .producto__media img.a{ opacity:0; }
 .producto:hover .producto__media img.b{ opacity:1; }

@@ -62,5 +62,12 @@ cat-collares.jpg  cat-brazaletes.jpg  y ig-1.jpg para Pulseras
 
 PRODUCTOS (cuadradas 1:1, ej. 1000x1000, mejor con fondo blanco)
 ----------------------------------------------------------------
-El nombre sale del campo "img" de cada producto en productos.js.
-La terminada en "-b" es la segunda foto: aparece al pasar el mouse.
+Igual que la web de referencia: la foto principal es el producto SOLO en
+fondo blanco, y al pasar el mouse aparece la foto de ambiente (puesto, etc.).
+  img  (productos.js) -> foto en fondo blanco
+  img2 (productos.js) -> foto de ambiente
+FALTAN las de los collares en fondo blanco, con estos nombres:
+  prod-col-tierra-blanco.jpg  prod-col-pampa-blanco.jpg
+  prod-col-ocre-blanco.jpg    prod-col-greda-blanco.jpg
+Mientras no esten, el collar muestra su foto puesto (sin cambio al pasar el mouse).
+Brazaletes y pulseras usan amb-brazaletes.jpg / amb-pulseras.jpg como ambiente.

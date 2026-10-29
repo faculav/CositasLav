@@ -46,6 +46,14 @@
     img.dataset.phListo = "1";
     var i = contador++;
     img.addEventListener("error", function () {
+      // si falta la foto en fondo blanco, se usa la de ambiente como principal
+      if (img.dataset.respaldo) {
+        var otra = img.parentElement.querySelector("img.b");
+        img.src = img.dataset.respaldo;
+        delete img.dataset.respaldo;
+        if (otra) otra.remove();
+        return;
+      }
       var etiqueta = img.dataset.ph || img.alt || "Foto";
       img.src = placeholder(etiqueta.toUpperCase(), i);
     });
@@ -91,7 +99,8 @@
     a.innerHTML =
       '<div class="producto__media">' +
         (p.tag ? '<span class="producto__tag' + (agotado ? " producto__tag--agotado" : "") + '">' + p.tag + "</span>" : "") +
-        '<img class="a" src="' + p.img + '" alt="' + p.nombre + '" data-ph="' + p.nombre + '" loading="lazy">' +
+        '<img class="a" src="' + p.img + '" alt="' + p.nombre + '" data-ph="' + p.nombre + '"' +
+          (p.img2 ? ' data-respaldo="' + p.img2 + '"' : "") + ' loading="lazy">' +
         (p.img2 ? '<img class="b" src="' + p.img2 + '" alt="" data-ph="' + p.nombre + ' 2" loading="lazy">' : "") +
         '<span class="producto__consulta">' + (agotado ? "Consultar reposición" : "Consultar por WhatsApp") + "</span>" +
       "</div>" +

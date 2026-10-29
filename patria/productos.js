@@ -26,23 +26,26 @@ const CONFIG = {
                o null para mostrar "Consultar precio"
    antes     : precio tachado, o null si no está en oferta
    tag       : "Nuevo" | "Oferta" | "Agotado" | null
-   img       : foto principal   -> images/<archivo>
-   img2      : foto secundaria (aparece al pasar el mouse), o null
+   img       : foto del producto SOLO, en fondo blanco -> images/<archivo>
+   img2      : foto de ambiente / puesto (aparece al pasar el mouse), o null
+               Si todavía no existe la foto en fondo blanco, se muestra
+               img2 directamente (sin efecto al pasar el mouse).
    --------------------------------------------------------- */
 
 // TODO: faltan los precios reales (hoy todos dicen "Consultar precio")
+// TODO: faltan las fotos de los collares en fondo blanco (prod-col-*-blanco.jpg)
 const PRODUCTOS = [
-  { id:"col-tierra",  nombre:"Collar Tierra",      cat:"collares",   desc:"Cuero vacuno + piedra natural",       precio:null, antes:null, tag:"Nuevo", img:"images/prod-col-tierra.jpg",  img2:null },
-  { id:"col-pampa",   nombre:"Collar Pampa",       cat:"collares",   desc:"Cuero vacuno + dije de nácar",        precio:null, antes:null, tag:"Nuevo", img:"images/prod-col-pampa.jpg",   img2:null },
-  { id:"col-ocre",    nombre:"Collar Ocre",        cat:"collares",   desc:"Cuero vacuno + piedra natural",       precio:null, antes:null, tag:null,    img:"images/prod-col-ocre.jpg",    img2:null },
-  { id:"col-greda",   nombre:"Collar Greda",       cat:"collares",   desc:"Cuero vacuno + piedra natural",       precio:null, antes:null, tag:null,    img:"images/prod-col-greda.jpg",   img2:null },
+  { id:"col-tierra",  nombre:"Collar Tierra",      cat:"collares",   desc:"Cuero vacuno + piedra natural",       precio:null, antes:null, tag:"Nuevo", img:"images/prod-col-tierra-blanco.jpg", img2:"images/prod-col-tierra.jpg" },
+  { id:"col-pampa",   nombre:"Collar Pampa",       cat:"collares",   desc:"Cuero vacuno + dije de nácar",        precio:null, antes:null, tag:"Nuevo", img:"images/prod-col-pampa-blanco.jpg",  img2:"images/prod-col-pampa.jpg" },
+  { id:"col-ocre",    nombre:"Collar Ocre",        cat:"collares",   desc:"Cuero vacuno + piedra natural",       precio:null, antes:null, tag:null,    img:"images/prod-col-ocre-blanco.jpg",   img2:"images/prod-col-ocre.jpg" },
+  { id:"col-greda",   nombre:"Collar Greda",       cat:"collares",   desc:"Cuero vacuno + piedra natural",       precio:null, antes:null, tag:null,    img:"images/prod-col-greda-blanco.jpg",  img2:"images/prod-col-greda.jpg" },
 
-  { id:"bra-origen",  nombre:"Brazalete Origen",   cat:"brazaletes", desc:"Cuero con pelo blanco y negro",       precio:null, antes:null, tag:null,    img:"images/prod-bra-origen.jpg",  img2:"images/prod-bra-origen-b.jpg" },
-  { id:"bra-brava",   nombre:"Brazalete Brava",    cat:"brazaletes", desc:"Cuero con pelo estampado cebra",      precio:null, antes:null, tag:null,    img:"images/prod-bra-brava.jpg",   img2:null },
-  { id:"bra-sombra",  nombre:"Brazalete Sombra",   cat:"brazaletes", desc:"Cuero negro grabado croco, tachas",   precio:null, antes:null, tag:null,    img:"images/prod-bra-sombra.jpg",  img2:"images/prod-bra-sombra-b.jpg" },
+  { id:"bra-origen",  nombre:"Brazalete Origen",   cat:"brazaletes", desc:"Cuero con pelo blanco y negro",       precio:null, antes:null, tag:null,    img:"images/prod-bra-origen.jpg",  img2:"images/amb-brazaletes.jpg" },
+  { id:"bra-brava",   nombre:"Brazalete Brava",    cat:"brazaletes", desc:"Cuero con pelo estampado cebra",      precio:null, antes:null, tag:null,    img:"images/prod-bra-brava.jpg",   img2:"images/amb-brazaletes.jpg" },
+  { id:"bra-sombra",  nombre:"Brazalete Sombra",   cat:"brazaletes", desc:"Cuero negro grabado croco, tachas",   precio:null, antes:null, tag:null,    img:"images/prod-bra-sombra.jpg",  img2:"images/amb-brazaletes.jpg" },
 
-  { id:"pul-tierra",  nombre:"Pulsera Tierra",     cat:"pulseras",   desc:"Cuero marrón, tachas de bronce",      precio:null, antes:null, tag:null,    img:"images/prod-pul-tierra.jpg",  img2:null },
-  { id:"pul-raices",  nombre:"Pulsera Raíces",     cat:"pulseras",   desc:"Cuero con pelo, cierre a presión",    precio:null, antes:null, tag:null,    img:"images/prod-pul-raices.jpg",  img2:null },
+  { id:"pul-tierra",  nombre:"Pulsera Tierra",     cat:"pulseras",   desc:"Cuero marrón, tachas de bronce",      precio:null, antes:null, tag:null,    img:"images/prod-pul-tierra.jpg",  img2:"images/amb-pulseras.jpg" },
+  { id:"pul-raices",  nombre:"Pulsera Raíces",     cat:"pulseras",   desc:"Cuero con pelo, cierre a presión",    precio:null, antes:null, tag:null,    img:"images/prod-pul-raices.jpg",  img2:"images/amb-pulseras.jpg" },
   // TODO: falta la foto de la Pulsera Savia (images/prod-pul-savia.jpg)
-  { id:"pul-savia",   nombre:"Pulsera Savia",      cat:"pulseras",   desc:"Cuero genuino",                       precio:null, antes:null, tag:null,    img:"images/prod-pul-savia.jpg",   img2:null }
+  { id:"pul-savia",   nombre:"Pulsera Savia",      cat:"pulseras",   desc:"Cuero genuino",                       precio:null, antes:null, tag:null,    img:"images/prod-pul-savia.jpg",   img2:"images/amb-pulseras.jpg" }
 ];

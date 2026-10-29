@@ -22,6 +22,8 @@ sobres de cuero genuino hechos a mano en Uruguay. Las ventas se cierran por What
   "Más Tirra", footer gris oscuro. Tipografía Raleway, botones de línea finos.
 - Portada = video `images/hero.mp4` + `hero.webm` (28 s, 1920x1080, loop, mudo), armado con ffmpeg desde 6 fotos 4K de Pexels (serie de M.Emin BİLİR, IDs en `images/LEEME.txt`) con zoom/paneo lento, fundidos, grano y viñeta. Poster `hero.jpg`. La búsqueda de pexels.com bloquea robots, pero images.pexels.com/photos/<id>/pexels-photo-<id>.jpeg descarga directo.
 - Instagram, email y WhatsApp salen sólo de `CONFIG` en `productos.js`.
+- Tarjetas de producto como la referencia: `img` = producto en fondo blanco, `img2` = ambiente al pasar el mouse. Si falta `img`, se usa `img2` (data-respaldo en script.js).
+- Título de portada: "100% **cuero** genuino **uruguayo**", interlineado .96.
 - Si una foto falta, la web muestra un placeholder con el nombre de la pieza (no se rompe).
 - Logo: `images/logo.png` (marrón, header) y `images/logo-claro.png` (crema, footer), sacados del logo de Tirra con forma de Uruguay. Si faltan, escribe "TIRRA" en Inter bold.
 - El hero está pensado para la foto del logo grabado en cuero con pelo (título abajo a la izquierda).
@@ -32,7 +34,8 @@ sobres de cuero genuino hechos a mano en Uruguay. Las ventas se cierran por What
 - [ ] Email de Tirra (hoy sigue `hola@patria.uy`).
 - [x] Productos reales (del Figma "UnAmargoMates", página TIRRA, nodo 1769:2): Collares Tierra, Pampa, Ocre, Greda; Brazaletes Origen, Brava, Sombra; Pulseras Tierra, Raíces, Savia. Categorías ahora: collares | brazaletes | pulseras.
 - [ ] Precios reales (hoy `precio:null` → "Consultar precio").
-- [ ] Foto de Pulsera Savia y una foto limpia del Collar Greda.
+- [ ] Foto de Pulsera Savia.
+- [ ] Fotos de los 4 collares en fondo blanco (`prod-col-*-blanco.jpg`); hoy muestran la foto puesto.
 - [x] Logo de Tirra cargado (PNG marrón y crema).
 - [x] Rediseño estilo delsurleather.com.
 - [ ] ¿Renombrar carpeta `patria/` a `tirra/`?
