@@ -37,9 +37,13 @@ izquierda para no taparle el grabado.
 
 VIDEO DE INTRO (portada a pantalla completa)
 --------------------------------------------
-hero.mp4              video de caballos corriendo, en loop y sin sonido.
-hero.webm             (opcional) misma version en webm, mas liviana.
-hero.jpg              foto que se ve mientras carga el video.
+hero.mp4              YA CARGADO. Video de caballos (21 s, loop, sin sonido),
+                      armado con 5 fotos: acercamientos lentos, fundidos,
+                      color calido y grano de pelicula.
+hero.webm             YA CARGADO. Misma version en webm, mas liviana.
+hero.jpg              YA CARGADO. Cuadro del video, se ve mientras carga.
+Las fotos originales eran chicas (500 px). Si conseguis versiones grandes
+(1920 px o mas), se puede rearmar el video mucho mas nitido.
 El texto va encima, abajo a la izquierda.
 
 

@@ -20,7 +20,7 @@ sobres de cuero genuino hechos a mano en Uruguay. Las ventas se cierran por What
   hero 650px (400px en celu) con título centrado, "Espíritu Tirra", "Nuestro estilo" (categorías), "Esenciales Tirra"
   (productos, 8 + "Ver más"), banner "Pedidos a medida", "Nuestro cuero", "Cuidado del cuero", "Calidad Tirra" (sellos),
   "Más Tirra", footer gris oscuro. Tipografía Raleway, botones de línea finos.
-- Portada = video `images/hero.mp4` (loop, mudo). Mientras falte, se ve `ig-1.jpg` de fondo.
+- Portada = video `images/hero.mp4` + `hero.webm` (21 s, loop, mudo), armado con ffmpeg desde 5 fotos de caballos (500 px) con zoom lento, fundidos, color cálido, grano y viñeta. Poster `hero.jpg`.
 - Instagram, email y WhatsApp salen sólo de `CONFIG` en `productos.js`.
 - Si una foto falta, la web muestra un placeholder con el nombre de la pieza (no se rompe).
 - Logo: `images/logo.png` (marrón, header) y `images/logo-claro.png` (crema, footer), sacados del logo de Tirra con forma de Uruguay. Si faltan, escribe "TIRRA" en Inter bold.
@@ -33,7 +33,8 @@ sobres de cuero genuino hechos a mano en Uruguay. Las ventas se cierran por What
 - [x] Logo de Tirra cargado (PNG marrón y crema).
 - [x] Rediseño estilo delsurleather.com.
 - [ ] ¿Renombrar carpeta `patria/` a `tirra/`?
-- [ ] Video de intro: el usuario pasa fotos de caballos y se arma `hero.mp4` cinemático.
+- [x] Video de intro con fotos (versión gratis).
+- [ ] Opcional: versión con caballos en movimiento real (IA, Higgsfield, con créditos) o fotos en más resolución.
 - [ ] Subir `hero.jpg` (antes era el logo PATRIA grabado en cuero; ver si hay foto nueva con Tirra).
 - [ ] Fotos de categorías (`cat-*.jpg`), Instagram (`ig-1..6.jpg`) y productos (`prod-*.jpg`).
 - [x] Fotos pasadas a JPG (de ~16 MB a ~1 MB).
