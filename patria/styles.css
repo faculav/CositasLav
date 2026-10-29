@@ -72,22 +72,16 @@ h1,h2,h3,h4{ font-family:var(--ui); font-weight:500; margin:0; }
 .linea-link:hover span{ color:var(--marron); }
 
 /* ---------- header ---------- */
+/* Logo a la izquierda, hamburguesa a la derecha, en todos los tamaños. */
 .header{ position:relative; z-index:60; background:var(--blanco); }
 .header__inner{
   max-width:var(--ancho); margin:0 auto; padding:0 var(--pad);
-  height:130px; display:grid; align-items:center;
-  grid-template-columns:1fr auto auto auto 1fr; gap:0 28px;
+  height:110px; display:flex; justify-content:space-between; align-items:center;
 }
-.header__contacto{ font-size:15px; justify-self:start; }
-.nav{ display:flex; gap:22px; }
-.nav a, .header__contacto{ position:relative; transition:color .3s; }
-.nav a{ font-size:18px; letter-spacing:-.5px; }
-.nav a:hover, .header__contacto:hover{ color:var(--marron); }
-.header__ig{ justify-self:end; display:flex; }
 
 /* ---------- logo ---------- */
 .logo{ line-height:1; display:block; }
-.logo__img{ height:92px; width:auto; }
+.logo__img{ height:80px; width:auto; }
 .logo__img--footer{ height:96px; margin:0 0 4px; align-self:flex-start; object-fit:contain; }
 /* texto de reemplazo: sólo si no hay archivo de logo */
 .logo__marca{ display:none; font-weight:600; font-size:28px; letter-spacing:.04em; text-transform:uppercase; }
@@ -95,17 +89,17 @@ h1,h2,h3,h4{ font-family:var(--ui); font-weight:500; margin:0; }
 .sin-logo .logo__img{ display:none; }
 .footer .logo__marca{ color:#fff; }
 
-/* ---------- hamburguesa (sólo celu) ---------- */
-.burger{ display:none; background:none; border:0; padding:10px; margin-right:-10px; cursor:pointer; position:relative; z-index:80; }
+/* ---------- hamburguesa ---------- */
+.burger{ display:block; background:none; border:0; padding:10px; margin-right:-10px; cursor:pointer; position:relative; z-index:80; }
 .burger span{ display:block; height:1.5px; background:var(--negro); margin:5px 0; transition:var(--transicion); margin-left:auto; }
-.burger span:nth-child(1){ width:22px; }
-.burger span:nth-child(2){ width:22px; }
-.burger span:nth-child(3){ width:14px; }
+.burger span:nth-child(1){ width:28px; }
+.burger span:nth-child(2){ width:28px; }
+.burger span:nth-child(3){ width:18px; }
 .burger.is-abierto span:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
 .burger.is-abierto span:nth-child(2){ opacity:0; }
-.burger.is-abierto span:nth-child(3){ width:22px; transform:translateY(-6.5px) rotate(-45deg); }
+.burger.is-abierto span:nth-child(3){ width:28px; transform:translateY(-6.5px) rotate(-45deg); }
 
-/* ---------- menú celu: panel desde la derecha ---------- */
+/* ---------- menú: panel desde la derecha ---------- */
 .menu-fondo{
   position:fixed; inset:0; z-index:65; background:rgba(0,0,0,.4);
   opacity:0; pointer-events:none; transition:opacity .4s;
@@ -317,17 +311,12 @@ body.menu-abierto .wa, body.menu-abierto .arriba{ opacity:0; pointer-events:none
    RESPONSIVE
    ========================================================= */
 @media (max-width:1080px){
-  .header__inner{ gap:0 18px; }
-  .nav a{ font-size:16px; }
   .productos{ grid-template-columns:repeat(3,1fr); }
   .footer__cols{ grid-template-columns:1fr 1fr 1fr; }
   .footer__col--marca{ grid-column:1 / -1; }
 }
 @media (max-width:860px){
-  /* celu: logo a la izquierda, hamburguesa a la derecha */
-  .header__inner{ height:74px; display:flex; justify-content:space-between; }
-  .nav, .header__contacto, .header__ig{ display:none; }
-  .burger{ display:block; }
+  .header__inner{ height:74px; }
   .logo__img{ height:52px; }
   .hero{ height:400px; }
   .hero__titulo{ font-size:28px; max-width:340px; }

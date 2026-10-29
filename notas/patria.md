@@ -16,7 +16,7 @@ sobres de cuero genuino hechos a mano en Uruguay. Las ventas se cierran por What
 
 ## Decisiones
 - Copia la estructura de delsurleather.com (WebFetch no la abre, pero `curl` y Playwright con el proxy sí):
-  header blanco (compu: Contacto | Inicio Productos [logo] Nuestro cuero Nosotros | IG; celu: logo izq + hamburguesa der),
+  header blanco con logo a la izquierda y hamburguesa a la derecha en todos los tamaños (pedido del usuario),
   hero 650px (400px en celu) con título centrado, "Espíritu Tirra", "Nuestro estilo" (categorías), "Esenciales Tirra"
   (productos, 8 + "Ver más"), banner "Pedidos a medida", "Nuestro cuero", "Cuidado del cuero", "Calidad Tirra" (sellos),
   "Más Tirra", footer gris oscuro. Tipografía Raleway, botones de línea finos.
