@@ -39,14 +39,14 @@ izquierda para no taparle el grabado.
 
 VIDEO DE INTRO (portada a pantalla completa)
 --------------------------------------------
-hero.mp4              YA CARGADO. Video de caballos (21 s, loop, sin sonido),
-                      armado con 5 fotos: acercamientos lentos, fundidos,
-                      color calido y grano de pelicula.
+hero.mp4              YA CARGADO. Video de caballos (28 s, Full HD, loop, sin sonido).
 hero.webm             YA CARGADO. Misma version en webm, mas liviana.
 hero.jpg              YA CARGADO. Cuadro del video, se ve mientras carga.
-Las fotos originales eran chicas (500 px). Si conseguis versiones grandes
-(1920 px o mas), se puede rearmar el video mucho mas nitido.
-El texto va encima, abajo a la izquierda.
+Armado con 6 fotos de Pexels (originales de 6000-7000 px) de la serie de
+caballos salvajes de M.Emin BILIR en Kayseri, Turquia. Licencia de Pexels:
+uso gratis comercial, sin obligacion de credito. IDs de las fotos:
+14233043, 14233053, 14233041, 14233074, 14233049, 14233072
+(https://www.pexels.com/photo/<id>/).
 
 
 HERO Y EDITORIAL

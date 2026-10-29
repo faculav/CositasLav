@@ -20,7 +20,7 @@ sobres de cuero genuino hechos a mano en Uruguay. Las ventas se cierran por What
   hero 650px (400px en celu) con título centrado, "Espíritu Tirra", "Nuestro estilo" (categorías), "Esenciales Tirra"
   (productos, 8 + "Ver más"), banner "Pedidos a medida", "Nuestro cuero", "Cuidado del cuero", "Calidad Tirra" (sellos),
   "Más Tirra", footer gris oscuro. Tipografía Raleway, botones de línea finos.
-- Portada = video `images/hero.mp4` + `hero.webm` (21 s, loop, mudo), armado con ffmpeg desde 5 fotos de caballos (500 px) con zoom lento, fundidos, color cálido, grano y viñeta. Poster `hero.jpg`.
+- Portada = video `images/hero.mp4` + `hero.webm` (28 s, 1920x1080, loop, mudo), armado con ffmpeg desde 6 fotos 4K de Pexels (serie de M.Emin BİLİR, IDs en `images/LEEME.txt`) con zoom/paneo lento, fundidos, grano y viñeta. Poster `hero.jpg`. La búsqueda de pexels.com bloquea robots, pero images.pexels.com/photos/<id>/pexels-photo-<id>.jpeg descarga directo.
 - Instagram, email y WhatsApp salen sólo de `CONFIG` en `productos.js`.
 - Si una foto falta, la web muestra un placeholder con el nombre de la pieza (no se rompe).
 - Logo: `images/logo.png` (marrón, header) y `images/logo-claro.png` (crema, footer), sacados del logo de Tirra con forma de Uruguay. Si faltan, escribe "TIRRA" en Inter bold.
@@ -37,7 +37,8 @@ sobres de cuero genuino hechos a mano en Uruguay. Las ventas se cierran por What
 - [x] Rediseño estilo delsurleather.com.
 - [ ] ¿Renombrar carpeta `patria/` a `tirra/`?
 - [x] Video de intro con fotos (versión gratis).
-- [ ] Opcional: versión con caballos en movimiento real (IA, Higgsfield, con créditos) o fotos en más resolución.
+- [x] Video rearmado con fotos 4K de Pexels.
+- [ ] Opcional: caballos en movimiento real (video de Pexels o IA con Higgsfield).
 - [ ] Subir `hero.jpg` (antes era el logo PATRIA grabado en cuero; ver si hay foto nueva con Tirra).
 - [ ] Fotos de categorías (`cat-*.jpg`), Instagram (`ig-1..6.jpg`) y productos (`prod-*.jpg`).
 - [x] Fotos pasadas a JPG (de ~16 MB a ~1 MB).
