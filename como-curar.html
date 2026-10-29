@@ -631,6 +631,18 @@
     }));
     const group = new THREE.Group();
     group.add(body, inside);
+    if (irregular) {
+      // el algarrobo tiene el borde pintado de blanco: el canto y unos milímetros hacia adentro
+      const lip = [];
+      for (let i = 0; i <= 10; i++) {
+        const a = (i / 10) * Math.PI;
+        lip.push(new THREE.Vector2(top.x - wall / 2 + Math.cos(a) * (wall / 2 + 0.004), top.y + Math.sin(a) * 0.024));
+      }
+      lip.push(new THREE.Vector2(top.x - wall - 0.004, top.y - 0.07));
+      const lipGeo = new THREE.LatheGeometry(lip, 160);
+      deform(lipGeo);
+      group.add(new THREE.Mesh(lipGeo, new THREE.MeshBasicMaterial({ color: 0xf1efea, toneMapped: false, side: THREE.DoubleSide })));
+    }
     mate.add(group);
     // el mate irregular se apoya sobre su forma real: el contacto se calcula con el radio más ancho
     const contact = irregular ? outer.map(p => new THREE.Vector2(p.x * 1.13, p.y)) : outer;
