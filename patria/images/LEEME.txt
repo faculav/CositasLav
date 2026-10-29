@@ -66,8 +66,8 @@ Igual que la web de referencia: la foto principal es el producto SOLO en
 fondo blanco, y al pasar el mouse aparece la foto de ambiente (puesto, etc.).
   img  (productos.js) -> foto en fondo blanco
   img2 (productos.js) -> foto de ambiente
-FALTAN las de los collares en fondo blanco, con estos nombres:
-  prod-col-tierra-blanco.jpg  prod-col-pampa-blanco.jpg
-  prod-col-ocre-blanco.jpg    prod-col-greda-blanco.jpg
-Mientras no esten, el collar muestra su foto puesto (sin cambio al pasar el mouse).
+Collares en fondo blanco (prod-col-*-blanco.jpg): armados recortando la piedra
+REAL de cada foto puesta, con cordon y argolla dibujados del mismo color y una
+sombra suave. Si sacas fotos reales en fondo blanco, reemplazalas con el mismo
+nombre. Si falta alguna, el collar muestra su foto puesto.
 Brazaletes y pulseras usan amb-brazaletes.jpg / amb-pulseras.jpg como ambiente.

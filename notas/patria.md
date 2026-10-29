@@ -35,7 +35,7 @@ sobres de cuero genuino hechos a mano en Uruguay. Las ventas se cierran por What
 - [x] Productos reales (del Figma "UnAmargoMates", página TIRRA, nodo 1769:2): Collares Tierra, Pampa, Ocre, Greda; Brazaletes Origen, Brava, Sombra; Pulseras Tierra, Raíces, Savia. Categorías ahora: collares | brazaletes | pulseras.
 - [ ] Precios reales (hoy `precio:null` → "Consultar precio").
 - [ ] Foto de Pulsera Savia.
-- [ ] Fotos de los 4 collares en fondo blanco (`prod-col-*-blanco.jpg`); hoy muestran la foto puesto.
+- [x] Collares en fondo blanco (`prod-col-*-blanco.jpg`): piedra real recortada con OpenCV (GrabCut) + cordón/argolla dibujados. Ideal a futuro: fotos reales de estudio.
 - [x] Logo de Tirra cargado (PNG marrón y crema).
 - [x] Rediseño estilo delsurleather.com.
 - [ ] ¿Renombrar carpeta `patria/` a `tirra/`?

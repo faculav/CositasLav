@@ -33,7 +33,6 @@ const CONFIG = {
    --------------------------------------------------------- */
 
 // TODO: faltan los precios reales (hoy todos dicen "Consultar precio")
-// TODO: faltan las fotos de los collares en fondo blanco (prod-col-*-blanco.jpg)
 const PRODUCTOS = [
   { id:"col-tierra",  nombre:"Collar Tierra",      cat:"collares",   desc:"Cuero vacuno + piedra natural",       precio:null, antes:null, tag:"Nuevo", img:"images/prod-col-tierra-blanco.jpg", img2:"images/prod-col-tierra.jpg" },
   { id:"col-pampa",   nombre:"Collar Pampa",       cat:"collares",   desc:"Cuero vacuno + dije de nácar",        precio:null, antes:null, tag:"Nuevo", img:"images/prod-col-pampa-blanco.jpg",  img2:"images/prod-col-pampa.jpg" },
