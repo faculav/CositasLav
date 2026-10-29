@@ -175,8 +175,8 @@
     }
 
     /* ── TIPO DE MATE ─────────────────────────────────────── */
-    body[data-mate="calabaza"] .v[data-v="algarrobo"],
-    body[data-mate="algarrobo"] .v[data-v="calabaza"] { display: none; }
+    body[data-mate="calabaza"] .step-copy[data-mate="algarrobo"],
+    body[data-mate="algarrobo"] .step-copy[data-mate="calabaza"] { display: none; }
     .mate-pick {
       display: inline-flex; gap: 4px; margin-top: 14px; padding: 4px;
       border-radius: 100px; box-shadow: inset 0 0 0 1.5px var(--ink);
@@ -250,7 +250,7 @@
 <nav class="dots" id="dots" aria-label="Pasos"></nav>
 
 <div class="copy" id="copy">
-  <div class="step-copy" data-pos="bottom">
+  <div class="step-copy" data-id="portada" data-mate="both" data-pos="bottom">
     <p class="eyebrow">Antes del primer amargo</p>
     <h1>Cómo curar <em>tu mate.</em></h1>
     <p>¿Qué mate tenés?</p>
@@ -262,63 +262,56 @@
       <button class="pill" data-go="1">Empezar <span aria-hidden="true">↗</span></button>
     </div>
   </div>
-  <div class="step-copy" data-pos="bottom">
-    <p class="eyebrow"><span class="mate-name"></span> · Paso 1 de 6</p>
-    <div class="v" data-v="calabaza">
-      <h2>Primero, <em>una limpieza.</em></h2>
-      <p>Con una cuchara, raspá suavemente el interior para sacar los restos sueltos de la calabaza.</p>
-    </div>
-    <div class="v" data-v="algarrobo">
-      <h2>Primero, <em>un enjuague.</em></h2>
-      <p>Enjuagalo con agua caliente para sacarle el polvillo de la madera, y volcá el agua.</p>
-    </div>
+
+  <div class="step-copy" data-id="cal-yerba" data-mate="calabaza" data-pos="bottom">
+    <p class="eyebrow">Calabaza · Paso 1 de 3</p>
+    <h2>Yerba usada, <em>bien húmeda.</em></h2>
+    <p>Llená el mate con yerba usada y mantenela húmeda.</p>
   </div>
-  <div class="step-copy" data-pos="bottom">
-    <p class="eyebrow"><span class="mate-name"></span> · Paso 2 de 6</p>
-    <h2>Yerba <em>hasta el borde.</em></h2>
-    <p>Llenalo hasta el borde con yerba ya usada. Para curar, siempre yerba usada.</p>
+  <div class="step-copy" data-id="cal-24" data-mate="calabaza" data-pos="top">
+    <p class="eyebrow">Calabaza · Paso 2 de 3</p>
+    <h2>A las 24 horas, <em>lavá y raspá.</em></h2>
+    <p class="clock"><span class="count" data-to="24">0</span>&nbsp;h</p>
+    <p>Sacá la yerba, lavalo bien y raspá el interior para sacar las impurezas.</p>
   </div>
-  <div class="step-copy" data-pos="bottom">
-    <p class="eyebrow"><span class="mate-name"></span> · Paso 3 de 6</p>
-    <h2>Agua caliente, <em>hasta arriba.</em></h2>
-    <p>Cubrí la yerba con agua caliente, sin que llegue a hervir, hasta el borde.</p>
+  <div class="step-copy" data-id="cal-secar" data-mate="calabaza" data-pos="bottom">
+    <p class="eyebrow">Calabaza · Paso 3 de 3</p>
+    <h2>Secalo <em>bien.</em></h2>
+    <p>Secá el mate con servilletas, para que absorban el agua y no quede húmedo.</p>
   </div>
-  <div class="step-copy" data-pos="top">
-    <p class="eyebrow"><span class="mate-name"></span> · Paso 4 de 6</p>
-    <h2>Un día <em>entero.</em></h2>
-    <p class="clock"><span class="count">0</span>&nbsp;h</p>
-    <div class="v" data-v="calabaza">
-      <p>Dejalo reposar 24 horas. Si la calabaza absorbe el agua, completá.</p>
-    </div>
-    <div class="v" data-v="algarrobo">
-      <p>Dejalo reposar 24 horas. La madera va a soltar un color rojizo: es normal.</p>
-    </div>
+
+  <div class="step-copy" data-id="alg-grasa" data-mate="algarrobo" data-pos="bottom">
+    <p class="eyebrow">Algarrobo · Paso 1 de 5</p>
+    <h2>Primero, <em>untalo con grasa.</em></h2>
+    <p>Aplicá una capa de manteca o aceite de cocina en el interior. Impermeabiliza la madera y evita que se agriete.</p>
   </div>
-  <div class="step-copy" data-pos="bottom">
-    <p class="eyebrow"><span class="mate-name"></span> · Paso 5 de 6</p>
-    <div class="v" data-v="calabaza">
-      <h2>Vaciá <em>y raspá.</em></h2>
-      <p>Tirá la yerba y, con la cuchara, raspá la piel que se ablandó en las paredes.</p>
-    </div>
-    <div class="v" data-v="algarrobo">
-      <h2>Vaciá <em>y enjuagá.</em></h2>
-      <p>Tirá la yerba y enjuagalo con agua caliente. La madera no se raspa.</p>
-    </div>
+  <div class="step-copy" data-id="alg-reposo" data-mate="algarrobo" data-pos="top">
+    <p class="eyebrow">Algarrobo · Paso 2 de 5</p>
+    <h2>Dejá que <em>se absorba.</em></h2>
+    <p class="clock"><span class="count" data-to="6">0</span>&nbsp;h</p>
+    <p>Dejá reposar para que la madera absorba la grasa, generalmente entre 2 y 6 horas.</p>
   </div>
-  <div class="step-copy" data-pos="bottom">
-    <p class="eyebrow"><span class="mate-name"></span> · Paso 6 de 6</p>
-    <h2>Repetí <em>y secá.</em></h2>
-    <div class="v" data-v="calabaza">
-      <p>Repetí todo dos o tres días seguidos. Al final enjuagalo y dejalo secar al aire, sin sol directo.</p>
-    </div>
-    <div class="v" data-v="algarrobo">
-      <p>Repetí dos o tres días, hasta que el agua salga casi limpia. Dejalo secar al aire, lejos del sol y del calor, para que la madera no se raje.</p>
-    </div>
+  <div class="step-copy" data-id="alg-yerba" data-mate="algarrobo" data-pos="bottom">
+    <p class="eyebrow">Algarrobo · Paso 3 de 5</p>
+    <h2>Yerba usada <em>y agua tibia.</em></h2>
+    <p>Poné yerba usada y humedecela con agua tibia. No lo llenes hasta el borde: dejá un espacio.</p>
   </div>
-  <div class="step-copy" data-pos="top">
+  <div class="step-copy" data-id="alg-reposo2" data-mate="algarrobo" data-pos="top">
+    <p class="eyebrow">Algarrobo · Paso 4 de 5</p>
+    <h2>Reposo, <em>otra vez.</em></h2>
+    <p class="clock"><span class="count" data-to="24">0</span>&nbsp;h</p>
+    <p>Dejalo reposar con la yerba húmeda de 12 a 24 horas, para que la madera se hidrate.</p>
+  </div>
+  <div class="step-copy" data-id="alg-limpiar" data-mate="algarrobo" data-pos="bottom">
+    <p class="eyebrow">Algarrobo · Paso 5 de 5</p>
+    <h2>Limpialo <em>con un paño.</em></h2>
+    <p>Retirá la yerba y limpiá el interior con un paño húmedo.</p>
+  </div>
+
+  <div class="step-copy" data-id="final" data-mate="both" data-pos="top">
     <p class="eyebrow">Curado</p>
-    <h2>Listo para <em>el primer amargo.</em></h2>
-    <p>Ahora sí: a cebarlo.</p>
+    <h2>Listo para disfrutar <em>de unamargo.</em></h2>
+    <p>Ya está listo para usar.</p>
     <div class="actions">
       <a class="pill" href="./como-cebar.html">Cómo cebar <span aria-hidden="true">→</span></a>
       <a class="pill ghost" href="./index.html#tienda">Ver mates <span aria-hidden="true">→</span></a>
@@ -333,103 +326,106 @@
 </footer>
 
 <main class="steps" id="steps">
-  <section id="paso-0"></section>
-  <section id="paso-1"></section>
-  <section id="paso-2"></section>
-  <section id="paso-3"></section>
-  <section id="paso-4"></section>
-  <section id="paso-5"></section>
-  <section id="paso-6"></section>
-  <section id="paso-7"></section>
+  <!-- las secciones se arman según el mate elegido -->
 </main>
 
 <script>
   // ── Navegación por pasos (independiente del 3D) ───────────
+  // Cada mate tiene su propio recorrido: portada, sus pasos y el final. Las secciones de scroll se arman
+  // según el mate elegido.
   (function () {
-    const BG = ['#ffffff', '#fafafa', '#f6f6f6', '#f4f4f4', '#f2f2f2', '#f0f0f0', '#eeeeee', '#0a0a0a'];
-    const sections = [...document.querySelectorAll('.steps section')];
-    const copies = [...document.querySelectorAll('.step-copy')];
+    const main = document.getElementById('steps');
+    const allCopies = [...document.querySelectorAll('.step-copy')];
     const dots = document.getElementById('dots');
     const prev = document.getElementById('prev');
     const next = document.getElementById('next');
     const nextLabel = document.getElementById('nextLabel');
-    const last = sections.length - 1;
-    let current = -1;
+    const NAMES = { calabaza: 'Calabaza', algarrobo: 'Algarrobo' };
+    let copies = [], sections = [], last = 0, current = -1;
 
-    sections.forEach((_, i) => {
-      const b = document.createElement('button');
-      b.setAttribute('aria-label', i === 0 ? 'Inicio' : i === last ? 'Compartir' : 'Paso ' + i);
-      b.addEventListener('click', () => go(i));
-      dots.appendChild(b);
-    });
-
+    function build(m) {
+      copies = allCopies.filter(c => c.dataset.mate === 'both' || c.dataset.mate === m);
+      main.innerHTML = copies.map((_, i) => `<section id="paso-${i}"></section>`).join('');
+      sections = [...main.children];
+      last = sections.length - 1;
+      dots.innerHTML = '';
+      sections.forEach((_, i) => {
+        const b = document.createElement('button');
+        b.setAttribute('aria-label', i === 0 ? 'Inicio' : i === last ? 'Listo' : 'Paso ' + i);
+        b.addEventListener('click', () => go(i));
+        dots.appendChild(b);
+      });
+    }
     function go(i) {
       i = Math.max(0, Math.min(last, i));
       sections[i].scrollIntoView({ behavior: 'smooth' });
     }
-    // tipo de mate: calabaza o algarrobo (cambia el mate 3D, los textos y la animación)
-    const NAMES = { calabaza: 'Calabaza', algarrobo: 'Algarrobo' };
     function pickMate(m) {
       if (!NAMES[m]) m = 'calabaza';
       document.body.dataset.mate = m;
       document.querySelectorAll('[data-mate-pick]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.matePick === m)));
-      document.querySelectorAll('.mate-name').forEach(e => { e.textContent = NAMES[m]; });
       const other = m === 'calabaza' ? 'algarrobo' : 'calabaza';
       document.querySelectorAll('.other-name').forEach(e => { e.textContent = 'mate de ' + other; });
       try { localStorage.setItem('curar-mate', m); } catch (e) {}
+      build(m);
+      const keep = Math.min(Math.max(current, 0), last);
+      current = -1;
+      setStep(keep);
       window.dispatchEvent(new CustomEvent('ritual:mate', { detail: { mate: m } }));
     }
-    let saved = null;
-    try { saved = localStorage.getItem('curar-mate'); } catch (e) {}
-    pickMate(saved);
-    window.ritualMate = () => document.body.dataset.mate;
-    document.querySelectorAll('[data-mate-pick]').forEach(b => b.addEventListener('click', () => pickMate(b.dataset.matePick)));
-    document.querySelectorAll('[data-switch]').forEach(b => b.addEventListener('click', () => {
-      pickMate(document.body.dataset.mate === 'calabaza' ? 'algarrobo' : 'calabaza');
-      go(1);
-    }));
 
-    // contador de horas del reposo (paso 4)
-    const counter = document.querySelector('.count');
+    // contador de horas de los reposos
     let countRaf = 0;
-    function runCounter(on) {
+    function runCounter(copy) {
       cancelAnimationFrame(countRaf);
+      document.querySelectorAll('.count').forEach(c => { c.textContent = '0'; });
+      const counter = copy && copy.querySelector('.count');
       if (!counter) return;
-      if (!on) { counter.textContent = '0'; return; }
-      const t0 = performance.now(), dur = 3200;
+      const to = +counter.dataset.to || 24, t0 = performance.now(), dur = 3200;
       const tickCount = (t) => {
         const k = Math.min(1, (t - t0) / dur);
-        counter.textContent = String(Math.round(24 * (1 - Math.pow(1 - k, 2))));
+        counter.textContent = String(Math.round(to * (1 - Math.pow(1 - k, 2))));
         if (k < 1) countRaf = requestAnimationFrame(tickCount);
       };
       countRaf = requestAnimationFrame(tickCount);
     }
 
-    document.querySelectorAll('[data-go]').forEach(b =>
-      b.addEventListener('click', () => go(+b.dataset.go)));
-    prev.addEventListener('click', () => go(current - 1));
-    next.addEventListener('click', () => current === last ? (location.href = './index.html#tienda') : go(current + 1));
-
     function setStep(i) {
       if (i === current) return;
       const from = current;
       current = i;
-      copies.forEach((c, k) => {
+      allCopies.forEach(c => {
+        const k = copies.indexOf(c);
         c.classList.toggle('active', k === i);
         c.classList.toggle('before', k > i);
-        c.classList.toggle('after', k < i);
+        c.classList.toggle('after', k >= 0 && k < i);
         c.inert = k !== i;
       });
       [...dots.children].forEach((d, k) =>
         k === i ? d.setAttribute('aria-current', 'step') : d.removeAttribute('aria-current'));
-      document.body.style.backgroundColor = BG[i];
+      // de blanco a grises cada vez más suaves; el final en negro
+      const g = Math.round(255 - (i / Math.max(1, last - 1)) * 17);
+      document.body.style.backgroundColor = i === last ? '#0a0a0a' : `rgb(${g},${g},${g})`;
       document.body.classList.toggle('is-dark', i === last);
       prev.classList.toggle('hidden', i === 0);
       nextLabel.textContent = i === 0 ? 'Deslizá para empezar' : i === last ? 'Ver la tienda' : 'Seguí bajando';
       history.replaceState(null, '', '#paso-' + i);
-      runCounter(i === 4);
-      window.dispatchEvent(new CustomEvent('ritual:step', { detail: { step: i, from } }));
+      runCounter(copies[i]);
+      const c = copies[i];
+      window.dispatchEvent(new CustomEvent('ritual:step', {
+        detail: { step: i, from, id: c.dataset.id, pos: c.dataset.pos === 'top' ? -1 : 1 }
+      }));
     }
+
+    document.querySelectorAll('[data-mate-pick]').forEach(b => b.addEventListener('click', () => pickMate(b.dataset.matePick)));
+    document.querySelectorAll('[data-switch]').forEach(b => b.addEventListener('click', () => {
+      pickMate(document.body.dataset.mate === 'calabaza' ? 'algarrobo' : 'calabaza');
+      go(1);
+    }));
+    document.querySelectorAll('[data-go]').forEach(b =>
+      b.addEventListener('click', () => go(+b.dataset.go)));
+    prev.addEventListener('click', () => go(current - 1));
+    next.addEventListener('click', () => current === last ? (location.href = './index.html#tienda') : go(current + 1));
 
     // el paso se decide con el alto real de cada sección y recién cuando el scroll se asienta:
     // así un cambio de alto de la ventana (barra del navegador, carga) no hace saltar de paso
@@ -446,9 +442,16 @@
     }
     addEventListener('scroll', onScroll, { passive: true });
 
+    let saved = null;
+    try { saved = localStorage.getItem('curar-mate'); } catch (e) {}
+    pickMate(saved);
     const start = /^#paso-(\d)$/.exec(location.hash);
-    if (start) sections[+start[1]].scrollIntoView();
-    window.ritualStep = () => current;
+    if (start && sections[+start[1]]) sections[+start[1]].scrollIntoView();
+    window.ritualMate = () => document.body.dataset.mate;
+    window.ritualStepInfo = () => {
+      const c = copies[current];
+      return c ? { id: c.dataset.id, pos: c.dataset.pos === 'top' ? -1 : 1 } : { id: 'portada', pos: 1 };
+    };
     onScroll();
   })();
 </script>
@@ -505,7 +508,7 @@
   const MATE_DATA = {
     calabaza: {
       photo: './images/mate-calabaza.jpg', interior: './images/mate-calabaza-interior.jpg', wall: 0.05,
-      cureTint: 0x9d9a72, sil: {"w":533,"h":533,"top":95,"bottom":422,"rim":121,"L":[288,268,249,240,231,220,214,200,196,187,183,176,172,165,161,157,154,149,147,144,141,139,136,133,132,130,128,127,127,126,125,125,124,124,124,124,125,126,126,127,128,128,129,130,131,131,132,133,133,134,135,135,136,137,137,138,139,140,140,141,142,142,143,144,144,145,146,146,147,148,148,149,150,150,150,151,152,152,153,154,154,154,155,155,156,156,157,157,158,158,158,159,159,159,160,160,160,160,160,161,161,161,161,161,161,161,161,161,161,161,161,161,161,161,161,161,161,161,161,161,160,160,160,160,160,160,160,160,160,160,159,159,159,158,158,158,158,158,158,158,158,157,157,157,157,157,156,156,156,156,156,156,156,156,156,156,155,155,155,155,155,155,155,155,155,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,155,155,155,155,155,155,156,156,156,156,156,156,156,156,157,157,157,158,158,158,158,158,159,159,159,159,160,160,160,160,161,161,161,162,162,162,163,163,164,164,164,165,165,166,166,166,167,167,168,168,169,169,170,170,170,171,171,172,173,173,174,174,175,176,176,176,177,178,179,179,180,181,181,182,183,184,184,185,186,187,187,188,189,190,191,192,192,193,194,195,197,198,199,200,200,201,203,204,205,206,207,209,210,211,212,214,216,217,218,220,221,223,224,226,228,229,229,234,236,239,241,242,244,248,251,254,261,268,279],"R":[337,359,368,377,381,388,393,396,398,400,402,404,405,406,406,407,407,407,408,408,408,407,407,407,407,406,406,405,404,403,402,401,401,400,399,399,398,397,397,396,395,395,394,394,393,393,392,392,391,391,391,390,390,390,388,388,388,387,386,386,386,386,385,385,384,384,384,384,384,383,384,383,383,382,381,381,381,380,380,380,380,379,380,380,380,380,380,379,379,379,379,379,379,380,380,380,380,380,380,380,380,380,380,380,380,380,380,380,380,380,381,381,382,382,382,382,383,383,383,383,383,384,385,385,385,385,385,385,385,386,386,387,387,387,388,388,388,388,388,388,388,389,389,389,389,389,389,389,389,390,390,390,391,391,392,393,393,393,393,393,393,393,393,393,393,393,393,393,393,393,393,393,393,393,394,394,394,394,394,394,394,394,394,394,395,395,395,395,395,395,395,395,395,395,395,395,395,394,395,395,394,394,394,394,394,394,394,394,394,394,393,393,393,393,393,393,392,392,392,392,392,391,391,391,391,390,390,390,389,389,389,389,388,388,388,387,387,386,386,386,385,384,384,384,384,383,383,382,382,382,381,381,380,380,379,379,378,377,376,376,376,375,375,374,373,372,372,371,371,370,369,369,368,367,366,366,365,364,363,362,361,360,360,359,358,357,356,355,354,353,352,351,350,349,348,347,346,344,343,342,341,340,339,337,336,335,333,332,331,329,328,326,325,323,321,319,318,317,317,318,318,316,314,314,311,308,305,288]}
+      cureTint: 0x86845a, sil: {"w":533,"h":533,"top":95,"bottom":422,"rim":121,"L":[288,268,249,240,231,220,214,200,196,187,183,176,172,165,161,157,154,149,147,144,141,139,136,133,132,130,128,127,127,126,125,125,124,124,124,124,125,126,126,127,128,128,129,130,131,131,132,133,133,134,135,135,136,137,137,138,139,140,140,141,142,142,143,144,144,145,146,146,147,148,148,149,150,150,150,151,152,152,153,154,154,154,155,155,156,156,157,157,158,158,158,159,159,159,160,160,160,160,160,161,161,161,161,161,161,161,161,161,161,161,161,161,161,161,161,161,161,161,161,161,160,160,160,160,160,160,160,160,160,160,159,159,159,158,158,158,158,158,158,158,158,157,157,157,157,157,156,156,156,156,156,156,156,156,156,156,155,155,155,155,155,155,155,155,155,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,154,155,155,155,155,155,155,156,156,156,156,156,156,156,156,157,157,157,158,158,158,158,158,159,159,159,159,160,160,160,160,161,161,161,162,162,162,163,163,164,164,164,165,165,166,166,166,167,167,168,168,169,169,170,170,170,171,171,172,173,173,174,174,175,176,176,176,177,178,179,179,180,181,181,182,183,184,184,185,186,187,187,188,189,190,191,192,192,193,194,195,197,198,199,200,200,201,203,204,205,206,207,209,210,211,212,214,216,217,218,220,221,223,224,226,228,229,229,234,236,239,241,242,244,248,251,254,261,268,279],"R":[337,359,368,377,381,388,393,396,398,400,402,404,405,406,406,407,407,407,408,408,408,407,407,407,407,406,406,405,404,403,402,401,401,400,399,399,398,397,397,396,395,395,394,394,393,393,392,392,391,391,391,390,390,390,388,388,388,387,386,386,386,386,385,385,384,384,384,384,384,383,384,383,383,382,381,381,381,380,380,380,380,379,380,380,380,380,380,379,379,379,379,379,379,380,380,380,380,380,380,380,380,380,380,380,380,380,380,380,380,380,381,381,382,382,382,382,383,383,383,383,383,384,385,385,385,385,385,385,385,386,386,387,387,387,388,388,388,388,388,388,388,389,389,389,389,389,389,389,389,390,390,390,391,391,392,393,393,393,393,393,393,393,393,393,393,393,393,393,393,393,393,393,393,393,394,394,394,394,394,394,394,394,394,394,395,395,395,395,395,395,395,395,395,395,395,395,395,394,395,395,394,394,394,394,394,394,394,394,394,394,393,393,393,393,393,393,392,392,392,392,392,391,391,391,391,390,390,390,389,389,389,389,388,388,388,387,387,386,386,386,385,384,384,384,384,383,383,382,382,382,381,381,380,380,379,379,378,377,376,376,376,375,375,374,373,372,372,371,371,370,369,369,368,367,366,366,365,364,363,362,361,360,360,359,358,357,356,355,354,353,352,351,350,349,348,347,346,344,343,342,341,340,339,337,336,335,333,332,331,329,328,326,325,323,321,319,318,317,317,318,318,316,314,314,311,308,305,288]}
     },
     algarrobo: {
       photo: './images/mate-ranchero.jpg', interior: './images/mate-ranchero-interior.jpg', wall: 0.07,
@@ -529,6 +532,29 @@
     const dent = 0.16 * s * Math.exp(-(d * d) / 0.16);               // hendidura del corazón, atrás
     return 1 + lobes * Math.cos(3 * (th - (5 * Math.PI) / 6)) - dent;
   }
+
+  // vetas de manteca untada con cuchara: crema con remolinos más claros y más oscuros
+  const GREASE_TEX = (() => {
+    const c = document.createElement('canvas');
+    c.width = 512; c.height = 256;
+    const g = c.getContext('2d');
+    g.fillStyle = '#efe2be'; g.fillRect(0, 0, 512, 256);
+    const r = rand(53);
+    g.lineCap = 'round';
+    for (let i = 0; i < 90; i++) {
+      g.strokeStyle = r() < 0.5 ? `rgba(255,250,232,${0.4 + r() * 0.4})` : `rgba(190,160,120,${0.15 + r() * 0.25})`;
+      g.lineWidth = 4 + r() * 14;
+      const x = r() * 512, y = r() * 256, a = r() * 6.28, l = 40 + r() * 120;
+      g.beginPath(); g.moveTo(x, y);
+      g.quadraticCurveTo(x + Math.cos(a + 1) * l * 0.6, y + Math.sin(a + 1) * l * 0.6, x + Math.cos(a) * l, y + Math.sin(a) * l);
+      g.stroke();
+    }
+    const t = new THREE.CanvasTexture(c);
+    t.colorSpace = THREE.SRGBColorSpace;
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    t.repeat.set(3, 2);
+    return t;
+  })();
 
   function buildMate({ photo, interior, wall, cureTint, sil, irregular }) {
     const kpx = MATE_H / (sil.bottom - sil.top);
@@ -646,8 +672,15 @@
     mate.add(group);
     // el mate irregular se apoya sobre su forma real: el contacto se calcula con el radio más ancho
     const contact = irregular ? outer.map(p => new THREE.Vector2(p.x * 1.13, p.y)) : outer;
+    // capa de manteca: el mismo interior apenas hacia adentro, cremosa y semitransparente
+    const grease = new THREE.Mesh(shellGeo, new THREE.MeshStandardMaterial({
+      map: GREASE_TEX, color: 0xf3e6c4, roughness: 0.25, transparent: true, opacity: 0, depthWrite: false, side: THREE.DoubleSide
+    }));
+    grease.scale.set(0.975, 0.995, 0.975);
+    grease.renderOrder = 1;
+    group.add(grease);
     return { group, outer: contact, radiusAt, shape, innerRadiusAt: (y) => radiusAt(y) - wall, rimY: top.y,
-             insideMat: inside.material, cureTint: new THREE.Color(cureTint) };
+             insideMat: inside.material, greaseMat: grease.material, cureTint: new THREE.Color(cureTint) };
   }
   const MATES = { calabaza: buildMate(MATE_DATA.calabaza), algarrobo: buildMate(MATE_DATA.algarrobo) };
   let cur = MATES.calabaza;
@@ -991,6 +1024,30 @@
     spoon.add(bowl, neck, handle);
   }
   spoon.visible = false;
+
+  // Servilleta (calabaza) o paño húmedo (algarrobo): un bollo de tela que entra, frota la pared y sale
+  const cloth = new THREE.Mesh(
+    (() => {
+      const g = new THREE.IcosahedronGeometry(0.34, 4), pos = g.attributes.position, cr = rand(61);
+      const bumps = Array.from({ length: 9 }, () => [cr() * 6.28, cr() * 3.14, 0.12 + cr() * 0.12]);
+      for (let i = 0; i < pos.count; i++) {
+        const v = new THREE.Vector3().fromBufferAttribute(pos, i), d = v.clone().normalize();
+        let k = 1;
+        for (const [a, b, h] of bumps) {
+          const dir = new THREE.Vector3(Math.sin(b) * Math.cos(a), Math.cos(b), Math.sin(b) * Math.sin(a));
+          k += h * Math.pow(Math.max(0, d.dot(dir)), 6) - 0.04;
+        }
+        k += (cr() - 0.5) * 0.05;
+        pos.setXYZ(i, v.x * k, v.y * k * 1.25, v.z * k);
+      }
+      g.computeVertexNormals();
+      return g;
+    })(),
+    new THREE.MeshStandardMaterial({ color: 0xf6f6f2, roughness: 0.95 })
+  );
+  cloth.visible = false;
+  mate.add(cloth);
+  const CLOTH_NAPKIN = new THREE.Color(0xf6f6f2), CLOTH_RAG = new THREE.Color(0xb9c3c6);
   mate.add(spoon);
   const spoonDir = new THREE.Vector3();
 
@@ -1018,11 +1075,10 @@
   rig.add(shadow);
 
   // ── Tweens por parámetro ──────────────────────────────────
-  const S = { fill: 0, slope: 0, wet: 0, bomb: 0, termo: 0, head: 0, tail: 0, tilt: 0, shake: 0, scale: 1, x: 0, y: 0, rain: 0, foam: 0, vaso: 0, vasoWater: 1, yerbera: 0, spout: 0, vy: 1, water: 0, red: 0, cured: 0, spoon: 0, scrape: 0, dumpRate: 0, lift: 0, dumpKind: 1 };
+  const S = { fill: 0, slope: 0, wet: 0, bomb: 0, termo: 0, head: 0, tail: 0, tilt: 0, shake: 0, scale: 1, x: 0, y: 0, rain: 0, foam: 0, vaso: 0, vasoWater: 1, yerbera: 0, spout: 0, vy: 1, water: 0, red: 0, cured: 0, spoon: 0, scrape: 0, dumpRate: 0, lift: 0, dumpKind: 1, clothKind: 0, grease: 0, absorbed: 0, cloth: 0, wetIn: 0 };
   const tweens = {};
   // celular: 1 = texto abajo (la escena sube), -1 = texto arriba (la escena baja)
-  const POS = [...document.querySelectorAll('.step-copy')].map((c) => (c.dataset.pos === 'top' ? -1 : 1));
-  const REST = { shake: 0, rain: 0, head: 0, tail: 0, vaso: 0, yerbera: 0, spout: 0, spoon: 0, scrape: 0, dumpRate: 0 };
+  const REST = { shake: 0, rain: 0, head: 0, tail: 0, vaso: 0, yerbera: 0, spout: 0, spoon: 0, scrape: 0, dumpRate: 0, cloth: 0 };
   const ease = (t) => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   let clock = 0;
   function to(key, value, dur = 0.8, delay = 0) {
@@ -1044,7 +1100,7 @@
     }
   }
 
-  function enterStep(step) {
+  function enterStep({ id, pos }) {
     for (const k in tweens) tweens[k].length = 0;
     S.head = S.tail = 0;                    // el chorro nunca queda colgado entre pasos
     if (S.vaso < 0.01) S.vasoWater = 1;
@@ -1057,75 +1113,91 @@
       to('dumpRate', 1, 0.2, t + 0.6); to('dumpRate', 0, 0.2, t + 1.6);
       to('tilt', 0, 0.9, t + 1.9); to('lift', 0, 0.9, t + 1.9);
     };
-    to('vy', POS[step] ?? 1, 0.9);
-    to('bomb', 0, 0.3); to('slope', 0, 0.4); to('foam', 0, 0.3);
-    switch (step) {
-      case 0:   // el mate nuevo, vacío
-        to('fill', 0, 0.5); to('water', 0, 0.5); to('wet', 0, 0.3); to('red', 0, 0.4); to('cured', 0, 0.6);
+    // herramienta (cuchara o paño): entra, trabaja en círculos contra la pared y sale
+    const tool = (key, t, dur) => { to(key, 1, 0.8, t); to('scrape', 1, 0.6, t + 0.7); to('scrape', 0, 0.5, t + dur); to(key, 0, 0.8, t + dur + 0.4); };
+    to('vy', pos ?? 1, 0.9);
+    to('bomb', 0, 0.3); to('slope', 0, 0.4); to('foam', 0, 0.3); to('red', 0, 0.3);
+    if (id !== 'cal-yerba' && id !== 'cal-24') to('vaso', 0, 0.6);
+    switch (id) {
+      case 'portada':   // el mate nuevo, vacío
+        to('fill', 0, 0.5); to('water', 0, 0.5); to('wet', 0, 0.3); to('cured', 0, 0.6); to('wetIn', 0, 0.4);
+        to('grease', 0, 0.4); to('absorbed', 0, 0.4);
         to('tilt', 0); to('lift', 0); to('termo', 0, 0.6);
         to('scale', 1); to('x', 0); to('y', 0);
         break;
-      case 1:   // calabaza: raspar los restos sueltos / algarrobo: enjuagar el polvillo
-        to('fill', 0, 0.4); to('wet', 0, 0.3); to('red', 0, 0.4); to('cured', 0, 0.6); to('tilt', 0); to('lift', 0);
-        if (calabaza) {
-          to('water', 0, 0.4); to('termo', 0, 0.6);
-          to('spoon', 1, 0.8, 0.2); to('scrape', 1, 0.6, 1.0); to('scrape', 0, 0.5, 3.8); to('spoon', 0, 0.8, 4.3);
-          to('scale', 1.05); to('x', 0); to('y', -0.1);
-        } else {
-          to('water', 0, 0.3); to('termo', 1, 0.9); pour(0.9, 2.4); to('water', 0.35, 1.5, 1.0); to('termo', 0, 0.9, 2.7);
-          dump(3.6, 0); to('water', 0, 0.6, 4.3);
-          to('scale', 0.8); to('x', -0.75); to('y', -0.45);
-        }
-        break;
-      case 2:   // yerba hasta el borde
-        to('termo', 0, 0.6); to('water', 0, 0.4); to('wet', 0, 0.3); to('tilt', 0); to('lift', 0); to('red', 0, 0.4);
+
+      // ── Calabaza ──
+      case 'cal-yerba':   // yerba usada hasta arriba y un poco de agua para mantenerla húmeda
+        to('water', 0, 0.3); to('wet', 0, 0.3); to('tilt', 0); to('lift', 0); to('termo', 0, 0.6); to('cured', 0, 0.5); to('wetIn', 0, 0.4);
         to('fill', 0, 0.45); to('yerbera', 1, 1.0); to('spout', 1, 0.45, 0.85);
         to('rain', 1, 0.15, 1.3); to('fill', 1.12, 2.8, 1.4); to('rain', 0, 0.3, 4.1);
         to('spout', 0, 0.4, 4.4); to('yerbera', 0, 1.0, 4.8);
+        to('vaso', 1, 0.9, 5.6); pour(6.5, 7.8); to('vasoWater', 0.4, 1.3, 6.5); to('wet', 1, 1.4, 6.6); to('vaso', 0, 0.9, 8.1);
         to('scale', 0.85); to('x', -0.6); to('y', -0.4);
         break;
-      case 3:   // agua caliente hasta arriba
-        to('fill', 1.12, 0.4); to('tilt', 0); to('lift', 0); to('red', 0, 0.4); to('water', 0, 0.2);
-        to('termo', 1, 0.9); pour(0.9, 3.0); to('wet', 1, 1.6, 1.0); to('water', 1, 2.0, 1.1); to('termo', 0, 0.9, 3.4);
-        to('scale', 0.8); to('x', -0.75); to('y', -0.45);
-        break;
-      case 4:   // 24 horas de reposo: el agua baja un poco (y en el algarrobo se pone rojiza)
-        to('fill', 1.12, 0.4); to('wet', 1, 0.4); to('termo', 0, 0.6); to('tilt', 0); to('lift', 0);
-        to('water', 1, 0.4); to('water', 0.8, 2.8, 0.6);
-        to('red', calabaza ? 0 : 1, 2.8, 0.6);
-        to('scale', 1.05); to('x', 0); to('y', -0.1);
-        break;
-      case 5:   // vaciar; después raspar (calabaza) o enjuagar (algarrobo)
-        to('fill', 1.12, 0.3); to('wet', 1, 0.3); to('water', 0.8, 0.3); to('termo', 0, 0.6);
-        to('red', calabaza ? 0 : 1, 0.3); to('cured', 0.5, 1.5, 2.0);
-        dump(0.3, 1); to('fill', 0, 1.0, 1.0); to('water', 0, 0.6, 0.9); to('wet', 0, 0.01, 2.0);
-        if (calabaza) {
-          to('spoon', 1, 0.8, 3.3); to('scrape', 1, 0.6, 4.0); to('scrape', 0, 0.5, 6.4); to('spoon', 0, 0.8, 6.9);
-        } else {
-          to('vaso', 1, 0.9, 3.3); pour(4.2, 5.4); to('vasoWater', 0.25, 1.3, 4.2); to('water', 0.3, 1.2, 4.3);
-          to('red', 0.35, 1.2, 4.3); to('vaso', 0, 0.9, 5.8);
-        }
+      case 'cal-24':   // a las 24 h: sacar la yerba, lavar y raspar
+        to('fill', 1.12, 0.3); to('wet', 1, 0.3); to('water', 0, 0.3); to('tilt', 0); to('lift', 0); to('termo', 0, 0.6);
+        to('cured', 0.4, 1.5, 3.8);
+        dump(3.4, 1); to('fill', 0, 1.0, 4.1); to('wet', 0, 0.01, 5.2);
+        to('vaso', 1, 0.9, 5.6); pour(6.5, 7.6); to('vasoWater', 0.25, 1.2, 6.5); to('water', 0.35, 1.1, 6.6); to('wetIn', 1, 0.8, 6.6);
+        to('vaso', 0, 0.9, 7.9);
+        dump(8.7, 0); to('water', 0, 0.6, 9.4);
+        tool('spoon', 11.0, 3.0); to('cured', 0.8, 2.5, 11.4);
         to('scale', 0.9); to('x', -0.3); to('y', -0.2);
         break;
-      case 6:   // repetir dos o tres días; enjuague final y a secar
-        to('fill', 0, 0.4); to('wet', 0, 0.3); to('tilt', 0); to('lift', 0); to('termo', 0, 0.6); to('red', 0, 0.6);
-        to('cured', 1, 2.5, 0.3);
-        to('vaso', 1, 0.9); pour(0.9, 2.2); to('vasoWater', 0.25, 1.2, 0.9); to('water', 0.3, 1.2, 1.0); to('vaso', 0, 0.9, 2.5);
-        dump(3.4, 0); to('water', 0, 0.6, 4.1);
-        to('scale', 0.85); to('x', -0.5); to('y', -0.35);
+      case 'cal-secar':   // secar con servilletas
+        to('fill', 0, 0.3); to('wet', 0, 0.3); to('water', 0, 0.3); to('tilt', 0); to('lift', 0); to('termo', 0, 0.6);
+        to('cured', 0.8, 0.4); to('wetIn', 1, 0.3);
+        S.clothKind = 0; tool('cloth', 0.3, 3.0); to('wetIn', 0, 2.6, 1.0);
+        to('scale', 1.05); to('x', 0); to('y', -0.1);
         break;
-      case 7:   // curado
-        to('fill', 0, 0.4); to('water', 0, 0.4); to('wet', 0, 0.3); to('tilt', 0); to('lift', 0); to('cured', 1, 0.6);
-        to('termo', 0, 0.6); to('red', 0, 0.4);
+
+      // ── Algarrobo ──
+      case 'alg-grasa':   // untar el interior con manteca
+        to('fill', 0, 0.4); to('wet', 0, 0.3); to('water', 0, 0.3); to('tilt', 0); to('lift', 0); to('termo', 0, 0.6);
+        to('cured', 0, 0.4); to('wetIn', 0, 0.4); to('absorbed', 0, 0.4); to('grease', 0, 0.3);
+        tool('spoon', 0.3, 3.4); to('grease', 1, 2.8, 1.0);
+        to('scale', 1.05); to('x', 0); to('y', -0.1);
+        break;
+      case 'alg-reposo':   // de 2 a 6 h: la madera absorbe la grasa
+        to('fill', 0, 0.4); to('wet', 0, 0.3); to('water', 0, 0.3); to('tilt', 0); to('lift', 0); to('termo', 0, 0.6);
+        to('grease', 1, 0.4); to('absorbed', 0, 0.01); to('absorbed', 1, 2.8, 0.6);
+        to('scale', 1.05); to('x', 0); to('y', -0.1);
+        break;
+      case 'alg-yerba':   // yerba usada sin llegar al borde, humedecida con agua tibia
+        to('grease', 1, 0.3); to('absorbed', 1, 0.3); to('water', 0, 0.3); to('wet', 0, 0.3); to('tilt', 0); to('lift', 0);
+        to('fill', 0, 0.45); to('yerbera', 1, 1.0); to('spout', 1, 0.45, 0.85);
+        to('rain', 1, 0.15, 1.3); to('fill', 0.82, 2.4, 1.4); to('rain', 0, 0.3, 3.6);
+        to('spout', 0, 0.4, 3.9); to('yerbera', 0, 1.0, 4.3);
+        to('termo', 1, 0.9, 5.0); pour(5.9, 7.2); to('wet', 1, 1.4, 6.0); to('termo', 0, 0.9, 7.6);
+        to('scale', 0.8); to('x', -0.75); to('y', -0.45);
+        break;
+      case 'alg-reposo2':   // de 12 a 24 h con la yerba húmeda
+        to('grease', 1, 0.3); to('absorbed', 1, 0.3); to('fill', 0.82, 0.4); to('wet', 1, 0.4); to('water', 0, 0.3);
+        to('termo', 0, 0.6); to('tilt', 0); to('lift', 0); to('cured', 0.5, 2.8, 0.6);
+        to('scale', 1.05); to('x', 0); to('y', -0.1);
+        break;
+      case 'alg-limpiar':   // retirar la yerba y limpiar con un paño húmedo
+        to('grease', 1, 0.3); to('absorbed', 1, 0.3); to('fill', 0.82, 0.3); to('wet', 1, 0.3); to('water', 0, 0.3);
+        to('termo', 0, 0.6); to('cured', 0.5, 0.4);
+        dump(0.3, 1); to('fill', 0, 1.0, 1.0); to('wet', 0, 0.01, 2.2);
+        S.clothKind = 1; tool('cloth', 3.3, 3.0);
+        to('scale', 0.9); to('x', -0.3); to('y', -0.2);
+        break;
+
+      case 'final':   // curado
+        to('fill', 0, 0.4); to('water', 0, 0.4); to('wet', 0, 0.3); to('tilt', 0); to('lift', 0); to('termo', 0, 0.6);
+        to('cured', calabaza ? 0.8 : 0.5, 0.6); to('wetIn', 0, 0.4);
+        to('grease', calabaza ? 0 : 1, 0.4); to('absorbed', calabaza ? 0 : 1, 0.4);
         to('scale', 1.02); to('x', 0); to('y', -0.05);
         break;
     }
     // red de seguridad: si un paso se interrumpe a la mitad, sus movimientos pasajeros vuelven siempre a reposo
     for (const k in REST) if (!tweens[k] || tweens[k].length === 0) to(k, REST[k], 0.3);
   }
-  addEventListener('ritual:mate', (e) => { useMate(e.detail.mate); enterStep(window.ritualStep() ?? 0); });
-  addEventListener('ritual:step', (e) => enterStep(e.detail.step));
-  enterStep(window.ritualStep() ?? 0);
+  addEventListener('ritual:mate', (e) => { useMate(e.detail.mate); enterStep(window.ritualStepInfo()); });
+  addEventListener('ritual:step', (e) => enterStep(e.detail));
+  enterStep(window.ritualStepInfo());
 
   // ── Layout ────────────────────────────────────────────────
   let mobile = false;
@@ -1243,17 +1315,30 @@
 
     updateWater();
     // el interior se oscurece a medida que el mate se cura
-    cur.insideMat.color.copy(WHITE).lerp(cur.cureTint, S.cured);
+    // interior: se oscurece al curarse, al mojarse y al absorber la grasa
+    cur.insideMat.color.copy(WHITE).lerp(cur.cureTint, S.cured).multiplyScalar(1 - 0.45 * S.wetIn - 0.3 * S.absorbed);
+    cur.greaseMat.opacity = S.grease * (1 - S.absorbed * 0.85) * 0.92;
+    cur.greaseMat.visible = cur.greaseMat.opacity > 0.01;
 
-    // cuchara: entra por su eje, raspa en círculos contra la pared y sale
+    // herramienta: cuchara (raspa o unta) o servilleta/paño (seca o limpia). Entra por su eje,
+    // trabaja en círculos contra la pared y sale
     spoon.visible = S.spoon > 0.01;
-    if (spoon.visible) {
-      const ang = elapsed * 2.6, depth = 0.8 + Math.sin(elapsed * 1.7) * 0.2;
-      const r = innerRadiusAt(depth) * 0.8 * S.scrape;
+    cloth.visible = S.cloth > 0.01;
+    if (spoon.visible || cloth.visible) {
+      // trabaja en la parte alta de la pared, donde se ve desde afuera
+      const ang = elapsed * 2.6, depth = cur.rimY * 0.66 + Math.sin(elapsed * 1.7) * 0.12;
+      const r = innerRadiusAt(depth) * 0.75 * S.scrape;
       const bx = Math.cos(ang) * r, bz = Math.sin(ang) * r;
       spoonDir.set(-bx * 0.35, 1, -bz * 0.35).normalize();
-      spoon.quaternion.setFromUnitVectors(up, spoonDir);
-      spoon.position.set(bx, depth, bz).addScaledVector(spoonDir, (1 - S.spoon) * 3);
+      if (spoon.visible) {
+        spoon.quaternion.setFromUnitVectors(up, spoonDir);
+        spoon.position.set(bx, depth, bz).addScaledVector(spoonDir, (1 - S.spoon) * 3);
+      }
+      if (cloth.visible) {
+        cloth.material.color.copy(S.clothKind ? CLOTH_RAG : CLOTH_NAPKIN);
+        cloth.position.set(bx * 0.45, cur.rimY - 0.28 + Math.sin(elapsed * 2.2) * 0.06, bz * 0.45).addScaledVector(spoonDir, (1 - S.cloth) * 3);
+        cloth.rotation.y = elapsed * 1.3;
+      }
     }
 
     // lo que sale al volcar cae hasta la mesa
