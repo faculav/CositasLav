@@ -270,9 +270,9 @@
   </div>
   <div class="step-copy" data-id="cal-24" data-mate="calabaza" data-pos="top">
     <p class="eyebrow">Calabaza · Paso 2 de 3</p>
-    <h2>A las 24 horas, <em>lavá y raspá.</em></h2>
+    <h2>A las 24 horas, <em>sacá y raspá.</em></h2>
     <p class="clock"><span class="count" data-to="24">0</span>&nbsp;h</p>
-    <p>Sacá la yerba, lavalo bien y raspá el interior para sacar las impurezas.</p>
+    <p>Sacá la yerba y raspá el interior para quitar las impurezas.</p>
   </div>
   <div class="step-copy" data-id="cal-secar" data-mate="calabaza" data-pos="bottom">
     <p class="eyebrow">Calabaza · Paso 3 de 3</p>
@@ -294,7 +294,7 @@
   <div class="step-copy" data-id="alg-yerba" data-mate="algarrobo" data-pos="bottom">
     <p class="eyebrow">Algarrobo · Paso 3 de 5</p>
     <h2>Yerba usada <em>y agua tibia.</em></h2>
-    <p>Con una cuchara, llená el mate con yerba usada de otro mate y humedecela con agua tibia. No lo llenes hasta el borde: dejá un espacio.</p>
+    <p>Llená el mate con yerba usada de otro mate y humedecela con agua tibia. No lo llenes hasta el borde: dejá un espacio.</p>
   </div>
   <div class="step-copy" data-id="alg-reposo2" data-mate="algarrobo" data-pos="top">
     <p class="eyebrow">Algarrobo · Paso 4 de 5</p>
@@ -1028,13 +1028,31 @@
   }
 
   // Cuchara de acero para raspar la calabaza por dentro (~14 cm)
+  const SPOON_ENV = (() => {
+    const c = document.createElement('canvas');
+    c.width = 512; c.height = 256;
+    const g = c.getContext('2d');
+    const grad = g.createLinearGradient(0, 0, 0, 256);
+    grad.addColorStop(0, '#ffffff'); grad.addColorStop(0.45, '#cfd2d5'); grad.addColorStop(0.55, '#6d7176'); grad.addColorStop(1, '#a9adb1');
+    g.fillStyle = grad; g.fillRect(0, 0, 512, 256);
+    g.fillStyle = '#3d4044';
+    for (const [x, w] of [[60, 26], [210, 14], [330, 34], [450, 16]]) g.fillRect(x, 20, w, 210);
+    const t = new THREE.CanvasTexture(c);
+    t.mapping = THREE.EquirectangularReflectionMapping;
+    t.colorSpace = THREE.SRGBColorSpace;
+    return pmrem.fromEquirectangular(t).texture;
+  })();
+
   function makeSpoon() {
     const g = new THREE.Group();
-    const steelMat = new THREE.MeshStandardMaterial({ color: 0xeef0f2, metalness: 1, roughness: 0.1, side: THREE.DoubleSide });
+    // acero pulido opaco: refleja un estudio claro con franjas oscuras, así nunca se lee como vidrio
+    const steelMat = new THREE.MeshStandardMaterial({ color: 0xd9dcdf, metalness: 1, roughness: 0.18, envMap: SPOON_ENV, envMapIntensity: 1.1, side: THREE.DoubleSide });
     // cuenco: media elipsoide hueca, con la parte cóncava hacia +z
     const bowl = new THREE.Mesh(new THREE.SphereGeometry(1, 40, 20, 0, Math.PI * 2, 0, Math.PI / 2), steelMat);
     bowl.rotation.x = -Math.PI / 2;
-    bowl.scale.set(0.3, 0.38, 0.13);
+    bowl.scale.set(0.3, 0.13, 0.38);   // (ancho, hondura, largo) antes de girarlo
+    const back = bowl.clone();
+    back.scale.set(0.305, 0.14, 0.385);
     // borde del cuenco
     const lip = new THREE.Mesh(new THREE.TorusGeometry(1, 0.035, 8, 48), steelMat);
     lip.scale.set(0.3, 0.38, 0.3);
@@ -1053,7 +1071,7 @@
     for (let i = 0; i < pos.count; i++) { const y = pos.getY(i); pos.setZ(i, pos.getZ(i) + Math.min(1, Math.max(0, (y - 0.3) / 0.6)) * 0.12); }
     handleGeo.computeVertexNormals();
     const handle = new THREE.Mesh(handleGeo, steelMat);
-    g.add(bowl, lip, handle);
+    g.add(bowl, back, lip, handle);
     return g;
   }
   const spoon = makeSpoon();
@@ -1078,29 +1096,52 @@
   rig.add(scoop);
   const scoopA = new THREE.Vector3(), scoopB = new THREE.Vector3(), scoopP = new THREE.Vector3(), mainMouth = new THREE.Vector3(), scoopBowlMate = new THREE.Vector3();
 
-  // Servilleta (calabaza) o paño húmedo (algarrobo): un bollo de tela que entra, frota la pared y sale
+  // Servilleta (calabaza) o paño húmedo (algarrobo): un cuadrado de tela tomado del centro, que cuelga con
+  // pliegues y se mete en el mate para frotar la pared
+  function clothTexture(kind) {
+    const c = document.createElement('canvas');
+    c.width = c.height = 256;
+    const g = c.getContext('2d');
+    if (kind) {   // paño de algodón: trama de hilos y un borde de color
+      g.fillStyle = '#c9d1d4'; g.fillRect(0, 0, 256, 256);
+      for (let i = 0; i < 256; i += 4) {
+        g.fillStyle = 'rgba(255,255,255,.18)'; g.fillRect(i, 0, 2, 256);
+        g.fillStyle = 'rgba(60,70,80,.10)'; g.fillRect(0, i, 256, 2);
+      }
+      g.fillStyle = '#5f7f95'; g.fillRect(0, 220, 256, 10); g.fillRect(0, 236, 256, 4);
+    } else {      // servilleta de papel: blanca, con relieve gofrado
+      g.fillStyle = '#fbfbf8'; g.fillRect(0, 0, 256, 256);
+      g.fillStyle = 'rgba(0,0,0,.05)';
+      for (let y = 0; y < 256; y += 8) for (let x = (y / 8 % 2) * 4; x < 256; x += 8) g.fillRect(x, y, 3, 3);
+    }
+    const t = new THREE.CanvasTexture(c);
+    t.colorSpace = THREE.SRGBColorSpace;
+    t.wrapS = t.wrapT = THREE.RepeatWrapping;
+    t.repeat.set(2, 2);
+    return t;
+  }
+  const CLOTH_TEX = [clothTexture(0), clothTexture(1)];
   const cloth = new THREE.Mesh(
     (() => {
-      const g = new THREE.IcosahedronGeometry(0.34, 4), pos = g.attributes.position, cr = rand(61);
-      const bumps = Array.from({ length: 9 }, () => [cr() * 6.28, cr() * 3.14, 0.12 + cr() * 0.12]);
+      const g = new THREE.PlaneGeometry(1.4, 1.4, 40, 40), pos = g.attributes.position;
       for (let i = 0; i < pos.count; i++) {
-        const v = new THREE.Vector3().fromBufferAttribute(pos, i), d = v.clone().normalize();
-        let k = 1;
-        for (const [a, b, h] of bumps) {
-          const dir = new THREE.Vector3(Math.sin(b) * Math.cos(a), Math.cos(b), Math.sin(b) * Math.sin(a));
-          k += h * Math.pow(Math.max(0, d.dot(dir)), 6) - 0.04;
-        }
-        k += (cr() - 0.5) * 0.05;
-        pos.setXYZ(i, v.x * k, v.y * k * 1.25, v.z * k);
+        const x = pos.getX(i), y = pos.getY(i);
+        const r = Math.hypot(x, y), a = Math.atan2(y, x);
+        // tomado del centro: la tela se recoge y cae; pliegues alrededor y un poco de vuelo abajo
+        // pliegues hondos e irregulares, el borde cae desparejo y la punta tomada queda hacia arriba
+        const fold = (Math.sin(a * 6 + r * 4) * 0.13 + Math.sin(a * 11 + 1.3) * 0.06 + Math.sin(a * 2 + 0.7) * 0.08) * r;
+        const spread = 0.1 + r * 0.42 + fold;
+        const knot = r < 0.18 ? (0.18 - r) * 1.6 : 0;
+        const hang = -r * 0.9 + knot + (Math.sin(a * 4 + 0.5) * 0.12 + Math.sin(a * 9) * 0.05) * r * r;
+        pos.setXYZ(i, Math.cos(a) * spread * (r > 0.01 ? 1 : 0), hang, Math.sin(a) * spread * (r > 0.01 ? 1 : 0));
       }
       g.computeVertexNormals();
       return g;
     })(),
-    new THREE.MeshStandardMaterial({ color: 0xf6f6f2, roughness: 0.95 })
+    new THREE.MeshStandardMaterial({ map: CLOTH_TEX[0], roughness: 0.95, side: THREE.DoubleSide })
   );
   cloth.visible = false;
   mate.add(cloth);
-  const CLOTH_NAPKIN = new THREE.Color(0xf6f6f2), CLOTH_RAG = new THREE.Color(0xb9c3c6);
   mate.add(spoon);
   const spoonDir = new THREE.Vector3();
 
@@ -1128,7 +1169,7 @@
   rig.add(shadow);
 
   // ── Tweens por parámetro ──────────────────────────────────
-  const S = { fill: 0, slope: 0, wet: 0, bomb: 0, termo: 0, head: 0, tail: 0, tilt: 0, shake: 0, scale: 1, x: 0, y: 0, rain: 0, foam: 0, vaso: 0, vasoWater: 1, yerbera: 0, spout: 0, vy: 1, water: 0, red: 0, cured: 0, spoon: 0, scrape: 0, dumpRate: 0, lift: 0, dumpKind: 1, clothKind: 0, peek: 0, donor: 0, trip: 0, scoopTo: 0, grease: 0, absorbed: 0, cloth: 0, wetIn: 0 };
+  const S = { fill: 0, slope: 0, wet: 0, bomb: 0, termo: 0, head: 0, tail: 0, tilt: 0, shake: 0, scale: 1, x: 0, y: 0, rain: 0, foam: 0, vaso: 0, vasoWater: 1, yerbera: 0, spout: 0, vy: 1, water: 0, red: 0, cured: 0, spoon: 0, scrape: 0, dumpRate: 0, lift: 0, dumpKind: 1, clothKind: 0, scoopOut: 0, peek: 0, donor: 0, trip: 0, scoopTo: 0, grease: 0, absorbed: 0, cloth: 0, wetIn: 0 };
   const tweens = {};
   // celular: 1 = texto abajo (la escena sube), -1 = texto arriba (la escena baja)
   const REST = { shake: 0, rain: 0, head: 0, tail: 0, vaso: 0, yerbera: 0, spout: 0, spoon: 0, scrape: 0, dumpRate: 0, cloth: 0, donor: 0 };
@@ -1169,7 +1210,7 @@
     // herramienta (cuchara o paño): entra, trabaja en círculos contra la pared y sale
     const tool = (key, t, dur) => { to(key, 1, 0.8, t); to('scrape', 1, 0.6, t + 0.7); to('scrape', 0, 0.5, t + dur); to(key, 0, 0.8, t + dur + 0.4); };
     to('vy', pos ?? 1, 0.9);
-    S.trip = 0; S.scoopTo = 0;
+    S.trip = 0; S.scoopTo = 0; S.scoopOut = 0;
     // el algarrobo tiene la boca angosta: cuando hay yerba adentro se inclina un poco hacia quien mira
     to('peek', cur === MATES.algarrobo && ['alg-yerba', 'alg-reposo2', 'alg-limpiar'].includes(id) ? 0.38 : 0, 0.9);
     // pasar yerba usada desde el mate de al lado: entra el mate, 3 cucharadas llenas y se va
@@ -1178,6 +1219,12 @@
       to('fill', 0, 0.4); to('wet', 1, 0.3); to('donor', 1, 0.9, t);
       to('trip', 1, 1.6, t + 0.9); to('trip', 2, 1.6, t + 2.6); to('trip', 3, 1.6, t + 4.3);
       return t + 6.1;
+    };
+    // sacar la yerba con la cuchara: cucharadas del mate hacia afuera de cuadro, hasta vaciarlo
+    const scoopOut = (t, from) => {
+      S.scoopOut = from;
+      to('trip', 1, 1.6, t); to('trip', 2, 1.6, t + 1.7); to('trip', 3, 1.6, t + 3.4);
+      return t + 5.1;
     };
     to('bomb', 0, 0.3); to('slope', 0, 0.4); to('foam', 0, 0.3); to('red', 0, 0.3);
     if (id !== 'cal-yerba' && id !== 'cal-24' && id !== 'alg-yerba') to('vaso', 0, 0.6);
@@ -1198,16 +1245,14 @@
         to('scale', 0.85); to('x', -0.6); to('y', -0.4);
         break;
       }
-      case 'cal-24':   // a las 24 h: sacar la yerba, lavar y raspar
+      case 'cal-24': {   // a las 24 h: sacar la yerba con la cuchara y raspar
         to('fill', 1.12, 0.3); to('wet', 1, 0.3); to('water', 0, 0.3); to('tilt', 0); to('lift', 0); to('termo', 0, 0.6);
-        to('cured', 0.4, 1.5, 3.8);
-        dump(3.4, 1); to('fill', 0, 1.0, 4.1); to('wet', 0, 0.01, 5.2);
-        to('vaso', 1, 0.9, 5.6); pour(6.5, 7.6); to('vasoWater', 0.25, 1.2, 6.5); to('water', 0.35, 1.1, 6.6); to('wetIn', 1, 0.8, 6.6);
-        to('vaso', 0, 0.9, 7.9);
-        dump(8.7, 0); to('water', 0, 0.6, 9.4);
-        tool('spoon', 11.0, 3.0); to('cured', 0.8, 2.5, 11.4);
+        to('wetIn', 0, 0.3);
+        const t = scoopOut(3.6, 1.12);
+        tool('spoon', t + 0.3, 3.0); to('cured', 0.8, 2.5, t + 0.6);
         to('scale', 0.9); to('x', -0.3); to('y', -0.2);
         break;
+      }
       case 'cal-secar':   // secar con servilletas
         to('fill', 0, 0.3); to('wet', 0, 0.3); to('water', 0, 0.3); to('tilt', 0); to('lift', 0); to('termo', 0, 0.6);
         to('cured', 0.8, 0.4); to('wetIn', 1, 0.3);
@@ -1243,8 +1288,10 @@
       case 'alg-limpiar':   // retirar la yerba y limpiar con un paño húmedo
         to('grease', 1, 0.3); to('absorbed', 1, 0.3); to('fill', 1.0, 0.3); to('wet', 1, 0.3); to('water', 0, 0.3);
         to('termo', 0, 0.6); to('cured', 0.5, 0.4);
-        dump(0.3, 1); to('fill', 0, 1.0, 1.0); to('wet', 0, 0.01, 2.2);
-        S.clothKind = 1; tool('cloth', 3.3, 3.0);
+        {
+          const t = scoopOut(0.4, 1.0);
+          S.clothKind = 1; tool('cloth', t + 0.3, 3.0);
+        }
         to('scale', 0.9); to('x', -0.3); to('y', -0.2);
         break;
 
@@ -1382,7 +1429,29 @@
     const donorOn = S.donor > 0.01;
     for (const k in DONORS) DONORS[k].group.visible = donorOn && DONORS[k] === donor;
     usedDisc.visible = donorOn;
-    scoop.visible = donorOn && S.trip > 0.001 && S.trip < 2.999;
+    const outOn = S.scoopOut > 0 && S.trip > 0.001;
+    scoop.visible = (donorOn || outOn) && S.trip > 0.001 && S.trip < 2.999;
+    if (outOn && !donorOn) {
+      // sacar: carga en la yerba del mate y la lleva fuera de cuadro, a la derecha
+      const ph = S.trip - Math.floor(S.trip);
+      const done = Math.floor(S.trip + 1e-4) + THREE.MathUtils.smoothstep(ph, 0.2, 0.3) * (S.trip < 2.999 ? 1 : 0);
+      S.fill = S.scoopOut * (1 - Math.min(3, done) / 3);
+      mate.updateMatrixWorld(true);
+      scoopA.set(0.05, Math.max(0.35, yerbaTop(S.fill) + 0.05), 0.05); mate.localToWorld(scoopA); rig.worldToLocal(scoopA);
+      const above = scoopB.copy(scoopA); above.y = 0; above.y = (() => { const m = new THREE.Vector3(0, cur.rimY + 0.6, 0); mate.localToWorld(m); rig.worldToLocal(m); return m.y; })();
+      const away = mainMouth.set(above.x + 4.2, above.y + 1.2, above.z);
+      const ease = (k) => k * k * (3 - 2 * k);
+      let loaded = false;
+      if (ph < 0.18) scoopP.lerpVectors(above, scoopA, ease(ph / 0.18));
+      else if (ph < 0.32) { scoopP.lerpVectors(scoopA, above, ease((ph - 0.18) / 0.14)); loaded = true; }
+      else if (ph < 0.62) { scoopP.lerpVectors(above, away, ease((ph - 0.32) / 0.3)); loaded = true; }
+      else scoopP.lerpVectors(away, above, ease((ph - 0.62) / 0.38));
+      if (S.trip < 0.02) scoopP.copy(above);
+      scoop.position.copy(scoopP);
+      scoop.rotation.set(0, 0, -0.45);
+      load.visible = loaded;
+      scoopDrop = false;
+    }
     if (donorOn) {
       const dx = mobile ? 1.15 : 2.0, dz = mobile ? -1.9 : -1.4;
       donorRig.position.set(dx + (1 - S.donor) * 4, 0, dz);
@@ -1443,18 +1512,23 @@
     cloth.visible = S.cloth > 0.01;
     if (spoon.visible || cloth.visible) {
       // trabaja en la parte alta de la pared, donde se ve desde afuera
-      const ang = elapsed * 2.6, depth = cur.rimY * 0.66 + Math.sin(elapsed * 1.7) * 0.12;
-      const r = innerRadiusAt(depth) * 0.75 * S.scrape;
+      const ang = elapsed * 2.6, depth = cur.rimY * 0.5 + Math.sin(elapsed * 1.7) * 0.1;
+      // el cuenco (0,3 de radio) queda siempre adentro: el centro no pasa de la pared menos el cuenco
+      const r = Math.max(0, innerRadiusAt(depth) * cur.shape(ang, depth) - 0.34) * S.scrape;
       const bx = Math.cos(ang) * r, bz = Math.sin(ang) * r;
       spoonDir.set(-bx * 0.35, 1, -bz * 0.35).normalize();
       if (spoon.visible) {
         spoon.quaternion.setFromUnitVectors(up, spoonDir);
+        spoon.rotateY(-ang + Math.PI / 2);   // el cuenco mira hacia la pared que raspa
         spoon.position.set(bx, depth, bz).addScaledVector(spoonDir, (1 - S.spoon) * 3);
       }
       if (cloth.visible) {
-        cloth.material.color.copy(S.clothKind ? CLOTH_RAG : CLOTH_NAPKIN);
-        cloth.position.set(bx * 0.45, cur.rimY - 0.28 + Math.sin(elapsed * 2.2) * 0.06, bz * 0.45).addScaledVector(spoonDir, (1 - S.cloth) * 3);
-        cloth.rotation.y = elapsed * 1.3;
+        const tex = CLOTH_TEX[S.clothKind ? 1 : 0];
+        if (cloth.material.map !== tex) { cloth.material.map = tex; cloth.material.needsUpdate = true; }
+        // la mano lo toma del centro, por encima de la boca: la tela se mete y frota la pared
+        cloth.position.set(bx * 0.25, cur.rimY + 0.5 + Math.sin(elapsed * 2.2) * 0.05, bz * 0.4).addScaledVector(spoonDir, (1 - S.cloth) * 3);
+        cloth.rotation.set(0, elapsed * 1.3, 0);
+        cloth.scale.setScalar(Math.min(1, innerRadiusAt(cur.rimY - 0.5) / 0.75));   // que entre en la boca de cada mate
       }
     }
 
