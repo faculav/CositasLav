@@ -28,7 +28,8 @@ sobres de cuero genuino hechos a mano en Uruguay. Las ventas se cierran por What
 
 ## Pendientes
 - [ ] Poner el WhatsApp real en `productos.js` (hoy `59899000000`).
-- [ ] Instagram y email nuevos de Tirra (hoy siguen `somospatria.uy` y `hola@patria.uy`).
+- [x] Instagram de Tirra: `tirra.uy`.
+- [ ] Email de Tirra (hoy sigue `hola@patria.uy`).
 - [ ] Reemplazar productos y precios de ejemplo por los reales.
 - [x] Logo de Tirra cargado (PNG marrón y crema).
 - [x] Rediseño estilo delsurleather.com.
