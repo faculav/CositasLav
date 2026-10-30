@@ -1369,9 +1369,12 @@
         if (y < low) { low = y; lowX = x * cs - p.y * sn; }
       }
       mate.position.y = -low + S.lift;                // al volcar se levanta en el aire
-      shadow.position.x = lowX * 0.7;
+      // en celular, mientras está el mate de al lado, el principal se corre a la izquierda para no superponerse
+      mate.position.x = mobile ? -0.9 * S.donor : 0;
+      shadow.position.x = lowX * 0.7 + mate.position.x;
     }
-    shadow.scale.setScalar(Math.max(0.4, 1 - Math.min(Math.abs(S.tilt), 0.8) * 0.15 - S.lift * 0.35));
+    // en celular la sombra es más chica, así no llega al texto
+    shadow.scale.setScalar(Math.max(0.4, 1 - Math.min(Math.abs(S.tilt), 0.8) * 0.15 - S.lift * 0.35) * (mobile ? 0.68 : 1));
 
     if (mobile) {
       camera.setViewOffset(lastW, lastH, 0, S.vy * (S.vy > 0 ? 0.15 : 0.12) * lastH, lastW, lastH);
@@ -1434,9 +1437,11 @@
     scoop.visible = (donorOn || outOn) && S.trip > 0.001 && S.trip < TRIPS - 0.001;
     let dl = 0;
     if (donorOn) {
-      const dx = mobile ? 1.15 : 2.0, dz = mobile ? -1.9 : -1.4;
+      // celular: lado a lado con el mate principal, a la misma distancia; escritorio: atrás a la derecha
+      const dx = mobile ? 1.0 : 2.0, dz = mobile ? -0.1 : -1.4;
       donorRig.position.set(dx + (1 - S.donor) * 4, 0, dz);
-      donorRig.scale.setScalar(0.9);
+      donorRig.scale.setScalar(mobile ? 0.78 : 0.9);
+      donorShadow.scale.setScalar(mobile ? 0.7 : 1);
       dl = donor.rimY * (0.9 - 0.025 * S.trip);
       usedDisc.position.y = dl;
       const up_ = usedDisc.geometry.attributes.position, R = donor.innerRadiusAt(dl) * 0.99;
