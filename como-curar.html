@@ -1210,7 +1210,8 @@
     };
     // herramienta (cuchara o paño): entra, trabaja en círculos contra la pared y sale
     const tool = (key, t, dur) => { to(key, 1, 0.9, t); to('scrape', 1, 0.9, t + 0.3); to('scrape', 0, 0.8, t + dur); to(key, 0, 0.9, t + dur + 0.3); };
-    to('vy', pos ?? 1, 0.9);
+    // la portada en celular tiene más texto (selector y botón): la escena sube más
+    to('vy', id === 'portada' ? 1.9 : (pos ?? 1), 0.9);
     S.trip = 0; S.scoopTo = 0; S.scoopOut = 0;   // S.trip va de 0 a TRIPS: una unidad por cucharada
     // el algarrobo tiene la boca angosta: cuando hay yerba adentro se inclina un poco hacia quien mira
     to('peek', cur === MATES.algarrobo && ['alg-yerba', 'alg-reposo2', 'alg-limpiar'].includes(id) ? 0.38 : 0, 0.9);
@@ -1234,7 +1235,7 @@
         to('fill', 0, 0.5); to('water', 0, 0.5); to('wet', 0, 0.3); to('cured', 0, 0.6); to('wetIn', 0, 0.4);
         to('grease', 0, 0.4); to('absorbed', 0, 0.4);
         to('tilt', 0); to('lift', 0); to('termo', 0, 0.6);
-        to('scale', 1); to('x', 0); to('y', 0);
+        to('scale', innerWidth <= 760 ? (innerHeight < 720 ? 0.66 : 0.78) : 1); to('x', 0); to('y', 0);
         break;
 
       // ── Calabaza ──
