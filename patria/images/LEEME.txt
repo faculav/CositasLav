@@ -71,5 +71,6 @@ REAL de cada foto puesta, con cordon y argolla dibujados del mismo color y una
 sombra suave. Si sacas fotos reales en fondo blanco, reemplazalas con el mismo
 nombre. Si falta alguna, el collar muestra su foto puesto.
 Pechera Cria: prod-pec-cria.jpg (frente) y prod-pec-cria-b.jpg (espalda),
-recortadas de las fotos en la percha. Categoria: cat-pecheras.jpg.
+recortadas de las fotos en la percha. Categoria Chalecos: cat-chalecos.jpg.
+Chaleco Cruz: prod-cha-cruz.jpg (frente) y prod-cha-cruz-b.jpg (espalda).
 Brazaletes y pulseras usan amb-brazaletes.jpg / amb-pulseras.jpg como ambiente.
