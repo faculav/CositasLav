@@ -3,226 +3,193 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PATRIA — Cuero genuino hecho a mano en Uruguay</title>
-<meta name="description" content="PATRIA. Llaveros, brazaletes, collares, cintos, monederos y sobres de cuero genuino, hechos a mano en Uruguay.">
-<meta property="og:title" content="PATRIA — Cuero genuino hecho a mano en Uruguay">
-<meta property="og:description" content="Llaveros, brazaletes, collares, cintos, monederos y sobres de cuero genuino, hechos a mano en Uruguay.">
+<title>TIRRA — Cuero genuino hecho a mano en Uruguay</title>
+<meta name="description" content="TIRRA. Chalecos, collares, brazaletes y pulseras de cuero genuino, hechos a mano en Uruguay.">
+<meta property="og:title" content="TIRRA — Cuero genuino hecho a mano en Uruguay">
+<meta property="og:description" content="Chalecos, collares, brazaletes y pulseras de cuero genuino, hechos a mano en Uruguay.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="images/hero.jpg">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%234b3729'/><text x='16' y='23' font-family='Helvetica,Arial' font-weight='700' font-size='17' fill='%23f4ede1' text-anchor='middle'>P</text></svg>">
+<meta property="og:image" content="images/ig-1.jpg">
+<link rel="icon" href="images/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=13">
 </head>
 <body>
 
-<!-- ============ BARRA DE ANUNCIO ============ -->
-<div class="anuncio">
-  <div class="anuncio__track">
-    <span>Envío gratis en compras superiores a $ 2.500</span><span>&bull;</span>
-    <span>10% off pagando por transferencia</span><span>&bull;</span>
-    <span>Llegó la primavera, florece Patria</span><span>&bull;</span>
-    <span>Envío gratis en compras superiores a $ 2.500</span><span>&bull;</span>
-    <span>10% off pagando por transferencia</span><span>&bull;</span>
-    <span>Llegó la primavera, florece Patria</span><span>&bull;</span>
-  </div>
-</div>
-
-<!-- ============ HEADER ============ -->
+<!-- ============ HEADER ============
+     Logo a la izquierda y menú hamburguesa a la derecha (compu y celu). -->
 <header class="header" id="header">
   <div class="header__inner">
+    <a class="logo" href="#top" aria-label="TIRRA — inicio">
+      <img class="logo__img" src="images/logo.png" alt="TIRRA" data-logo>
+      <span class="logo__marca">TIRRA</span>
+    </a>
+
     <button class="burger" aria-label="Abrir menú" aria-expanded="false" id="burger">
       <span></span><span></span><span></span>
     </button>
-
-    <nav class="nav nav--izq">
-      <a href="#coleccion">Colección</a>
-      <a href="#categorias">Productos</a>
-      <a href="#historia">Nosotros</a>
-    </nav>
-
-    <a class="logo" href="#top" aria-label="PATRIA — inicio">
-      <!-- Poné tu logo en images/logo.svg (o .png). Si falta, se muestra el texto. -->
-      <img class="logo__img" src="images/logo.svg" alt="PATRIA" data-logo>
-      <span class="logo__marca">PATRIA</span>
-      <span class="logo__bajada">Cuero genuino &middot; Uruguay</span>
-    </a>
-
-    <nav class="nav nav--der">
-      <a href="#cuidados">Cuidados</a>
-      <a href="#contacto">Contacto</a>
-      <a class="nav__ig" href="https://instagram.com/somospatria.uy" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4">
-          <rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
-        </svg>
-      </a>
-    </nav>
   </div>
 </header>
 
-<!-- ============ MENÚ MÓVIL ============ -->
-<div class="menu-movil" id="menuMovil">
-  <a href="#coleccion">Colección</a>
-  <a href="#categorias">Productos</a>
-  <a href="#historia">Nosotros</a>
+<!-- ============ MENÚ (panel desde la derecha) ============ -->
+<div class="menu-fondo" id="menuFondo"></div>
+<nav class="menu" id="menuMovil" aria-label="Menú">
+  <a href="#top">Inicio</a>
+  <a href="#estilo">Productos</a>
+  <a href="#cuero">Nuestro cuero</a>
+  <a href="#espiritu">Nosotros</a>
   <a href="#cuidados">Cuidados</a>
   <a href="#contacto">Contacto</a>
-  <a href="https://instagram.com/somospatria.uy" target="_blank" rel="noopener">@somospatria.uy</a>
-</div>
+  <div class="menu__pie">
+    <a data-ig href="#" target="_blank" rel="noopener">Instagram</a>
+    <a data-whatsapp href="#" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+</nav>
 
 <main id="top">
 
-<!-- ============ HERO ============ -->
+<!-- ============ HERO: video de intro ============
+     Video: images/hero.mp4 (y hero.webm opcional), en loop y sin sonido.
+     Mientras carga, se ve images/hero.jpg (un cuadro del video).       -->
 <section class="hero">
-  <!-- Guardá acá la foto del logo grabado en el cuero: images/hero.jpg -->
-  <img class="hero__img" src="images/hero.jpg" alt="Logo PATRIA grabado en el cuero" data-ph="Logo grabado en el cuero">
+  <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="images/hero.jpg">
+    <source src="images/hero.webm" type="video/webm">
+    <source src="images/hero.mp4" type="video/mp4">
+  </video>
   <div class="hero__velo"></div>
-  <div class="hero__contenido">
-    <p class="hero__kicker">Taller uruguayo</p>
-    <h1 class="hero__titulo"><strong>Cuero genuino</strong><br>hecho a mano.</h1>
-    <p class="hero__texto">Piezas nobles, de corte simple, pensadas para durar toda la vida.</p>
-    <div class="hero__ctas">
-      <a class="btn btn--claro" href="#coleccion">Ver colección</a>
-      <a class="btn btn--linea" href="#contacto">Comprar por WhatsApp</a>
-    </div>
-  </div>
-  <div class="hero__scroll" aria-hidden="true"><span></span></div>
+  <h1 class="hero__titulo">100% <strong>cuero</strong> genuino <strong>uruguayo</strong></h1>
 </section>
 
-<!-- ============ BENEFICIOS ============ -->
-<section class="beneficios">
-  <div class="beneficio">
-    <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.2"><path d="M12 3l7 4v5c0 4.2-2.9 7.7-7 9-4.1-1.3-7-4.8-7-9V7z"/></svg>
-    <h3>Cuero genuino</h3><p>Vacuno seleccionado, curtido natural.</p>
-  </div>
-  <div class="beneficio">
-    <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.2"><path d="M4 20c2-5 5-7 8-7s6 2 8 7"/><circle cx="12" cy="7" r="3.5"/></svg>
-    <h3>Hecho a mano</h3><p>Cada pieza cortada y cosida de a una.</p>
-  </div>
-  <div class="beneficio">
-    <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.2"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="1.8"/><circle cx="17" cy="17" r="1.8"/></svg>
-    <h3>Envíos a todo el país</h3><p>Montevideo e interior, 24 a 72 hs.</p>
-  </div>
-  <div class="beneficio">
-    <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.2"><path d="M7 11V8a5 5 0 0110 0v3"/><rect x="4" y="11" width="16" height="9" rx="2"/></svg>
-    <h3>Pago seguro</h3><p>Transferencia, efectivo o tarjeta.</p>
-  </div>
+<!-- ============ ESPÍRITU TIRRA ============ -->
+<section class="seccion espiritu" id="espiritu">
+  <h2 class="titulo">Espíritu Tirra</h2>
+  <p>Tirra es el resultado de diseños simples y del mejor cuero vacuno uruguayo. Piezas con el espíritu natural de nuestra tierra y el cariño de lo hecho a mano.</p>
+  <p>Cada pieza se corta, se bisela, se cose y se sella a mano en nuestro taller. Por eso ninguna sale exactamente igual a la otra, y por eso dura toda la vida.</p>
+  <a class="linea-link" href="#cuero"><span>Descubrí más</span></a>
 </section>
 
-<!-- ============ CATEGORÍAS ============ -->
-<section class="seccion" id="categorias">
-  <header class="seccion__head">
-    <p class="kicker">Qué hacemos</p>
-    <h2>Nuestros productos</h2>
-  </header>
-
-  <div class="cats">
-    <a class="cat" href="#coleccion" data-ir="llaveros">
-      <div class="cat__img"><img src="images/cat-llaveros.jpg" alt="Llaveros de cuero" data-ph="Llaveros"></div>
-      <span class="cat__nombre">Llaveros</span>
+<!-- ============ NUESTRO ESTILO (categorías) ============ -->
+<section class="seccion" id="estilo">
+  <h2 class="titulo">Nuestro estilo</h2>
+  <div class="estilos">
+    <a class="estilo" href="#esenciales" data-ir="chalecos">
+      <div class="estilo__img"><img src="images/cat-chalecos.jpg" alt="Detalle de chaleco de gamuza con bolsillo cebra" data-ph="Chalecos"></div>
+      <span>Chalecos</span>
     </a>
-    <a class="cat" href="#coleccion" data-ir="brazaletes">
-      <div class="cat__img"><img src="images/cat-brazaletes.png" alt="Brazaletes de cuero" data-ph="Brazaletes"></div>
-      <span class="cat__nombre">Brazaletes</span>
+    <a class="estilo" href="#esenciales" data-ir="collares">
+      <div class="estilo__img"><img src="images/cat-collares.jpg" alt="Collar de cuero con piedra natural" data-ph="Collares"></div>
+      <span>Collares</span>
     </a>
-    <a class="cat" href="#coleccion" data-ir="collares">
-      <div class="cat__img"><img src="images/cat-collares.jpg" alt="Collares de cuero" data-ph="Collares"></div>
-      <span class="cat__nombre">Collares</span>
+    <a class="estilo" href="#esenciales" data-ir="brazaletes">
+      <div class="estilo__img"><img src="images/cat-brazaletes.jpg" alt="Brazaletes de cuero sobre madera" data-ph="Brazaletes"></div>
+      <span>Brazaletes</span>
     </a>
-    <a class="cat" href="#coleccion" data-ir="cintos">
-      <div class="cat__img"><img src="images/cat-cintos.jpg" alt="Cintos de cuero" data-ph="Cintos"></div>
-      <span class="cat__nombre">Cintos</span>
-    </a>
-    <a class="cat" href="#coleccion" data-ir="monederos">
-      <div class="cat__img"><img src="images/cat-monederos.jpg" alt="Monederos de cuero" data-ph="Monederos"></div>
-      <span class="cat__nombre">Monederos</span>
-    </a>
-    <a class="cat" href="#coleccion" data-ir="sobres">
-      <div class="cat__img"><img src="images/cat-sobres.jpg" alt="Sobres de cuero" data-ph="Sobres"></div>
-      <span class="cat__nombre">Sobres</span>
+    <a class="estilo" href="#esenciales" data-ir="pulseras">
+      <div class="estilo__img"><img src="images/ig-1.jpg" alt="Pulseras de cuero sobre el lomo de un caballo" data-ph="Pulseras"></div>
+      <span>Pulseras</span>
     </a>
   </div>
 </section>
 
-<!-- ============ COLECCIÓN ============ -->
-<section class="seccion seccion--crema" id="coleccion">
-  <header class="seccion__head">
-    <p class="kicker">Temporada 2026</p>
-    <h2>Colección</h2>
-    <p class="seccion__bajada">Piezas en stock. Tocá cualquier producto para consultarlo por WhatsApp.</p>
-  </header>
+<!-- ============ ESENCIALES (productos) ============ -->
+<section class="seccion" id="esenciales">
+  <h2 class="titulo">Esenciales Tirra</h2>
 
   <div class="filtros" id="filtros">
     <button class="filtro is-activo" data-filtro="todos">Todos</button>
-    <button class="filtro" data-filtro="llaveros">Llaveros</button>
-    <button class="filtro" data-filtro="brazaletes">Brazaletes</button>
+    <button class="filtro" data-filtro="chalecos">Chalecos</button>
     <button class="filtro" data-filtro="collares">Collares</button>
-    <button class="filtro" data-filtro="cintos">Cintos</button>
-    <button class="filtro" data-filtro="monederos">Monederos</button>
-    <button class="filtro" data-filtro="sobres">Sobres</button>
+    <button class="filtro" data-filtro="brazaletes">Brazaletes</button>
+    <button class="filtro" data-filtro="pulseras">Pulseras</button>
   </div>
 
   <!-- Los productos se generan desde productos.js -->
   <div class="productos" id="productos"></div>
 
-  <p class="nota-precios">Precios en pesos uruguayos. Consultá disponibilidad de colores por mensaje.</p>
+  <div class="centro"><button class="btn-linea" id="verMas">Ver más</button></div>
+  <p class="nota-precios">Tocá cualquier producto para consultarlo por WhatsApp.</p>
 </section>
 
-<!-- ============ EDITORIAL / HISTORIA ============ -->
-<section class="editorial" id="historia">
-  <div class="editorial__img">
-    <img src="images/taller.png" alt="Taller PATRIA" data-ph="Foto del taller &middot; vertical">
+<!-- ============ BANNER: HECHO A MANO ============ -->
+<section class="banner" id="contacto">
+  <img src="images/taller-tirra.jpg" alt="Caballo asomado en el box con el cartel de Tirra" data-ph="Taller">
+  <div class="banner__velo"></div>
+  <div class="banner__contenido">
+    <h2>Pedidos a medida</h2>
+    <p>Color, largo, herraje e iniciales grabadas. Escribinos y lo pensamos juntos.</p>
+    <a class="btn-linea btn-linea--claro" data-whatsapp href="#" target="_blank" rel="noopener">Escribinos</a>
   </div>
-  <div class="editorial__texto">
-    <p class="kicker">Nuestra historia</p>
-    <h2>Del cuero a la mano,<br>sin atajos</h2>
-    <p>PATRIA nació en un taller chico, con una chaira, una hoja y ganas de hacer las cosas como se hacían antes. Elegimos cuero vacuno uruguayo de curtido natural: el que se marca con el uso, se oscurece con el sol y cuenta dónde estuvo.</p>
-    <p>No trabajamos con moldes industriales. Cada pieza se corta, se bisela, se cose y se sella a mano. Por eso ninguna sale exactamente igual a la otra — y por eso dura.</p>
-    <a class="btn btn--oscuro" href="#contacto">Hablemos</a>
+</section>
+
+<!-- ============ NUESTRO CUERO ============ -->
+<section class="duo" id="cuero">
+  <div class="duo__texto">
+    <p class="kicker">Cuero vacuno uruguayo</p>
+    <h2 class="titulo titulo--izq">Nuestro cuero</h2>
+    <p>Elegimos cuero vacuno uruguayo de curtido natural: el que se marca con el uso, se oscurece con el sol y cuenta dónde estuvo.</p>
+    <p>No trabajamos con moldes industriales. Ningún material reemplaza el tacto, la nobleza y la duración del cuero de verdad.</p>
+    <a class="btn-linea" href="#cuidados">Más info</a>
   </div>
+  <div class="duo__img"><img src="images/caballo-tirra.jpg" alt="Caballo con la marca Tirra en el anca" data-ph="Cuero"></div>
 </section>
 
 <!-- ============ CUIDADOS ============ -->
-<section class="seccion" id="cuidados">
-  <header class="seccion__head">
+<section class="duo duo--invertido" id="cuidados">
+  <div class="duo__texto">
     <p class="kicker">Para que dure</p>
-    <h2>Cuidado del cuero</h2>
-  </header>
-  <div class="cuidados">
-    <article><span class="num">01</span><h3>Lejos del agua</h3><p>Si se moja, secalo a temperatura ambiente. Nunca con estufa ni secador.</p></article>
-    <article><span class="num">02</span><h3>Nutrilo</h3><p>Una vez cada tres meses, un paño suave con grasa de caballo o cera neutra.</p></article>
-    <article><span class="num">03</span><h3>Guardalo respirando</h3><p>En bolsa de tela, nunca en nylon cerrado. El cuero necesita aire.</p></article>
-    <article><span class="num">04</span><h3>La pátina es tuya</h3><p>Las marcas del uso no son defectos: son la historia de la pieza.</p></article>
+    <h2 class="titulo titulo--izq">Cuidado del cuero</h2>
+    <ul class="cuidados">
+      <li><strong>Lejos del agua.</strong> Si se moja, secalo a temperatura ambiente. Nunca con estufa ni secador.</li>
+      <li><strong>Nutrilo.</strong> Una vez cada tres meses, un paño suave con grasa de caballo o cera neutra.</li>
+      <li><strong>Guardalo respirando.</strong> En bolsa de tela, nunca en nylon cerrado.</li>
+      <li><strong>La pátina es tuya.</strong> Las marcas del uso no son defectos: son la historia de la pieza.</li>
+    </ul>
+    <a class="btn-linea" data-whatsapp href="#" target="_blank" rel="noopener">Consultanos</a>
   </div>
+  <div class="duo__img"><img src="images/ig-1.jpg" alt="Brazaletes de cuero sobre el lomo de un caballo" data-ph="Cuidados"></div>
 </section>
 
-<!-- ============ INSTAGRAM ============ -->
-<section class="ig">
-  <header class="seccion__head">
-    <p class="kicker">Seguinos</p>
-    <h2><a href="https://instagram.com/somospatria.uy" target="_blank" rel="noopener">@somospatria.uy</a></h2>
-  </header>
-  <div class="ig__grid">
-    <a href="https://instagram.com/somospatria.uy" target="_blank" rel="noopener"><img src="images/ig-1.png" alt="" data-ph="IG 1"></a>
-    <a href="https://instagram.com/somospatria.uy" target="_blank" rel="noopener"><img src="images/ig-2.png" alt="" data-ph="IG 2"></a>
-    <a href="https://instagram.com/somospatria.uy" target="_blank" rel="noopener"><img src="images/ig-3.jpg" alt="" data-ph="IG 3"></a>
-    <a href="https://instagram.com/somospatria.uy" target="_blank" rel="noopener"><img src="images/ig-4.jpg" alt="" data-ph="IG 4"></a>
-    <a href="https://instagram.com/somospatria.uy" target="_blank" rel="noopener"><img src="images/ig-5.jpg" alt="" data-ph="IG 5"></a>
-    <a href="https://instagram.com/somospatria.uy" target="_blank" rel="noopener"><img src="images/ig-6.jpg" alt="" data-ph="IG 6"></a>
-  </div>
-</section>
-
-<!-- ============ CONTACTO ============ -->
-<section class="contacto" id="contacto">
-  <div class="contacto__inner">
-    <p class="kicker kicker--claro">Contacto</p>
-    <h2>¿Buscás algo en particular?</h2>
-    <p>Hacemos pedidos a medida: color, largo, herraje e iniciales grabadas. Escribinos y lo pensamos juntos.</p>
-    <div class="contacto__ctas">
-      <a class="btn btn--claro" data-whatsapp href="#" target="_blank" rel="noopener">WhatsApp</a>
-      <a class="btn btn--linea-claro" href="https://instagram.com/somospatria.uy" target="_blank" rel="noopener">Instagram</a>
+<!-- ============ CALIDAD TIRRA ============ -->
+<section class="calidad">
+  <h2 class="titulo">Calidad Tirra</h2>
+  <p>Trabajamos sólo con cuero genuino seleccionado, cortado y cosido de a una pieza. Enviamos a todo el país y podés pagar como te quede cómodo.</p>
+  <div class="sellos">
+    <div class="sello">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.1"><path d="M12 3l7 4v5c0 4.2-2.9 7.7-7 9-4.1-1.3-7-4.8-7-9V7z"/></svg>
+      <span>Cuero genuino</span>
     </div>
+    <div class="sello">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.1"><path d="M4 20c2-5 5-7 8-7s6 2 8 7"/><circle cx="12" cy="7" r="3.5"/></svg>
+      <span>Hecho a mano</span>
+    </div>
+    <div class="sello">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.1"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="1.8"/><circle cx="17" cy="17" r="1.8"/></svg>
+      <span>Envíos a todo el país</span>
+    </div>
+    <div class="sello">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.1"><path d="M7 11V8a5 5 0 0110 0v3"/><rect x="4" y="11" width="16" height="9" rx="2"/></svg>
+      <span>Pago seguro</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MÁS TIRRA ============ -->
+<section class="seccion">
+  <h2 class="titulo">Más Tirra</h2>
+  <div class="mas">
+    <a class="estilo" data-ig href="#" target="_blank" rel="noopener">
+      <div class="estilo__img"><img src="images/ig-3.jpg" alt="" data-ph="Instagram"></div>
+      <span>Seguinos en Instagram</span>
+    </a>
+    <a class="estilo" href="#cuidados">
+      <div class="estilo__img"><img src="images/ig-4.jpg" alt="" data-ph="Cuidados"></div>
+      <span>Cuidado del cuero</span>
+    </a>
+    <a class="estilo" data-whatsapp href="#" target="_blank" rel="noopener">
+      <div class="estilo__img"><img src="images/ig-5.jpg" alt="" data-ph="A medida"></div>
+      <span>Pedidos a medida</span>
+    </a>
   </div>
 </section>
 
@@ -232,41 +199,58 @@
 <footer class="footer">
   <div class="footer__cols">
     <div class="footer__col footer__col--marca">
-      <!-- versión clara del logo (crema sobre fondo oscuro) -->
-      <img class="logo__img logo__img--footer" src="images/logo-claro.svg" alt="PATRIA" data-logo>
-      <span class="logo__marca">PATRIA</span>
-      <p>Cuero genuino hecho a mano en Uruguay.</p>
+      <img class="logo__img logo__img--footer" src="images/logo-claro.png" alt="TIRRA" data-logo>
+      <span class="logo__marca">TIRRA</span>
+      <p>Cuero genuino hecho a mano en Uruguay, con piezas pensadas para durar toda la vida.</p>
+    </div>
+    <div class="footer__col">
+      <h4>Tirra</h4>
+      <a href="#espiritu">Nosotros</a><a href="#cuero">Nuestro cuero</a>
+      <a href="#esenciales">Productos</a><a href="#contacto">Contacto</a>
     </div>
     <div class="footer__col">
       <h4>Productos</h4>
-      <a href="#coleccion">Llaveros</a><a href="#coleccion">Brazaletes</a><a href="#coleccion">Collares</a>
-      <a href="#coleccion">Cintos</a><a href="#coleccion">Monederos</a><a href="#coleccion">Sobres</a>
+      <a href="#esenciales" data-ir="chalecos">Chalecos</a>
+      <a href="#esenciales" data-ir="collares">Collares</a>
+      <a href="#esenciales" data-ir="brazaletes">Brazaletes</a>
+      <a href="#esenciales" data-ir="pulseras">Pulseras</a>
     </div>
     <div class="footer__col">
       <h4>Info</h4>
-      <a href="#historia">Nosotros</a><a href="#cuidados">Cuidado del cuero</a>
-      <a href="#contacto">Envíos</a><a href="#contacto">Cambios y devoluciones</a>
+      <a href="#cuidados">Cuidado del cuero</a><a href="#contacto">Pedidos a medida</a>
+      <a data-whatsapp href="#" target="_blank" rel="noopener">Envíos</a>
+      <a data-whatsapp href="#" target="_blank" rel="noopener">Cambios y devoluciones</a>
     </div>
     <div class="footer__col">
-      <h4>Contacto</h4>
-      <a href="https://instagram.com/somospatria.uy" target="_blank" rel="noopener">@somospatria.uy</a>
-      <a data-whatsapp href="#" target="_blank" rel="noopener">WhatsApp</a>
-      <a href="mailto:hola@patria.uy">hola@patria.uy</a>
-      <span>Montevideo, Uruguay</span>
+      <h4>Redes y contacto</h4>
+      <div class="redes">
+        <a data-whatsapp href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.13c-.25.69-1.44 1.32-1.98 1.37-.53.05-1.02.24-3.44-.72-2.9-1.14-4.73-4.1-4.87-4.29-.14-.19-1.16-1.54-1.16-2.94s.73-2.09.99-2.37c.26-.29.57-.36.76-.36h.54c.17.01.41-.07.64.49.25.6.83 2.08.9 2.23.07.15.12.32.02.51-.09.19-.14.31-.28.48l-.42.48c-.14.14-.28.29-.12.57.16.29.72 1.18 1.54 1.91 1.06.94 1.95 1.24 2.23 1.38.28.14.44.12.6-.07.17-.19.69-.8.87-1.08.19-.29.37-.24.62-.14.26.09 1.63.77 1.91.91.28.14.47.21.53.32.07.12.07.67-.18 1.36z"/></svg>
+        </a>
+        <a data-email href="#" aria-label="Email">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        </a>
+        <a data-ig href="#" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+      </div>
+      <span class="footer__lugar">Montevideo, Uruguay</span>
     </div>
   </div>
   <div class="footer__base">
-    <span>&copy; <span id="anio"></span> PATRIA. Todos los derechos reservados.</span>
-    <span>Hecho en Uruguay</span>
+    &copy; <span id="anio"></span> TIRRA. Todos los derechos reservados. Hecho en Uruguay.
   </div>
 </footer>
 
-<!-- ============ BOTÓN FLOTANTE WHATSAPP ============ -->
+<!-- ============ BOTONES FLOTANTES ============ -->
+<button class="arriba" id="arriba" aria-label="Volver arriba">
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 15l6-6 6 6"/></svg>
+</button>
 <a class="wa" data-whatsapp href="#" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
   <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm5.8 14.13c-.25.69-1.44 1.32-1.98 1.37-.53.05-1.02.24-3.44-.72-2.9-1.14-4.73-4.1-4.87-4.29-.14-.19-1.16-1.54-1.16-2.94 0-1.4.73-2.09.99-2.37.26-.29.57-.36.76-.36l.54.01c.17.01.41-.07.64.49.25.6.83 2.08.9 2.23.07.15.12.32.02.51-.09.19-.14.31-.28.48l-.42.48c-.14.14-.28.29-.12.57.16.29.72 1.18 1.54 1.91 1.06.94 1.95 1.24 2.23 1.38.28.14.44.12.6-.07.17-.19.69-.8.87-1.08.19-.29.37-.24.62-.14.26.09 1.63.77 1.91.91.28.14.47.21.53.32.07.12.07.67-.18 1.36z"/></svg>
 </a>
 
-<script src="productos.js"></script>
-<script src="script.js"></script>
+<script src="productos.js?v=13"></script>
+<script src="script.js?v=13"></script>
 </body>
 </html>

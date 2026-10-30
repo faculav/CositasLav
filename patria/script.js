@@ -1,5 +1,5 @@
 /* =========================================================
-   PATRIA — comportamiento
+   TIRRA — comportamiento
    ========================================================= */
 (function () {
   "use strict";
@@ -7,32 +7,31 @@
   /* ---------- placeholders de imagen ----------
      Mientras no existan las fotos reales en /images,
      cada <img> que falle se reemplaza por un bloque en
-     tonos cuero con su etiqueta. Al subir el archivo real
+     tonos neutros con su etiqueta. Al subir el archivo real
      con ese nombre, el placeholder desaparece solo.        */
   var TONOS = [
-    ["#f4ede1", "#d8c9b4"], ["#e7dccb", "#b9a284"],
-    ["#ded2c0", "#a68a6e"], ["#eee5d6", "#c2ad94"]
+    ["#f3f1ee", "#ddd7cf"], ["#ece8e2", "#cfc6ba"],
+    ["#e6e1da", "#c4b8a9"], ["#f0ece6", "#d6cdc1"]
   ];
 
   function placeholder(texto, i) {
     var t = TONOS[i % TONOS.length];
     var svg =
-      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000">' +
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">' +
       '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">' +
       '<stop offset="0" stop-color="' + t[0] + '"/><stop offset="1" stop-color="' + t[1] + '"/>' +
       '</linearGradient></defs>' +
-      '<rect width="800" height="1000" fill="url(#g)"/>' +
-      '<text x="400" y="492" font-family="Inter,Helvetica,Arial,sans-serif" font-weight="700" ' +
-      'font-size="36" fill="#4b3729" text-anchor="middle" letter-spacing="-1">PATRIA</text>' +
-      '<text x="400" y="534" font-family="Inter,Helvetica,Arial,sans-serif" font-size="19" ' +
-      'fill="#7d6f64" text-anchor="middle" letter-spacing="1">' + texto + '</text>' +
+      '<rect width="800" height="800" fill="url(#g)"/>' +
+      '<text x="400" y="392" font-family="Raleway,Helvetica,Arial,sans-serif" font-weight="600" ' +
+      'font-size="34" fill="#4b3729" text-anchor="middle" letter-spacing="4">TIRRA</text>' +
+      '<text x="400" y="434" font-family="Raleway,Helvetica,Arial,sans-serif" font-size="18" ' +
+      'fill="#8a8a8a" text-anchor="middle" letter-spacing="2">' + texto + '</text>' +
       '</svg>';
     return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
   }
 
   /* ---------- logo ----------
-     Si no existe images/logo.svg (o .png), se muestra el
-     wordmark de texto en vez de un placeholder.            */
+     Si no existe images/logo.png, se muestra el texto TIRRA. */
   document.querySelectorAll("[data-logo]").forEach(function (img) {
     img.addEventListener("error", function () {
       var cont = img.closest(".logo") || img.parentElement;
@@ -47,8 +46,15 @@
     img.dataset.phListo = "1";
     var i = contador++;
     img.addEventListener("error", function () {
+      // si falta la foto en fondo blanco, se usa la de ambiente como principal
+      if (img.dataset.respaldo) {
+        var otra = img.parentElement.querySelector("img.b");
+        img.src = img.dataset.respaldo;
+        delete img.dataset.respaldo;
+        if (otra) otra.remove();
+        return;
+      }
       var etiqueta = img.dataset.ph || img.alt || "Foto";
-      etiqueta = etiqueta.replace(/&middot;/g, "·").replace(/&bull;/g, "·");
       img.src = placeholder(etiqueta.toUpperCase(), i);
     });
     // si ya falló antes de que enganchemos el listener
@@ -56,19 +62,28 @@
   }
   document.querySelectorAll("img").forEach(cuidarImagen);
 
-  /* ---------- links de WhatsApp ---------- */
+  /* ---------- links de contacto (salen de CONFIG en productos.js) ---------- */
   function linkWhatsapp(mensaje) {
     return "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(mensaje);
   }
   document.querySelectorAll("[data-whatsapp]").forEach(function (a) {
-    a.href = linkWhatsapp("¡Hola PATRIA! Quería hacerles una consulta.");
+    a.href = linkWhatsapp("¡Hola TIRRA! Quería hacerles una consulta.");
+  });
+  document.querySelectorAll("[data-ig]").forEach(function (a) {
+    a.href = "https://instagram.com/" + CONFIG.instagram;
+  });
+  document.querySelectorAll("[data-email]").forEach(function (a) {
+    a.href = "mailto:" + CONFIG.email;
   });
 
   /* ---------- render de productos ---------- */
   var cont = document.getElementById("productos");
+  var verMas = document.getElementById("verMas");
+  var VISIBLES = 8;      // cuántos se ven antes de tocar "Ver más"
+  var todosVisibles = false;
 
   function precio(n) {
-    return "$ " + n.toLocaleString("es-UY");
+    return n == null ? "Consultar precio" : "$ " + n.toLocaleString("es-UY");
   }
 
   function tarjeta(p, i) {
@@ -76,14 +91,16 @@
     var a = document.createElement("a");
     a.className = "producto reveal";
     a.dataset.cat = p.cat;
-    a.href = linkWhatsapp(CONFIG.mensajeBase + p.nombre + " (" + precio(p.precio) + "). ¿Está disponible?");
+    a.href = linkWhatsapp(CONFIG.mensajeBase + p.nombre +
+      (p.precio == null ? "" : " (" + precio(p.precio) + ")") + ". ¿Está disponible?");
     a.target = "_blank";
     a.rel = "noopener";
 
     a.innerHTML =
       '<div class="producto__media">' +
         (p.tag ? '<span class="producto__tag' + (agotado ? " producto__tag--agotado" : "") + '">' + p.tag + "</span>" : "") +
-        '<img class="a" src="' + p.img + '" alt="' + p.nombre + '" data-ph="' + p.nombre + '" loading="lazy">' +
+        '<img class="a" src="' + p.img + '" alt="' + p.nombre + '" data-ph="' + p.nombre + '"' +
+          (p.img2 ? ' data-respaldo="' + p.img2 + '"' : "") + ' loading="lazy">' +
         (p.img2 ? '<img class="b" src="' + p.img2 + '" alt="" data-ph="' + p.nombre + ' 2" loading="lazy">' : "") +
         '<span class="producto__consulta">' + (agotado ? "Consultar reposición" : "Consultar por WhatsApp") + "</span>" +
       "</div>" +
@@ -102,13 +119,24 @@
 
   function pintar(filtro) {
     cont.innerHTML = "";
-    PRODUCTOS
-      .filter(function (p) { return filtro === "todos" || p.cat === filtro; })
-      .forEach(function (p, i) { cont.appendChild(tarjeta(p, i)); });
+    var lista = PRODUCTOS.filter(function (p) { return filtro === "todos" || p.cat === filtro; });
+    lista.forEach(function (p, i) {
+      var t = tarjeta(p, i);
+      if (!todosVisibles && i >= VISIBLES) t.classList.add("is-oculto");
+      cont.appendChild(t);
+    });
+    if (verMas) verMas.style.display = (!todosVisibles && lista.length > VISIBLES) ? "" : "none";
     observarReveals();
   }
 
-  if (cont) pintar("todos");
+  if (verMas) {
+    verMas.addEventListener("click", function () {
+      todosVisibles = true;
+      cont.querySelectorAll(".is-oculto").forEach(function (t) { t.classList.remove("is-oculto"); });
+      verMas.style.display = "none";
+      observarReveals();
+    });
+  }
 
   /* ---------- filtros ---------- */
   var filtros = document.getElementById("filtros");
@@ -122,7 +150,7 @@
     });
   }
 
-  /* ---------- categorías -> filtran la colección ---------- */
+  /* ---------- categorías -> filtran los productos ---------- */
   document.querySelectorAll("[data-ir]").forEach(function (c) {
     c.addEventListener("click", function () {
       var b = filtros && filtros.querySelector('[data-filtro="' + c.dataset.ir + '"]');
@@ -130,29 +158,39 @@
     });
   });
 
-  /* ---------- menú móvil ---------- */
+  /* ---------- menú hamburguesa (panel desde la derecha) ---------- */
   var burger = document.getElementById("burger");
   var menu = document.getElementById("menuMovil");
+  var fondo = document.getElementById("menuFondo");
+  function abrirMenu(abierto) {
+    menu.classList.toggle("is-abierto", abierto);
+    if (fondo) fondo.classList.toggle("is-abierto", abierto);
+    burger.classList.toggle("is-abierto", abierto);
+    document.body.classList.toggle("menu-abierto", abierto);
+    burger.setAttribute("aria-expanded", String(abierto));
+    burger.setAttribute("aria-label", abierto ? "Cerrar menú" : "Abrir menú");
+  }
   if (burger && menu) {
     burger.addEventListener("click", function () {
-      var abierto = menu.classList.toggle("is-abierto");
-      burger.classList.toggle("is-abierto", abierto);
-      burger.setAttribute("aria-expanded", String(abierto));
+      abrirMenu(!menu.classList.contains("is-abierto"));
     });
     menu.addEventListener("click", function (e) {
-      if (e.target.tagName === "A") {
-        menu.classList.remove("is-abierto");
-        burger.classList.remove("is-abierto");
-        burger.setAttribute("aria-expanded", "false");
-      }
+      if (e.target.tagName === "A") abrirMenu(false);
+    });
+    if (fondo) fondo.addEventListener("click", function () { abrirMenu(false); });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") abrirMenu(false);
     });
   }
 
-  /* ---------- sombra del header ---------- */
-  var header = document.getElementById("header");
-  window.addEventListener("scroll", function () {
-    header.classList.toggle("is-scroll", window.scrollY > 10);
-  }, { passive: true });
+  /* ---------- botón "volver arriba" ---------- */
+  var arriba = document.getElementById("arriba");
+  if (arriba) {
+    arriba.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
+    window.addEventListener("scroll", function () {
+      arriba.classList.toggle("is-visible", window.scrollY > 600);
+    }, { passive: true });
+  }
 
   /* ---------- animación de entrada ---------- */
   var io = null;
@@ -168,10 +206,12 @@
       if (io) io.observe(el); else el.classList.add("is-visible");
     });
   }
-  [".beneficio", ".cat", ".seccion__head", ".editorial__img", ".editorial__texto",
-   ".cuidados article", ".ig__grid a", ".contacto__inner"].forEach(function (sel) {
+  [".titulo", ".espiritu p", ".linea-link", ".estilo", ".banner__contenido",
+   ".duo__texto", ".duo__img", ".sello", ".calidad > p"].forEach(function (sel) {
     document.querySelectorAll(sel).forEach(function (el) { el.classList.add("reveal"); });
   });
+
+  if (cont) pintar("todos");
   observarReveals();
 
   /* ---------- año del footer ---------- */

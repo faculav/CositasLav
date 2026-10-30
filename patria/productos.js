@@ -1,5 +1,5 @@
 /* =========================================================
-   PATRIA — datos editables
+   TIRRA — datos editables
    Este es el ÚNICO archivo que necesitás tocar para cambiar
    el contenido de la tienda: teléfono, productos y precios.
    ========================================================= */
@@ -7,47 +7,47 @@
 const CONFIG = {
   // TODO: poné el número real de WhatsApp (formato internacional, sin + ni espacios)
   whatsapp: "59899000000",
-  instagram: "somospatria.uy",
+  // Instagram y email de Tirra (se usan en toda la página)
+  instagram: "tirra.uy",
+  // TODO: email real de Tirra
   email: "hola@patria.uy",
   // Mensaje que se autocompleta al tocar un producto
-  mensajeBase: "¡Hola PATRIA! Me interesa "
+  mensajeBase: "¡Hola TIRRA! Me interesa "
 };
 
 /* ---------------------------------------------------------
-   PRODUCTOS  (todos los datos de abajo son DE EJEMPLO)
+   PRODUCTOS  (nombres y fotos sacados del Figma de Tirra)
 
    id        : identificador corto, sin espacios
    nombre    : cómo se llama la pieza
-   cat       : llaveros | brazaletes | collares | cintos | monederos | sobres
+   cat       : chalecos | collares | brazaletes | pulseras
    desc      : una línea corta (material, color, detalle)
-   precio    : número en pesos uruguayos (sin puntos)
+   precio    : número en pesos uruguayos (sin puntos),
+               o null para mostrar "Consultar precio"
    antes     : precio tachado, o null si no está en oferta
    tag       : "Nuevo" | "Oferta" | "Agotado" | null
-   img       : foto principal   -> images/<archivo>
-   img2      : foto secundaria (aparece al pasar el mouse), o null
+   img       : foto del producto SOLO, en fondo blanco -> images/<archivo>
+   img2      : foto de ambiente / puesto (aparece al pasar el mouse), o null
+               Si todavía no existe la foto en fondo blanco, se muestra
+               img2 directamente (sin efecto al pasar el mouse).
    --------------------------------------------------------- */
 
+// TODO: faltan los precios reales (hoy todos dicen "Consultar precio")
 const PRODUCTOS = [
-  { id:"lla-01", nombre:"Llavero Campo",       cat:"llaveros",   desc:"Cuero natural, herraje bronce",        precio:390,  antes:null, tag:"Nuevo",   img:"images/prod-lla-01.jpg", img2:"images/prod-lla-01b.jpg" },
-  { id:"lla-02", nombre:"Llavero Nudo",        cat:"llaveros",   desc:"Trenzado a mano, tabaco",              precio:450,  antes:null, tag:null,      img:"images/prod-lla-02.jpg", img2:null },
-  { id:"lla-03", nombre:"Llavero Mosquetón",   cat:"llaveros",   desc:"Cuero negro, acero inoxidable",        precio:520,  antes:640,  tag:"Oferta",  img:"images/prod-lla-03.jpg", img2:null },
+  { id:"pec-cria",    nombre:"Pechera Cría",       cat:"chalecos",   desc:"Gamuza marrón, cordones y bolsillo cebra con tachas", precio:1990, antes:null, tag:"Nuevo", img:"images/prod-pec-cria.jpg", img2:"images/prod-pec-cria-b.jpg" },
+  { id:"cha-cruz",    nombre:"Chaleco Cruz",       cat:"chalecos",   desc:"Gamuza suela, tachas en hombros y frente, cordones cruzados", precio:1990, antes:null, tag:"Nuevo", img:"images/prod-cha-cruz.jpg", img2:"images/prod-cha-cruz-b.jpg" },
 
-  { id:"bra-01", nombre:"Brazalete Trenza",    cat:"brazaletes", desc:"Trenzado triple, cierre imán",         precio:890,  antes:null, tag:"Nuevo",   img:"images/prod-bra-01.jpg", img2:"images/prod-bra-01b.jpg" },
-  { id:"bra-02", nombre:"Brazalete Llanura",   cat:"brazaletes", desc:"Banda ancha, curtido natural",         precio:1150, antes:null, tag:null,      img:"images/prod-bra-02.jpg", img2:null },
-  { id:"bra-03", nombre:"Brazalete Doble",     cat:"brazaletes", desc:"Dos vueltas, caramelo",                precio:980,  antes:null, tag:null,      img:"images/prod-bra-03.jpg", img2:null },
+  { id:"col-tierra",  nombre:"Collar Tierra",      cat:"collares",   desc:"Cuero vacuno + piedra natural",       precio:null, antes:null, tag:"Nuevo", img:"images/prod-col-tierra-blanco.jpg", img2:"images/prod-col-tierra.jpg" },
+  { id:"col-pampa",   nombre:"Collar Pampa",       cat:"collares",   desc:"Cuero vacuno + dije de nácar",        precio:null, antes:null, tag:"Nuevo", img:"images/prod-col-pampa-blanco.jpg",  img2:"images/prod-col-pampa.jpg" },
+  { id:"col-ocre",    nombre:"Collar Ocre",        cat:"collares",   desc:"Cuero vacuno + piedra natural",       precio:null, antes:null, tag:null,    img:"images/prod-col-ocre-blanco.jpg",   img2:"images/prod-col-ocre.jpg" },
+  { id:"col-greda",   nombre:"Collar Greda",       cat:"collares",   desc:"Cuero vacuno + piedra natural",       precio:null, antes:null, tag:null,    img:"images/prod-col-greda-blanco.jpg",  img2:"images/prod-col-greda.jpg" },
 
-  { id:"col-01", nombre:"Collar Sur",          cat:"collares",   desc:"Cordón fino con dije de bronce",       precio:1290, antes:null, tag:null,      img:"images/prod-col-01.jpg", img2:"images/prod-col-01b.jpg" },
-  { id:"col-02", nombre:"Collar Raíz",         cat:"collares",   desc:"Cuero negro con nudo central",         precio:1090, antes:null, tag:"Nuevo",   img:"images/prod-col-02.jpg", img2:null },
+  { id:"bra-origen",  nombre:"Brazalete Origen",   cat:"brazaletes", desc:"Cuero con pelo blanco y negro",       precio:null, antes:null, tag:null,    img:"images/prod-bra-origen.jpg",  img2:"images/amb-brazaletes.jpg" },
+  { id:"bra-brava",   nombre:"Brazalete Brava",    cat:"brazaletes", desc:"Cuero con pelo estampado cebra",      precio:null, antes:null, tag:null,    img:"images/prod-bra-brava.jpg",   img2:"images/amb-brazaletes.jpg" },
+  { id:"bra-sombra",  nombre:"Brazalete Sombra",   cat:"brazaletes", desc:"Cuero negro grabado croco, tachas",   precio:null, antes:null, tag:null,    img:"images/prod-bra-sombra.jpg",  img2:"images/amb-brazaletes.jpg" },
 
-  { id:"cin-01", nombre:"Cinto Estancia",      cat:"cintos",     desc:"4 cm, hebilla de bronce macizo",       precio:2450, antes:null, tag:null,      img:"images/prod-cin-01.jpg", img2:"images/prod-cin-01b.jpg" },
-  { id:"cin-02", nombre:"Cinto Clásico",       cat:"cintos",     desc:"3,5 cm, negro, costura a mano",        precio:2290, antes:2690, tag:"Oferta",  img:"images/prod-cin-02.jpg", img2:null },
-  { id:"cin-03", nombre:"Cinto Tabaco",        cat:"cintos",     desc:"3 cm, hebilla níquel mate",            precio:2190, antes:null, tag:null,      img:"images/prod-cin-03.jpg", img2:null },
-
-  { id:"mon-01", nombre:"Monedero Ronda",      cat:"monederos",  desc:"Cierre metálico, forro interior",      precio:1490, antes:null, tag:"Nuevo",   img:"images/prod-mon-01.jpg", img2:"images/prod-mon-01b.jpg" },
-  { id:"mon-02", nombre:"Monedero Broche",     cat:"monederos",  desc:"Cuero crema, broche a presión",        precio:1350, antes:null, tag:null,      img:"images/prod-mon-02.jpg", img2:null },
-  { id:"mon-03", nombre:"Monedero Tarjetero",  cat:"monederos",  desc:"Cuatro divisiones, negro",             precio:1590, antes:null, tag:"Agotado", img:"images/prod-mon-03.jpg", img2:null },
-
-  { id:"sob-01", nombre:"Sobre Cordillera",    cat:"sobres",     desc:"Tamaño A5, solapa con tiento",         precio:3290, antes:null, tag:null,      img:"images/prod-sob-01.jpg", img2:"images/prod-sob-01b.jpg" },
-  { id:"sob-02", nombre:"Sobre Noche",         cat:"sobres",     desc:"Negro mate, interior de gamuza",       precio:3690, antes:null, tag:"Nuevo",   img:"images/prod-sob-02.jpg", img2:null },
-  { id:"sob-03", nombre:"Sobre Notebook 13\"", cat:"sobres",     desc:"Acolchado, cierre magnético",          precio:4490, antes:null, tag:null,      img:"images/prod-sob-03.jpg", img2:null }
+  { id:"pul-tierra",  nombre:"Pulsera Tierra",     cat:"pulseras",   desc:"Cuero marrón, tachas de bronce",      precio:null, antes:null, tag:null,    img:"images/prod-pul-tierra.jpg",  img2:"images/amb-pulseras.jpg" },
+  { id:"pul-raices",  nombre:"Pulsera Raíces",     cat:"pulseras",   desc:"Cuero con pelo, cierre a presión",    precio:null, antes:null, tag:null,    img:"images/prod-pul-raices.jpg",  img2:"images/amb-pulseras.jpg" },
+  // TODO: falta la foto de la Pulsera Savia (images/prod-pul-savia.jpg)
+  { id:"pul-savia",   nombre:"Pulsera Savia",      cat:"pulseras",   desc:"Cuero genuino",                       precio:null, antes:null, tag:null,    img:"images/prod-pul-savia.jpg",   img2:"images/amb-pulseras.jpg" }
 ];
