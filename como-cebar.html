@@ -127,6 +127,10 @@
       pointer-events: auto;
       transition-delay: 120ms;
     }
+    /* celular: si el texto cambia de arriba a abajo (o al revés), aparece recién cuando la escena ya se corrió */
+    @media (max-width: 760px) {
+      body.pos-swap .step-copy.active { transition-delay: 520ms; }
+    }
     .eyebrow {
       font-size: 12px; letter-spacing: .16em; text-transform: uppercase;
       color: var(--muted);
@@ -322,6 +326,7 @@
       if (i === current) return;
       const from = current;
       current = i;
+      document.body.classList.toggle('pos-swap', from >= 0 && !!copies[from] && copies[from].dataset.pos !== copies[i].dataset.pos);
       copies.forEach((c, k) => {
         c.classList.toggle('active', k === i);
         c.classList.toggle('before', k > i);
@@ -877,7 +882,7 @@
     if (step !== 3) { to('vaso', 0, 0.6); to('vasoWater', 1, 0.01, 0.7); }   // se rellena ya fuera de cuadro
     if (step !== 1) { to('yerbera', 0, 0.6); to('spout', 0, 0.3); }
     if (step < 5) to('foam', 0, 0.4);
-    to('vy', POS[step] ?? 1, 0.9);
+    to('vy', POS[step] ?? 1, 0.6);
     switch (step) {
       case 0:
         to('fill', 1); to('slope', 0.6); to('wet', 1); to('bomb', 1, 0.9, 0.2); to('termo', 0, 0.6);
