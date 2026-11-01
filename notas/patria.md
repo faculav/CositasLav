@@ -7,10 +7,23 @@ La marca se llamaba PATRIA y ahora es **TIRRA** (la carpeta sigue siendo `patria
 Landing / catálogo de TIRRA: llaveros, brazaletes, collares, cintos, monederos y
 sobres de cuero genuino hechos a mano en Uruguay. Las ventas se cierran por WhatsApp.
 
+## Rediseño "Tirra es tierra" (nov 2026)
+Minimalista/editorial: fondo hueso #efe9df, tinta #171412, cuero #7a4a2a; Instrument Serif + Inter.
+Pantalla de carga con contador, cursor propio, grano de película, header que se esconde al bajar,
+menú a pantalla completa (círculo que se expande), hero con video que se achica/redondea al bajar y
+título letra por letra, manifiesto que se ilumina palabra por palabra, cinta infinita que acelera con el
+scroll, brazalete 3D (three.js r128, `pieza3d.js` + texturas embebidas en `texturas.js`) con Origen/Brava/
+Sombra, categorías con scroll horizontal fijado (en celu: deslizar), tarjetas de producto con inclinación 3D,
+parallax en "Nuestro cuero", cifras con contador, acordeón de cuidados, "Hablemos" con botones imán, footer
+con TIRRA gigante. Librerías por CDN: GSAP 3.12.5 + ScrollTrigger (cdnjs), three.js r128 (cdnjs).
+Todo funciona abriendo el archivo directo (sin módulos ES ni fetch de texturas). Si una librería no carga,
+la página queda usable sin animaciones.
+
 ## Archivos
 - `patria/index.html` — estructura de la página (barra de anuncios, hero, categorías, productos, Instagram, footer).
 - `patria/styles.css` — estilos (tonos cuero, tipografía Inter).
-- `patria/script.js` — render del catálogo, filtros y links a WhatsApp.
+- `patria/script.js` — catálogo, filtros, WhatsApp/IG/email, menú, cursor, animaciones GSAP.
+- `patria/pieza3d.js` + `patria/texturas.js` — brazalete 3D.
 - `patria/productos.js` — **único archivo a tocar para contenido**: `CONFIG` (WhatsApp, Instagram, email) y la lista `PRODUCTOS`.
 - `patria/images/LEEME.txt` — lista exacta de nombres de foto que espera la web.
 
