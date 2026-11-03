@@ -8,7 +8,7 @@ Landing / catálogo de TIRRA: llaveros, brazaletes, collares, cintos, monederos 
 sobres de cuero genuino hechos a mano en Uruguay. Las ventas se cierran por WhatsApp.
 
 ## Rediseño "Tirra es tierra" (nov 2026)
-Minimalista/editorial: fondo hueso #efe9df, tinta #171412, cuero #7a4a2a; Instrument Serif + Inter.
+Minimalista/editorial: fondo hueso #efe9df, tinta #171412, cuero #7a4a2a. Tipografía SOLO Inter 400 y 700 (pedido del usuario), títulos con interlineado negativo (.84–.9) y tracking -0.05em. Celular: versión minimalista (sin grano, cinta, cifras, etiquetas ni TIRRA gigante; botones en píldora).
 Pantalla de carga con contador, cursor propio, grano de película, header que se esconde al bajar,
 menú a pantalla completa (círculo que se expande), hero con video que se achica/redondea al bajar y
 título letra por letra, manifiesto que se ilumina palabra por palabra, cinta infinita que acelera con el
@@ -33,7 +33,7 @@ la página queda usable sin animaciones.
   hero 650px (400px en celu) con título centrado, "Espíritu Tirra", "Nuestro estilo" (categorías), "Esenciales Tirra"
   (productos, 8 + "Ver más"), banner "Pedidos a medida", "Nuestro cuero", "Cuidado del cuero", "Calidad Tirra" (sellos),
   "Más Tirra", footer gris oscuro. Tipografía Raleway, botones de línea finos.
-- Portada = video `images/hero.mp4` + `hero.webm` (28 s, 1920x1080, loop, mudo), armado con ffmpeg desde 6 fotos 4K de Pexels (serie de M.Emin BİLİR, IDs en `images/LEEME.txt`) con zoom/paneo lento, fundidos, grano y viñeta. Poster `hero.jpg`. La búsqueda de pexels.com bloquea robots, pero images.pexels.com/photos/<id>/pexels-photo-<id>.jpeg descarga directo.
+- Portada = video `images/hero.mp4` (1080p, compu) / `hero-720.mp4` (celu) H.264 con keyframe cada 2 s y faststart; `hero-720.webm` solo si el navegador no tiene H.264. script.js reintenta el play si se pausa o traba. Antes: (28 s, 1920x1080, loop, mudo), armado con ffmpeg desde 6 fotos 4K de Pexels (serie de M.Emin BİLİR, IDs en `images/LEEME.txt`) con zoom/paneo lento, fundidos, grano y viñeta. Poster `hero.jpg`. La búsqueda de pexels.com bloquea robots, pero images.pexels.com/photos/<id>/pexels-photo-<id>.jpeg descarga directo.
 - Instagram, email y WhatsApp salen sólo de `CONFIG` en `productos.js`.
 - Tarjetas de producto como la referencia: `img` = producto en fondo blanco, `img2` = ambiente al pasar el mouse. Si falta `img`, se usa `img2` (data-respaldo en script.js).
 - Título de portada: "100% **cuero** genuino **uruguayo**", interlineado .96.

@@ -70,6 +70,52 @@
     if (a.hasAttribute("data-email-texto")) a.textContent = CONFIG.email;
   });
 
+  /* ---------- video de portada: que arranque y no se quede trabado ---------- */
+  var video = document.getElementById("heroVideo");
+  if (video) {
+    video.muted = true; video.defaultMuted = true; video.setAttribute("muted", "");
+    // mp4 (H.264) primero: lo decodifica el hardware en casi todos lados.
+    // Si el navegador no lo soporta, usa la versión webm.
+    var mp4 = video.canPlayType('video/mp4; codecs="avc1.4D401F"');
+    video.src = !mp4 ? "images/hero-720.webm" : (window.innerWidth < 900 ? video.dataset.chico : video.dataset.grande);
+    video.addEventListener("error", function () {
+      if (video.src.indexOf(".webm") < 0) { video.src = "images/hero-720.webm"; darPlay(); }
+    });
+    var enPantalla = true, intentos = 0;
+    var darPlay = function () {
+      if (!enPantalla || document.hidden) return;
+      var pr = video.play();
+      if (pr && pr.catch) pr.catch(function () {});
+    };
+    video.addEventListener("loadeddata", darPlay);
+    video.addEventListener("canplay", darPlay);
+    // si se pausa solo (ahorro de batería, pestaña de fondo), lo retomamos
+    video.addEventListener("pause", function () { setTimeout(darPlay, 300); });
+    // si se queda esperando datos mucho rato, recargamos desde donde estaba
+    var trabado = null;
+    video.addEventListener("waiting", function () {
+      clearTimeout(trabado);
+      trabado = setTimeout(function () {
+        if (video.readyState < 3 && intentos < 3) {
+          intentos++; var t = video.currentTime; video.load(); video.currentTime = t; darPlay();
+        }
+      }, 4000);
+    });
+    video.addEventListener("playing", function () { clearTimeout(trabado); });
+    document.addEventListener("visibilitychange", darPlay);
+    // algunos celulares solo dejan reproducir después de un toque o scroll
+    ["touchstart", "click", "scroll"].forEach(function (ev) {
+      window.addEventListener(ev, function () { if (video.paused) darPlay(); }, { passive: true });
+    });
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (e) {
+        enPantalla = e[0].isIntersecting;
+        if (enPantalla) darPlay(); else video.pause();
+      }).observe(video);
+    }
+    darPlay();
+  }
+
   /* ---------- año del footer ---------- */
   var anio = document.getElementById("anio");
   if (anio) anio.textContent = new Date().getFullYear();
@@ -302,9 +348,9 @@
   if (carga && !REDUCIR) {
     var n = 0, listo = false;
     window.addEventListener("load", function () { listo = true; });
-    setTimeout(function () { listo = true; }, 3500);   // por si algo tarda demasiado
+    setTimeout(function () { listo = true; }, TACTIL ? 1800 : 3000);   // por si algo tarda demasiado
     (function sube() {
-      n = Math.min(100, n + (listo ? 4 : Math.random() * 2.2));
+      n = Math.min(100, n + (listo ? 5 : Math.random() * (TACTIL ? 4 : 2.2)));
       if (num) num.textContent = Math.floor(n);
       if (n < 100) requestAnimationFrame(sube); else setTimeout(entrar, 150);
     })();
@@ -322,10 +368,12 @@
     return;
   }
 
-  // el video se achica y redondea al bajar
-  G.to("#heroMarco", {
-    clipPath: "inset(6% 4% 6% 4% round 28px)", ease: "none",
-    scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: true }
+  // el video se achica y redondea al bajar (solo compu: en celu queda quieto, más simple)
+  G.matchMedia().add("(min-width: 861px)", function () {
+    G.to("#heroMarco", {
+      scale: 0.9, borderRadius: 28, ease: "none",
+      scrollTrigger: { trigger: "#hero", start: "top top", end: "bottom top", scrub: true }
+    });
   });
   G.to(".hero__contenido", {
     yPercent: -18, opacity: 0, ease: "none",
@@ -372,9 +420,11 @@
   });
 
   // parallax en las fotos de "Nuestro cuero"
-  document.querySelectorAll("[data-parallax]").forEach(function (img) {
-    var v = +img.dataset.parallax;
-    G.fromTo(img, { yPercent: -v }, { yPercent: v, ease: "none", scrollTrigger: { trigger: img.parentElement, start: "top bottom", end: "bottom top", scrub: true } });
+  mm.add("(min-width: 861px)", function () {
+    document.querySelectorAll("[data-parallax]").forEach(function (img) {
+      var v = +img.dataset.parallax;
+      G.fromTo(img, { yPercent: -v }, { yPercent: v, ease: "none", scrollTrigger: { trigger: img.parentElement, start: "top bottom", end: "bottom top", scrub: true } });
+    });
   });
 
   // pieza 3D, cifras, acordeón, contacto: aparición

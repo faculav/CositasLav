@@ -40,7 +40,8 @@ izquierda para no taparle el grabado.
 VIDEO DE INTRO (portada a pantalla completa)
 --------------------------------------------
 hero.mp4              YA CARGADO. Video de caballos (28 s, Full HD, loop, sin sonido).
-hero.webm             YA CARGADO. Misma version en webm, mas liviana.
+hero-720.mp4          YA CARGADO. Version liviana para celular.
+hero-720.webm         YA CARGADO. Respaldo para navegadores sin mp4.
 hero.jpg              YA CARGADO. Cuadro del video, se ve mientras carga.
 Armado con 6 fotos de Pexels (originales de 6000-7000 px) de la serie de
 caballos salvajes de M.Emin BILIR en Kayseri, Turquia. Licencia de Pexels:
