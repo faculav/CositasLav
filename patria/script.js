@@ -157,18 +157,17 @@
     var a = document.createElement("a");
     a.className = "producto";
     a.dataset.cat = p.cat;
-    a.dataset.cursor = "Pedir";
-    a.href = linkWhatsapp(CONFIG.mensajeBase + p.nombre +
-      (p.precio == null ? "" : " (" + precio(p.precio) + ")") + ". ¿Está disponible?");
-    a.target = "_blank";
-    a.rel = "noopener";
+    a.dataset.cursor = "Ver";
+    a.href = "#coleccion";
+    a.setAttribute("aria-label", "Ver " + p.nombre);
+    a.addEventListener("click", function (e) { e.preventDefault(); abrirFicha(p); });
     a.innerHTML =
       '<div class="producto__media">' +
         (p.tag ? '<span class="producto__tag' + (agotado ? " producto__tag--agotado" : "") + '">' + p.tag + "</span>" : "") +
         '<img class="a" src="' + p.img + '" alt="' + p.nombre + '" data-ph="' + p.nombre + '"' +
           (p.img2 ? ' data-respaldo="' + p.img2 + '"' : "") + ' loading="lazy">' +
         (p.img2 ? '<img class="b" src="' + p.img2 + '" alt="" data-ph="' + p.nombre + ' 2" loading="lazy">' : "") +
-        '<span class="producto__consulta">' + (agotado ? "Consultar reposición" : "Consultar por WhatsApp") + "</span>" +
+        '<span class="producto__consulta">' + (agotado ? "Consultar reposición" : "Ver pieza") + "</span>" +
       "</div>" +
       '<div class="producto__info">' +
         '<h3 class="producto__nombre">' + p.nombre + "</h3>" +
@@ -238,6 +237,171 @@
   });
   if (cont) pintar("todos");
 
+  /* ---------- ficha de producto: fotos en grande + añadir al carrito ---------- */
+  var ficha = document.getElementById("ficha");
+  var fichaImg = document.getElementById("fichaImg");
+  var fichaMinis = document.getElementById("fichaMinis");
+  var fichaCant = document.getElementById("fichaCant");
+  var actual = null, fotosActuales = [], fotoIdx = 0, cantidad = 1;
+  var NOMBRE_CAT = { chalecos: "Chalecos", collares: "Collares", brazaletes: "Brazaletes", pulseras: "Pulseras" };
+
+  function fotosDe(p) {
+    return [p.img, p.img2].concat(p.fotos || []).filter(Boolean)
+      .filter(function (f, i, arr) { return arr.indexOf(f) === i; });
+  }
+  function mostrarFoto(i) {
+    fotoIdx = (i + fotosActuales.length) % fotosActuales.length;
+    fichaImg.src = fotosActuales[fotoIdx];
+    fichaImg.alt = actual.nombre;
+    fichaMinis.querySelectorAll("button").forEach(function (b, k) { b.classList.toggle("is-activa", k === fotoIdx); });
+  }
+  function abrirFicha(p) {
+    actual = p; cantidad = 1; fichaCant.textContent = "1";
+    fotosActuales = fotosDe(p);
+    document.getElementById("fichaNombre").textContent = p.nombre;
+    document.getElementById("fichaCat").textContent = NOMBRE_CAT[p.cat] || "";
+    document.getElementById("fichaPrecio").textContent = precio(p.precio);
+    document.getElementById("fichaDesc").textContent = p.desc;
+    document.getElementById("fichaConsulta").href = linkWhatsapp(CONFIG.mensajeBase + p.nombre +
+      (p.precio == null ? "" : " (" + precio(p.precio) + ")") + ". ¿Está disponible?");
+    fichaMinis.innerHTML = "";
+    fotosActuales.forEach(function (f, k) {
+      var b = document.createElement("button");
+      b.innerHTML = '<img src="' + f + '" alt="">';
+      b.setAttribute("aria-label", "Foto " + (k + 1));
+      b.addEventListener("click", function () { mostrarFoto(k); });
+      fichaMinis.appendChild(b);
+    });
+    fichaMinis.hidden = fotosActuales.length < 2;
+    fichaImg.onerror = function () { if (fotosActuales.length > 1) { fotosActuales.splice(fotoIdx, 1); fichaMinis.children[fotoIdx] && fichaMinis.children[fotoIdx].remove(); mostrarFoto(0); } };
+    mostrarFoto(0);
+    ficha.hidden = false;
+    requestAnimationFrame(function () { ficha.classList.add("is-abierta"); });
+    document.body.classList.add("con-modal");
+  }
+  function cerrarFicha() {
+    ficha.classList.remove("is-abierta");
+    document.body.classList.remove("con-modal");
+    setTimeout(function () { ficha.hidden = true; }, 450);
+  }
+  if (ficha) {
+    ficha.addEventListener("click", function (e) { if (e.target.closest("[data-cerrar]")) cerrarFicha(); });
+    document.getElementById("fichaMenos").addEventListener("click", function () { cantidad = Math.max(1, cantidad - 1); fichaCant.textContent = cantidad; });
+    document.getElementById("fichaMas").addEventListener("click", function () { cantidad = Math.min(20, cantidad + 1); fichaCant.textContent = cantidad; });
+    document.getElementById("fichaAgregar").addEventListener("click", function () {
+      agregar(actual.id, cantidad);
+      cerrarFicha();
+      avisar(actual.nombre + " se sumó al carrito");
+    });
+    document.getElementById("fichaFoto").addEventListener("click", function () { abrirVisor(fotoIdx); });
+  }
+
+  /* ---------- visor de fotos a pantalla completa ---------- */
+  var visor = document.getElementById("visor"), visorImg = document.getElementById("visorImg");
+  function abrirVisor(i) {
+    mostrarFoto(i); visorImg.src = fotosActuales[fotoIdx]; visorImg.alt = actual.nombre;
+    visor.hidden = false; requestAnimationFrame(function () { visor.classList.add("is-abierto"); });
+  }
+  function moverVisor(d) { mostrarFoto(fotoIdx + d); visorImg.src = fotosActuales[fotoIdx]; }
+  function cerrarVisor() { visor.classList.remove("is-abierto"); setTimeout(function () { visor.hidden = true; }, 300); }
+  if (visor) {
+    document.getElementById("visorCerrar").addEventListener("click", cerrarVisor);
+    document.getElementById("visorPrev").addEventListener("click", function () { moverVisor(-1); });
+    document.getElementById("visorNext").addEventListener("click", function () { moverVisor(1); });
+    visor.addEventListener("click", function (e) { if (e.target === visor) cerrarVisor(); });
+    var toqueX = null;   // deslizar con el dedo
+    visor.addEventListener("touchstart", function (e) { toqueX = e.touches[0].clientX; }, { passive: true });
+    visor.addEventListener("touchend", function (e) {
+      if (toqueX == null) return; var dx = e.changedTouches[0].clientX - toqueX; toqueX = null;
+      if (Math.abs(dx) > 40) moverVisor(dx < 0 ? 1 : -1);
+    });
+  }
+
+  /* ---------- carrito (se guarda en este navegador) ---------- */
+  var CLAVE = "tirra-carrito";
+  var carrito = [];
+  try { carrito = JSON.parse(localStorage.getItem(CLAVE)) || []; } catch (e) { carrito = []; }
+  carrito = carrito.filter(function (it) { return PRODUCTOS.some(function (p) { return p.id === it.id; }); });
+  function guardar() { try { localStorage.setItem(CLAVE, JSON.stringify(carrito)); } catch (e) {} }
+  function producto(id) { return PRODUCTOS.filter(function (p) { return p.id === id; })[0]; }
+  function agregar(id, n) {
+    var it = carrito.filter(function (x) { return x.id === id; })[0];
+    if (it) it.cant = Math.min(20, it.cant + n); else carrito.push({ id: id, cant: n });
+    guardar(); pintarCarrito(true);
+  }
+  function cambiar(id, d) {
+    carrito = carrito.map(function (x) { if (x.id === id) x.cant += d; return x; }).filter(function (x) { return x.cant > 0; });
+    guardar(); pintarCarrito();
+  }
+  function pintarCarrito(salto) {
+    var lista = document.getElementById("carritoLista");
+    var unidades = 0, total = 0, sinPrecio = 0, lineas = [];
+    lista.innerHTML = "";
+    if (!carrito.length) lista.innerHTML = '<p class="carrito__vacio">Todavía no sumaste piezas.<br>Tocá una pieza de la colección para agregarla.</p>';
+    carrito.forEach(function (it) {
+      var p = producto(it.id); if (!p) return;
+      unidades += it.cant;
+      if (p.precio == null) sinPrecio++; else total += p.precio * it.cant;
+      lineas.push("• " + it.cant + " x " + p.nombre + (p.precio == null ? " (precio a consultar)" : " (" + precio(p.precio * it.cant) + ")"));
+      var fila = document.createElement("div");
+      fila.className = "carrito__item";
+      fila.innerHTML =
+        '<img src="' + p.img + '" alt="">' +
+        '<div class="carrito__datos"><strong>' + p.nombre + '</strong><span>' + precio(p.precio) + '</span>' +
+          '<div class="carrito__cant"><button data-d="-1" aria-label="Menos">−</button><span>' + it.cant + '</span><button data-d="1" aria-label="Más">+</button></div></div>' +
+        '<button class="carrito__quitar" aria-label="Quitar">✕</button>';
+      fila.querySelector("img").addEventListener("error", function () { if (p.img2) this.src = p.img2; });
+      fila.querySelectorAll("[data-d]").forEach(function (b) { b.addEventListener("click", function () { cambiar(it.id, +b.dataset.d); }); });
+      fila.querySelector(".carrito__quitar").addEventListener("click", function () { cambiar(it.id, -it.cant); });
+      lista.appendChild(fila);
+    });
+    var num = document.getElementById("carritoNum");
+    num.textContent = unidades; num.classList.toggle("is-vacio", !unidades);
+    document.body.classList.toggle("con-carrito", unidades > 0);
+    if (unidades > 0 && header) header.classList.remove("is-oculto");
+    if (salto && G && !REDUCIR) G.fromTo(num, { scale: 1.8 }, { scale: 1, duration: 0.6, ease: "back.out(3)" });
+    document.getElementById("carritoTotal").textContent = "$ " + total.toLocaleString("es-UY") + (sinPrecio ? " + a consultar" : "");
+    document.getElementById("carritoNota").textContent = sinPrecio ? "Algunas piezas no tienen precio cargado: te lo confirmamos por WhatsApp." : "";
+    var fin = document.getElementById("carritoFinalizar");
+    fin.classList.toggle("is-deshabilitado", !carrito.length);
+    fin.href = linkWhatsapp("¡Hola TIRRA! Quiero hacer este pedido:\n" + lineas.join("\n") +
+      "\nTotal: $ " + total.toLocaleString("es-UY") + (sinPrecio ? " + piezas a consultar" : "") + "\n¿Está disponible?");
+  }
+  var carritoEl = document.getElementById("carrito"), carritoFondo = document.getElementById("carritoFondo");
+  function abrirCarrito(si) {
+    carritoEl.classList.toggle("is-abierto", si); carritoFondo.classList.toggle("is-abierto", si);
+    if (si && aviso) aviso.classList.remove("is-visible");
+    document.body.classList.toggle("con-modal", si);
+  }
+  if (carritoEl) {
+    document.getElementById("carritoBtn").addEventListener("click", function () { abrirCarrito(true); });
+    document.getElementById("carritoCerrar").addEventListener("click", function () { abrirCarrito(false); });
+    carritoFondo.addEventListener("click", function () { abrirCarrito(false); });
+    document.getElementById("carritoVaciar").addEventListener("click", function () { carrito = []; guardar(); pintarCarrito(); });
+    document.getElementById("carritoFinalizar").addEventListener("click", function (e) { if (!carrito.length) e.preventDefault(); });
+    pintarCarrito();
+  }
+
+  /* ---------- aviso flotante ---------- */
+  var aviso = document.getElementById("aviso"), avisoT = null;
+  function avisar(txt) {
+    aviso.innerHTML = '<span>' + txt + '</span><button type="button">Ver carrito</button>';
+    aviso.querySelector("button").onclick = function () { aviso.classList.remove("is-visible"); abrirCarrito(true); };
+    aviso.classList.add("is-visible");
+    clearTimeout(avisoT); avisoT = setTimeout(function () { aviso.classList.remove("is-visible"); }, 3600);
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape") return;
+    if (visor && !visor.hidden) cerrarVisor();
+    else if (ficha && !ficha.hidden) cerrarFicha();
+    else if (carritoEl && carritoEl.classList.contains("is-abierto")) abrirCarrito(false);
+  });
+  document.addEventListener("keydown", function (e) {
+    if (!visor || visor.hidden) return;
+    if (e.key === "ArrowRight") moverVisor(1); if (e.key === "ArrowLeft") moverVisor(-1);
+  });
+
   /* ---------- menú a pantalla completa ---------- */
   var burger = document.getElementById("burger");
   var menu = document.getElementById("menuMovil");
@@ -261,7 +425,9 @@
   function revisarHeader() {
     var y = window.scrollY;
     header.classList.toggle("is-scroll", y > window.innerHeight * 0.85);
-    header.classList.toggle("is-oculto", y > ultimoY && y > window.innerHeight && !document.body.classList.contains("menu-abierto"));
+    // con piezas en el carrito el header no se esconde, así el carrito queda siempre a mano
+    header.classList.toggle("is-oculto", y > ultimoY && y > window.innerHeight &&
+      !document.body.classList.contains("menu-abierto") && !document.body.classList.contains("con-carrito"));
     ultimoY = y;
   }
   window.addEventListener("scroll", revisarHeader, { passive: true });

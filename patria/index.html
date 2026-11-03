@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=21">
+<link rel="stylesheet" href="styles.css?v=22">
 </head>
 <body>
 
@@ -37,6 +37,10 @@
   </a>
   <div class="header__der">
     <a class="header__link" href="#coleccion" data-cursor="Ver">Colección</a>
+    <button class="carrito-btn" id="carritoBtn" aria-label="Abrir carrito" data-cursor="Carrito">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 8h14l-1.2 11.2a1 1 0 01-1 .8H7.2a1 1 0 01-1-.8L5 8z"/><path d="M9 8V6.5a3 3 0 016 0V8"/></svg>
+      <span class="carrito-btn__num" id="carritoNum">0</span>
+    </button>
     <button class="burger" aria-label="Abrir menú" aria-expanded="false" id="burger">
       <span class="burger__txt">Menú</span>
       <span class="burger__lineas"><i></i><i></i></span>
@@ -87,12 +91,13 @@
   <p class="manifiesto__txt" data-palabras>Elegimos cuero vacuno uruguayo de curtido natural. Cada pieza se corta, se bisela, se cose y se sella a mano. Por eso ninguna sale igual a la otra, y por eso dura.</p>
 </section>
 
-<!-- ============ CINTA ============ -->
+<!-- ============ CINTA DE TEXTURAS DE CUERO ============
+     Se mueve hacia la izquierda y acelera con la velocidad del scroll. -->
 <div class="cinta" aria-hidden="true">
   <div class="cinta__pista" id="cinta">
-    <span>Hecho a mano</span><i>✦</i><span>Cuero genuino</span><i>✦</i><span>Uruguay</span><i>✦</i>
-    <span>Hecho a mano</span><i>✦</i><span>Cuero genuino</span><i>✦</i><span>Uruguay</span><i>✦</i>
-    <span>Hecho a mano</span><i>✦</i><span>Cuero genuino</span><i>✦</i><span>Uruguay</span><i>✦</i>
+    <img src="images/cinta-croco.jpg" alt="" loading="lazy"><img src="images/cinta-cebra.jpg" alt="" loading="lazy"><img src="images/cinta-gamuza.jpg" alt="" loading="lazy"><img src="images/cinta-tachas.jpg" alt="" loading="lazy"><img src="images/cinta-pelo.jpg" alt="" loading="lazy"><img src="images/cinta-cruces.jpg" alt="" loading="lazy"><img src="images/cinta-suela.jpg" alt="" loading="lazy"><img src="images/cinta-bolsillo.jpg" alt="" loading="lazy">
+    <img src="images/cinta-croco.jpg" alt="" loading="lazy"><img src="images/cinta-cebra.jpg" alt="" loading="lazy"><img src="images/cinta-gamuza.jpg" alt="" loading="lazy"><img src="images/cinta-tachas.jpg" alt="" loading="lazy"><img src="images/cinta-pelo.jpg" alt="" loading="lazy"><img src="images/cinta-cruces.jpg" alt="" loading="lazy"><img src="images/cinta-suela.jpg" alt="" loading="lazy"><img src="images/cinta-bolsillo.jpg" alt="" loading="lazy">
+    <img src="images/cinta-croco.jpg" alt="" loading="lazy"><img src="images/cinta-cebra.jpg" alt="" loading="lazy"><img src="images/cinta-gamuza.jpg" alt="" loading="lazy"><img src="images/cinta-tachas.jpg" alt="" loading="lazy"><img src="images/cinta-pelo.jpg" alt="" loading="lazy"><img src="images/cinta-cruces.jpg" alt="" loading="lazy"><img src="images/cinta-suela.jpg" alt="" loading="lazy"><img src="images/cinta-bolsillo.jpg" alt="" loading="lazy">
   </div>
 </div>
 
@@ -166,7 +171,7 @@
   <div class="productos" id="productos"></div>
 
   <div class="centro"><button class="btn btn--linea" id="verMas" data-cursor="Más"><span>Ver más</span></button></div>
-  <p class="nota-precios">Tocá cualquier pieza para consultarla por WhatsApp.</p>
+  <p class="nota-precios">Tocá una pieza para verla en grande y sumarla al carrito.</p>
 </section>
 
 <!-- ============ NUESTRO CUERO ============ -->
@@ -252,6 +257,56 @@
   </div>
 </footer>
 
+<!-- ============ FICHA DE PRODUCTO (foto grande + carrito) ============ -->
+<div class="ficha" id="ficha" role="dialog" aria-modal="true" aria-labelledby="fichaNombre" hidden>
+  <div class="ficha__fondo" data-cerrar></div>
+  <div class="ficha__caja">
+    <button class="ficha__cerrar" data-cerrar aria-label="Cerrar">✕</button>
+    <div class="ficha__galeria">
+      <div class="ficha__foto" id="fichaFoto" data-cursor="Ampliar"><img id="fichaImg" src="" alt=""></div>
+      <div class="ficha__miniaturas" id="fichaMinis"></div>
+    </div>
+    <div class="ficha__info">
+      <p class="ficha__cat" id="fichaCat"></p>
+      <h3 class="ficha__nombre" id="fichaNombre"></h3>
+      <p class="ficha__precio" id="fichaPrecio"></p>
+      <p class="ficha__desc" id="fichaDesc"></p>
+      <div class="ficha__cant">
+        <span>Cantidad</span>
+        <button id="fichaMenos" aria-label="Menos">−</button><span id="fichaCant">1</span><button id="fichaMas" aria-label="Más">+</button>
+      </div>
+      <button class="btn ficha__agregar" id="fichaAgregar"><span>Añadir al carrito</span></button>
+      <a class="ficha__consulta" id="fichaConsulta" href="#" target="_blank" rel="noopener">o consultar por WhatsApp →</a>
+    </div>
+  </div>
+</div>
+
+<!-- foto a pantalla completa -->
+<div class="visor" id="visor" hidden>
+  <button class="visor__cerrar" id="visorCerrar" aria-label="Cerrar">✕</button>
+  <button class="visor__flecha visor__flecha--izq" id="visorPrev" aria-label="Anterior">←</button>
+  <img id="visorImg" src="" alt="">
+  <button class="visor__flecha visor__flecha--der" id="visorNext" aria-label="Siguiente">→</button>
+</div>
+
+<!-- ============ CARRITO ============ -->
+<div class="carrito-fondo" id="carritoFondo"></div>
+<aside class="carrito" id="carrito" aria-label="Carrito">
+  <div class="carrito__cabeza">
+    <h3>Tu pedido</h3>
+    <button id="carritoCerrar" aria-label="Cerrar carrito">✕</button>
+  </div>
+  <div class="carrito__lista" id="carritoLista"></div>
+  <div class="carrito__pie">
+    <div class="carrito__total"><span>Total</span><strong id="carritoTotal">$ 0</strong></div>
+    <p class="carrito__nota" id="carritoNota"></p>
+    <a class="btn carrito__finalizar" id="carritoFinalizar" href="#" target="_blank" rel="noopener"><span>Finalizar por WhatsApp</span></a>
+    <button class="carrito__vaciar" id="carritoVaciar">Vaciar carrito</button>
+  </div>
+</aside>
+
+<div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+
 <!-- ============ WHATSAPP FLOTANTE ============ -->
 <a class="wa" data-whatsapp href="#" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
   <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm5.8 14.13c-.25.69-1.44 1.32-1.98 1.37-.53.05-1.02.24-3.44-.72-2.9-1.14-4.73-4.1-4.87-4.29-.14-.19-1.16-1.54-1.16-2.94 0-1.4.73-2.09.99-2.37.26-.29.57-.36.76-.36l.54.01c.17.01.41-.07.64.49.25.6.83 2.08.9 2.23.07.15.12.32.02.51-.09.19-.14.31-.28.48l-.42.48c-.14.14-.28.29-.12.57.16.29.72 1.18 1.54 1.91 1.06.94 1.95 1.24 2.23 1.38.28.14.44.12.6-.07.17-.19.69-.8.87-1.08.19-.29.37-.24.62-.14.26.09 1.63.77 1.91.91.28.14.47.21.53.32.07.12.07.67-.18 1.36z"/></svg>
@@ -259,10 +314,10 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="productos.js?v=21"></script>
-<script src="script.js?v=21"></script>
+<script src="productos.js?v=22"></script>
+<script src="script.js?v=22"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="texturas.js?v=21"></script>
-<script src="pieza3d.js?v=21"></script>
+<script src="texturas.js?v=22"></script>
+<script src="pieza3d.js?v=22"></script>
 </body>
 </html>

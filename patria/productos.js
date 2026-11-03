@@ -28,14 +28,15 @@ const CONFIG = {
    tag       : "Nuevo" | "Oferta" | "Agotado" | null
    img       : foto del producto SOLO, en fondo blanco -> images/<archivo>
    img2      : foto de ambiente / puesto (aparece al pasar el mouse), o null
+   fotos     : (opcional) más fotos para la ficha en grande, ej. ["images/x-d.jpg"]
                Si todavía no existe la foto en fondo blanco, se muestra
                img2 directamente (sin efecto al pasar el mouse).
    --------------------------------------------------------- */
 
 // TODO: faltan los precios reales (hoy todos dicen "Consultar precio")
 const PRODUCTOS = [
-  { id:"pec-cria",    nombre:"Pechera Cría",       cat:"chalecos",   desc:"Gamuza marrón, cordones y bolsillo cebra con tachas", precio:1990, antes:null, tag:"Nuevo", img:"images/prod-pec-cria.jpg", img2:"images/prod-pec-cria-b.jpg" },
-  { id:"cha-cruz",    nombre:"Chaleco Cruz",       cat:"chalecos",   desc:"Gamuza suela, tachas en hombros y frente, cordones cruzados", precio:1990, antes:null, tag:"Nuevo", img:"images/prod-cha-cruz.jpg", img2:"images/prod-cha-cruz-b.jpg" },
+  { id:"pec-cria",    nombre:"Pechera Cría",       cat:"chalecos",   desc:"Gamuza marrón, cordones y bolsillo cebra con tachas", precio:1990, antes:null, tag:"Nuevo", img:"images/prod-pec-cria.jpg", img2:"images/prod-pec-cria-b.jpg", fotos:["images/prod-pec-cria-d.jpg"] },
+  { id:"cha-cruz",    nombre:"Chaleco Cruz",       cat:"chalecos",   desc:"Gamuza suela, tachas en hombros y frente, cordones cruzados", precio:1990, antes:null, tag:"Nuevo", img:"images/prod-cha-cruz.jpg", img2:"images/prod-cha-cruz-b.jpg", fotos:["images/prod-cha-cruz-d.jpg"] },
 
   { id:"col-tierra",  nombre:"Collar Tierra",      cat:"collares",   desc:"Cuero vacuno + piedra natural",       precio:null, antes:null, tag:"Nuevo", img:"images/prod-col-tierra-blanco.jpg", img2:"images/prod-col-tierra.jpg" },
   { id:"col-pampa",   nombre:"Collar Pampa",       cat:"collares",   desc:"Cuero vacuno + dije de nácar",        precio:null, antes:null, tag:"Nuevo", img:"images/prod-col-pampa-blanco.jpg",  img2:"images/prod-col-pampa.jpg" },
@@ -47,7 +48,5 @@ const PRODUCTOS = [
   { id:"bra-sombra",  nombre:"Brazalete Sombra",   cat:"brazaletes", desc:"Cuero negro grabado croco, tachas",   precio:null, antes:null, tag:null,    img:"images/prod-bra-sombra.jpg",  img2:"images/amb-brazaletes.jpg" },
 
   { id:"pul-tierra",  nombre:"Pulsera Tierra",     cat:"pulseras",   desc:"Cuero marrón, tachas de bronce",      precio:null, antes:null, tag:null,    img:"images/prod-pul-tierra.jpg",  img2:"images/amb-pulseras.jpg" },
-  { id:"pul-raices",  nombre:"Pulsera Raíces",     cat:"pulseras",   desc:"Cuero con pelo, cierre a presión",    precio:null, antes:null, tag:null,    img:"images/prod-pul-raices.jpg",  img2:"images/amb-pulseras.jpg" },
-  // TODO: falta la foto de la Pulsera Savia (images/prod-pul-savia.jpg)
-  { id:"pul-savia",   nombre:"Pulsera Savia",      cat:"pulseras",   desc:"Cuero genuino",                       precio:null, antes:null, tag:null,    img:"images/prod-pul-savia.jpg",   img2:"images/amb-pulseras.jpg" }
+  { id:"pul-raices",  nombre:"Pulsera Raíces",     cat:"pulseras",   desc:"Cuero con pelo, cierre a presión",    precio:null, antes:null, tag:null,    img:"images/prod-pul-raices.jpg",  img2:"images/amb-pulseras.jpg" }
 ];

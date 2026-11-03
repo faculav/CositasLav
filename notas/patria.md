@@ -19,6 +19,17 @@ con TIRRA gigante. Librerías por CDN: GSAP 3.12.5 + ScrollTrigger (cdnjs), thre
 Todo funciona abriendo el archivo directo (sin módulos ES ni fetch de texturas). Si una librería no carga,
 la página queda usable sin animaciones.
 
+## Carrito y ficha (nov 2026)
+- Tocar un producto abre una ficha: foto grande + miniaturas (img, img2 y `fotos` extra), visor a pantalla
+  completa (flechas / deslizar), cantidad, "Añadir al carrito" y "consultar por WhatsApp".
+- Carrito lateral guardado en el navegador (localStorage `tirra-carrito`): suma, resta, quita, total
+  (piezas sin precio = "a consultar") y "Finalizar por WhatsApp" con el pedido armado en el mensaje.
+- Con piezas en el carrito el header no se esconde al bajar.
+- La cinta en movimiento ahora es de fotos de texturas de cuero (`images/cinta-*.jpg`), misma dirección.
+- Pulsera Savia eliminada (pedido del usuario).
+- Pendiente: el usuario va a mandar videos de cada pieza para mejorar el 3D (idea: visor 360° con
+  fotogramas del video, que se gira arrastrando).
+
 ## Archivos
 - `patria/index.html` — estructura de la página (barra de anuncios, hero, categorías, productos, Instagram, footer).
 - `patria/styles.css` — estilos (tonos cuero, tipografía Inter).
