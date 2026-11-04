@@ -25,7 +25,7 @@ la página queda usable sin animaciones.
 - Carrito lateral guardado en el navegador (localStorage `tirra-carrito`): suma, resta, quita, total
   (piezas sin precio = "a consultar") y "Finalizar por WhatsApp" con el pedido armado en el mensaje.
 - Con piezas en el carrito el header no se esconde al bajar.
-- La cinta en movimiento ahora es de fotos de texturas de cuero (`images/cinta-*.jpg`), misma dirección.
+- La cinta en movimiento usa 9 texturas de cuero de Pexels en alta (no fotos de productos; IDs en images/LEEME.txt), con versión -m para celular vía srcset.
 - Pulsera Savia eliminada (pedido del usuario).
 - Pendiente: el usuario va a mandar videos de cada pieza para mejorar el 3D (idea: visor 360° con
   fotogramas del video, que se gira arrastrando).

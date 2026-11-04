@@ -75,3 +75,10 @@ Pechera Cria: prod-pec-cria.jpg (frente) y prod-pec-cria-b.jpg (espalda),
 recortadas de las fotos en la percha. Categoria Chalecos: cat-chalecos.jpg.
 Chaleco Cruz: prod-cha-cruz.jpg (frente) y prod-cha-cruz-b.jpg (espalda).
 Brazaletes y pulseras usan amb-brazaletes.jpg / amb-pulseras.jpg como ambiente.
+
+
+CINTA EN MOVIMIENTO (texturas de cuero, fotos de Pexels, uso libre comercial)
+--------------------------------------------------------------------------
+cinta-01..09.jpg (1200x1600) y cinta-01..09-m.jpg (600x800, celular).
+IDs de Pexels en orden: 30037103, 7598667, 4452515, 35385654, 15269525,
+6045249, 4452511, 6045262, 7598669  (https://www.pexels.com/photo/<id>/)
