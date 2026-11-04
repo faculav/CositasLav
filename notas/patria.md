@@ -30,6 +30,15 @@ la página queda usable sin animaciones.
 - Pendiente: el usuario va a mandar videos de cada pieza para mejorar el 3D (idea: visor 360° con
   fotogramas del video, que se gira arrastrando).
 
+## Versión 2 (`patria/v2.html`, nov 2026)
+- La v1 (index.html: minimalista, Inter, 3D) quedó guardada en la rama `tirra-v1`.
+- v2 = estética de tienda editorial inspirada en criacruz.com (Lora serif, camel #a88563, texto #45322e,
+  barra de anuncios, logo centrado, nav en mayúsculas, slider de fotos, bloques camel, grillas 3:4,
+  beneficios, lookbook B/N, Instagram, footer marrón). SOLO la estética: fotos y textos son de Tirra
+  (no se copió contenido de Cría Cruz).
+- Archivos propios: v2.html, v2.css, v2.js e images/v2-*.jpg (fotos de Pexels, serie M.Emin BİLİR).
+  Comparte productos.js e imágenes con la v1 y el mismo carrito guardado (`tirra-carrito`).
+
 ## Archivos
 - `patria/index.html` — estructura de la página (barra de anuncios, hero, categorías, productos, Instagram, footer).
 - `patria/styles.css` — estilos (tonos cuero, tipografía Inter).

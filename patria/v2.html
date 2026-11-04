@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es-UY">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TIRRA — Tienda de cuero hecho a mano en Uruguay</title>
+<meta name="description" content="TIRRA. Chalecos, collares, brazaletes y pulseras de cuero genuino, hechos a mano en Uruguay.">
+<meta property="og:title" content="TIRRA — Cuero genuino hecho a mano en Uruguay">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/v2-slide-1.jpg">
+<meta name="theme-color" content="#a88563">
+<link rel="icon" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="v2.css?v=1">
+</head>
+<body>
+
+<!-- =========================================================
+     TIRRA v2 — estética de tienda editorial (camel + serif).
+     Versión 1 (minimalista) en index.html.
+     ========================================================= -->
+
+<!-- ============ BARRA DE ANUNCIOS ============ -->
+<div class="anuncio">
+  <div class="anuncio__pista">
+    <span>Envíos a todo Uruguay</span><i>·</i><span>Pedidos por WhatsApp</span><i>·</i><span>Hecho a mano en Montevideo</span><i>·</i>
+    <span>Envíos a todo Uruguay</span><i>·</i><span>Pedidos por WhatsApp</span><i>·</i><span>Hecho a mano en Montevideo</span><i>·</i>
+  </div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="header">
+  <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+
+  <nav class="nav nav--izq">
+    <a href="#top">Inicio</a>
+    <div class="nav__grupo">
+      <a href="#tienda">Productos <small>▾</small></a>
+      <div class="nav__sub">
+        <a href="#tienda" data-ir="chalecos">Chalecos</a>
+        <a href="#tienda" data-ir="collares">Collares</a>
+        <a href="#tienda" data-ir="brazaletes">Brazaletes</a>
+        <a href="#tienda" data-ir="pulseras">Pulseras</a>
+      </div>
+    </div>
+    <div class="nav__grupo">
+      <a href="#hacemos">Información <small>▾</small></a>
+      <div class="nav__sub">
+        <a href="#hacemos">Qué hacemos</a>
+        <a href="#cuidados">Cuidado del cuero</a>
+        <a href="#beneficios">Envíos y pagos</a>
+      </div>
+    </div>
+  </nav>
+
+  <a class="logo" href="#top" aria-label="TIRRA — inicio"><img src="images/logo.png" alt="TIRRA"></a>
+
+  <nav class="nav nav--der">
+    <a href="#lookbook">Lookbook</a>
+    <a href="#contacto">Contacto</a>
+    <button class="carrito-btn" id="carritoBtn" aria-label="Abrir carrito">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 8h14l-1.2 11.2a1 1 0 01-1 .8H7.2a1 1 0 01-1-.8L5 8z"/><path d="M9 8V6.5a3 3 0 016 0V8"/></svg>
+      <span id="carritoNum">0</span>
+    </button>
+  </nav>
+</header>
+
+<!-- menú celular -->
+<nav class="menu" id="menuMovil" aria-label="Menú">
+  <a href="#top">Inicio</a>
+  <a href="#tienda">Productos</a>
+  <a href="#lookbook">Lookbook</a>
+  <a href="#hacemos">Qué hacemos</a>
+  <a href="#cuidados">Cuidado del cuero</a>
+  <a href="#contacto">Contacto</a>
+  <a data-ig href="#" target="_blank" rel="noopener">Instagram</a>
+</nav>
+
+<main id="top">
+
+<!-- ============ PORTADA: fotos que pasan ============ -->
+<section class="slider" id="slider" aria-roledescription="carrusel">
+  <div class="slide is-activa">
+    <img src="images/v2-slide-1.jpg" alt="Manada de caballos al atardecer">
+    <div class="slide__txt"><p>Colección 2026</p><h1>Cuero de nuestra tierra</h1><a class="boton boton--claro" href="#tienda">Ver productos</a></div>
+  </div>
+  <div class="slide">
+    <img src="images/v2-slide-2.jpg" alt="Jinete arreando caballos, en blanco y negro">
+    <div class="slide__txt"><p>Hecho a mano</p><h2>Pieza por pieza, sin moldes industriales</h2><a class="boton boton--claro" href="#hacemos">Conocé el taller</a></div>
+  </div>
+  <div class="slide">
+    <img src="images/v2-slide-3.jpg" alt="Caballos en el agua con montañas de fondo">
+    <div class="slide__txt"><p>Chalecos</p><h2>Gamuza, tachas y cordones cruzados</h2><a class="boton boton--claro" href="#tienda" data-ir="chalecos">Ver chalecos</a></div>
+  </div>
+  <button class="slider__flecha slider__flecha--izq" id="slidePrev" aria-label="Anterior">‹</button>
+  <button class="slider__flecha slider__flecha--der" id="slideNext" aria-label="Siguiente">›</button>
+  <div class="slider__puntos" id="slidePuntos"></div>
+</section>
+
+<!-- ============ DESTACADOS ============ -->
+<section class="bloque" id="destacados">
+  <h2 class="bloque__titulo">Productos destacados</h2>
+  <div class="grilla" id="destacadosGrilla"></div>
+</section>
+
+<!-- ============ QUÉ HACEMOS (bloque camel) ============ -->
+<section class="camel" id="hacemos">
+  <h2>Qué hacemos</h2>
+  <p>Tirra es una marca uruguaya de piezas de cuero hechas a mano. Elegimos cuero vacuno de curtido natural, gamuzas y cueros con pelo, y los trabajamos en nuestro taller de Montevideo: cada pieza se corta, se bisela, se cose y se sella a mano.</p>
+  <p>Diseñamos chalecos, collares, brazaletes y pulseras de líneas simples, pensados para acompañar el día a día y para durar. Ninguna pieza sale exactamente igual a la otra: el cuero se marca con el uso y cuenta su propia historia.</p>
+</section>
+
+<!-- ============ LOOKBOOK ============ -->
+<section class="lookbook" id="lookbook">
+  <div class="look look--grande"><img src="images/v2-look-1.jpg" alt="Caballos corriendo entre el polvo" loading="lazy"></div>
+  <div class="look look--texto">
+    <p class="look__eti">Lookbook</p>
+    <h2>Del campo a la ciudad</h2>
+    <p>Piezas nobles que acompañan el paso del tiempo. Fotos de nuestra colección y de la tierra que nos inspira.</p>
+    <a class="boton" href="#tienda">Comprar la colección</a>
+  </div>
+  <div class="look"><img src="images/v2-look-2.jpg" alt="Manada de caballos en blanco y negro" loading="lazy"></div>
+  <div class="look"><img src="images/v2-look-4.jpg" alt="Caballo con la marca Tirra, en blanco y negro" loading="lazy"></div>
+  <div class="look look--ancho"><img src="images/v2-look-3.jpg" alt="Manada al atardecer con polvo" loading="lazy"></div>
+</section>
+
+<!-- ============ TODOS LOS PRODUCTOS ============ -->
+<section class="bloque" id="tienda">
+  <h2 class="bloque__titulo">Todos los productos</h2>
+  <div class="filtros" id="filtros">
+    <button class="filtro is-activo" data-filtro="todos">Todos</button>
+    <button class="filtro" data-filtro="chalecos">Chalecos</button>
+    <button class="filtro" data-filtro="collares">Collares</button>
+    <button class="filtro" data-filtro="brazaletes">Brazaletes</button>
+    <button class="filtro" data-filtro="pulseras">Pulseras</button>
+  </div>
+  <div class="grilla" id="productos"></div>
+</section>
+
+<!-- ============ BENEFICIOS ============ -->
+<section class="beneficios" id="beneficios">
+  <div class="beneficio">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 20c2-5 5-7 8-7s6 2 8 7"/><circle cx="12" cy="7" r="3.5"/></svg>
+    <h3>Hecho a mano</h3>
+    <p>Cada pieza se corta y se cose de a una en nuestro taller de Montevideo.</p>
+  </div>
+  <div class="beneficio">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="1.8"/><circle cx="17" cy="17" r="1.8"/></svg>
+    <h3>Envíos a todo Uruguay</h3>
+    <p>Coordinamos el envío o el retiro cuando nos escribís para cerrar el pedido.</p>
+  </div>
+  <div class="beneficio">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M20.5 3.5A11 11 0 003 17.4L2 22l4.7-1.2A11 11 0 0020.5 3.5z"/></svg>
+    <h3>Pedido por WhatsApp</h3>
+    <p>Armá tu carrito y finalizá la compra hablando directamente con nosotros.</p>
+  </div>
+</section>
+
+<!-- ============ CUIDADOS ============ -->
+<section class="cuidados" id="cuidados">
+  <img src="images/cinta-03.jpg" alt="Rollos de cuero" loading="lazy">
+  <div>
+    <h2>Cuidado del cuero</h2>
+    <ul>
+      <li><strong>Lejos del agua.</strong> Si se moja, secalo a temperatura ambiente, nunca con estufa ni secador.</li>
+      <li><strong>Nutrilo.</strong> Cada tres meses, un paño suave con grasa de caballo o cera neutra.</li>
+      <li><strong>Guardalo respirando.</strong> En bolsa de tela, nunca en nylon cerrado.</li>
+      <li><strong>La pátina es tuya.</strong> Las marcas del uso no son defectos: son la historia de la pieza.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ PEDIDOS A MEDIDA (bloque camel) ============ -->
+<section class="camel camel--foto" id="contacto">
+  <h2>Pedidos a medida</h2>
+  <p>¿Buscás un color, un largo o unas iniciales grabadas? Escribinos y armamos tu pieza juntos.</p>
+  <a class="boton boton--claro" data-whatsapp href="#" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
+</section>
+
+<!-- ============ INSTAGRAM ============ -->
+<section class="insta">
+  <h2 class="bloque__titulo"><a data-ig data-ig-texto href="#" target="_blank" rel="noopener">@tirra.uy</a></h2>
+  <div class="insta__grilla">
+    <a data-ig href="#" target="_blank" rel="noopener"><img src="images/ig-1.jpg" alt="" loading="lazy"></a>
+    <a data-ig href="#" target="_blank" rel="noopener"><img src="images/cat-collares.jpg" alt="" loading="lazy"></a>
+    <a data-ig href="#" target="_blank" rel="noopener"><img src="images/cat-chalecos.jpg" alt="" loading="lazy"></a>
+    <a data-ig href="#" target="_blank" rel="noopener"><img src="images/cat-brazaletes.jpg" alt="" loading="lazy"></a>
+    <a data-ig href="#" target="_blank" rel="noopener"><img src="images/taller-tirra.jpg" alt="" loading="lazy"></a>
+    <a data-ig href="#" target="_blank" rel="noopener"><img src="images/ig-3.jpg" alt="" loading="lazy"></a>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer__cols">
+    <div>
+      <img class="footer__logo" src="images/logo.png" alt="TIRRA">
+      <p>Cuero genuino hecho a mano en Uruguay.</p>
+    </div>
+    <div>
+      <h4>Productos</h4>
+      <a href="#tienda" data-ir="chalecos">Chalecos</a><a href="#tienda" data-ir="collares">Collares</a>
+      <a href="#tienda" data-ir="brazaletes">Brazaletes</a><a href="#tienda" data-ir="pulseras">Pulseras</a>
+    </div>
+    <div>
+      <h4>Información</h4>
+      <a href="#hacemos">Qué hacemos</a><a href="#cuidados">Cuidado del cuero</a>
+      <a href="#beneficios">Envíos y pagos</a><a href="#contacto">Pedidos a medida</a>
+    </div>
+    <div>
+      <h4>Contacto</h4>
+      <a data-whatsapp href="#" target="_blank" rel="noopener">WhatsApp</a>
+      <a data-ig data-ig-texto href="#" target="_blank" rel="noopener">Instagram</a>
+      <a data-email data-email-texto href="#">Email</a>
+      <span>Montevideo, Uruguay</span>
+    </div>
+  </div>
+  <p class="footer__base">&copy; <span id="anio"></span> TIRRA · Todos los derechos reservados</p>
+</footer>
+
+<!-- ============ FICHA DE PRODUCTO ============ -->
+<div class="ficha" id="ficha" role="dialog" aria-modal="true" aria-labelledby="fichaNombre" hidden>
+  <div class="ficha__fondo" data-cerrar></div>
+  <div class="ficha__caja">
+    <button class="ficha__cerrar" data-cerrar aria-label="Cerrar">✕</button>
+    <div class="ficha__galeria">
+      <div class="ficha__foto" id="fichaFoto"><img id="fichaImg" src="" alt=""></div>
+      <div class="ficha__miniaturas" id="fichaMinis"></div>
+    </div>
+    <div class="ficha__info">
+      <p class="ficha__cat" id="fichaCat"></p>
+      <h3 class="ficha__nombre" id="fichaNombre"></h3>
+      <p class="ficha__precio" id="fichaPrecio"></p>
+      <p class="ficha__desc" id="fichaDesc"></p>
+      <div class="ficha__cant">
+        <span>Cantidad</span>
+        <button id="fichaMenos" aria-label="Menos">−</button><span id="fichaCant">1</span><button id="fichaMas" aria-label="Más">+</button>
+      </div>
+      <button class="boton boton--lleno ficha__agregar" id="fichaAgregar">Agregar al carrito</button>
+      <a class="ficha__consulta" id="fichaConsulta" href="#" target="_blank" rel="noopener">o consultar por WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<div class="visor" id="visor" hidden>
+  <button class="visor__cerrar" id="visorCerrar" aria-label="Cerrar">✕</button>
+  <button class="visor__flecha visor__flecha--izq" id="visorPrev" aria-label="Anterior">‹</button>
+  <img id="visorImg" src="" alt="">
+  <button class="visor__flecha visor__flecha--der" id="visorNext" aria-label="Siguiente">›</button>
+</div>
+
+<!-- ============ CARRITO ============ -->
+<div class="carrito-fondo" id="carritoFondo"></div>
+<aside class="carrito" id="carrito" aria-label="Carrito">
+  <div class="carrito__cabeza"><h3>Carrito de compras</h3><button id="carritoCerrar" aria-label="Cerrar carrito">✕</button></div>
+  <div class="carrito__lista" id="carritoLista"></div>
+  <div class="carrito__pie">
+    <div class="carrito__total"><span>Total</span><strong id="carritoTotal">$ 0</strong></div>
+    <p class="carrito__nota" id="carritoNota"></p>
+    <a class="boton boton--lleno carrito__finalizar" id="carritoFinalizar" href="#" target="_blank" rel="noopener">Finalizar por WhatsApp</a>
+    <button class="carrito__vaciar" id="carritoVaciar">Vaciar carrito</button>
+  </div>
+</aside>
+<div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+
+<a class="wa" data-whatsapp href="#" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
+  <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm5.8 14.13c-.25.69-1.44 1.32-1.98 1.37-.53.05-1.02.24-3.44-.72-2.9-1.14-4.73-4.1-4.87-4.29-.14-.19-1.16-1.54-1.16-2.94 0-1.4.73-2.09.99-2.37.26-.29.57-.36.76-.36l.54.01c.17.01.41-.07.64.49.25.6.83 2.08.9 2.23.07.15.12.32.02.51-.09.19-.14.31-.28.48l-.42.48c-.14.14-.28.29-.12.57.16.29.72 1.18 1.54 1.91 1.06.94 1.95 1.24 2.23 1.38.28.14.44.12.6-.07.17-.19.69-.8.87-1.08.19-.29.37-.24.62-.14.26.09 1.63.77 1.91.91.28.14.47.21.53.32.07.12.07.67-.18 1.36z"/></svg>
+</a>
+
+<script src="productos.js?v=23"></script>
+<script src="v2.js?v=1"></script>
+</body>
+</html>
