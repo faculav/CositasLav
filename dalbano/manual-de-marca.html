@@ -2,110 +2,118 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..600&family=Jost:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: manual en pliegos — columna angosta con número y título de sección, columna ancha con el contenido. Tapa redonda como pieza central. */
+/* Layout: manual en pliegos — columna angosta con número y título, columna ancha con contenido. El emblema de la vaca y la palabra manchada son las dos piezas centrales. */
 :root{
   --bg:#F6F0E6; --surface:#FBF8F3; --ink:#2B1C14; --muted:#76604F; --line:#DDD0BE;
-  --accent:#8C5E3C; --brand-ink:#4A2E1F; --knock:#F6F0E6; --ok:#4F6B3A; --bad:#A33A22;
-  --f-display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --accent:#8C5E3C; --brand-ink:#4A2E1F; --ok:#4F6B3A; --bad:#A33A22;
+  --f-display:"Alfa Slab One","Rockwell","Roboto Slab",Georgia,serif;
   --f-body:"Jost","Futura","Century Gothic","Avenir Next",system-ui,sans-serif;
   --f-mono:"DM Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
-  /* colores de marca: fijos en ambos temas, porque son especímenes */
+  /* colores de marca: fijos en ambos temas, son especímenes */
   --nogal:#2B1C14; --cuero:#4A2E1F; --avellana:#8C5E3C; --caramelo:#C49A6C; --crema:#F3EBDD; --leche:#FBF8F3;
+  /* emblema y palabra en el contexto de la página */
+  --c1:#4A2E1F; --c2:#F3EBDD; --c3:#C49A6C; --c4:#8C5E3C; --c5:#2B1C14; --w1:#4A2E1F; --w2:#C49A6C;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --bg:#1B130E; --surface:#251A13; --ink:#F1E7D8; --muted:#B49E89; --line:#3E2D22;
-    --accent:#C49A6C; --brand-ink:#E9D8C0; --knock:#1B130E; --ok:#9DBA7E; --bad:#E58A6F; color-scheme:dark;
+    --accent:#C49A6C; --brand-ink:#E9D8C0; --ok:#9DBA7E; --bad:#E58A6F;
+    --c1:#8C5E3C; --w1:#F3EBDD; --w2:#8C5E3C; color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
   --bg:#1B130E; --surface:#251A13; --ink:#F1E7D8; --muted:#B49E89; --line:#3E2D22;
-  --accent:#C49A6C; --brand-ink:#E9D8C0; --knock:#1B130E; --ok:#9DBA7E; --bad:#E58A6F; color-scheme:dark;
+  --accent:#C49A6C; --brand-ink:#E9D8C0; --ok:#9DBA7E; --bad:#E58A6F;
+  --c1:#8C5E3C; --w1:#F3EBDD; --w2:#8C5E3C; color-scheme:dark;
 }
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;font-weight:400;
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
 .wrap{max-width:1120px;margin:0 auto}
-h1,h2,h3{font-family:var(--f-display);font-weight:500;text-wrap:balance;margin:0;line-height:1.1}
-h2{font-size:clamp(2rem,4.2vw,2.9rem)}
-h3{font-size:1.35rem;margin-bottom:.4rem}
+h1,h2{font-family:var(--f-display);font-weight:400;text-wrap:balance;margin:0;line-height:1.1;letter-spacing:.01em}
+h2{font-size:clamp(1.9rem,3.8vw,2.6rem);color:var(--brand-ink)}
+h3{font-family:var(--f-body);font-weight:600;font-size:1.2rem;margin:0 0 .3rem;text-wrap:balance}
 p{margin:0 0 1em;max-width:62ch}
-.label{font-family:var(--f-body);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:500;color:var(--muted)}
+.label{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:500;color:var(--muted)}
 .mono{font-family:var(--f-mono);font-size:.8rem;font-variant-numeric:tabular-nums}
 .muted{color:var(--muted)}
-a{color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-svg.vaca{display:block;color:var(--brand-ink);--k:var(--knock)}
+svg.em,svg.wm{display:block;max-width:100%;height:auto}
+svg.em{aspect-ratio:1}
+svg.wm{aspect-ratio:536/100}
 
 /* nav */
 nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin:0 calc(-1*max(16px,env(safe-area-inset-left,0px)))}
-nav .in{max-width:1120px;margin:0 auto;display:flex;gap:22px;align-items:center;overflow-x:auto;padding:12px max(16px,env(safe-area-inset-left,0px));scrollbar-width:none}
+nav .in{max-width:1120px;margin:0 auto;display:flex;gap:22px;align-items:center;overflow-x:auto;padding:10px max(16px,env(safe-area-inset-left,0px));scrollbar-width:none}
 nav a{text-decoration:none;font-size:.82rem;white-space:nowrap;color:var(--muted)}
 nav a:hover{color:var(--ink)}
-nav .brand{font-family:var(--f-display);letter-spacing:.14em;color:var(--ink);font-size:.95rem;display:flex;gap:8px;align-items:center}
+nav .brand{display:flex;gap:8px;align-items:center}
+nav .brand svg.em{width:26px}
+nav .brand svg.wm{width:86px}
 
 /* hero */
-.hero{padding-block:72px 64px;display:grid;justify-items:center;text-align:center;gap:18px}
-.hero svg.vaca{width:150px;height:auto}
-.wordmark{font-family:var(--f-display);font-weight:500;letter-spacing:.16em;font-size:clamp(2.6rem,9vw,5.6rem);line-height:1;margin-right:-.16em}
+.hero{padding-block:64px 60px;display:grid;justify-items:center;text-align:center;gap:22px}
+.hero svg.em{width:min(240px,60vw)}
+.hero svg.wm{width:min(520px,88vw)}
 .hero .sub{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
-.hero .lead{font-family:var(--f-display);font-style:italic;font-size:1.25rem;max-width:34ch;margin:10px 0 0}
+.hero .lead{font-size:1.2rem;max-width:36ch;margin:4px 0 0;font-style:italic}
 
 /* secciones */
 section.s{display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px;padding-block:72px;border-top:1px solid var(--line)}
-section.s>header{position:relative}
 section.s>header .n{font-family:var(--f-mono);font-size:.8rem;color:var(--accent);display:block;margin-bottom:10px}
 section.s>header .lbl{margin-top:12px;display:block}
 .body{min-width:0;display:grid;gap:44px}
 .block{display:grid;gap:14px}
 @media (max-width:820px){section.s{grid-template-columns:1fr;gap:24px;padding-block:52px}}
-
 .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:22px}
 .card p:last-child{margin-bottom:0}
 
 /* esencia */
-.concept{font-family:var(--f-display);font-size:clamp(1.6rem,3.6vw,2.4rem);line-height:1.2;max-width:24ch;margin:0}
-.traits{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border-top:1px solid var(--line)}
+.concept{font-family:var(--f-display);font-size:clamp(1.5rem,3.2vw,2.1rem);line-height:1.2;max-width:24ch;margin:0;color:var(--brand-ink)}
+.traits{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));border-top:1px solid var(--line)}
 .traits div{padding:18px 18px 18px 0;border-bottom:1px solid var(--line)}
-.traits b{font-family:var(--f-display);font-weight:500;font-size:1.2rem;display:block}
-.voice{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
-.voice .card{display:grid;gap:10px}
-.voice q{font-family:var(--f-display);font-size:1.15rem;quotes:"“" "”";display:block}
+.traits b{font-weight:600;font-size:1.1rem;display:block}
+.voice{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.voice .card{display:grid;gap:10px;align-content:start}
+.voice q{font-size:1.15rem;font-style:italic;quotes:"“" "”";display:block}
 .tag-ok{color:var(--ok)} .tag-bad{color:var(--bad)}
+
+/* fondos de marca: cada uno fija emblema y palabra */
+.on-crema{background:var(--crema);color:var(--cuero);--c1:#4A2E1F;--c2:#F3EBDD;--c3:#C49A6C;--c4:#8C5E3C;--c5:#2B1C14;--w1:#4A2E1F;--w2:#C49A6C}
+.on-leche{background:var(--leche);color:var(--cuero);--c1:#4A2E1F;--c2:#F3EBDD;--c3:#C49A6C;--c4:#8C5E3C;--c5:#2B1C14;--w1:#4A2E1F;--w2:#C49A6C;box-shadow:inset 0 0 0 1px var(--line)}
+.on-cuero{background:var(--cuero);color:var(--crema);--c1:#C49A6C;--c2:#FBF8F3;--c3:#C49A6C;--c4:#8C5E3C;--c5:#2B1C14;--w1:#FBF8F3;--w2:#8C5E3C}
+.on-nogal{background:var(--nogal);color:var(--caramelo);--c1:#8C5E3C;--c2:#F3EBDD;--c3:#C49A6C;--c4:#4A2E1F;--c5:#2B1C14;--w1:#F3EBDD;--w2:#8C5E3C}
+.on-caramelo{background:var(--caramelo);color:var(--nogal);--c1:#4A2E1F;--c2:#FBF8F3;--c3:#C49A6C;--c4:#8C5E3C;--c5:#2B1C14;--w1:#FBF8F3;--w2:#4A2E1F}
 
 /* logos */
 .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
-.tile .lid{width:auto;height:84%;max-width:100%;margin-top:-14px}
-.tile{border-radius:4px;aspect-ratio:4/3;display:grid;place-items:center;position:relative;overflow:hidden;max-width:100%;padding:20px}
-.tile .cap{position:absolute;left:14px;bottom:10px;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;opacity:.8}
-.on-crema{background:var(--crema);color:var(--cuero);--k:var(--crema)}
-.on-leche{background:var(--leche);color:var(--cuero);--k:var(--leche);box-shadow:inset 0 0 0 1px var(--line)}
-.on-cuero{background:var(--cuero);color:var(--crema);--k:var(--cuero)}
-.on-nogal{background:var(--nogal);color:var(--caramelo);--k:var(--nogal)}
-.on-caramelo{background:var(--caramelo);color:var(--nogal);--k:var(--caramelo)}
-.on-avellana{background:var(--avellana);color:var(--crema);--k:var(--avellana)}
-.tile svg.vaca{color:inherit}
-.lock-h{display:flex;align-items:center;gap:14px}
-.lock-h svg{width:54px}
-.lock-h .wm{font-family:var(--f-display);font-weight:500;letter-spacing:.16em;font-size:1.8rem;line-height:1}
-.lock-h .wm small{display:block;font-family:var(--f-body);font-size:.52rem;letter-spacing:.32em;margin-top:6px;font-weight:500}
-.lock-v{display:grid;justify-items:center;gap:8px}
-.lock-v svg{width:72px}
-.lock-v .wm{font-family:var(--f-display);font-weight:500;letter-spacing:.16em;font-size:1.7rem;line-height:1;margin-right:-.16em}
-.lock-v small{font-size:.55rem;letter-spacing:.32em;font-weight:500;margin-right:-.32em}
+.tile{border-radius:4px;aspect-ratio:4/3;display:grid;place-items:center;position:relative;overflow:hidden;max-width:100%;padding:24px 24px 34px}
+.tile .cap{position:absolute;left:14px;bottom:10px;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;opacity:.85}
+.lock-h{display:flex;align-items:center;gap:14px;min-width:0}
+.lock-h svg.em{width:64px;flex:none}
+.lock-h .t{display:grid;gap:6px;min-width:0}
+.lock-h svg.wm{width:170px}
+.lock-h small,.lock-v small{font-size:.56rem;letter-spacing:.32em;font-weight:500}
+.lock-v{display:grid;justify-items:center;gap:10px}
+.lock-v svg.em{width:96px}
+.lock-v svg.wm{width:170px}
 .lid{width:min(100%,230px);height:auto;display:block}
+.tile .lid{width:auto;height:100%;max-width:100%}
+
+.demo2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.demo2 .tile{aspect-ratio:auto;min-height:160px}
+.demo2 .tile svg.wm{width:min(100%,300px)}
 
 .clear{display:grid;place-items:center;padding:30px;background:var(--surface);border:1px solid var(--line);border-radius:4px;overflow-x:auto}
-.clear .box{position:relative;padding:28px;outline:1px dashed var(--accent);color:var(--brand-ink);--k:var(--surface)}
+.clear .box{position:relative;padding:30px;outline:1px dashed var(--accent)}
 .clear .box .inner{outline:1px solid color-mix(in srgb,var(--accent) 40%,transparent)}
 .clear .x{position:absolute;font-family:var(--f-mono);font-size:.7rem;color:var(--accent)}
 .sizes{display:flex;gap:36px;align-items:flex-end;flex-wrap:wrap}
-.sizes figure{margin:0;display:grid;gap:8px;justify-items:start;color:var(--brand-ink);--k:var(--bg)}
-
+.sizes figure{margin:0;display:grid;gap:8px;justify-items:start}
 .wrong .tile{aspect-ratio:3/2}
 .wrong .tile::after{content:"";position:absolute;inset:0;background:linear-gradient(to top right,transparent calc(50% - 1px),var(--bad) 50%,transparent calc(50% + 1px));opacity:.55}
 .wrong figcaption{font-size:.85rem;margin-top:8px}
@@ -114,26 +122,25 @@ section.s>header .lbl{margin-top:12px;display:block}
 /* color */
 .swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
 .sw{border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--surface);cursor:pointer;text-align:left;padding:0;font:inherit;color:inherit}
-.sw .chip{height:110px;display:flex;align-items:flex-end;padding:10px 12px;font-family:var(--f-display);font-size:1.3rem}
+.sw .chip{height:110px;display:flex;align-items:flex-end;padding:10px 12px;font-family:var(--f-display);font-size:1.2rem}
 .sw .meta{padding:10px 12px;display:grid;gap:2px}
 .sw .meta .mono{color:var(--muted)}
 .sw .copied{font-size:.72rem;color:var(--accent);min-height:1.1em}
 .ratio{display:flex;height:46px;border-radius:4px;overflow:hidden;border:1px solid var(--line)}
 .ratio span{display:flex;align-items:center;padding-left:10px;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;white-space:nowrap;overflow:hidden}
 
-/* tipografia */
+/* tipografía */
 .spec{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:24px;align-items:end;padding-block:22px;border-bottom:1px solid var(--line)}
-.spec .big{font-size:clamp(3.2rem,8vw,5.4rem);line-height:1}
+.spec .big{font-size:clamp(3rem,7vw,5rem);line-height:1}
 @media (max-width:620px){.spec{grid-template-columns:1fr}}
 .hier{width:100%;border-collapse:collapse}
-.hier td{padding:14px 12px 14px 0;border-bottom:1px solid var(--line);vertical-align:baseline}
+.hier td{padding:14px 12px 14px 0;border-bottom:1px solid var(--line);vertical-align:middle}
 .hier td:last-child{color:var(--muted);white-space:nowrap}
 .tbl{overflow-x:auto}
 
 /* recursos */
-.pattern{height:220px;border-radius:4px;color:var(--cuero);background:var(--crema);overflow:hidden}
+.pattern{height:220px;border-radius:4px;overflow:hidden}
 .pattern svg{width:100%;height:100%;display:block}
-.pattern.dark{background:var(--cuero);color:#5B3A28}
 
 /* foto */
 .photo-rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
@@ -143,7 +150,7 @@ section.s>header .lbl{margin-top:12px;display:block}
 
 /* packaging */
 .lid-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center}
-.lid-hero .lid{width:min(100%,400px);filter:drop-shadow(0 18px 30px rgba(43,28,20,.22))}
+.lid-hero .lid{width:min(100%,420px);filter:drop-shadow(0 18px 30px rgba(43,28,20,.22))}
 @media (max-width:760px){.lid-hero{grid-template-columns:1fr}}
 .anat{margin:0;padding:0;list-style:none;display:grid;gap:12px;counter-reset:a}
 .anat li{display:grid;grid-template-columns:28px 1fr;gap:8px}
@@ -152,10 +159,10 @@ section.s>header .lbl{margin-top:12px;display:block}
 .lids figure{margin:0;display:grid;gap:10px;justify-items:center;text-align:center}
 .lids figcaption{font-size:.85rem}
 .band-wrap{overflow-x:auto}
-.band{min-width:760px;height:96px;background:var(--crema);color:var(--cuero);border-radius:3px;display:grid;grid-template-columns:auto 1fr 1fr 1fr auto;align-items:center;gap:26px;padding:0 26px;--k:var(--crema);font-size:.72rem;line-height:1.4}
-.band svg{width:40px}
+.band{min-width:780px;height:100px;border-radius:3px;display:grid;grid-template-columns:auto auto 1fr 1fr auto;align-items:center;gap:26px;padding:0 26px;font-size:.72rem;line-height:1.4}
+.band svg.em{width:56px}
+.band svg.wm{width:120px}
 .band b{display:block;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
-.band .wm{font-family:var(--f-display);letter-spacing:.16em;font-size:1.25rem}
 .barcode{width:110px;height:46px;background:repeating-linear-gradient(90deg,var(--cuero) 0 2px,transparent 2px 4px,var(--cuero) 4px 5px,transparent 5px 8px,var(--cuero) 8px 11px,transparent 11px 12px)}
 
 /* aplicaciones */
@@ -164,65 +171,94 @@ section.s>header .lbl{margin-top:12px;display:block}
 .biz{aspect-ratio:85/55;border-radius:4px;max-width:100%;padding:18px;display:grid;box-shadow:0 8px 22px rgba(43,28,20,.15)}
 .biz.front{place-items:center}
 .biz.back{align-content:space-between;font-size:.72rem;line-height:1.5}
-.biz.back .name{font-family:var(--f-display);font-size:1.15rem;letter-spacing:.02em}
+.biz.back .name{font-weight:600;font-size:1.05rem}
 .post{aspect-ratio:1/1;border-radius:4px;max-width:100%;padding:26px;display:grid;align-content:space-between;position:relative;overflow:hidden}
-.post .q{font-family:var(--f-display);font-size:clamp(1.4rem,3vw,1.9rem);line-height:1.15;max-width:12ch;position:relative}
-.post .foot{display:flex;justify-content:space-between;align-items:center;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;position:relative}
-.post .bgcow{position:absolute;right:-30px;bottom:-24px;width:68%;opacity:.16}
+.post .q{font-family:var(--f-display);font-size:clamp(1.4rem,3vw,1.8rem);line-height:1.15;max-width:12ch;position:relative;margin:0}
+.post .foot{display:flex;justify-content:space-between;align-items:center;gap:10px;position:relative}
+.post .foot svg.wm{width:110px}
+.post .foot small{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500}
+.post .bg{position:absolute;inset:0;width:100%;height:100%}
 .ex{font-size:.72rem;color:var(--muted)}
 
-.todo{margin:0;padding:0;list-style:none;display:grid;gap:0;border-top:1px solid var(--line)}
+.todo{margin:0;padding:0;list-style:none;display:grid;border-top:1px solid var(--line)}
 .todo li{display:grid;grid-template-columns:22px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
 .todo li::before{content:"";width:14px;height:14px;border:1.5px solid var(--accent);border-radius:2px;margin-top:5px}
 footer{padding-block:48px 64px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:.85rem}
 @media (prefers-reduced-motion:no-preference){.sw{transition:transform .15s}.sw:hover{transform:translateY(-2px)}}
 </style>
 
-<!-- Isotipo: vaca de frente, línea continua, una mancha en el ojo izquierdo -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <symbol id="vaca" viewBox="11 12 78 70">
-      <g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M36 27 C31 25 29 21 30 16"/><path d="M64 27 C69 25 71 21 70 16"/>
-        <path d="M34.5 33 C27 30 19 31 15 34.5 C19 38 27 39 34.5 37.5"/>
-        <path d="M65.5 33 C73 30 81 31 85 34.5 C81 38 73 39 65.5 37.5"/>
-        <path d="M35 27 C41 23 59 23 65 27 C67 39 65 51 63 59 L37 59 C35 51 33 39 35 27 Z"/>
-        <rect x="33" y="57" width="34" height="21" rx="10.5"/>
+    <!-- Emblema: vaca de frente en negativo dentro de un círculo -->
+    <clipPath id="vclip"><circle cx="100" cy="100" r="90"/></clipPath>
+    <symbol id="vaca" viewBox="10 10 180 180">
+      <circle cx="100" cy="100" r="90" style="fill:var(--c1)"/>
+      <g clip-path="url(#vclip)" stroke-linecap="round" stroke-linejoin="round">
+        <path style="fill:var(--c2)" d="M48 200 C50 172 60 146 74 126 L126 126 C140 146 150 172 152 200 Z"/>
+        <path style="fill:var(--c2)" d="M70 60 C62 54 54 44 50 30 C57 34 64 40 70 45 C75 48 80 51 84 53 Z"/>
+        <path style="fill:var(--c2)" d="M130 60 C138 54 146 44 150 30 C143 34 136 40 130 45 C125 48 120 51 116 53 Z"/>
+        <path style="fill:var(--c2)" d="M67 70 C52 63 34 68 19 83 C35 90 54 88 69 82 Z"/>
+        <path style="fill:var(--c3)" d="M64 74 C52 70 40 73 29 82 C42 85 54 84 65 79 Z"/>
+        <path style="fill:var(--c2)" d="M133 70 C148 63 166 68 181 83 C165 90 146 88 131 82 Z"/>
+        <path style="fill:var(--c3)" d="M136 74 C148 70 160 73 171 82 C158 85 146 84 135 79 Z"/>
+        <path style="fill:var(--c2)" d="M68 58 C80 47 120 47 132 58 C136 66 137 76 137 84 C137 95 128 105 122 117 C125 125 128 133 127 145 C126 159 116 167 100 167 C84 167 74 159 73 145 C72 133 75 125 78 117 C72 105 63 95 63 84 C63 76 64 66 68 58 Z"/>
+        <path d="M77 120 C73 132 72 150 80 160 C88 168 112 168 120 160 C128 150 127 132 123 120" style="stroke:var(--c1)" stroke-width="2.6" fill="none"/>
+        <path style="fill:var(--c3)" opacity=".5" d="M64 90 C68 102 75 110 80 118 C79 110 76 100 72 92 Z"/>
+        <path style="fill:var(--c3)" opacity=".5" d="M136 90 C132 102 125 110 120 118 C121 110 124 100 128 92 Z"/>
+        <path style="fill:var(--c3)" opacity=".35" d="M92 96 C95 108 96 118 95 128 L105 128 C104 118 105 108 108 96 C104 100 96 100 92 96 Z"/>
+        <path style="fill:var(--c4)" d="M66 66 C76 58 92 60 96 72 C99 82 94 94 84 98 C76 100 68 96 65 90 C63 82 62 72 66 66 Z"/>
+        <path style="fill:var(--c5)" d="M65 85 C68 81 75 81 78 85 C75 89 68 89 65 85 Z"/>
+        <path style="fill:var(--c5)" d="M135 85 C132 81 125 81 122 85 C125 89 132 89 135 85 Z"/>
+        <circle cx="73.5" cy="84" r="1" style="fill:var(--c2)"/><circle cx="126.5" cy="84" r="1" style="fill:var(--c2)"/>
+        <path style="fill:var(--c3)" d="M79 135 C88 128 112 128 121 135 C125 143 125 156 118 162 C110 167 90 167 82 162 C75 156 75 143 79 135 Z"/>
+        <path style="fill:var(--c1)" d="M85 141 C82 145 83 151 88 152 C91 152 92 149 90 146 C88 144 87 143 85 141 Z"/>
+        <path style="fill:var(--c1)" d="M115 141 C118 145 117 151 112 152 C109 152 108 149 110 146 C112 144 113 143 115 141 Z"/>
+        <path d="M100 150 L100 156.5 M91 159.5 C96 160.3 104 160.3 109 159.5" style="stroke:var(--c1)" stroke-width="1.4" fill="none"/>
       </g>
-      <path d="M35.3 31 C39 28 47 30 48 36 C49 42 46 48 40 49 C37 49.5 35.5 48 34.8 46 C34.2 40 34.4 35 35.3 31 Z" fill="currentColor"/>
-      <circle cx="42" cy="42" r="1.9" style="fill:var(--k)"/>
-      <circle cx="58" cy="42" r="1.9" fill="currentColor"/>
-      <ellipse cx="43.5" cy="67.5" rx="1.9" ry="2.8" fill="currentColor"/>
-      <ellipse cx="56.5" cy="67.5" rx="1.9" ry="2.8" fill="currentColor"/>
     </symbol>
-    <!-- versión de trazo grueso para tamaños chicos -->
-    <symbol id="vaca-b" viewBox="11 12 78 70">
-      <g fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M36 27 C31 25 29 21 30 16"/><path d="M64 27 C69 25 71 21 70 16"/>
-        <path d="M34.5 33 C27 30 19 31 15 34.5 C19 38 27 39 34.5 37.5"/>
-        <path d="M65.5 33 C73 30 81 31 85 34.5 C81 38 73 39 65.5 37.5"/>
-        <path d="M35 27 C41 23 59 23 65 27 C67 39 65 51 63 59 L37 59 C35 51 33 39 35 27 Z"/>
-        <rect x="33" y="57" width="34" height="21" rx="10.5"/>
+    <!-- Emblema simplificado: dos tintas, para tamaños chicos y sellos -->
+    <symbol id="vaca-s" viewBox="10 10 180 180">
+      <circle cx="100" cy="100" r="90" style="fill:var(--c1)"/>
+      <g clip-path="url(#vclip)" stroke-linecap="round" stroke-linejoin="round">
+        <path style="fill:var(--c2)" d="M48 200 C50 172 60 146 74 126 L126 126 C140 146 150 172 152 200 Z"/>
+        <path style="fill:var(--c2)" d="M70 60 C62 54 54 44 50 30 C57 34 64 40 70 45 C75 48 80 51 84 53 Z"/>
+        <path style="fill:var(--c2)" d="M130 60 C138 54 146 44 150 30 C143 34 136 40 130 45 C125 48 120 51 116 53 Z"/>
+        <path style="fill:var(--c2)" d="M67 70 C52 63 34 68 19 83 C35 90 54 88 69 82 Z"/>
+        <path style="fill:var(--c2)" d="M133 70 C148 63 166 68 181 83 C165 90 146 88 131 82 Z"/>
+        <path style="fill:var(--c2)" d="M68 58 C80 47 120 47 132 58 C136 66 137 76 137 84 C137 95 128 105 122 117 C125 125 128 133 127 145 C126 159 116 167 100 167 C84 167 74 159 73 145 C72 133 75 125 78 117 C72 105 63 95 63 84 C63 76 64 66 68 58 Z"/>
+        <path d="M77 120 C73 132 72 150 80 160 C88 168 112 168 120 160 C128 150 127 132 123 120" style="stroke:var(--c1)" stroke-width="4" fill="none"/>
+        <path style="fill:var(--c1)" d="M66 66 C76 58 92 60 96 72 C99 82 94 94 84 98 C76 100 68 96 65 90 C63 82 62 72 66 66 Z"/>
+        <path style="fill:var(--c1)" d="M135 85 C132 80 124 80 120 85 C124 90 132 90 135 85 Z"/>
+        <path style="fill:var(--c1)" d="M84 140 C80 145 81 153 88 154 C92 154 93 150 91 146 Z"/>
+        <path style="fill:var(--c1)" d="M116 140 C120 145 119 153 112 154 C108 154 107 150 109 146 Z"/>
       </g>
-      <path d="M35.3 31 C39 28 47 30 48 36 C49 42 46 48 40 49 C37 49.5 35.5 48 34.8 46 C34.2 40 34.4 35 35.3 31 Z" fill="currentColor"/>
-      <circle cx="42" cy="42" r="2.4" style="fill:var(--k)"/>
-      <circle cx="58" cy="42" r="2.6" fill="currentColor"/>
-      <ellipse cx="43.5" cy="67.5" rx="2.5" ry="3.4" fill="currentColor"/>
-      <ellipse cx="56.5" cy="67.5" rx="2.5" ry="3.4" fill="currentColor"/>
     </symbol>
-    <!-- manchas: el pelaje de la vaca como textura -->
-    <pattern id="manchas" width="220" height="220" patternUnits="userSpaceOnUse">
-      <path fill="currentColor" d="M22 18 C40 6 66 14 68 34 C70 52 50 66 30 58 C12 51 6 30 22 18 Z"/>
-      <path fill="currentColor" d="M128 40 C140 30 162 34 166 50 C170 64 158 76 142 74 C126 72 116 52 128 40 Z"/>
-      <path fill="currentColor" d="M70 118 C92 100 130 108 134 136 C138 160 112 176 88 168 C64 160 52 134 70 118 Z"/>
-      <path fill="currentColor" d="M176 150 C188 140 208 146 210 162 C212 176 198 186 184 182 C170 178 166 160 176 150 Z"/>
-      <path fill="currentColor" d="M14 176 C22 168 38 170 40 182 C42 194 30 202 20 198 C8 194 6 184 14 176 Z"/>
-    </pattern>
+    <!-- Palabra: D’Albano en Alfa Slab One con manchas de cuero -->
+    <clipPath id="wmclip"><text x="0" y="100" font-family="Alfa Slab One, Rockwell, serif" font-size="110" letter-spacing="3">D’Albano</text></clipPath>
+    <symbol id="wm" viewBox="-2 6 536 100">
+      <g clip-path="url(#wmclip)">
+        <rect x="-2" y="0" width="540" height="140" style="fill:var(--w1)"/>
+        <g style="fill:var(--w2)"><path d="M36.0 25.5C35.0 27.1 33.5 26.4 31.6 28.3C29.8 30.2 28.1 35.3 25.0 36.9C22.0 38.6 15.9 39.8 13.2 38.3C10.5 36.8 10.1 30.5 8.7 28.0C7.4 25.6 6.1 25.0 5.2 23.6C4.3 22.2 3.2 21.5 3.4 19.4C3.5 17.4 3.1 12.7 6.2 11.2C9.2 9.6 17.0 9.6 21.5 10.0C26.1 10.4 30.8 12.2 33.5 13.6C36.2 15.1 37.1 16.5 37.5 18.4C38.0 20.4 37.0 23.8 36.0 25.5Z"/><path d="M85.0 101.2C85.1 102.9 85.0 106.4 84.0 107.2C83.0 107.9 81.6 105.5 79.1 105.7C76.5 105.9 71.0 108.4 68.7 108.3C66.4 108.2 66.1 106.5 65.1 105.1C64.0 103.7 62.8 101.7 62.3 100.0C61.8 98.3 61.1 96.2 62.3 95.1C63.5 93.9 66.7 93.8 69.4 93.0C72.1 92.1 76.2 89.8 78.3 89.9C80.5 90.0 81.4 92.1 82.3 93.3C83.1 94.6 82.8 95.9 83.3 97.2C83.7 98.5 84.9 99.6 85.0 101.2Z"/><path d="M159.4 37.2C159.0 39.1 155.5 40.6 153.8 42.8C152.2 45.1 152.1 49.6 149.7 50.8C147.2 51.9 142.9 50.6 139.2 49.6C135.4 48.7 129.6 46.8 127.3 45.0C125.0 43.1 124.4 40.4 125.4 38.4C126.5 36.3 132.6 35.1 133.6 32.9C134.6 30.7 129.4 26.7 131.6 25.4C133.8 24.0 142.9 24.2 146.9 24.7C150.9 25.2 153.9 27.3 155.5 28.4C157.1 29.5 155.7 30.0 156.4 31.5C157.0 33.0 159.8 35.3 159.4 37.2Z"/><path d="M208.8 98.0C209.2 99.7 209.6 100.9 207.9 102.4C206.2 103.8 201.9 106.3 198.5 106.6C195.1 106.8 190.5 104.7 187.5 103.8C184.5 102.9 181.6 102.5 180.5 101.2C179.4 99.8 180.0 96.9 180.9 95.6C181.7 94.4 185.1 95.1 185.5 93.8C185.9 92.5 181.7 88.9 183.2 87.9C184.7 86.8 191.6 87.4 194.4 87.7C197.3 88.0 198.4 89.0 200.3 89.7C202.2 90.4 204.3 90.4 205.8 91.8C207.2 93.1 208.5 96.2 208.8 98.0Z"/><path d="M268.0 26.8C267.3 28.9 266.3 31.8 263.4 33.5C260.5 35.2 254.7 35.4 250.8 36.9C247.0 38.5 243.5 42.7 240.3 42.7C237.1 42.7 233.4 39.5 231.8 37.0C230.3 34.5 231.4 30.4 230.8 27.7C230.2 25.0 226.4 22.7 228.1 20.6C229.8 18.5 237.2 15.7 241.0 15.2C244.8 14.8 248.6 17.1 251.0 17.7C253.3 18.3 252.1 18.4 254.9 19.0C257.7 19.6 265.5 19.9 267.7 21.2C269.9 22.5 268.8 24.8 268.0 26.8Z"/><path d="M304.5 100.5C305.2 102.5 309.1 107.8 307.5 109.7C306.0 111.5 299.7 111.2 295.3 111.8C290.8 112.3 283.7 113.7 280.9 112.8C278.1 111.9 279.5 108.2 278.5 106.3C277.4 104.3 275.8 103.3 274.5 101.1C273.1 98.9 268.9 94.8 270.5 93.1C272.0 91.4 280.3 91.3 283.8 90.8C287.3 90.3 288.5 90.6 291.4 89.9C294.4 89.3 299.6 85.8 301.6 87.1C303.5 88.4 302.6 95.2 303.1 97.5C303.6 99.7 303.7 98.5 304.5 100.5Z"/><path d="M370.2 37.3C369.9 39.9 374.9 44.9 372.2 46.3C369.6 47.8 358.8 45.4 354.4 45.9C350.0 46.4 350.1 49.5 346.0 49.1C342.0 48.8 332.4 45.8 329.9 43.6C327.4 41.3 330.5 38.4 330.8 35.6C331.2 32.8 330.7 28.9 332.0 26.6C333.4 24.4 335.4 22.0 338.9 22.0C342.4 22.0 349.5 25.7 353.1 26.6C356.7 27.4 357.1 26.3 360.5 27.0C364.0 27.6 372.2 28.7 373.8 30.5C375.4 32.2 370.4 34.6 370.2 37.3Z"/><path d="M410.4 110.0C409.6 111.8 409.4 113.1 407.7 114.4C406.0 115.7 403.3 117.0 400.2 117.9C397.2 118.9 392.1 120.3 389.4 120.1C386.6 119.9 385.1 118.3 383.8 116.6C382.5 115.0 381.3 112.2 381.5 110.2C381.8 108.3 383.9 106.5 385.5 104.8C387.0 103.2 388.9 101.2 390.9 100.4C392.9 99.7 394.8 100.1 397.5 100.6C400.1 101.1 404.2 102.8 406.7 103.4C409.3 104.0 412.2 103.0 412.8 104.1C413.4 105.2 411.3 108.3 410.4 110.0Z"/><path d="M476.0 32.3C475.2 34.5 471.4 35.0 468.5 36.2C465.6 37.4 461.5 39.3 458.5 39.6C455.6 39.9 452.9 38.8 450.8 38.0C448.7 37.2 449.8 36.2 446.1 34.5C442.4 32.9 430.0 30.0 428.8 28.0C427.7 26.0 436.0 23.7 439.2 22.5C442.4 21.3 445.4 21.8 448.2 20.7C451.0 19.6 453.3 16.9 456.3 16.0C459.2 15.0 463.0 13.5 465.8 14.7C468.7 15.9 471.5 20.2 473.2 23.1C474.9 26.0 476.8 30.1 476.0 32.3Z"/><path d="M513.9 91.9C513.6 93.9 514.2 97.8 512.8 99.0C511.4 100.2 508.1 98.2 505.4 98.9C502.7 99.7 499.1 104.1 496.5 103.4C493.8 102.8 492.2 96.7 489.5 95.0C486.9 93.2 480.3 94.3 480.5 93.0C480.6 91.7 488.1 89.5 490.4 87.2C492.7 85.0 492.2 81.4 494.1 79.5C496.0 77.6 498.5 75.3 501.9 75.7C505.4 76.1 512.5 80.0 514.6 81.8C516.6 83.7 514.4 85.2 514.3 86.9C514.2 88.6 514.1 89.9 513.9 91.9Z"/></g>
+      </g>
+    </symbol>
+    <pattern id="manchas" width="220" height="220" patternUnits="userSpaceOnUse"><g fill="#8C5E3C">
+      <path d="M22 18 C40 6 66 14 68 34 C70 52 50 66 30 58 C12 51 6 30 22 18 Z"/>
+      <path d="M128 40 C140 30 162 34 166 50 C170 64 158 76 142 74 C126 72 116 52 128 40 Z"/>
+      <path d="M70 118 C92 100 130 108 134 136 C138 160 112 176 88 168 C64 160 52 134 70 118 Z"/>
+      <path d="M176 150 C188 140 208 146 210 162 C212 176 198 186 184 182 C170 178 166 160 176 150 Z"/>
+      <path d="M14 176 C22 168 38 170 40 182 C42 194 30 202 20 198 C8 194 6 184 14 176 Z"/>
+    </g></pattern><pattern id="manchas-c" width="220" height="220" patternUnits="userSpaceOnUse"><g fill="#4A2E1F">
+      <path d="M22 18 C40 6 66 14 68 34 C70 52 50 66 30 58 C12 51 6 30 22 18 Z"/>
+      <path d="M128 40 C140 30 162 34 166 50 C170 64 158 76 142 74 C126 72 116 52 128 40 Z"/>
+      <path d="M70 118 C92 100 130 108 134 136 C138 160 112 176 88 168 C64 160 52 134 70 118 Z"/>
+      <path d="M176 150 C188 140 208 146 210 162 C212 176 198 186 184 182 C170 178 166 160 176 150 Z"/>
+      <path d="M14 176 C22 168 38 170 40 182 C42 194 30 202 20 198 C8 194 6 184 14 176 Z"/>
+    </g></pattern>
   </defs>
 </svg>
 
 <nav aria-label="Secciones del manual"><div class="in">
-  <a class="brand" href="#inicio"><svg class="vaca" width="22" height="20" style="--k:var(--bg)"><use href="#vaca-b"/></svg>D’ALBANO</a>
+  <a class="brand" href="#inicio" aria-label="Inicio"><svg class="em" viewBox="0 0 180 180"><use href="#vaca-s"/></svg><svg class="wm" viewBox="0 0 536 100"><use href="#wm"/></svg></a>
   <a href="#esencia">Esencia</a><a href="#logotipo">Logotipo</a><a href="#color">Color</a><a href="#tipografia">Tipografía</a>
   <a href="#recursos">Recursos</a><a href="#fotografia">Fotografía</a><a href="#packaging">Packaging</a><a href="#aplicaciones">Aplicaciones</a><a href="#pendientes">Pendientes</a>
 </div></nav>
@@ -230,11 +266,11 @@ footer{padding-block:48px 64px;border-top:1px solid var(--line);display:flex;jus
 <div class="wrap">
 
 <header class="hero" id="inicio">
-  <svg class="vaca" viewBox="11 12 78 70" role="img" aria-label="Isotipo D’Albano: cabeza de vaca"><use href="#vaca"/></svg>
-  <div class="wordmark">D’ALBANO</div>
+  <svg class="em" viewBox="0 0 180 180" role="img" aria-label="Emblema D’Albano: vaca de frente dentro de un círculo"><use href="#vaca"/></svg>
+  <svg class="wm" viewBox="0 0 536 100" role="img" aria-label="D’Albano"><use href="#wm"/></svg>
   <div class="sub"><span class="label">Queso artesanal</span><span class="label">·</span><span class="label">Industria uruguaya</span></div>
   <p class="lead">Manual de identidad visual. Todo empieza en la vaca.</p>
-  <span class="mono muted">Versión 1.0 · Noviembre 2026</span>
+  <span class="mono muted">Versión 2.0 · Noviembre 2026</span>
 </header>
 
 <!-- 01 -->
@@ -243,8 +279,8 @@ footer{padding-block:48px 64px;border-top:1px solid var(--line);display:flex;jus
   <div class="body">
     <div class="block">
       <p class="concept">Un queso es tan bueno como la vaca que da la leche.</p>
-      <p>D’Albano pone a la vaca en el centro de todo: en el logo, en las fotos y en cómo hablamos. No vendemos “gourmet”; mostramos el origen y dejamos que el producto hable. La estética es limpia y cálida, con los marrones del cuero, la madera y la corteza del queso.</p>
-      <p class="muted">La etiqueta anterior apoyaba la misma idea, pero la contaba con demasiados elementos a la vez: foto, paisaje, banderas, flor de lis, laureles y cuatro textos. Este sistema conserva lo esencial (la vaca, el nombre y el origen) y quita el resto.</p>
+      <p>D’Albano pone a la vaca en el centro de todo: es el emblema, es la textura de la palabra y es la protagonista de las fotos. La estética es limpia y cálida, con los marrones del cuero, la madera y la corteza del queso.</p>
+      <p class="muted">La etiqueta anterior contaba la misma idea con demasiados elementos a la vez: foto, paisaje, banderas, flor de lis, laureles y cuatro textos. Este sistema conserva lo esencial (la vaca, el nombre y el origen) y quita el resto.</p>
     </div>
     <div class="block">
       <span class="label">Personalidad</span>
@@ -252,7 +288,7 @@ footer{padding-block:48px 64px;border-top:1px solid var(--line);display:flex;jus
         <div><b>Serena</b><span class="muted">Sin gritos ni signos de exclamación. Confianza tranquila.</span></div>
         <div><b>Honesta</b><span class="muted">Decimos qué es, de dónde viene y cuánto tiempo lleva.</span></div>
         <div><b>Cuidadosa</b><span class="muted">El detalle está en la terminación, no en el adorno.</span></div>
-        <div><b>De campo</b><span class="muted">Cercana a la tierra, pero nunca rústica ni improvisada.</span></div>
+        <div><b>De campo</b><span class="muted">Cercana a la tierra, pero nunca improvisada.</span></div>
       </div>
     </div>
     <div class="block">
@@ -268,42 +304,55 @@ footer{padding-block:48px 64px;border-top:1px solid var(--line);display:flex;jus
 
 <!-- 02 -->
 <section class="s" id="logotipo">
-  <header><span class="n">02</span><h2>Logotipo</h2><span class="label lbl">Versiones y reglas de uso</span></header>
+  <header><span class="n">02</span><h2>Logotipo</h2><span class="label lbl">Emblema y palabra</span></header>
   <div class="body">
     <div class="block">
-      <p>El isotipo es una vaca de frente dibujada con una sola línea de grosor constante. La mancha sobre el ojo izquierdo es el rasgo propio de la marca: la hace reconocible incluso a 16 px. El nombre se escribe siempre en mayúsculas espaciadas y con apóstrofo tipográfico (<span class="mono">’</span>), nunca con tilde (<span class="mono">´</span>) ni comilla recta (<span class="mono">'</span>).</p>
+      <h3>El emblema</h3>
+      <p>Una vaca de frente, mirando a cámara, recortada en negativo dentro de un círculo. Tiene los ojos a los costados de la cabeza, como una vaca real, volumen en los cachetes y el hocico, y una mancha sobre el ojo izquierdo. El cuello sale por abajo del círculo y le da presencia.</p>
     </div>
-    <div class="tiles">
-      <div class="tile on-crema"><div class="lock-v"><svg class="vaca" viewBox="11 12 78 70"><use href="#vaca"/></svg><span class="wm">D’ALBANO</span><small>QUESO ARTESANAL</small></div><span class="cap">Principal · vertical</span></div>
-      <div class="tile on-leche"><div class="lock-h"><svg class="vaca" viewBox="11 12 78 70"><use href="#vaca"/></svg><span class="wm">D’ALBANO<small>QUESO ARTESANAL</small></span></div><span class="cap">Horizontal</span></div>
-      <div class="tile on-cuero"><svg class="lid" viewBox="0 0 400 400" data-lid data-bg="transparent" data-ink="#F3EBDD" data-k="#4A2E1F" data-var=""></svg><span class="cap">Sello · tapas y sellos</span></div>
-      <div class="tile on-nogal"><svg class="vaca" viewBox="11 12 78 70" style="width:96px"><use href="#vaca"/></svg><span class="cap">Isotipo solo</span></div>
+    <div class="block">
+      <h3>La palabra</h3>
+      <p>D’Albano se escribe en Alfa Slab One, una slab pesada de trazo parejo, con manchas que imitan el cuero de la vaca. El trazo grueso permite que las manchas se vean sin que se pierda ninguna letra. Se escribe con apóstrofo (<span class="mono">’</span>), no con tilde (<span class="mono">´</span>).</p>
+      <div class="demo2">
+        <div class="tile on-crema"><svg class="wm" viewBox="0 0 536 100"><use href="#wm"/></svg><span class="cap">Positiva · cuero con manchas caramelo</span></div>
+        <div class="tile on-caramelo"><svg class="wm" viewBox="0 0 536 100"><use href="#wm"/></svg><span class="cap">Cuero de vaca · blanca con manchas</span></div>
+      </div>
+    </div>
+    <div class="block">
+      <h3>Versiones</h3>
+      <div class="tiles">
+        <div class="tile on-crema"><div class="lock-v"><svg class="em" viewBox="0 0 180 180"><use href="#vaca"/></svg><svg class="wm" viewBox="0 0 536 100"><use href="#wm"/></svg><small>QUESO ARTESANAL</small></div><span class="cap">Principal · vertical</span></div>
+        <div class="tile on-leche"><div class="lock-h"><svg class="em" viewBox="0 0 180 180"><use href="#vaca"/></svg><div class="t"><svg class="wm" viewBox="0 0 536 100"><use href="#wm"/></svg><small>QUESO ARTESANAL</small></div></div><span class="cap">Horizontal</span></div>
+        <div class="tile on-cuero"><svg class="lid" viewBox="0 0 400 400" data-lid="transparent,#FBF8F3,#C49A6C,#FBF8F3,#C49A6C,#8C5E3C,#2B1C14,#FBF8F3,#8C5E3C" data-var=""></svg><span class="cap">Sello · tapas</span></div>
+        <div class="tile on-nogal"><svg class="em" viewBox="0 0 180 180" style="width:130px"><use href="#vaca"/></svg><span class="cap">Emblema solo · fondo oscuro</span></div>
+      </div>
     </div>
 
     <div class="block">
       <h3>Área de seguridad</h3>
-      <p>Alrededor del logo queda libre un espacio igual a <b>x</b>, la altura del hocico de la vaca. Ningún texto, borde ni imagen entra en esa zona.</p>
-      <div class="clear"><div class="box"><span class="x" style="top:6px;left:50%;transform:translateX(-50%)">x</span><span class="x" style="left:8px;top:50%;transform:translateY(-50%)">x</span><span class="x" style="right:8px;top:50%;transform:translateY(-50%)">x</span><span class="x" style="bottom:6px;left:50%;transform:translateX(-50%)">x</span>
-        <div class="inner lock-h"><svg class="vaca" viewBox="11 12 78 70"><use href="#vaca"/></svg><span class="wm" style="color:var(--brand-ink)">D’ALBANO<small>QUESO ARTESANAL</small></span></div></div></div>
+      <p>Alrededor del logo queda libre un espacio igual a <b>x</b>, la altura de la letra <i>a</i> de la palabra. Ningún texto, borde ni imagen entra en esa zona.</p>
+      <div class="clear"><div class="box"><span class="x" style="top:8px;left:50%;transform:translateX(-50%)">x</span><span class="x" style="left:10px;top:50%;transform:translateY(-50%)">x</span><span class="x" style="right:10px;top:50%;transform:translateY(-50%)">x</span><span class="x" style="bottom:8px;left:50%;transform:translateX(-50%)">x</span>
+        <div class="inner lock-h"><svg class="em" viewBox="0 0 180 180"><use href="#vaca"/></svg><div class="t"><svg class="wm" viewBox="0 0 536 100"><use href="#wm"/></svg><small style="color:var(--brand-ink)">QUESO ARTESANAL</small></div></div></div></div>
     </div>
 
     <div class="block">
       <h3>Tamaños mínimos</h3>
-      <p>Por debajo de 24 px (o 8 mm impreso) se usa la versión de trazo grueso del isotipo, que no pierde la mancha ni los ojos.</p>
+      <p>Por debajo de 48 px (o 15 mm impreso) se usa el emblema simplificado, en dos tintas y sin sombras. Por debajo de 100 px de ancho, la palabra va lisa, sin manchas.</p>
       <div class="sizes">
-        <figure><div class="lock-h" style="gap:8px"><svg class="vaca" viewBox="11 12 78 70" style="width:30px"><use href="#vaca"/></svg><span class="wm" style="font-size:1rem">D’ALBANO</span></div><figcaption class="mono muted">Horizontal · mín. 30 mm / 120 px</figcaption></figure>
-        <figure><svg class="vaca" viewBox="11 12 78 70" style="width:40px"><use href="#vaca"/></svg><figcaption class="mono muted">Isotipo · mín. 12 mm / 40 px</figcaption></figure>
-        <figure><svg class="vaca" viewBox="11 12 78 70" style="width:18px"><use href="#vaca-b"/></svg><figcaption class="mono muted">Trazo grueso · 16–24 px</figcaption></figure>
+        <figure><svg class="em" viewBox="0 0 180 180" style="width:64px"><use href="#vaca"/></svg><figcaption class="mono muted">Completo · mín. 15 mm / 48 px</figcaption></figure>
+        <figure><svg class="em" viewBox="0 0 180 180" style="width:32px"><use href="#vaca-s"/></svg><figcaption class="mono muted">Simplificado · 16–48 px</figcaption></figure>
+        <figure><svg class="wm" viewBox="0 0 536 100" style="width:120px"><use href="#wm"/></svg><figcaption class="mono muted">Con manchas · mín. 30 mm / 100 px</figcaption></figure>
+        <figure><svg class="wm" viewBox="0 0 536 100" style="width:72px;--w2:var(--w1)"><use href="#wm"/></svg><figcaption class="mono muted">Lisa · menos de 100 px</figcaption></figure>
       </div>
     </div>
 
     <div class="block wrong">
       <h3>Usos incorrectos</h3>
       <div class="tiles">
-        <figure><div class="tile on-crema"><div class="lock-h" style="transform:scaleX(1.3)"><svg class="vaca" viewBox="11 12 78 70"><use href="#vaca"/></svg><span class="wm">D’ALBANO</span></div></div><figcaption>No deformar ni estirar.</figcaption></figure>
-        <figure><div class="tile" style="background:#E8F0E3;color:#2F7A3A;--k:#E8F0E3"><div class="lock-h"><svg class="vaca" viewBox="11 12 78 70"><use href="#vaca"/></svg><span class="wm">D’ALBANO</span></div></div><figcaption>No usar colores fuera de la paleta.</figcaption></figure>
-        <figure><div class="tile" style="background:repeating-linear-gradient(35deg,#C49A6C 0 14px,#8C5E3C 14px 28px,#F3EBDD 28px 40px);color:#4A2E1F;--k:#C49A6C"><div class="lock-h"><svg class="vaca" viewBox="11 12 78 70"><use href="#vaca"/></svg><span class="wm">D’ALBANO</span></div></div><figcaption>No apoyar sobre fondos cargados.</figcaption></figure>
-        <figure><div class="tile on-crema"><div class="lock-h" style="filter:drop-shadow(3px 3px 0 #C49A6C)"><svg class="vaca" viewBox="11 12 78 70"><use href="#vaca"/></svg><span class="wm" style="font-family:Georgia,serif;font-style:italic;letter-spacing:0">D´Albano</span></div></div><figcaption>No agregar sombras, cambiar la letra ni usar tilde en el apóstrofo.</figcaption></figure>
+        <figure><div class="tile on-crema"><div class="lock-h" style="transform:scaleX(1.3)"><svg class="em" viewBox="0 0 180 180"><use href="#vaca"/></svg><div class="t"><svg class="wm" viewBox="0 0 536 100"><use href="#wm"/></svg></div></div></div><figcaption>No deformar ni estirar.</figcaption></figure>
+        <figure><div class="tile" style="background:#E8F0E3;--c1:#2F7A3A;--c2:#E8F0E3;--c3:#9CC48A;--c4:#2F7A3A;--c5:#123;--w1:#2F7A3A;--w2:#9CC48A"><div class="lock-h"><svg class="em" viewBox="0 0 180 180"><use href="#vaca"/></svg><div class="t"><svg class="wm" viewBox="0 0 536 100"><use href="#wm"/></svg></div></div></div><figcaption>No usar colores fuera de la paleta.</figcaption></figure>
+        <figure><div class="tile on-crema" style="--w2:#4A2E1F;--w1:#F3EBDD"><div class="lock-h"><svg class="em" viewBox="0 0 180 180"><use href="#vaca"/></svg><div class="t"><svg class="wm" viewBox="0 0 536 100"><use href="#wm"/></svg></div></div></div><figcaption>No usar la palabra blanca sobre fondo claro: las letras desaparecen.</figcaption></figure>
+        <figure><div class="tile on-crema"><div class="lock-h"><svg class="em" viewBox="0 0 180 180"><use href="#vaca"/></svg><span style="font-family:Georgia,serif;font-style:italic;font-size:1.9rem;color:var(--cuero)">D´Albano</span></div></div><figcaption>No cambiar la tipografía ni usar tilde en lugar de apóstrofo.</figcaption></figure>
       </div>
     </div>
   </div>
@@ -313,7 +362,7 @@ footer{padding-block:48px 64px;border-top:1px solid var(--line);display:flex;jus
 <section class="s" id="color">
   <header><span class="n">03</span><h2>Color</h2><span class="label lbl">Seis marrones, del cuero a la leche</span></header>
   <div class="body">
-    <p>La paleta sale de la vaca y del queso: el pelaje, la madera de la estiba, la corteza y la pasta. No hay acentos estridentes; el contraste se logra entre el marrón más oscuro y los cremas. Tocá un color para copiar su código.</p>
+    <p>La paleta sale de la vaca y del queso: el pelaje, la madera de la estiba, la corteza y la pasta. El contraste se logra entre el marrón más oscuro y los cremas. Tocá un color para copiar su código.</p>
     <div class="swatches" id="sw"></div>
     <div class="block">
       <h3>Proporción de uso</h3>
@@ -322,7 +371,7 @@ footer{padding-block:48px 64px;border-top:1px solid var(--line);display:flex;jus
         <span style="flex:25;background:var(--cuero);color:var(--crema)">Cuero 25%</span>
         <span style="flex:12;background:var(--leche);color:var(--cuero)">Leche</span>
         <span style="flex:8;background:var(--caramelo);color:var(--nogal)">Car.</span>
-        <span style="flex:6;background:var(--avellana);color:var(--crema)"></span>
+        <span style="flex:6;background:var(--avellana)"></span>
         <span style="flex:4;background:var(--nogal)"></span>
       </div>
       <p class="muted">Los valores CMYK son una conversión inicial. Antes de imprimir hay que hacer una prueba de color con la imprenta y fijar los Pantone equivalentes.</p>
@@ -332,20 +381,20 @@ footer{padding-block:48px 64px;border-top:1px solid var(--line);display:flex;jus
 
 <!-- 04 -->
 <section class="s" id="tipografia">
-  <header><span class="n">04</span><h2>Tipografía</h2><span class="label lbl">Una clásica, una moderna</span></header>
+  <header><span class="n">04</span><h2>Tipografía</h2><span class="label lbl">Una de campo, una limpia</span></header>
   <div class="body">
     <div>
-      <div class="spec"><div><span class="big" style="font-family:var(--f-display)">Aa</span></div><div><h3>Bodoni Moda</h3><p class="muted" style="margin:0">Logo, títulos y nombres de variedad. Una didona de alto contraste, de tradición tipográfica francesa: aporta la raíz europea de la marca sin necesidad de banderas ni flores de lis.</p></div></div>
-      <div class="spec"><div><span class="big" style="font-family:var(--f-body);font-weight:300">Aa</span></div><div><h3 style="font-family:var(--f-body);font-weight:500">Jost</h3><p class="muted" style="margin:0">Textos, etiquetas y datos legales. Geométrica y limpia; en mayúsculas espaciadas para los rótulos.</p></div></div>
-      <div class="spec"><div><span class="big" style="font-family:var(--f-mono);font-size:clamp(2.4rem,6vw,4rem)">01</span></div><div><h3 style="font-family:var(--f-mono);font-weight:400;font-size:1.1rem">DM Mono</h3><p class="muted" style="margin:0">Solo para lote, fecha y peso. Uso técnico.</p></div></div>
+      <div class="spec"><div><span class="big" style="font-family:var(--f-display)">Aa</span></div><div><h3>Alfa Slab One</h3><p class="muted" style="margin:0">Logo, títulos y nombres de variedad. Slab pesada de trazo parejo: tiene el peso de un sello de campo y aguanta las manchas de cuero sin perder letras. Se usa siempre en tamaños grandes y con poco texto.</p></div></div>
+      <div class="spec"><div><span class="big" style="font-weight:300">Aa</span></div><div><h3>Jost</h3><p class="muted" style="margin:0">Textos, etiquetas y datos legales. Geométrica y limpia; en mayúsculas espaciadas para los rótulos. Equilibra el peso de la slab.</p></div></div>
+      <div class="spec"><div><span class="big" style="font-family:var(--f-mono);font-size:clamp(2.4rem,6vw,3.6rem)">01</span></div><div><h3>DM Mono</h3><p class="muted" style="margin:0">Solo para lote, fecha y peso. Uso técnico.</p></div></div>
     </div>
     <div class="block">
       <h3>Jerarquía</h3>
       <div class="tbl"><table class="hier"><tbody>
-        <tr><td><span style="font-family:var(--f-display);font-size:2.2rem;letter-spacing:.14em">D’ALBANO</span></td><td class="mono">Bodoni 500 · +160 tracking</td></tr>
-        <tr><td><span style="font-family:var(--f-display);font-style:italic;font-size:1.8rem">Estacionado</span></td><td class="mono">Bodoni itálica · variedad</td></tr>
+        <tr><td><svg class="wm" viewBox="0 0 536 100" style="width:200px"><use href="#wm"/></svg></td><td class="mono">Palabra con manchas · solo logo</td></tr>
+        <tr><td><span style="font-family:var(--f-display);font-size:1.7rem;color:var(--brand-ink)">Estacionado</span></td><td class="mono">Alfa Slab · títulos y variedad</td></tr>
         <tr><td><span style="font-size:.78rem;letter-spacing:.24em;font-weight:500">QUESO ARTESANAL</span></td><td class="mono">Jost 500 · mayúsculas +240</td></tr>
-        <tr><td><span>Elaborado con leche de nuestras vacas.</span></td><td class="mono">Jost 400 · texto</td></tr>
+        <tr><td>Elaborado con leche de nuestras vacas.</td><td class="mono">Jost 400 · texto</td></tr>
         <tr><td><span class="mono">LOTE 0425 · 1,2 kg</span></td><td class="mono">DM Mono · datos</td></tr>
       </tbody></table></div>
     </div>
@@ -358,15 +407,16 @@ footer{padding-block:48px 64px;border-top:1px solid var(--line);display:flex;jus
   <div class="body">
     <div class="block">
       <h3>Manchas</h3>
-      <p>El pelaje de la vaca convertido en textura. Se usa en papel de envolver, cajas, fondos de redes y el interior de bolsas. Siempre en tono sobre tono, nunca en contraste alto.</p>
+      <p>El mismo cuero de la palabra, convertido en textura. Se usa en papel de envolver, cajas, fondos de redes y el interior de bolsas. Tono sobre tono para fondos; blanco con manchas cuero solo en piezas chicas y puntuales.</p>
       <div class="cols">
-        <div class="pattern"><svg aria-hidden="true"><rect width="100%" height="100%" fill="url(#manchas)" opacity=".13"/></svg></div>
-        <div class="pattern dark"><svg aria-hidden="true"><rect width="100%" height="100%" fill="url(#manchas)"/></svg></div>
+        <div class="pattern" style="background:var(--crema)"><svg aria-hidden="true"><rect width="100%" height="100%" fill="url(#manchas)" opacity=".22"/></svg></div>
+        <div class="pattern" style="background:var(--cuero)"><svg aria-hidden="true"><rect width="100%" height="100%" fill="url(#manchas)" opacity=".45"/></svg></div>
+        <div class="pattern" style="background:var(--leche)"><svg aria-hidden="true"><rect width="100%" height="100%" fill="url(#manchas-c)"/></svg></div>
       </div>
     </div>
     <div class="cols">
-      <div class="card"><h3>Línea simple</h3><p class="muted">Todo pictograma de apoyo (balde, rueda de queso, tranquera, sol) se dibuja con el mismo trazo redondeado que la vaca. Nunca ilustraciones realistas en el packaging.</p></div>
-      <div class="card"><h3>Anillo</h3><p class="muted">El doble círculo de la tapa se puede usar solo, como marco para precios, sellos de premio o datos destacados.</p></div>
+      <div class="card"><h3>El círculo</h3><p class="muted">El círculo del emblema se puede usar solo, lleno o en línea, como marco para precios, sellos de premio o datos destacados.</p></div>
+      <div class="card"><h3>Ilustración</h3><p class="muted">Cualquier ilustración de apoyo sigue el estilo del emblema: formas llenas, dos o tres marrones, sombras planas. Nunca degradados ni contornos.</p></div>
       <div class="card"><h3>Espacio vacío</h3><p class="muted">Es un recurso más. Cada pieza debe tener al menos un 40% de superficie libre.</p></div>
     </div>
   </div>
@@ -376,9 +426,9 @@ footer{padding-block:48px 64px;border-top:1px solid var(--line);display:flex;jus
 <section class="s" id="fotografia">
   <header><span class="n">06</span><h2>Fotografía</h2><span class="label lbl">La vaca, de frente y en calma</span></header>
   <div class="body">
-    <p>La foto cuenta lo que el logo resume. Hay tres tipos de imagen y siempre comparten luz natural cálida, tonos tierra y composiciones con aire.</p>
+    <p>La foto cuenta lo que el emblema resume. Hay tres tipos de imagen y siempre comparten luz natural cálida, tonos tierra y composiciones con aire.</p>
     <div class="cols">
-      <div><div class="frame" style="background:linear-gradient(180deg,#C9AE8A 0%,#8C6A47 55%,#4A2E1F 100%)"><span>Retrato</span></div><p style="margin-top:10px"><b>Retrato de vaca.</b> <span class="muted">De frente, mirando a cámara, a la altura de los ojos. Fondo de campo desenfocado. Es la imagen protagonista.</span></p></div>
+      <div><div class="frame" style="background:linear-gradient(180deg,#C9AE8A 0%,#8C6A47 55%,#4A2E1F 100%)"><span>Retrato</span></div><p style="margin-top:10px"><b>Retrato de vaca.</b> <span class="muted">De frente, mirando a cámara, a la altura de los ojos, como en el emblema. Fondo de campo desenfocado.</span></p></div>
       <div><div class="frame" style="background:linear-gradient(160deg,#F3EBDD 0%,#D9C3A2 60%,#B88B5C 100%)"><span style="color:#4A2E1F">Producto</span></div><p style="margin-top:10px"><b>Producto.</b> <span class="muted">Horma entera y cortada sobre madera o lino crudo. Luz lateral suave. Pocos objetos.</span></p></div>
       <div><div class="frame" style="background:linear-gradient(180deg,#B9A27F 0%,#6E5536 100%)"><span>Proceso</span></div><p style="margin-top:10px"><b>Proceso.</b> <span class="muted">Manos, ordeñe, moldes, estiba. Fotos reales del establecimiento, nunca de banco de imágenes.</span></p></div>
     </div>
@@ -394,17 +444,16 @@ footer{padding-block:48px 64px;border-top:1px solid var(--line);display:flex;jus
   <header><span class="n">07</span><h2>Packaging</h2><span class="label lbl">La tapa y el sistema por variedad</span></header>
   <div class="body">
     <div class="lid-hero">
-      <svg class="lid" viewBox="0 0 400 400" data-lid data-bg="#F3EBDD" data-ink="#4A2E1F" data-k="#F3EBDD" data-var="Semiduro" role="img" aria-label="Tapa redonda D’Albano, variedad Semiduro"></svg>
+      <svg class="lid" viewBox="0 0 400 400" data-lid="#F3EBDD,#4A2E1F,#4A2E1F,#F3EBDD,#C49A6C,#8C5E3C,#2B1C14,#4A2E1F,#C49A6C" data-var="Semiduro" role="img" aria-label="Tapa redonda D’Albano, variedad Semiduro"></svg>
       <div class="block">
         <h3>La tapa</h3>
-        <p class="muted">Rediseño de la tapa actual. Misma forma redonda y la misma información, en una sola tinta.</p>
+        <p class="muted">Rediseño de la tapa actual: misma forma redonda y misma información, con la mitad de los elementos.</p>
         <ol class="anat">
           <li><span><b>Anillo de texto.</b> “Queso artesanal” arriba e “Industria uruguaya” abajo, en Jost espaciada.</span></li>
-          <li><span><b>Vaca.</b> Centrada, ocupa un cuarto del diámetro.</span></li>
-          <li><span><b>Nombre.</b> D’ALBANO en Bodoni, debajo de la vaca.</span></li>
-          <li><span><b>Variedad.</b> En itálica, separada por una línea fina. Cambia el color de toda la tapa.</span></li>
+          <li><span><b>Emblema.</b> La vaca, centrada en la mitad superior.</span></li>
+          <li><span><b>Palabra.</b> D’Albano con manchas, debajo del emblema.</span></li>
+          <li><span><b>Variedad.</b> En Alfa Slab, separada por una línea fina. Cambia el color de toda la tapa.</span></li>
         </ol>
-        <p class="muted">Impresión sugerida: una tinta sobre cartulina o madera de álamo con sello a calor para las hormas grandes.</p>
       </div>
     </div>
 
@@ -412,19 +461,19 @@ footer{padding-block:48px 64px;border-top:1px solid var(--line);display:flex;jus
       <h3>Una tapa por variedad</h3>
       <p>El color de fondo identifica la variedad de un vistazo en la góndola: cuanto más estacionado el queso, más oscura la tapa. <span class="muted">(Las variedades son de ejemplo; se ajustan a tu línea real.)</span></p>
       <div class="lids">
-        <figure><svg class="lid" viewBox="0 0 400 400" data-lid data-bg="#FBF8F3" data-ink="#4A2E1F" data-k="#FBF8F3" data-var="Fresco" data-ring="#DDD0BE"></svg><figcaption>Fresco · <span class="mono">Leche</span></figcaption></figure>
-        <figure><svg class="lid" viewBox="0 0 400 400" data-lid data-bg="#C49A6C" data-ink="#2B1C14" data-k="#C49A6C" data-var="Semiduro"></svg><figcaption>Semiduro · <span class="mono">Caramelo</span></figcaption></figure>
-        <figure><svg class="lid" viewBox="0 0 400 400" data-lid data-bg="#8C5E3C" data-ink="#F3EBDD" data-k="#8C5E3C" data-var="Estacionado"></svg><figcaption>Estacionado · <span class="mono">Avellana</span></figcaption></figure>
-        <figure><svg class="lid" viewBox="0 0 400 400" data-lid data-bg="#2B1C14" data-ink="#C49A6C" data-k="#2B1C14" data-var="Ahumado"></svg><figcaption>Ahumado · <span class="mono">Nogal</span></figcaption></figure>
+        <figure><svg class="lid" viewBox="0 0 400 400" data-lid="#FBF8F3,#4A2E1F,#4A2E1F,#FBF8F3,#C49A6C,#8C5E3C,#2B1C14,#4A2E1F,#C49A6C,#DDD0BE" data-var="Fresco"></svg><figcaption>Fresco · <span class="mono">Leche</span></figcaption></figure>
+        <figure><svg class="lid" viewBox="0 0 400 400" data-lid="#C49A6C,#2B1C14,#4A2E1F,#FBF8F3,#C49A6C,#8C5E3C,#2B1C14,#FBF8F3,#4A2E1F" data-var="Semiduro"></svg><figcaption>Semiduro · <span class="mono">Caramelo</span></figcaption></figure>
+        <figure><svg class="lid" viewBox="0 0 400 400" data-lid="#8C5E3C,#F3EBDD,#4A2E1F,#F3EBDD,#C49A6C,#8C5E3C,#2B1C14,#F3EBDD,#4A2E1F" data-var="Estacionado"></svg><figcaption>Estacionado · <span class="mono">Avellana</span></figcaption></figure>
+        <figure><svg class="lid" viewBox="0 0 400 400" data-lid="#2B1C14,#C49A6C,#8C5E3C,#F3EBDD,#C49A6C,#4A2E1F,#2B1C14,#F3EBDD,#8C5E3C" data-var="Ahumado"></svg><figcaption>Ahumado · <span class="mono">Nogal</span></figcaption></figure>
       </div>
     </div>
 
     <div class="block">
       <h3>Faja lateral</h3>
       <p class="muted">Rodea el canto de la horma y lleva los datos legales. Fondo crema en todas las variedades.</p>
-      <div class="band-wrap"><div class="band">
-        <svg class="vaca" viewBox="11 12 78 70" style="color:var(--cuero)"><use href="#vaca"/></svg>
-        <div><span class="wm">D’ALBANO</span><br>Queso semiduro artesanal</div>
+      <div class="band-wrap"><div class="band on-crema">
+        <svg class="em" viewBox="0 0 180 180"><use href="#vaca"/></svg>
+        <div><svg class="wm" viewBox="0 0 536 100"><use href="#wm"/></svg><div style="margin-top:4px">Queso semiduro artesanal</div></div>
         <div><b>Ingredientes</b>Leche de vaca pasteurizada, cuajo, fermentos lácticos, sal.</div>
         <div><b>Lote · Elab. · Venc.</b><span class="mono">0425 · 10/2026 · 04/2027</span><br><b style="margin-top:4px">Peso neto</b><span class="mono">1,2 kg aprox.</span></div>
         <div class="barcode" aria-hidden="true"></div>
@@ -439,40 +488,41 @@ footer{padding-block:48px 64px;border-top:1px solid var(--line);display:flex;jus
   <header><span class="n">08</span><h2>Aplicaciones</h2><span class="label lbl">Papelería y redes</span></header>
   <div class="body">
     <div class="apps">
-      <figure><div class="biz front on-cuero"><div class="lock-v"><svg class="vaca" viewBox="11 12 78 70" style="width:54px"><use href="#vaca"/></svg><span class="wm" style="font-size:1.3rem">D’ALBANO</span></div></div><figcaption class="muted">Tarjeta · frente</figcaption></figure>
+      <figure><div class="biz front on-cuero"><div class="lock-v" style="gap:8px"><svg class="em" viewBox="0 0 180 180" style="width:64px"><use href="#vaca"/></svg><svg class="wm" viewBox="0 0 536 100" style="width:130px"><use href="#wm"/></svg></div></div><figcaption class="muted">Tarjeta · frente</figcaption></figure>
       <figure><div class="biz back on-crema"><div><span class="name">Nombre Apellido</span><br><span class="label" style="color:var(--avellana)">Quesería D’Albano</span></div><div>+598 00 000 000<br>contacto@dalbano.uy<br>Departamento, Uruguay</div></div><figcaption class="muted">Tarjeta · dorso <span class="ex">(datos de ejemplo)</span></figcaption></figure>
-      <figure><div class="post on-crema"><svg class="vaca bgcow" viewBox="11 12 78 70" aria-hidden="true"><use href="#vaca"/></svg><span class="label" style="color:var(--avellana);position:relative">Semiduro</span><p class="q">Leche, cuajo, sal y tiempo.</p><div class="foot"><span>D’Albano</span><span>Queso artesanal</span></div></div><figcaption class="muted">Post de Instagram · claro</figcaption></figure>
-      <figure><div class="post on-nogal"><svg class="bgcow" viewBox="0 0 220 220" aria-hidden="true" style="width:100%;right:0;bottom:0;opacity:.35;color:#3D2A1E"><rect width="220" height="220" fill="url(#manchas)"/></svg><span class="label" style="color:var(--caramelo);position:relative">Ahumado</span><p class="q" style="color:var(--crema)">Ahumado lento, con leña de monte.</p><div class="foot" style="color:var(--caramelo)"><span>D’Albano</span><span>Queso artesanal</span></div></div><figcaption class="muted">Post de Instagram · oscuro <span class="ex">(texto de ejemplo)</span></figcaption></figure>
+      <figure><div class="post on-crema"><span class="label" style="color:var(--avellana);position:relative">Semiduro</span><svg class="em" viewBox="0 0 180 180" style="width:46%;justify-self:center;position:relative"><use href="#vaca"/></svg><div class="foot"><svg class="wm" viewBox="0 0 536 100"><use href="#wm"/></svg><small>Queso artesanal</small></div></div><figcaption class="muted">Post de Instagram · producto</figcaption></figure>
+      <figure><div class="post on-caramelo"><svg class="bg" aria-hidden="true"><rect width="100%" height="100%" fill="url(#manchas)" opacity=".18"/></svg><span class="label" style="color:var(--nogal);position:relative">Ahumado</span><p class="q" style="color:var(--nogal)">Leche, cuajo, sal y tiempo.</p><div class="foot"><svg class="wm" viewBox="0 0 536 100"><use href="#wm"/></svg><small>Queso artesanal</small></div></div><figcaption class="muted">Post de Instagram · frase <span class="ex">(texto de ejemplo)</span></figcaption></figure>
     </div>
   </div>
 </section>
 
 <!-- 09 -->
 <section class="s" id="pendientes">
-  <header><span class="n">09</span><h2>Pendientes</h2><span class="label lbl">Para cerrar la versión 1.0</span></header>
+  <header><span class="n">09</span><h2>Pendientes</h2><span class="label lbl">Para cerrar la versión 2.0</span></header>
   <div class="body">
     <ul class="todo">
       <li><span><b>Línea de productos.</b> Confirmar variedades reales y asignarles color.</span></li>
-      <li><span><b>Historia.</b> Origen del nombre D’Albano, la familia, el lugar y el vínculo con Francia, si existe, para el texto de marca.</span></li>
-      <li><span><b>Raza de las vacas.</b> Si son Holando, Jersey u otra, se puede ajustar la mancha del isotipo a su pelaje real.</span></li>
+      <li><span><b>Historia.</b> Origen del nombre D’Albano, la familia y el lugar, para el texto de marca.</span></li>
+      <li><span><b>Raza de las vacas.</b> Ajustar la mancha del emblema al pelaje real (Holando, Jersey, Hereford).</span></li>
+      <li><span><b>Ilustración final.</b> Pasar el emblema a manos de un ilustrador o vectorizarlo en Illustrator o Figma, partiendo de este boceto, para afinar anatomía y detalle.</span></li>
+      <li><span><b>Palabra.</b> Revisar la ubicación de cada mancha letra por letra y verificar la licencia de Alfa Slab One (es libre, licencia OFL).</span></li>
       <li><span><b>Imprenta.</b> Prueba de color y equivalencias Pantone.</span></li>
-      <li><span><b>Logo final.</b> Vectorizar el isotipo y el wordmark en Illustrator o Figma para producción.</span></li>
       <li><span><b>Sesión de fotos</b> en el tambo, siguiendo la sección 06.</span></li>
     </ul>
   </div>
 </section>
 
-<footer><span>D’Albano · Manual de marca v1.0</span><span>Queso artesanal · Industria uruguaya</span></footer>
+<footer><span>D’Albano · Manual de marca v2.0</span><span>Queso artesanal · Industria uruguaya</span></footer>
 </div>
 
 <script>
 (function(){
-  // Tapas: un mismo dibujo, cambia color y variedad
-  var C=200, ringTop='M 39,200 A 161,161 0 0 1 361,200', ringBot='M 27,200 A 173,173 0 0 0 373,200';
+  // Tapas: bg, tinta, c1..c5 del emblema, w1, w2, borde opcional
+  var ringTop='M 39,200 A 161,161 0 0 1 361,200', ringBot='M 27,200 A 173,173 0 0 0 373,200';
   document.querySelectorAll('svg[data-lid]').forEach(function(s,i){
-    var bg=s.dataset.bg, ink=s.dataset.ink, k=s.dataset.k, v=s.dataset.var, ring=s.dataset.ring||'none', id='l'+i;
-    var hasVar=!!v;
-    s.style.setProperty('--k',k);
+    var a=s.dataset.lid.split(','), bg=a[0], ink=a[1], v=s.dataset.var, ring=a[9]||'none', id='l'+i, hv=!!v;
+    ['--c1','--c2','--c3','--c4','--c5','--w1','--w2'].forEach(function(k,j){s.style.setProperty(k,a[j+2])});
+    var ey=hv?62:74, wy=hv?202:218;
     s.innerHTML=
       '<defs><path id="'+id+'t" d="'+ringTop+'"/><path id="'+id+'b" d="'+ringBot+'"/></defs>'+
       '<circle cx="200" cy="200" r="196" fill="'+bg+'" stroke="'+ring+'" stroke-width="1.5"/>'+
@@ -481,21 +531,18 @@ footer{padding-block:48px 64px;border-top:1px solid var(--line);display:flex;jus
       '<text fill="'+ink+'" font-family="Jost, Futura, sans-serif" font-weight="500" font-size="15" letter-spacing="6.5"><textPath href="#'+id+'t" startOffset="50%" text-anchor="middle">QUESO ARTESANAL</textPath></text>'+
       '<text fill="'+ink+'" font-family="Jost, Futura, sans-serif" font-weight="500" font-size="15" letter-spacing="6.5"><textPath href="#'+id+'b" startOffset="50%" text-anchor="middle">INDUSTRIA URUGUAYA</textPath></text>'+
       '<circle cx="34" cy="200" r="2.6" fill="'+ink+'"/><circle cx="366" cy="200" r="2.6" fill="'+ink+'"/>'+
-      '<svg x="152" y="'+(hasVar?98:112)+'" width="96" height="86" viewBox="11 12 78 70" style="color:'+ink+'"><use href="#vaca"/></svg>'+
-      '<text x="200" y="'+(hasVar?236:252)+'" text-anchor="middle" fill="'+ink+'" font-family="Bodoni Moda, Didot, Georgia, serif" font-weight="500" font-size="36" letter-spacing="6">D’ALBANO</text>'+
-      (hasVar?
-        '<line x1="176" y1="256" x2="224" y2="256" stroke="'+ink+'" stroke-width="0.9"/>'+
-        '<text x="200" y="290" text-anchor="middle" fill="'+ink+'" font-family="Bodoni Moda, Didot, Georgia, serif" font-style="italic" font-size="25">'+v+'</text>'
-        :'');
+      '<svg x="137" y="'+ey+'" width="126" height="126" viewBox="0 0 180 180"><use href="#vaca"/></svg>'+
+      '<svg x="96" y="'+wy+'" width="208" height="34" viewBox="0 0 536 100"><use href="#wm"/></svg>'+
+      (hv?'<line x1="180" y1="258" x2="220" y2="258" stroke="'+ink+'" stroke-width="0.9"/>'+
+        '<text x="200" y="290" text-anchor="middle" fill="'+ink+'" font-family="Alfa Slab One, Rockwell, serif" font-size="21" letter-spacing="1">'+v+'</text>':'');
   });
 
-  // Paleta
   var pal=[
     ['Nogal','#2B1C14','43 · 28 · 20','0 · 35 · 53 · 83','Texto y fondos oscuros','#C49A6C'],
     ['Cuero','#4A2E1F','74 · 46 · 31','0 · 38 · 58 · 71','Color principal de marca','#F3EBDD'],
-    ['Avellana','#8C5E3C','140 · 94 · 60','0 · 33 · 57 · 45','Secundario, variedades','#F3EBDD'],
-    ['Caramelo','#C49A6C','196 · 154 · 108','0 · 21 · 45 · 23','Acento cálido','#2B1C14'],
-    ['Crema','#F3EBDD','243 · 235 · 221','0 · 3 · 9 · 5','Fondo principal','#4A2E1F'],
+    ['Avellana','#8C5E3C','140 · 94 · 60','0 · 33 · 57 · 45','Manchas, variedades','#F3EBDD'],
+    ['Caramelo','#C49A6C','196 · 154 · 108','0 · 21 · 45 · 23','Hocico, sombras, acento','#2B1C14'],
+    ['Crema','#F3EBDD','243 · 235 · 221','0 · 3 · 9 · 5','La vaca, fondo principal','#4A2E1F'],
     ['Leche','#FBF8F3','251 · 248 · 243','0 · 1 · 3 · 2','Fondo limpio, etiquetas','#4A2E1F']
   ];
   var box=document.getElementById('sw');
