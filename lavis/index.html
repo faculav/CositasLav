@@ -120,6 +120,18 @@ a.row:hover{background:var(--fill-2)}
 .rail.inset{margin:0!important;padding:4px 0 8px!important;scroll-padding:0!important}
 @media(min-width:900px){.two{grid-template-columns:1fr 1fr;gap:24px}}
 
+
+/* team */
+.tcard{position:relative;width:min(64vw,290px);aspect-ratio:4/5;border-radius:var(--r-xl);overflow:hidden;background:#3a3a3c;box-shadow:inset 0 0 0 .5px var(--line)}
+.tcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.tcard:hover img{transform:scale(1.03)}
+.tcard::after{content:"";position:absolute;inset:auto 0 0;height:45%;background:linear-gradient(to top,rgba(0,0,0,.6),rgba(0,0,0,0))}
+.tcard .tmeta{position:absolute;left:18px;right:18px;bottom:16px;z-index:2;color:#fff}
+.tcard .tmeta b{display:block;font-size:22px;font-weight:700;letter-spacing:-.025em}
+.tcard .tmeta small{font-size:14px;opacity:.8;font-weight:500}
+.tcard.soon{background:linear-gradient(160deg,#2c2c2e,#1c1c1e);display:grid;place-items:center}
+.tcard.soon .ini{font-size:96px;font-weight:700;letter-spacing:-.05em;color:rgba(255,255,255,.12);margin-top:-40px}
+
 /* membership */
 .member{position:relative;border-radius:var(--r-xl);overflow:hidden;background:var(--ink);color:#fff;display:grid}
 @media(min-width:900px){.member{grid-template-columns:1.1fr 1fr}}
@@ -267,6 +279,16 @@ footer a:hover{color:var(--ink)}
     </div>
   </section>
 
+  <!-- EQUIPO -->
+  <section class="wrap fade" id="equipo">
+    <div class="sh"><h2>El equipo</h2><a href="https://lavis-studio.vercel.app/reservar">Elegir barbero <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a></div>
+    <div class="rail">
+      <a class="tcard" href="https://lavis-studio.vercel.app/reservar"><img src="assets/barbero-theo.jpg" alt="Theo, barbero de Lavis" loading="lazy"><div class="tmeta"><b>Theo</b><small>Barbero</small></div></a>
+      <a class="tcard" href="https://lavis-studio.vercel.app/reservar"><img src="assets/barbero-gabriel.jpg" alt="Gabriel, barbero de Lavis" loading="lazy"><div class="tmeta"><b>Gabriel</b><small>Barbero</small></div></a>
+      <a class="tcard soon" href="https://lavis-studio.vercel.app/reservar"><span class="ini">I</span><div class="tmeta"><b>Ignacio</b><small>Barbero</small></div></a>
+    </div>
+  </section>
+
   <!-- MEMBRESIA -->
   <section class="wrap fade" id="membresia">
     <div class="member">
@@ -284,7 +306,7 @@ footer a:hover{color:var(--ink)}
         <a class="btn btn-light" href="https://www.mercadopago.com.uy/subscriptions/checkout?preapproval_plan_id=2c93808490edce280190ef6848ec0048">Hacerme socio</a>
         <p class="note">Precio fundador para los primeros 150 socios. Después, $1.800.</p>
       </div>
-      <figure><img src="assets/salon-detalle.jpg" alt="Detalle del salón Lavis" loading="lazy"></figure>
+      <figure><img src="assets/cartel-lavis.jpg" alt="Cartel de Lavis en el salón" loading="lazy"></figure>
     </div>
   </section>
 
@@ -357,7 +379,7 @@ footer a:hover{color:var(--ink)}
 <nav class="tabbar" aria-label="Navegación">
   <a href="#inicio" class="on" data-s="inicio" aria-label="Inicio"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.3 3.3a1 1 0 0 1 1.4 0l8 7.6a1 1 0 0 1-.7 1.7H19V20a1 1 0 0 1-1 1h-4v-5h-4v5H6a1 1 0 0 1-1-1v-7.4H4a1 1 0 0 1-.7-1.7l8-7.6Z"/></svg><span class="lbl">Inicio</span></a>
   <a href="#trabajo" data-s="trabajo" aria-label="Trabajos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="6" width="18" height="15" rx="3"/><path d="M6 3h12M3 17l5-5 4 4 3-3 6 6" stroke-linecap="round"/></svg><span class="lbl">Trabajos</span></a>
-  <a href="#salon" data-s="salon" aria-label="El salón"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z"/></svg><span class="lbl">Salón</span></a>
+  <a href="#equipo" data-s="equipo" aria-label="El equipo"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z"/></svg><span class="lbl">Equipo</span></a>
   <a href="https://lavis-studio.vercel.app/reservar" class="book">Reservar</a>
 </nav>
 
@@ -369,7 +391,7 @@ footer a:hover{color:var(--ink)}
   document.querySelectorAll('.fade').forEach(el=>io.observe(el));
   const tabs=[...document.querySelectorAll('.tabbar a[data-s]')];
   const spy=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){tabs.forEach(t=>t.classList.toggle('on',t.dataset.s===e.target.id))}}),{rootMargin:'-45% 0px -50% 0px'});
-  ['inicio','trabajo','salon'].forEach(id=>{const el=document.getElementById(id);el&&spy.observe(el)});
+  ['inicio','trabajo','equipo'].forEach(id=>{const el=document.getElementById(id);el&&spy.observe(el)});
 })();
 </script>
 </body>
