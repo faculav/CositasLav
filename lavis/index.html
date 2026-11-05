@@ -121,6 +121,15 @@ a.row:hover{background:var(--fill-2)}
 @media(min-width:900px){.two{grid-template-columns:1fr 1fr;gap:24px}}
 
 
+
+.glabel{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);margin:0 0 8px 4px}
+.pcard{width:min(58vw,260px)}
+@media(min-width:768px){.pcard{width:280px}}
+.pcard figure{aspect-ratio:3/4.4;border-radius:var(--r-xl);overflow:hidden;background:var(--fill);box-shadow:inset 0 0 0 .5px var(--line)}
+.pcard img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.pcard:hover img{transform:scale(1.04)}
+.pcard h3{font-size:17px;font-weight:600;margin-top:10px;letter-spacing:-.015em}
+.pcard p{color:var(--mute);font-size:15px}
 /* team */
 .tcard{position:relative;width:min(64vw,290px);aspect-ratio:4/5;border-radius:var(--r-xl);overflow:hidden;background:#3a3a3c;box-shadow:inset 0 0 0 .5px var(--line)}
 .tcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
@@ -211,7 +220,7 @@ footer a:hover{color:var(--ink)}
 <main>
   <div class="wrap page-title" id="inicio">
     <h1>Lavis Studio</h1>
-    <p>Barbería en El Pinar. Antes de cortar, leemos tu cara.</p>
+    <p>Viví tu propio estilo. Barbería en El Pinar: antes de cortar, leemos tu cara.</p>
   </div>
 
   <!-- HERO RAIL -->
@@ -227,7 +236,7 @@ footer a:hover{color:var(--ink)}
       </a>
       <a class="hcard" href="https://lavis-studio.vercel.app/reservar">
         <img src="assets/corte-barba.jpg" alt="Corte y barba perfilada">
-        <span class="pill">Más pedido</span>
+        <span class="pill">Barba incluida</span>
         <div class="hmeta">
           <div class="thumb"><img src="assets/trans-poster-2.jpg" alt=""></div>
           <div><b>Corte y barba <span>$750</span></b><small>40 min · Según tu cara</small></div>
@@ -266,17 +275,27 @@ footer a:hover{color:var(--ink)}
   <section class="wrap fade" id="servicios">
     <div class="sh"><h2>Servicios</h2><a href="https://lavis-studio.vercel.app/reservar">Reservar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a></div>
     <div class="two">
-      <div class="group">
-        <a class="row" href="https://lavis-studio.vercel.app/reservar"><span class="ic"><img src="assets/corte.jpg" alt=""></span><span class="tx"><b>Corte</b><small>40 min · Análisis, corte y peinado</small></span><span class="val">$750</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
-        <a class="row" href="https://lavis-studio.vercel.app/reservar"><span class="ic"><img src="assets/corte-barba.jpg" alt=""></span><span class="tx"><b>Corte y barba</b><small>40 min · Barba según tu cara</small></span><span class="val">$750</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
-        <a class="row" href="https://lavis-studio.vercel.app/reservar"><span class="ic"><img src="assets/cejas.jpg" alt=""></span><span class="tx"><b>Cejas</b><small>5 min · Emparejadas, nunca finas</small></span><span class="val">$250</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+      <div>
+        <p class="glabel">Corte y barba</p>
+        <div class="group">
+        <a class="row" href="https://lavis-studio.vercel.app/reservar"><span class="ic"><img src="assets/corte.jpg" alt=""></span><span class="tx"><b>Corte</b><small>Análisis, corte y peinado</small></span><span class="val">$750</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="https://lavis-studio.vercel.app/reservar"><span class="ic"><img src="assets/corte-barba.jpg" alt=""></span><span class="tx"><b>Corte + barba</b><small>Barba según tu cara</small></span><span class="val">$750</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="https://lavis-studio.vercel.app/reservar"><span class="ic"><img src="assets/trans-poster-3.jpg" alt=""></span><span class="tx"><b>Corte + lavado</b><small>Corte con lavado</small></span><span class="val">$850</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="https://lavis-studio.vercel.app/reservar"><span class="ic"><img src="assets/cejas.jpg" alt=""></span><span class="tx"><b>Cejas</b><small>En base al visagismo</small></span><span class="val">$250</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        </div>
       </div>
-      <div class="group">
-        <a class="row" href="https://wa.me/59895459911?text=Hola%20Lavis%2C%20quiero%20consultar%20por%20color"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z"/></svg></span><span class="tx"><b>Color</b><small>Mechas · Platinado · Tinta</small></span><span class="val mute">Consultar</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
-        <a class="row" href="https://wa.me/59895459911?text=Hola%20Lavis%2C%20quiero%20consultar%20por%20tratamientos"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg></span><span class="tx"><b>Tratamientos</b><small>Lavado · Black mask · Cuidado</small></span><span class="val mute">Consultar</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
-        <div class="row"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg></span><span class="tx"><b>Análisis de cara</b><small>Incluido en todos los servicios</small></span><span class="val">Gratis</span></div>
+      <div>
+        <p class="glabel">Tratamientos y color</p>
+        <div class="group">
+        <a class="row" href="https://lavis-studio.vercel.app/reservar"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1" fill="currentColor"/><circle cx="15" cy="10" r="1" fill="currentColor"/><path d="M9 15.5c1.8 1.2 4.2 1.2 6 0"/></svg></span><span class="tx"><b>Black Mask</b><small>Mascarilla facial</small></span><span class="val">$350</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="https://lavis-studio.vercel.app/reservar"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14Z"/><path d="M5 19 13 11"/></svg></span><span class="tx"><b>Nutrición capilar</b><small>Tratamiento de nutrición</small></span><span class="val">$450</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="https://lavis-studio.vercel.app/reservar"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4 2.5-2.5Z"/></svg></span><span class="tx"><b>Reparación capilar</b><small>Tratamiento de reparación</small></span><span class="val">$650</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="https://lavis-studio.vercel.app/reservar"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c3 0 5-1.5 5-4a3 3 0 0 0-3-3c-2 0-2 2-2 4v3Z"/><path d="m9.5 13.5 9-9a1.8 1.8 0 0 1 2.5 2.5l-9 9"/></svg></span><span class="tx"><b>Mechas</b><small>Color parcial</small></span><span class="val">$1.750</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="https://lavis-studio.vercel.app/reservar"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor"/></svg></span><span class="tx"><b>Color global</b><small>Color en todo el pelo</small></span><span class="val">$3.000</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        </div>
       </div>
     </div>
+    <p class="mute" style="font-size:14px;margin-top:14px">El análisis de tu cara va incluido en todos los servicios.</p>
   </section>
 
   <!-- EQUIPO -->
@@ -298,16 +317,28 @@ footer a:hover{color:var(--ink)}
         <p style="color:rgba(255,255,255,.6)">Dos cortes sueltos son $1.500. Con dos por mes ya te conviene.</p>
         <p class="price">$1.300 <span>/ mes</span></p>
         <ul>
-          <li>Corte y barba ilimitados</li>
-          <li>Descuento en servicios y productos del salón</li>
-          <li>Beneficios en comercios aliados</li>
-          <li>Sin permanencia, cancelás cuando quieras</li>
+          <li>Cortes ilimitados todo el mes</li>
+          <li>Precio especial en servicios extra</li>
+          <li>Descuento en la línea de productos Lavis</li>
+          <li>Descuento en empresas amigas</li>
+          <li>Asesoramiento personalizado del equipo</li>
         </ul>
         <a class="btn btn-light" href="https://www.mercadopago.com.uy/subscriptions/checkout?preapproval_plan_id=2c93808490edce280190ef6848ec0048">Hacerme socio</a>
         <p class="note">Precio fundador para los primeros 150 socios. Después, $1.800.</p>
       </div>
       <figure><img src="assets/cartel-lavis.jpg" alt="Cartel de Lavis en el salón" loading="lazy"></figure>
     </div>
+  </section>
+
+  <!-- PRODUCTOS -->
+  <section class="wrap fade" id="productos">
+    <div class="sh"><h2>Línea Lavis</h2><a href="https://wa.me/59895459911?text=Hola%20Lavis%2C%20quiero%20consultar%20por%20productos">Consultar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a></div>
+    <div class="rail">
+      <div class="hcard"><img src="assets/producto-cera-mano.jpg" alt="Cera Mate Strong de Lavis en la mano" loading="lazy"><span class="pill">Hecho en Uruguay</span><div class="hmeta"><div class="thumb"><img src="assets/producto-cera-vitrina.jpg" alt=""></div><div><b>Productos <span>propios</span></b><small>Línea propia de la casa</small></div></div></div>
+      <div class="pcard"><figure><img src="assets/producto-cera-vitrina.jpg" alt="Cera Mate Strong 50 g" loading="lazy"></figure><h3>Cera Mate Strong</h3><p>Cera · 50 g</p></div>
+      <div class="pcard"><figure><img src="assets/producto-impact-texture.jpg" alt="Impact Texture spray 120 mL" loading="lazy"></figure><h3>Impact Texture</h3><p>Spray texturizante · 120 mL</p></div>
+    </div>
+    <p class="mute" style="font-size:14px;margin-top:10px">De venta en el salón. Los socios tienen descuento.</p>
   </section>
 
   <!-- RESEÑAS -->
