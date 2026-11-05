@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Lavis Studio — Auditoría web</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+@page{size:A4;margin:0}
+:root{--k:#0B0B0B;--w:#FFFFFF;--g:#6E6E6E;--l:#D9D9D9;--s:'Instrument Serif',Georgia,serif;--f:'Inter Tight',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font:400 9.6pt/1.55 var(--f);color:var(--k);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:210mm;height:297mm;padding:22mm 20mm 18mm;position:relative;overflow:hidden;page-break-after:always;background:var(--w)}
+.page:last-child{page-break-after:auto}
+.dark{background:var(--k);color:var(--w)}
+.serif{font-family:var(--s);font-weight:400;letter-spacing:-.01em}
+.eyebrow{font-size:7.5pt;letter-spacing:.18em;text-transform:uppercase;color:var(--g)}
+.dark .eyebrow{color:#9A9A9A}
+h1{font-family:var(--s);font-weight:400;font-size:46pt;line-height:.98;letter-spacing:-.02em}
+h2{font-family:var(--s);font-weight:400;font-size:34pt;line-height:1;letter-spacing:-.015em;margin:6mm 0 9mm}
+h3{font-family:var(--s);font-weight:400;font-size:15pt;line-height:1.15;margin-bottom:1.5mm}
+p{margin-bottom:3mm}
+.mute{color:var(--g)}
+.head{position:absolute;top:10mm;left:20mm;right:20mm;display:flex;justify-content:space-between;align-items:center;font-size:7pt;letter-spacing:.14em;text-transform:uppercase;color:var(--g)}
+.head img{height:9pt}
+.foot{position:absolute;bottom:10mm;left:20mm;right:20mm;display:flex;justify-content:space-between;font-size:7pt;color:var(--g);border-top:.5pt solid var(--l);padding-top:3mm}
+.dark .foot{border-color:#2a2a2a}
+.rule{border-top:.75pt solid var(--k)}
+/* cover */
+.cover{display:flex;flex-direction:column;justify-content:space-between;padding:20mm}
+.cover .logo{width:62mm;filter:invert(1)}
+.cover h1{font-size:60pt}
+.cover h1 em{font-style:italic}
+.cover-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:8mm;border-top:.5pt solid #333;padding-top:5mm;font-size:8pt}
+.cover-meta b{display:block;font-weight:500;color:#fff}
+.cover-meta span{color:#9A9A9A}
+/* lists */
+.num-list{list-style:none;counter-reset:n}
+.num-list li{counter-increment:n;display:grid;grid-template-columns:11mm 1fr;padding:3.6mm 0;border-top:.5pt solid var(--l)}
+.num-list li:last-child{border-bottom:.5pt solid var(--l)}
+.num-list li::before{content:counter(n,decimal-leading-zero);font-family:var(--s);font-size:13pt;color:var(--g);line-height:1.1}
+.num-list p{margin:0;color:#333}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:10mm}
+.cols3{display:grid;grid-template-columns:repeat(3,1fr);gap:7mm}
+.box{border-top:.75pt solid var(--k);padding-top:3.5mm}
+.box ul{list-style:none}
+.box li{padding:1.6mm 0;border-bottom:.5pt solid var(--l);font-size:9pt}
+.box li:last-child{border-bottom:0}
+.lead{font-family:var(--s);font-size:17pt;line-height:1.25;max-width:150mm}
+figure img{width:100%;display:block;border:.5pt solid var(--l);filter:grayscale(1)}
+figcaption{font-size:7.5pt;color:var(--g);margin-top:2mm;letter-spacing:.04em}
+.tag{display:inline-block;font-size:6.5pt;letter-spacing:.16em;text-transform:uppercase;border:.5pt solid currentColor;padding:.6mm 2mm;margin-bottom:2mm}
+.swatch{display:flex;gap:4mm;margin-top:3mm}
+.swatch div{flex:1;height:22mm;border:.5pt solid var(--l);display:flex;align-items:flex-end;padding:2mm;font-size:7pt}
+.quote{font-family:var(--s);font-size:22pt;line-height:1.15}
+.big-n{font-family:var(--s);font-size:84pt;line-height:.85}
+.kv{display:grid;grid-template-columns:34mm 1fr;border-top:.5pt solid var(--l);padding:2.6mm 0;font-size:9pt}
+.kv:last-child{border-bottom:.5pt solid var(--l)}
+.kv b{font-weight:500}
+.toc{list-style:none;margin-top:6mm}
+.toc li{display:flex;justify-content:space-between;padding:3.2mm 0;border-top:.5pt solid #333;font-family:var(--s);font-size:15pt}
+.toc li span{font-family:var(--f);font-size:8pt;color:#9A9A9A}
+</style>
+</head>
+<body>
+
+<!-- 1 PORTADA -->
+<section class="page dark cover">
+  <img class="logo" src="logo.png" alt="Lavis">
+  <div>
+    <p class="eyebrow" style="margin-bottom:6mm">Auditoría web · Propuesta de imagen</p>
+    <h1>Una web a la altura<br>de la <em>silla.</em></h1>
+    <p style="color:#9A9A9A;margin-top:7mm;max-width:120mm;font-size:10pt">Análisis de lavis-studio.vercel.app, inventario completo del sitio actual y dirección de rediseño para Lavis Studio, El Pinar.</p>
+  </div>
+  <div class="cover-meta">
+    <div><b>Cliente</b><span>Lavis Studio</span></div>
+    <div><b>Ubicación</b><span>El Pinar, Uruguay</span></div>
+    <div><b>Fecha</b><span>Noviembre 2026</span></div>
+  </div>
+</section>
+
+<!-- 2 RESUMEN -->
+<section class="page dark">
+  <div class="head"><img src="logo.png" style="filter:invert(1)"><span>Resumen</span></div>
+  <p class="eyebrow" style="margin-top:8mm">00 — Resumen</p>
+  <h2>El negocio es top.<br>La web todavía no.</h2>
+  <p class="lead" style="color:#E6E6E6">Lavis tiene 5.0 en Google con 390 reseñas, +700 clientes y una agenda llena. La web, en cambio, se ve como una plantilla genérica: muchos elementos, mucho color dorado y poca personalidad. La propuesta es simple: menos, pero mejor.</p>
+  <ul class="toc">
+    <li>Debilidades principales <span>01</span></li>
+    <li>Inventario del sitio actual <span>02</span></li>
+    <li>Dirección de rediseño <span>03</span></li>
+    <li>Antes y después <span>04</span></li>
+    <li>Fotografía, oferta y técnico <span>05</span></li>
+    <li>Próximos pasos <span>06</span></li>
+  </ul>
+  <div class="foot"><span>Lavis Studio · Auditoría web</span><span>02</span></div>
+</section>
+
+<!-- 3 DEBILIDADES 1 -->
+<section class="page">
+  <div class="head"><img src="logo.png"><span>01 · Debilidades</span></div>
+  <p class="eyebrow" style="margin-top:8mm">01 — Debilidades principales</p>
+  <h2>Lo que hoy le resta nivel.</h2>
+  <ol class="num-list">
+    <li><div><h3>Estética de plantilla de IA</h3><p>Crema con dorado, Montserrat en negrita y una palabra en cursiva en cada título. Tarjetas redondeadas, pastillas y contadores grandes. Es el patrón de cualquier generador automático: no se ve Lavis.</p></div></li>
+    <li><div><h3>Titular negativo</h3><p>“Tu imagen no te representa” le dice al cliente que se ve mal. Una barbería top transmite confianza y aspiración, no culpa.</p></div></li>
+    <li><div><h3>Demasiado ruido</h3><p>Popup de cuponera, WhatsApp flotante, barra de reserva, 8 burbujas de chat, 8 capturas de reseñas, audio, contador 85/150 y tarjeta VIP. Todo compite; nada se destaca.</p></div></li>
+    <li><div><h3>Prueba social que parece armada</h3><p>Mensajes con hora y doble check sin nombre se leen como inventados. Las reseñas son imágenes: ilegibles en el celular e invisibles para Google.</p></div></li>
+    <li><div><h3>“Antes y después” sin antes</h3><p>La sección muestra 4 retratos terminados. La promesa del título no se cumple.</p></div></li>
+  </ol>
+  <div class="foot"><span>Lavis Studio · Auditoría web</span><span>03</span></div>
+</section>
+
+<!-- 4 DEBILIDADES 2 -->
+<section class="page">
+  <div class="head"><img src="logo.png"><span>01 · Debilidades</span></div>
+  <ol class="num-list" start="6" style="counter-reset:n 5;margin-top:8mm">
+    <li><div><h3>Celular saturado</h3><p>Al abrirla hay 4 botones sobre la foto principal y la cuponera tapa el texto de ubicación. La mayoría del tráfico llega desde Instagram, o sea desde el celular.</p></div></li>
+    <li><div><h3>Fotografía despareja</h3><p>Cada foto con otro fondo y otra luz, todas de celular. Es lo que más baja la percepción premium.</p></div></li>
+    <li><div><h3>Oferta confusa</h3><p>Corte y Corte con barba a $750 (parece un error). La membresía compite con el servicio principal.</p></div></li>
+    <li><div><h3>Marca sin sistema</h3><p>Cuatro tipografías sin un rol claro (Montserrat, Archivo Black, Yellowtail, Times). El logo es bueno; la web no lo acompaña.</p></div></li>
+    <li><div><h3>SEO y técnico</h3><p>Sin dominio propio (.vercel.app). “Lavis Style” en Google Maps y “Lavis Studio” en la web. Imagen para compartir con ruta relativa y sin datos estructurados para Google.</p></div></li>
+  </ol>
+  <div class="cols" style="margin-top:9mm">
+    <figure><img src="actual-hero.png"><figcaption>Web actual — escritorio</figcaption></figure>
+    <figure><img src="actual-resenas.png"><figcaption>Web actual — sección de reseñas</figcaption></figure>
+  </div>
+  <div class="foot"><span>Lavis Studio · Auditoría web</span><span>04</span></div>
+</section>
+
+<!-- 5 INVENTARIO -->
+<section class="page">
+  <div class="head"><img src="logo.png"><span>02 · Inventario</span></div>
+  <p class="eyebrow" style="margin-top:8mm">02 — Inventario del sitio actual</p>
+  <h2>Todo lo que hay para recrear.</h2>
+  <div class="cols">
+    <div>
+      <div class="box"><p class="eyebrow">Secciones de la home</p>
+        <ul>
+          <li>Header · logo, menú y Reservar turno</li>
+          <li>Hero · titular, chips, CTA, badge 5.0 / 390 reseñas</li>
+          <li>Métricas · 5 años, +700 clientes, +150 reservas/sem, 3 barberos</li>
+          <li>Servicios · Corte $750, Corte y barba $750, Cejas $250</li>
+          <li>Extras · Lavado, Black mask, Mechas, Platinado, Tinta, Tratamientos</li>
+          <li>Método · Miramos, cortamos, enseñamos a mantener</li>
+          <li>Antes y después · 4 videos verticales</li>
+          <li>Reseñas · chats, 8 capturas de Google, audio de 18 s</li>
+          <li>Membresía VIP · $1.300/mes, 85 de 150 socios</li>
+          <li>Salón · 3 fotos, dirección y horario</li>
+          <li>Preguntas frecuentes · 6 preguntas</li>
+          <li>Academia · 3 niveles × 3 meses, $5.500/mes</li>
+          <li>Cierre y footer · contacto y links</li>
+          <li>Flotantes · cuponera, WhatsApp, barra móvil</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="box"><p class="eyebrow">Páginas</p>
+        <ul><li>/ · Landing</li><li>/reservar · Agenda propia</li><li>/mi-cuenta · Cuponera del cliente</li><li>/login · Acceso barberos</li></ul>
+      </div>
+      <div class="box" style="margin-top:7mm"><p class="eyebrow">Integraciones</p>
+        <ul><li>Mercado Pago · suscripción de membresía</li><li>WhatsApp · mensajes prellenados</li><li>Google Maps · cómo llegar</li><li>Instagram · @laviss_studio</li></ul>
+      </div>
+      <div class="box" style="margin-top:7mm"><p class="eyebrow">Assets y stack</p>
+        <ul><li>Logo wordmark PNG</li><li>4 fotos de servicio · 4 videos · 3 del salón</li><li>8 capturas de reseñas · 1 audio</li><li>HTML/CSS estático en Vercel</li></ul>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lavis Studio · Auditoría web</span><span>05</span></div>
+</section>
+
+<!-- 6 DIRECCION -->
+<section class="page">
+  <div class="head"><img src="logo.png"><span>03 · Dirección</span></div>
+  <p class="eyebrow" style="margin-top:8mm">03 — Dirección de rediseño</p>
+  <h2>El corte que es <em>tuyo.</em></h2>
+  <p class="lead" style="margin-bottom:9mm">El visagismo deja de ser un argumento gritado y pasa a ser el método de la casa. Un mensaje por sección, un solo botón principal: Reservar.</p>
+  <div class="cols">
+    <div class="box"><p class="eyebrow">Paleta</p>
+      <div class="swatch"><div style="background:#0E0E0D;color:#fff">Tinta<br>#0E0E0D</div><div style="background:#F3F0EA">Hueso<br>#F3F0EA</div><div style="background:#76726A;color:#fff">Gris<br>#76726A</div></div>
+      <p class="mute" style="margin-top:3mm;font-size:8.5pt">Sin dorado. El color lo ponen las fotos.</p>
+    </div>
+    <div class="box"><p class="eyebrow">Tipografía</p>
+      <p class="serif" style="font-size:30pt;line-height:1;margin:2mm 0 1mm">Instrument Serif</p>
+      <p class="mute" style="font-size:8pt">Títulos y precios</p>
+      <p style="font-size:16pt;font-weight:500;margin:2mm 0 1mm">Inter Tight</p>
+      <p class="mute" style="font-size:8pt">Texto y botones. Sin cursivas decorativas.</p>
+    </div>
+  </div>
+  <div class="cols3" style="margin-top:9mm">
+    <div class="box"><h3>Carta de precios</h3><p class="mute">Servicios como en un buen restaurante: nombre, precio y una línea. Líneas finas, sin tarjetas.</p></div>
+    <div class="box"><h3>Trabajo en B/N</h3><p class="mute">Grilla de cortes en blanco y negro que toma color al pasar el mouse. Coherente y editorial.</p></div>
+    <div class="box"><h3>Reseñas en texto</h3><p class="mute">Tres citas reales con nombre y un 5.0 grande con link a Google. Más creíble y legible.</p></div>
+    <div class="box"><h3>Cero widgets</h3><p class="mute">Sin popup, burbujas ni contadores. En el celular, una sola barra: Reservar y WhatsApp.</p></div>
+    <div class="box"><h3>Jerarquía clara</h3><p class="mute">Membresía, academia y preguntas en bloques tranquilos, fuera del recorrido principal.</p></div>
+    <div class="box"><h3>Titular positivo</h3><p class="mute">De “no te representa” a “el corte que es tuyo”. Confianza en lugar de culpa.</p></div>
+  </div>
+  <div class="foot"><span>Lavis Studio · Auditoría web</span><span>06</span></div>
+</section>
+
+<!-- 7 ANTES / DESPUES -->
+<section class="page">
+  <div class="head"><img src="logo.png"><span>04 · Antes y después</span></div>
+  <p class="eyebrow" style="margin-top:8mm">04 — Antes y después</p>
+  <h2>Menos, pero mejor.</h2>
+  <div class="cols">
+    <figure><span class="tag">Actual</span><img src="actual-hero.png"><figcaption>Dorado, cursivas, popup y contadores.</figcaption></figure>
+    <figure><span class="tag">Propuesta</span><img src="nuevo-hero.png"><figcaption>Foto protagonista, titular editorial, un CTA.</figcaption></figure>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 2fr;gap:7mm;margin-top:8mm;align-items:start">
+    <figure><span class="tag">Actual · móvil</span><img src="actual-movil.png"><figcaption>4 botones sobre el hero.</figcaption></figure>
+    <figure><span class="tag">Propuesta · móvil</span><img src="nuevo-movil.png"><figcaption>Foto limpia, una barra.</figcaption></figure>
+    <figure><span class="tag">Propuesta · servicios</span><img src="nuevo-carta.png"><figcaption>Servicios como carta de precios.</figcaption></figure>
+  </div>
+  <div class="foot"><span>Lavis Studio · Auditoría web</span><span>07</span></div>
+</section>
+
+<!-- 8 FOTO OFERTA TECNICO -->
+<section class="page">
+  <div class="head"><img src="logo.png"><span>05 · Fotografía, oferta y técnico</span></div>
+  <p class="eyebrow" style="margin-top:8mm">05 — Más allá del código</p>
+  <h2>Lo que más impacto tiene.</h2>
+  <div class="cols" style="gap:12mm">
+    <div>
+      <div class="box"><h3>Fotografía</h3>
+        <ul>
+          <li>Sesión profesional de media jornada</li>
+          <li>Fondo único: la pared de mármol negro del salón</li>
+          <li>Misma luz, mismo encuadre, mismo color</li>
+          <li>Retratos 3/4, perfil, manos y herramientas</li>
+          <li>Antes y después real: díptico lado a lado</li>
+          <li>Retrato de cada barbero con su nombre</li>
+        </ul>
+      </div>
+      <div class="box" style="margin-top:8mm"><h3>Oferta</h3>
+        <ul>
+          <li>Revisar Corte vs. Corte y barba (mismo precio)</li>
+          <li>Si es intencional: comunicar “barba incluida”</li>
+          <li>Membresía sin contadores de urgencia</li>
+          <li>Academia y cuponera fuera del flujo principal</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="box"><h3>Técnico y SEO</h3>
+        <ul>
+          <li>Dominio propio: lavis.uy o lavisstudio.com.uy</li>
+          <li>Unificar nombre en Google Maps (Lavis Style → Lavis Studio)</li>
+          <li>Imagen para compartir con URL absoluta</li>
+          <li>Datos estructurados BarberShop: horario, puntaje, dirección</li>
+          <li>Imágenes en WebP/AVIF con textos alternativos</li>
+          <li>Medir clics en Reservar y WhatsApp (GA4 / Meta Pixel)</li>
+        </ul>
+      </div>
+      <div style="margin-top:12mm">
+        <p class="big-n">5.0</p>
+        <p class="mute" style="margin-top:3mm">390 reseñas en Google. El mejor activo de Lavis ya existe: la web solo tiene que dejarlo hablar.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Lavis Studio · Auditoría web</span><span>08</span></div>
+</section>
+
+<!-- 9 PROXIMOS PASOS -->
+<section class="page dark">
+  <div class="head"><img src="logo.png" style="filter:invert(1)"><span>06 · Próximos pasos</span></div>
+  <p class="eyebrow" style="margin-top:8mm">06 — Próximos pasos</p>
+  <h2>Hoja de ruta.</h2>
+  <ol class="num-list" style="margin-top:4mm">
+    <li style="border-color:#333"><div><h3>Validar la dirección visual</h3><p style="color:#B5B5B5">Revisar el prototipo con el equipo de Lavis y ajustar tono y mensajes.</p></div></li>
+    <li style="border-color:#333"><div><h3>Sesión de fotos</h3><p style="color:#B5B5B5">Antes de cerrar el diseño final. Es la pieza que más eleva la percepción.</p></div></li>
+    <li style="border-color:#333"><div><h3>Llevar el sistema a toda la web</h3><p style="color:#B5B5B5">Aplicar el mismo estilo a /reservar y /mi-cuenta para una experiencia continua.</p></div></li>
+    <li style="border-color:#333;border-bottom:.5pt solid #333"><div><h3>Dominio, Google e Instagram</h3><p style="color:#B5B5B5">Dominio propio, nombre unificado en Google Business y link nuevo en la bio.</p></div></li>
+  </ol>
+  <div style="position:absolute;left:20mm;right:20mm;bottom:30mm">
+    <p class="quote">“No hay un corte de moda.<br>Hay un corte para cada cara.”</p>
+  </div>
+  <div class="foot"><span>Lavis Studio · Auditoría web</span><span>09</span></div>
+</section>
+
+<!-- 10 CONTRAPORTADA -->
+<section class="page dark cover" style="justify-content:center;align-items:center;text-align:center">
+  <img class="logo" src="logo.png" alt="Lavis" style="width:80mm">
+  <p style="color:#9A9A9A;margin-top:10mm;font-size:8pt;letter-spacing:.18em;text-transform:uppercase">El Pinar · Ciudad de la Costa · Uruguay</p>
+</section>
+
+</body>
+</html>
