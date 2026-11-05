@@ -143,6 +143,102 @@ a.row:hover{background:var(--fill-2)}
 .book-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:28px;padding-top:20px;border-top:.5px solid rgba(255,255,255,.14);font-size:14px}
 .book-meta b{display:block;font-weight:600}
 .book-meta small{color:rgba(255,255,255,.55)}
+
+/* cuponera */
+.cup-card{background:var(--fill);border-radius:var(--r-xl);padding:32px 24px;display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+@media(min-width:768px){.cup-card{padding:48px}}
+.cup-card h3{font-size:clamp(28px,3.4vw,40px);font-weight:700;letter-spacing:-.035em;line-height:1.05}
+.pill-d{font-size:13px;font-weight:500;padding:5px 11px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 .5px var(--line)}
+.stamps{display:flex;gap:10px;margin:8px 0 6px;width:100%;max-width:340px}
+.stamps i{flex:1;aspect-ratio:1;border-radius:50%;border:1.5px dashed #C7C7CC;display:grid;place-items:center;color:var(--mute)}
+.stamps i.on{border:0;background:var(--ink);color:#fff}
+.stamps i.gift{border-style:solid;border-color:var(--ink);color:var(--ink)}
+.stamps i.gift.on{background:var(--ink);color:#fff}
+.stamps svg{width:45%;height:45%}
+.stamps i.on::after{content:"";width:34%;height:18%;border:solid #fff;border-width:0 0 2px 2px;transform:rotate(-45deg) translate(1px,-2px)}
+.stamps i.gift.on::after{display:none}
+.book-card{display:flex;flex-direction:column;align-items:center;justify-content:center}
+.book-meta{width:100%}
+
+/* sheet */
+.sheet{position:fixed;inset:0;z-index:50;pointer-events:none}
+.sheet-bg{position:absolute;inset:0;background:rgba(0,0,0,.32);opacity:0;transition:opacity .3s}
+.sheet-panel{position:absolute;left:0;right:0;bottom:0;max-height:92svh;background:#fff;border-radius:28px 28px 0 0;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .45s cubic-bezier(.2,.8,.2,1);box-shadow:0 -10px 40px rgba(0,0,0,.12)}
+@media(min-width:768px){.sheet-panel{left:50%;right:auto;bottom:auto;top:50%;width:560px;max-height:86vh;border-radius:28px;transform:translate(-50%,-46%) scale(.98);opacity:0;transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .25s}}
+.sheet.open{pointer-events:auto}
+.sheet.open .sheet-bg{opacity:1}
+.sheet.open .sheet-panel{transform:none}
+@media(min-width:768px){.sheet.open .sheet-panel{transform:translate(-50%,-50%);opacity:1}}
+.sheet-grab{width:36px;height:5px;border-radius:9px;background:#D1D1D6;margin:8px auto 0}
+@media(min-width:768px){.sheet-grab{display:none}}
+.sheet-head{display:flex;align-items:center;gap:12px;padding:10px 16px 6px}
+.icon-btn.sm{width:36px;height:36px}
+.icon-btn.sm svg{width:18px;height:18px}
+#sh-back.hide{visibility:hidden}
+.sh-t{flex:1;text-align:center}
+.sh-t small{display:block;font-size:12px;color:var(--mute);font-weight:500}
+.sh-t b{font-size:17px;font-weight:600;letter-spacing:-.02em}
+.sheet-body{flex:1;overflow-y:auto;padding:8px 20px 20px;-webkit-overflow-scrolling:touch}
+.sheet-foot{display:flex;align-items:center;gap:12px;padding:12px 20px calc(12px + env(safe-area-inset-bottom));border-top:.5px solid var(--line)}
+.sheet-foot .sum{flex:1;min-width:0}
+.sheet-foot .sum b{display:block;font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sheet-foot .sum small{color:var(--mute);font-size:13px}
+.sheet-foot .btn{height:48px}
+.btn:disabled{opacity:.35;pointer-events:none}
+.demo-note{font-size:11.5px;color:var(--mute);text-align:center;padding:0 20px 10px}
+body.lock{overflow:hidden}
+.sh-label{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);margin:18px 0 8px 2px}
+.sh-label:first-child{margin-top:6px}
+/* service picker */
+.pick{display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;border-radius:16px;background:var(--fill);margin-bottom:8px;text-align:left;transition:background .2s,box-shadow .2s}
+.pick .ic{width:44px;height:44px;border-radius:11px;overflow:hidden;flex:none;background:var(--fill-2)}
+.pick .ic img{width:100%;height:100%;object-fit:cover}
+.pick .tx{flex:1;min-width:0}
+.pick .tx b{display:block;font-weight:600;font-size:15px}
+.pick .tx small{color:var(--mute);font-size:13px}
+.pick .pr{font-weight:600;font-size:15px}
+.pick .ck{width:24px;height:24px;border-radius:50%;border:1.5px solid #C7C7CC;flex:none;display:grid;place-items:center;transition:all .2s}
+.pick.on{background:#fff;box-shadow:inset 0 0 0 1.5px var(--ink)}
+.pick.on .ck{background:var(--ink);border-color:var(--ink)}
+.pick.on .ck::after{content:"";width:8px;height:4px;border:solid #fff;border-width:0 0 2px 2px;transform:rotate(-45deg) translate(1px,-1px)}
+.pick.lite{padding:10px 14px}
+/* barber & day chips */
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -20px;padding:2px 20px 4px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 6px;min-width:76px;border-radius:16px;background:var(--fill);font-size:13px;font-weight:600;transition:background .2s,color .2s}
+.chip .av{width:44px;height:44px;border-radius:50%;overflow:hidden;background:#fff;display:grid;place-items:center;font-size:17px;font-weight:700}
+.chip .av img{width:100%;height:100%;object-fit:cover}
+.chip.on{background:var(--ink);color:#fff}
+.chip.on .av{background:rgba(255,255,255,.15);color:#fff}
+.day{min-width:58px;padding:10px 0;gap:2px}
+.day small{font-size:11px;font-weight:600;color:var(--mute);text-transform:uppercase;letter-spacing:.04em}
+.day b{font-size:20px;font-weight:700;letter-spacing:-.03em}
+.day.on small{color:rgba(255,255,255,.6)}
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+@media(max-width:380px){.slots{grid-template-columns:repeat(3,1fr)}}
+.slot{height:44px;border-radius:12px;background:var(--fill);font-weight:600;font-size:15px;font-variant-numeric:tabular-nums;transition:background .2s,color .2s}
+.slot.on{background:var(--ink);color:#fff}
+.empty{padding:22px;border-radius:16px;background:var(--fill);color:var(--mute);text-align:center;font-size:14px}
+.loading{padding:22px;text-align:center;color:var(--mute);font-size:14px}
+/* form */
+.field{display:block;margin-bottom:10px}
+.field span{display:block;font-size:13px;color:var(--mute);margin:0 0 6px 2px}
+.field input{width:100%;height:50px;border-radius:14px;border:0;background:var(--fill);padding:0 16px;font:inherit;font-size:16px;color:var(--ink);outline:none;box-shadow:inset 0 0 0 1.5px transparent;transition:box-shadow .2s,background .2s}
+.field input:focus{background:#fff;box-shadow:inset 0 0 0 1.5px var(--ink)}
+.field input.err{box-shadow:inset 0 0 0 1.5px #D70015}
+.resume{background:var(--fill);border-radius:16px;padding:14px 16px;margin-bottom:16px;font-size:14px}
+.resume div{display:flex;justify-content:space-between;gap:12px;padding:4px 0}
+.resume div span:first-child{color:var(--mute)}
+.resume div span:last-child{font-weight:600;text-align:right}
+.hint{font-size:13px;color:var(--mute);margin-top:4px}
+/* done */
+.done{text-align:center;padding:12px 0 6px}
+.done .ok{width:72px;height:72px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;margin:8px auto 18px;animation:pop .5s cubic-bezier(.3,1.5,.5,1) both}
+.done .ok svg{width:34px;height:34px}
+.done h4{font-size:26px;font-weight:700;letter-spacing:-.03em}
+.done p{color:var(--mute);margin:6px 0 18px}
+.done .stamps{margin:16px auto 6px}
+@keyframes pop{from{transform:scale(.5);opacity:0}to{transform:none;opacity:1}}
 /* team */
 .tcard{position:relative;width:min(64vw,290px);aspect-ratio:4/5;border-radius:var(--r-xl);overflow:hidden;background:#3a3a3c;box-shadow:inset 0 0 0 .5px var(--line)}
 .tcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
@@ -291,20 +387,21 @@ footer a:hover{color:var(--ink)}
       <div>
         <p class="glabel">Corte y barba</p>
         <div class="group">
-        <a class="row" href="#reservar"><span class="ic"><img src="assets/corte.jpg" alt=""></span><span class="tx"><b>Corte</b><small>Análisis, corte y peinado</small></span><span class="val">$750</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
-        <a class="row" href="#reservar"><span class="ic"><img src="assets/corte-barba.jpg" alt=""></span><span class="tx"><b>Corte + barba</b><small>Barba según tu cara</small></span><span class="val">$750</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
-        <a class="row" href="#reservar"><span class="ic"><img src="assets/trans-poster-3.jpg" alt=""></span><span class="tx"><b>Corte + lavado</b><small>Corte con lavado</small></span><span class="val">$850</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
-        <a class="row" href="#reservar"><span class="ic"><img src="assets/cejas.jpg" alt=""></span><span class="tx"><b>Cejas</b><small>En base al visagismo</small></span><span class="val">$250</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="#reservar"><span class="ic"><img src="assets/corte.jpg" alt=""></span><span class="tx"><b>Corte</b><small>40 min · Análisis, corte y peinado</small></span><span class="val">$750</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="#reservar"><span class="ic"><img src="assets/corte-barba.jpg" alt=""></span><span class="tx"><b>Corte + barba</b><small>40 min · Barba según tu cara</small></span><span class="val">$750</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="#reservar"><span class="ic"><img src="assets/trans-poster-3.jpg" alt=""></span><span class="tx"><b>Corte + lavado</b><small>45 min · Corte con lavado</small></span><span class="val">$850</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="#reservar"><span class="ic"><img src="assets/cejas.jpg" alt=""></span><span class="tx"><b>Cejas</b><small>5 min · En base al visagismo</small></span><span class="val">$250</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
         </div>
       </div>
       <div>
         <p class="glabel">Tratamientos y color</p>
         <div class="group">
-        <a class="row" href="#reservar"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1" fill="currentColor"/><circle cx="15" cy="10" r="1" fill="currentColor"/><path d="M9 15.5c1.8 1.2 4.2 1.2 6 0"/></svg></span><span class="tx"><b>Black Mask</b><small>Mascarilla facial</small></span><span class="val">$350</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
-        <a class="row" href="#reservar"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14Z"/><path d="M5 19 13 11"/></svg></span><span class="tx"><b>Nutrición capilar</b><small>Tratamiento de nutrición</small></span><span class="val">$450</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
-        <a class="row" href="#reservar"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4 2.5-2.5Z"/></svg></span><span class="tx"><b>Reparación capilar</b><small>Tratamiento de reparación</small></span><span class="val">$650</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
-        <a class="row" href="#reservar"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c3 0 5-1.5 5-4a3 3 0 0 0-3-3c-2 0-2 2-2 4v3Z"/><path d="m9.5 13.5 9-9a1.8 1.8 0 0 1 2.5 2.5l-9 9"/></svg></span><span class="tx"><b>Mechas</b><small>Color parcial</small></span><span class="val">$1.750</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
-        <a class="row" href="#reservar"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor"/></svg></span><span class="tx"><b>Color global</b><small>Color en todo el pelo</small></span><span class="val">$3.000</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="#reservar"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1" fill="currentColor"/><circle cx="15" cy="10" r="1" fill="currentColor"/><path d="M9 15.5c1.8 1.2 4.2 1.2 6 0"/></svg></span><span class="tx"><b>Black mask</b><small>15 min · Mascarilla facial</small></span><span class="val">$350</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="#reservar"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14Z"/><path d="M5 19 13 11"/></svg></span><span class="tx"><b>Tratamiento para rulos</b><small>10 min · Definición y cuidado</small></span><span class="val">$650</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="#reservar"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4 2.5-2.5Z"/></svg></span><span class="tx"><b>Tratamiento reparador</b><small>10 min</small></span><span class="val">$650</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="#reservar"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c3 0 5-1.5 5-4a3 3 0 0 0-3-3c-2 0-2 2-2 4v3Z"/><path d="m9.5 13.5 9-9a1.8 1.8 0 0 1 2.5 2.5l-9 9"/></svg></span><span class="tx"><b>Mechas</b><small>2 h · Color parcial</small></span><span class="val">$2.000</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="#reservar"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor"/></svg></span><span class="tx"><b>Tinta</b><small>2 h · Color en todo el pelo</small></span><span class="val">$1.100</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+<a class="row" href="#reservar"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor"/></svg></span><span class="tx"><b>Platinado</b><small>3 h · Decoloración</small></span><span class="val">$3.000</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
         </div>
       </div>
     </div>
@@ -384,20 +481,28 @@ footer a:hover{color:var(--ink)}
     </div>
   </section>
 
-  <!-- RESERVAR -->
+  <!-- RESERVAR + CUPONERA -->
   <section class="wrap fade" id="reservar">
-    <div class="book-card">
-      <span class="tag">Martes a sábado · 10 a 19 h</span>
-      <h3>Tu turno,<br>en un minuto.</h3>
-      <p>Escribinos por WhatsApp con el servicio y el barbero que querés, y coordinamos tu horario.</p>
-      <div class="book-actions">
-        <a class="btn btn-light" href="https://wa.me/59895459911?text=Hola%20Lavis%2C%20quiero%20sacar%20un%20turno"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12Z"/></svg>Reservar por WhatsApp</a>
-        <a class="btn btn-ghost" href="#servicios">Ver precios</a>
+    <div class="two">
+      <div class="book-card">
+        <span class="tag">Martes a sábado · 10 a 19 h</span>
+        <h3>Tu turno,<br>en un minuto.</h3>
+        <p>Elegí servicio, barbero y horario. Te llega la confirmación por WhatsApp y mail.</p>
+        <div class="book-actions">
+          <button class="btn btn-light" data-open="reserva">Reservar turno</button>
+        </div>
+        <div class="book-meta">
+          <div><b>Corte</b><small>$750 · 40 min</small></div>
+          <div><b>Corte + barba</b><small>$750 · 40 min</small></div>
+          <div><b>Cejas</b><small>$250 · 5 min</small></div>
+        </div>
       </div>
-      <div class="book-meta">
-        <div><b>Corte</b><small>$750 · 40 min</small></div>
-        <div><b>Corte + barba</b><small>$750 · 40 min</small></div>
-        <div><b>Cejas</b><small>$250 · 5 min</small></div>
+      <div class="cup-card" id="cuponera">
+        <span class="pill-d">Cuponera</span>
+        <h3>Cada corte suma un sello.</h3>
+        <p class="mute">Con 5 cortes, tu premio de regalo. La cuponera se crea sola con tu primera reserva.</p>
+        <div class="stamps" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="gift"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="8" width="17" height="4" rx="1"/><path d="M5 12v8h14v-8M12 8v12M12 8c-1.5-3-5-3.5-5-1.5S10 8 12 8Zm0 0c1.5-3 5-3.5 5-1.5S14 8 12 8Z"/></svg></i></div>
+        <button class="btn btn-fill" data-open="cuenta">Ver mi cuponera</button>
       </div>
     </div>
   </section>
@@ -443,6 +548,24 @@ footer a:hover{color:var(--ink)}
   <a href="#reservar" class="book">Reservar</a>
 </nav>
 
+<div class="sheet" id="sheet" aria-hidden="true">
+  <div class="sheet-bg" data-close></div>
+  <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sh-title">
+    <div class="sheet-grab"></div>
+    <div class="sheet-head">
+      <button class="icon-btn sm" id="sh-back" aria-label="Volver"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m15 6-6 6 6 6"/></svg></button>
+      <div class="sh-t"><small id="sh-step"></small><b id="sh-title"></b></div>
+      <button class="icon-btn sm" data-close aria-label="Cerrar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="sheet-body" id="sh-body"></div>
+    <div class="sheet-foot" id="sh-foot">
+      <div class="sum"><b id="sh-sum">Ningún servicio</b><small id="sh-sub">Elegí uno o varios</small></div>
+      <button class="btn btn-dark" id="sh-next" disabled>Continuar</button>
+    </div>
+    <p class="demo-note" id="sh-demo" hidden>Vista previa: los horarios son de ejemplo y no se guarda ninguna reserva.</p>
+  </div>
+</div>
+
 <script>
 (()=>{
   const top=document.getElementById('top');
@@ -452,6 +575,160 @@ footer a:hover{color:var(--ink)}
   const tabs=[...document.querySelectorAll('.tabbar a[data-s]')];
   const spy=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){tabs.forEach(t=>t.classList.toggle('on',t.dataset.s===e.target.id))}}),{rootMargin:'-45% 0px -50% 0px'});
   ['inicio','trabajo','equipo'].forEach(id=>{const el=document.getElementById(id);el&&spy.observe(el)});
+})();
+</script>
+<script>
+/* ===== Agenda Lavis =====
+   Usa la API de la agenda actual (/api/turnos/...) cuando la página se sirve desde el mismo dominio.
+   Abierta como archivo (vista previa) usa datos de ejemplo y NO guarda reservas.
+   Para conectar la confirmación real, definir LAVIS_CONFIRMAR(payload) -> Promise. */
+(()=>{
+const API='/api/turnos';
+const IMG={'CORTE':'assets/corte.jpg','CORTE Y BARBA':'assets/corte-barba.jpg','cejas en base al visagismo':'assets/cejas.jpg','CORTE+LAVADO':'assets/trans-poster-3.jpg'};
+const FOTO={'Gabriel':'assets/barbero-gabriel.jpg','Matheo':'assets/barbero-theo.jpg'};
+const NOMBRE={'CORTE':'Corte','CORTE Y BARBA':'Corte y barba','cejas en base al visagismo':'Cejas con visagismo','CORTE+LAVADO':'Corte y lavado','Tratamiento especial para rulos':'Tratamiento para rulos','Tratamiento Reparador':'Tratamiento reparador','Black mask':'Black mask','Mechas':'Mechas','tinta':'Tinta','platinado':'Platinado'};
+const FB_SERV=[
+ {id:'62499335',nombre:'CORTE',duracion_min:40,precio:750,categoria:'Peluquería',destacado:1},
+ {id:'f0513d4d',nombre:'CORTE Y BARBA',duracion_min:40,precio:750,categoria:'Peluquería',destacado:2},
+ {id:'79dbbfc1',nombre:'cejas en base al visagismo',duracion_min:5,precio:250,categoria:'Peluquería',destacado:0},
+ {id:'7a0f6f7a',nombre:'CORTE+LAVADO',duracion_min:45,precio:850,categoria:'Peluquería',destacado:0},
+ {id:'3880403d',nombre:'Black mask',duracion_min:15,precio:350,categoria:'Tratamientos',destacado:0},
+ {id:'7c952ce6',nombre:'Tratamiento especial para rulos',duracion_min:10,precio:650,categoria:'Tratamientos',destacado:0},
+ {id:'141d604f',nombre:'Tratamiento Reparador',duracion_min:10,precio:650,categoria:'Tratamientos',destacado:0},
+ {id:'fc52d9a5',nombre:'tinta',duracion_min:120,precio:1100,categoria:'Tratamientos',destacado:0},
+ {id:'91151c9b',nombre:'Mechas',duracion_min:120,precio:2000,categoria:'Tratamientos',destacado:0},
+ {id:'0d1f84ce',nombre:'platinado',duracion_min:180,precio:3000,categoria:'Tratamientos',destacado:0}];
+const FB_BARB=[{id:'g',nombre:'Gabriel'},{id:'m',nombre:'Matheo'},{id:'n',nombre:'Nacho'}];
+const DIAS=['DOM','LUN','MAR','MIÉ','JUE','VIE','SÁB'];
+const MESES=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+const $=s=>document.querySelector(s);
+const money=n=>'$'+n.toLocaleString('es-UY');
+const nom=s=>NOMBRE[s.nombre]||s.nombre;
+let live=false, serv=[], barb=[];
+const st={mode:'reserva',step:1,sel:new Set(),barbero:'any',fecha:null,hora:null,slotsCache:{}};
+
+async function get(url){const c=new AbortController();const t=setTimeout(()=>c.abort(),4000);try{const r=await fetch(url,{signal:c.signal});if(!r.ok)throw 0;return await r.json()}finally{clearTimeout(t)}}
+async function boot(){
+  if(serv.length)return;
+  try{if(location.protocol==='file:')throw 0;const [a,b]=await Promise.all([get(API+'/servicios'),get(API+'/barberos')]);serv=a.servicios.filter(s=>s.activo&&!s.solo_membresia);barb=b.barberos;live=true}
+  catch(e){serv=FB_SERV;barb=FB_BARB;live=false}
+  serv.sort((a,b)=>(b.destacado>0)-(a.destacado>0)||(a.destacado-b.destacado)||(a.orden||0)-(b.orden||0));
+  $('#sh-demo').hidden=live&&typeof window.LAVIS_CONFIRMAR==='function';
+}
+const dur=()=>[...st.sel].reduce((t,id)=>t+serv.find(s=>s.id===id).duracion_min,0);
+const total=()=>[...st.sel].reduce((t,id)=>t+serv.find(s=>s.id===id).precio,0);
+const ymd=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+function days(){const out=[],d=new Date();d.setHours(0,0,0,0);while(out.length<15){const w=d.getDay();if(w>=2&&w<=6)out.push(new Date(d));d.setDate(d.getDate()+1)}return out}
+function demoSlots(f){const seed=[...f].reduce((a,c)=>a+c.charCodeAt(0),0);return barb.map((b,i)=>{const s=[];for(let m=600;m+dur()<=1140;m+=40){if(((m/40+seed+i*3)%5)>1)s.push(String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0'))}
+  const now=new Date();if(f===ymd(now)){const lim=now.getHours()*60+now.getMinutes()+60;return{barbero_id:b.id,barbero_nombre:b.nombre,slots:s.filter(h=>+h.slice(0,2)*60+ +h.slice(3)>=lim)}}
+  return{barbero_id:b.id,barbero_nombre:b.nombre,slots:s}})}
+async function slots(f){const k=f+'|'+dur();if(st.slotsCache[k])return st.slotsCache[k];let r;
+  if(live){try{r=(await get(`${API}/disponibilidad?fecha=${f}&duracion_min=${dur()}`)).slots}catch(e){r=demoSlots(f)}}else r=demoSlots(f);
+  return st.slotsCache[k]=r}
+
+/* ---- render ---- */
+const body=()=>$('#sh-body');
+function head(step,title,back){$('#sh-step').textContent=step;$('#sh-title').textContent=title;$('#sh-back').classList.toggle('hide',!back)}
+function foot(sum,sub,label,ok,show=true){$('#sh-foot').style.display=show?'':'none';$('#sh-sum').textContent=sum;$('#sh-sub').textContent=sub;const n=$('#sh-next');n.textContent=label;n.disabled=!ok}
+function sumTxt(){const n=[...st.sel].map(id=>nom(serv.find(s=>s.id===id)));return n.length?n.join(' + '):'Ningún servicio'}
+
+function renderServicios(){
+  head('Paso 1 de 3','¿Qué te hacés?',false);
+  const main=serv.filter(s=>IMG[s.nombre]),rest=serv.filter(s=>!IMG[s.nombre]);
+  const item=(s,lite)=>`<button class="pick${lite?' lite':''}${st.sel.has(s.id)?' on':''}" data-s="${s.id}">${lite?'':`<span class="ic"><img src="${IMG[s.nombre]}" alt=""></span>`}<span class="tx"><b>${nom(s)}</b><small>${s.duracion_min} min</small></span><span class="pr">${money(s.precio)}</span><span class="ck"></span></button>`;
+  body().innerHTML=`<p class="sh-label">Elegí uno o varios. Van seguidos, con el mismo barbero.</p>${main.map(s=>item(s)).join('')}<p class="sh-label">Tratamientos y color</p>${rest.map(s=>item(s,1)).join('')}`;
+  body().querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{const id=b.dataset.s;st.sel.has(id)?st.sel.delete(id):st.sel.add(id);b.classList.toggle('on');st.hora=null;updServ()});
+  updServ();
+}
+function updServ(){foot(sumTxt(),st.sel.size?`${dur()} min · ${money(total())}`:'Elegí uno o varios','Elegir día',st.sel.size>0)}
+
+async function renderCuando(){
+  head('Paso 2 de 3','¿Cuándo venís?',true);
+  const ds=days();if(!st.fecha||!ds.some(d=>ymd(d)===st.fecha)){st.fecha=ymd(ds[0]);st.autoDay=true}
+  const av=b=>FOTO[b.nombre]?`<img src="${FOTO[b.nombre]}" alt="">`:b.nombre[0];
+  body().innerHTML=`<p class="sh-label">Con quién</p><div class="chips" id="c-barb"><button class="chip${st.barbero==='any'?' on':''}" data-b="any"><span class="av">★</span>El primero libre</button>${barb.map(b=>`<button class="chip${st.barbero===b.id?' on':''}" data-b="${b.id}"><span class="av">${av(b)}</span>${b.nombre}</button>`).join('')}</div>
+  <p class="sh-label">${MESES[ds[0].getMonth()]==MESES[ds.at(-1).getMonth()]?MESES[ds[0].getMonth()]:MESES[ds[0].getMonth()]+' – '+MESES[ds.at(-1).getMonth()]}</p>
+  <div class="chips" id="c-day">${ds.map(d=>`<button class="chip day${st.fecha===ymd(d)?' on':''}" data-d="${ymd(d)}"><small>${DIAS[d.getDay()]}</small><b>${d.getDate()}</b></button>`).join('')}</div>
+  <div id="c-slots"></div>`;
+  body().querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{st.barbero=b.dataset.b;st.hora=null;body().querySelectorAll('[data-b]').forEach(x=>x.classList.toggle('on',x===b));drawSlots()});
+  body().querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{st.fecha=b.dataset.d;st.hora=null;body().querySelectorAll('[data-d]').forEach(x=>x.classList.toggle('on',x===b));drawSlots()});
+  updCuando();drawSlots();
+}
+function updCuando(){const d=st.fecha?new Date(st.fecha+'T12:00'):null;foot(sumTxt(),st.hora?`${DIAS[d.getDay()][0]+DIAS[d.getDay()].slice(1).toLowerCase()} ${d.getDate()} · ${st.hora} · ${barbName()}`:'Elegí el día y la hora','Continuar',!!st.hora)}
+const barbName=()=>st.barbero==='any'?(st.asignado||'Cualquier barbero'):barb.find(b=>b.id===st.barbero).nombre;
+async function drawSlots(){
+  const box=$('#c-slots');box.innerHTML='<p class="loading">Buscando horarios…</p>';updCuando();
+  const f=st.fecha,r=await slots(f);if(f!==st.fecha)return;
+  let hs;if(st.barbero==='any'){const m={};r.forEach(b=>b.slots.forEach(h=>{(m[h]=m[h]||[]).push(b.barbero_nombre)}));hs=Object.keys(m).sort();st.porHora=m}else{hs=(r.find(b=>b.barbero_id===st.barbero)||{slots:[]}).slots}
+  if(!hs.length&&st.autoDay){st.autoDay=false;const nx=body().querySelector(`[data-d="${f}"]`)?.nextElementSibling;if(nx){nx.click();nx.scrollIntoView({inline:'center',block:'nearest'});return}}
+  st.autoDay=false;
+  if(!hs.length){box.innerHTML='<p class="sh-label">Horarios</p><div class="empty">No quedan horarios libres ese día. Probá con otro día o con otro barbero.</div>';return}
+  const am=hs.filter(h=>h<'13:00'),pm=hs.filter(h=>h>='13:00');
+  const grid=a=>`<div class="slots">${a.map(h=>`<button class="slot${st.hora===h?' on':''}" data-h="${h}">${h}</button>`).join('')}</div>`;
+  box.innerHTML=(am.length?`<p class="sh-label">Mañana</p>${grid(am)}`:'')+(pm.length?`<p class="sh-label">Tarde</p>${grid(pm)}`:'');
+  box.querySelectorAll('[data-h]').forEach(b=>b.onclick=()=>{st.hora=b.dataset.h;st.asignado=st.barbero==='any'?st.porHora[st.hora][0]:null;box.querySelectorAll('[data-h]').forEach(x=>x.classList.toggle('on',x===b));updCuando()});
+}
+
+function renderDatos(){
+  head('Paso 3 de 3','Tus datos',true);
+  const d=new Date(st.fecha+'T12:00');const saved=JSON.parse(localStorageGet('lavis_datos')||'{}');
+  body().innerHTML=`<div class="resume"><div><span>Servicio</span><span>${sumTxt()}</span></div><div><span>Cuándo</span><span>${DIAS[d.getDay()][0]+DIAS[d.getDay()].slice(1).toLowerCase()} ${d.getDate()} ${MESES[d.getMonth()]} · ${st.hora}</span></div><div><span>Con</span><span>${barbName()}</span></div><div><span>Total</span><span>${money(total())}</span></div></div>
+  <label class="field"><span>Teléfono (WhatsApp)</span><input id="f-tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="09X XXX XXX" value="${saved.tel||''}"></label>
+  <label class="field"><span>Nombre y apellido</span><input id="f-nom" type="text" autocomplete="name" value="${saved.nom||''}"></label>
+  <label class="field"><span>Email</span><input id="f-mail" type="email" autocomplete="email" value="${saved.mail||''}"></label>
+  <label class="field"><span>Cumpleaños (opcional)</span><input id="f-cum" type="date" value="${saved.cum||''}"></label>
+  <p class="hint">Te mandamos la confirmación y el recordatorio por WhatsApp y mail. Tu teléfono es tu usuario para la cuponera.</p>`;
+  const v=()=>{const t=$('#f-tel').value.replace(/\D/g,''),n=$('#f-nom').value.trim(),m=$('#f-mail').value.trim();return t.length>=8&&n.length>=3&&/^\S+@\S+\.\S+$/.test(m)};
+  body().querySelectorAll('input').forEach(i=>i.oninput=i.onchange=()=>{i.classList.remove('err');foot(money(total()),`${st.hora} · ${barbName()}`,'Confirmar reserva',v())});
+  foot(money(total()),`${st.hora} · ${barbName()}`,'Confirmar reserva',v());
+}
+async function confirmar(){
+  const datos={tel:$('#f-tel').value.trim(),nom:$('#f-nom').value.trim(),mail:$('#f-mail').value.trim(),cum:$('#f-cum').value};
+  localStorageSet('lavis_datos',JSON.stringify(datos));
+  const payload={servicios:[...st.sel],barbero_id:st.barbero==='any'?null:st.barbero,fecha:st.fecha,hora:st.hora,telefono:datos.tel,nombre:datos.nom,email:datos.mail,cumpleanos:datos.cum||null};
+  const n=$('#sh-next');n.disabled=true;n.textContent='Reservando…';
+  try{ if(live&&typeof window.LAVIS_CONFIRMAR==='function') await window.LAVIS_CONFIRMAR(payload); else await new Promise(r=>setTimeout(r,700)); renderDone(datos)}
+  catch(e){n.disabled=false;n.textContent='Confirmar reserva';alert('No pudimos guardar la reserva. Probá de nuevo o escribinos por WhatsApp.')}
+}
+function renderDone(datos){
+  head('','¡Listo!',false);foot('','','',false,false);
+  const d=new Date(st.fecha+'T12:00');const sellos=Math.min(5,(+localStorageGet('lavis_sellos_demo')||0)+1);localStorageSet('lavis_sellos_demo',sellos);
+  body().innerHTML=`<div class="done"><div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
+  <h4>Te esperamos, ${datos.nom.split(' ')[0]}.</h4><p>${DIAS[d.getDay()][0]+DIAS[d.getDay()].slice(1).toLowerCase()} ${d.getDate()} de ${MESES[d.getMonth()]} a las ${st.hora} con ${barbName()}.<br>Te llega la confirmación por WhatsApp y mail.</p>
+  <div class="resume" style="text-align:left"><div><span>Servicio</span><span>${sumTxt()}</span></div><div><span>Total</span><span>${money(total())}</span></div><div><span>Dónde</span><span>Paralela Sur esq. 15008</span></div></div>
+  <p class="sh-label" style="text-align:center">Tu cuponera</p>${stampsHTML(sellos)}<p class="hint">${sellos>=5?'¡Completaste la cuponera! Tu premio te espera.':`Te ${5-sellos===1?'falta 1 corte':'faltan '+(5-sellos)+' cortes'} para tu premio.`}</p>
+  <div style="display:flex;gap:8px;justify-content:center;margin-top:20px"><a class="btn btn-fill" href="https://www.google.com/maps/place/Lavis+Style/@-34.8000824,-55.9208232,17z">Cómo llegar</a><button class="btn btn-dark" data-close>Cerrar</button></div></div>`;
+  body().querySelector('[data-close]').onclick=close;
+}
+const stampsHTML=n=>`<div class="stamps" style="margin-left:auto;margin-right:auto">${[1,2,3,4,5].map(i=>`<i class="${i===5?'gift':''}${i<=n?' on':''}">${i===5?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="8" width="17" height="4" rx="1"/><path d="M5 12v8h14v-8M12 8v12M12 8c-1.5-3-5-3.5-5-1.5S10 8 12 8Zm0 0c1.5-3 5-3.5 5-1.5S14 8 12 8Z"/></svg>':''}</i>`).join('')}</div>`;
+
+/* ---- cuenta / cuponera ---- */
+function renderCuenta(){
+  head('Mi cuenta','Tu cuponera',false);foot('','','',false,false);
+  const saved=JSON.parse(localStorageGet('lavis_datos')||'{}');
+  body().innerHTML=`<p class="hint" style="margin:6px 0 14px">Entrá con el teléfono que usaste para reservar. La sesión queda abierta en este dispositivo.</p>
+  <label class="field"><span>Teléfono (WhatsApp)</span><input id="c-tel" type="tel" inputmode="tel" value="${saved.tel||''}" placeholder="09X XXX XXX"></label>
+  <button class="btn btn-dark" id="c-go" style="width:100%;margin-top:6px">Entrar</button>
+  <p class="hint" style="text-align:center;margin-top:14px">¿Todavía no reservaste? <a href="#" id="c-res" style="color:var(--ink);font-weight:600">Reservá tu turno</a> y se crea tu cuenta.</p>`;
+  $('#c-res').onclick=e=>{e.preventDefault();st.mode='reserva';st.step=1;render()};
+  $('#c-go').onclick=()=>{const t=$('#c-tel').value.replace(/\D/g,'');if(t.length<8){$('#c-tel').classList.add('err');return}
+    const n=+localStorageGet('lavis_sellos_demo')||0;
+    body().innerHTML=`<div class="done"><h4>Hola${saved.nom?', '+saved.nom.split(' ')[0]:''}.</h4><p>Cada corte suma un sello. Con 5, tu premio de regalo.</p>${stampsHTML(n)}<p class="hint">${n>=5?'¡Tu premio te espera!':`Llevás ${n} de 5.`}</p><button class="btn btn-dark" id="c-new" style="margin-top:20px">Reservar turno</button></div>`;
+    $('#c-new').onclick=()=>{st.mode='reserva';st.step=1;render()}};
+}
+
+function localStorageGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function localStorageSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+
+function render(){body().scrollTop=0;if(st.mode==='cuenta')return renderCuenta();({1:renderServicios,2:renderCuando,3:renderDatos})[st.step]()}
+async function open(mode){st.mode=mode;st.step=1;if(mode==='reserva'){st.hora=null}await boot();render();$('#sheet').classList.add('open');$('#sheet').setAttribute('aria-hidden','false');document.body.classList.add('lock')}
+function close(){$('#sheet').classList.remove('open');$('#sheet').setAttribute('aria-hidden','true');document.body.classList.remove('lock')}
+$('#sh-next').onclick=()=>{if(st.step===3)return confirmar();st.step++;render()};
+$('#sh-back').onclick=()=>{if(st.step>1){st.step--;render()}};
+document.querySelectorAll('[data-close]').forEach(b=>b.onclick=close);
+addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+document.addEventListener('click',e=>{const a=e.target.closest('a[href="#reservar"],[data-open]');if(!a)return;e.preventDefault();open(a.dataset.open||'reserva')});
+document.querySelectorAll('.stamps').forEach(el=>{const n=+localStorageGet('lavis_sellos_demo')||0;[...el.children].forEach((i,k)=>i.classList.toggle('on',k<n))});
 })();
 </script>
 </body>
