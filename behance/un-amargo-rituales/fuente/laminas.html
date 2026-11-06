@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Rituales — láminas Behance</title>
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --soft: #5c5c5c;
+    --muted: #8a8a8a;
+    --line: #dcdcd8;
+    --paper: #f4f4f1;
+    --white: #ffffff;
+    --calabaza: #b8642a;
+    --yerba: #8ea35c;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #777; font-family: 'Helvetica Neue', Helvetica, Inter, Arial, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .slide { width: 1400px; position: relative; overflow: hidden; background: var(--paper); margin: 0 auto 40px; }
+  .pad { padding: 96px 104px; }
+  .eyebrow { font-size: 15px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+  h1, h2 { font-weight: 700; letter-spacing: -.045em; line-height: .88; }
+  h2 em, h1 em { font-style: normal; font-weight: 400; display: block; }
+  p { font-size: 21px; line-height: 1.55; color: var(--soft); }
+  .num { font-variant-numeric: tabular-nums; font-size: 15px; letter-spacing: .12em; color: var(--muted); }
+
+  /* marco de navegador */
+  .browser { background: var(--white); border-radius: 14px; overflow: hidden; box-shadow: 0 30px 80px -30px rgba(0,0,0,.28), 0 0 0 1px rgba(0,0,0,.06); }
+  .browser .bar { height: 34px; display: flex; align-items: center; gap: 7px; padding: 0 14px; background: #fafafa; border-bottom: 1px solid #ececec; }
+  .browser .bar i { width: 10px; height: 10px; border-radius: 50%; background: #dedede; }
+  .browser .bar span { margin-left: 14px; font-size: 12px; color: #a0a0a0; }
+  .browser img { display: block; width: 100%; }
+
+  /* marco de celular */
+  .phone { border-radius: 52px; background: #111; padding: 12px; box-shadow: 0 40px 90px -30px rgba(0,0,0,.45); }
+  .phone img { display: block; width: 100%; border-radius: 41px; }
+
+  /* 01 portada */
+  #s01 { height: 1180px; background: var(--white); }
+  #s01 .top { display: flex; justify-content: space-between; align-items: center; padding: 56px 104px 0; }
+  #s01 .brand { display: flex; align-items: center; gap: 14px; font-weight: 700; font-size: 20px; letter-spacing: -.02em; }
+  #s01 .brand svg { height: 34px; width: auto; }
+  #s01 h1 { font-size: 250px; margin: 92px 0 0 96px; }
+  #s01 .sub { display: flex; justify-content: space-between; align-items: flex-end; padding: 34px 104px 0; }
+  #s01 .sub p { max-width: 520px; font-size: 24px; color: var(--ink); }
+  #s01 .browser { position: absolute; left: 104px; right: 104px; top: 610px; }
+
+  /* 02 concepto */
+  #s02 { height: 980px; }
+  #s02 h2 { font-size: 104px; max-width: 900px; margin-top: 28px; }
+  #s02 .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px; margin-top: 110px; padding-top: 40px; border-top: 1.5px solid var(--ink); }
+  #s02 h3 { font-size: 15px; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 18px; }
+  #s02 .cols p { font-size: 20px; }
+
+  /* 03 / 04 grillas de pasos */
+  .steps-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 72px; }
+  .steps-head h2 { font-size: 96px; }
+  .steps-head p { max-width: 380px; text-align: right; font-size: 19px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px 44px; }
+  .cap { display: flex; gap: 16px; align-items: baseline; margin-top: 22px; }
+  .cap b { font-size: 22px; letter-spacing: -.02em; }
+  #s03 { background: var(--white); }
+
+  /* 04 curado */
+  #s04 .pick { display: inline-flex; gap: 4px; padding: 5px; border-radius: 100px; box-shadow: inset 0 0 0 1.5px var(--ink); margin-bottom: 30px; }
+  #s04 .pick span { padding: 12px 24px; border-radius: 100px; font-size: 17px; font-weight: 500; }
+  #s04 .pick .on { background: var(--ink); color: #fff; }
+  #s04 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; }
+  #s04 .col h3 { font-size: 30px; letter-spacing: -.03em; margin-bottom: 6px; }
+  #s04 .col .num { display: block; margin-bottom: 26px; }
+  #s04 .col .browser + .browser { margin-top: 30px; }
+
+  /* 05 celulares */
+  #s05 { background: var(--ink); color: #fff; }
+  #s05 h2 { font-size: 96px; }
+  #s05 p { color: rgba(255,255,255,.6); max-width: 560px; margin-top: 26px; }
+  #s05 .row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 34px; margin-top: 90px; align-items: start; }
+  #s05 .row .phone:nth-child(even) { margin-top: 90px; }
+  #s05 .phone { background: #262626; }
+
+  /* 06 sistema */
+  #s06 { background: var(--white); }
+  #s06 .sys { display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; margin-top: 70px; }
+  #s06 .type .aa { white-space: nowrap; font-size: 210px; font-weight: 700; letter-spacing: -.06em; line-height: .8; }
+  #s06 .type .aa span { font-weight: 400; margin-left: 24px; }
+  #s06 .type .meta { display: flex; gap: 40px; margin-top: 34px; font-size: 18px; color: var(--soft); }
+  #s06 .type .meta b { display: block; color: var(--ink); font-size: 20px; margin-bottom: 4px; }
+  #s06 .sw { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  #s06 .sw div { height: 150px; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; justify-content: flex-end; font-size: 14px; letter-spacing: .06em; box-shadow: inset 0 0 0 1px rgba(0,0,0,.08); }
+  #s06 .sw b { font-size: 16px; letter-spacing: 0; margin-bottom: 2px; }
+  #s06 .rules { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-top: 96px; padding-top: 40px; border-top: 1.5px solid var(--ink); }
+  #s06 .rules h3 { font-size: 23px; letter-spacing: -.02em; margin: 14px 0 10px; }
+  #s06 .rules p { font-size: 17px; }
+
+  /* 07 final oscuro */
+  #s07 { background: var(--ink); height: 875px; }
+  #s07 img { display: block; width: 100%; }
+  #s07 .label { position: absolute; left: 104px; bottom: 80px; color: rgba(255,255,255,.55); font-size: 15px; letter-spacing: .18em; text-transform: uppercase; }
+
+  /* 08 cierre */
+  #s08 { height: 860px; background: var(--white); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  #s08 svg { height: 120px; width: auto; }
+  #s08 h2 { font-size: 150px; margin-top: 56px; }
+  #s08 .credits { display: flex; gap: 72px; margin-top: 76px; font-size: 17px; color: var(--soft); text-align: left; }
+  #s08 .credits b { display: block; color: var(--ink); margin-bottom: 4px; font-size: 13px; letter-spacing: .18em; text-transform: uppercase; }
+
+  /* portada Behance 808x632 */
+  #cover { width: 808px; height: 632px; background: var(--white); margin: 0 auto 40px; position: relative; overflow: hidden; }
+  #cover img { position: absolute; right: -10px; top: 0; height: 632px; }
+  #cover .t { position: absolute; left: 52px; bottom: 56px; }
+  #cover .t span { font-size: 15px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+  #cover h1 { font-size: 118px; margin-top: 16px; }
+  #cover .brand { position: absolute; left: 52px; top: 46px; display: flex; gap: 10px; align-items: center; font-weight: 700; font-size: 17px; letter-spacing: -.02em; }
+  #cover .brand svg { height: 28px; width: auto; }
+</style>
+</head>
+<body>
+
+<!-- ISO -->
+<template id="iso">__ISO__</template>
+
+<div id="cover">
+  <div class="brand"><span class="iso"></span>Un Amargo</div>
+  <img src="stills/crop_cover.png" alt="">
+  <div class="t"><span>Experiencia web 3D</span><h1>Rituales.</h1></div>
+</div>
+
+<section class="slide" id="s01">
+  <div class="top">
+    <div class="brand"><span class="iso"></span>Un Amargo</div>
+    <span class="eyebrow">Experiencia web interactiva · 3D · 2025</span>
+  </div>
+  <h1>Rituales.</h1>
+  <div class="sub">
+    <p>Dos guías interactivas en 3D para aprender a cebar y a curar un mate, paso a paso.</p>
+    <span class="eyebrow">Diseño · Desarrollo · 3D</span>
+  </div>
+  <div class="browser"><div class="bar"><i></i><i></i><i></i><span>unamargo.com</span></div><img src="stills/cebar_desk_0.png" alt=""></div>
+</section>
+
+<section class="slide pad" id="s02">
+  <span class="eyebrow">El concepto</span>
+  <h2>El mate no se explica. <em>Se ceba.</em></h2>
+  <div class="cols">
+    <div><h3>Desafío</h3><p>Muchos compran su primer mate y no saben curarlo ni cebarlo bien. Las guías de siempre son texto largo o fotos sueltas que nadie termina de leer.</p></div>
+    <div><h3>Idea</h3><p>Convertir cada instrucción en un momento: un paso por pantalla, el mate en 3D como protagonista y objetos que entran en escena solo cuando hacen falta.</p></div>
+    <div><h3>Resultado</h3><p>Dos experiencias de scroll que enseñan el ritual en menos de un minuto, conectadas entre sí y con la tienda. Funcionan igual de bien en compu y en celular.</p></div>
+  </div>
+</section>
+
+<section class="slide pad" id="s03">
+  <div class="steps-head">
+    <div><span class="eyebrow">Guía 01</span><h2 style="margin-top:22px">Cómo cebar <em>un buen amargo.</em></h2></div>
+    <p>Cinco pasos y un cierre. La yerbera, el vaso de agua y el termo entran y salen de cuadro según el paso.</p>
+  </div>
+  <div class="grid">
+    <div><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="stills/cebar_desk_1.png" alt=""></div><div class="cap"><span class="num">01</span><b>Primero, la yerba.</b></div></div>
+    <div><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="stills/cebar_desk_2.png" alt=""></div><div class="cap"><span class="num">02</span><b>Hacé la montañita.</b></div></div>
+    <div><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="stills/cebar_desk_3.png" alt=""></div><div class="cap"><span class="num">03</span><b>Un poco de agua fría.</b></div></div>
+    <div><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="stills/cebar_desk_4.png" alt=""></div><div class="cap"><span class="num">04</span><b>Ahora, la bombilla.</b></div></div>
+    <div><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="stills/cebar_desk_5.png" alt=""></div><div class="cap"><span class="num">05</span><b>Cebá. Sin apuro.</b></div></div>
+    <div><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="stills/cebar_desk_6.png" alt=""></div><div class="cap"><span class="num">06</span><b>El mejor paso: compartirlo.</b></div></div>
+  </div>
+</section>
+
+<section class="slide pad" id="s04">
+  <div class="steps-head">
+    <div><span class="eyebrow">Guía 02</span><h2 style="margin-top:22px">Cómo curar <em>tu mate.</em></h2></div>
+    <p>Un mismo recorrido, dos caminos: la guía cambia los pasos según el material del mate.</p>
+  </div>
+  <div class="pick"><span class="on">Calabaza</span><span>Algarrobo</span></div>
+  <div class="two">
+    <div class="col">
+      <h3>Calabaza</h3><span class="num">3 PASOS · CONTADOR DE 24 H</span>
+      <div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="stills/curar_desk_1.png" alt=""></div>
+      <div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="stills/curar_desk_2.png" alt=""></div>
+    </div>
+    <div class="col">
+      <h3>Algarrobo</h3><span class="num">5 PASOS · GRASA Y REPOSO</span>
+      <div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="stills/curar_desk_algarrobo_1.png" alt=""></div>
+      <div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="stills/curar_desk_algarrobo_3.png" alt=""></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide pad" id="s05">
+  <span class="eyebrow" style="color:rgba(255,255,255,.45)">Mobile first</span>
+  <h2 style="margin-top:22px">En la mano, <em>como el mate.</em></h2>
+  <p>En el celular la escena se reorganiza: el mate sube o baja para dejarle lugar al texto, que aparece recién cuando el objeto termina de moverse.</p>
+  <div class="row">
+    <div class="phone"><img src="stills/cebar_mob_0.png" alt=""></div>
+    <div class="phone"><img src="stills/cebar_mob_2.png" alt=""></div>
+    <div class="phone"><img src="stills/curar_mob_2.png" alt=""></div>
+    <div class="phone"><img src="stills/cebar_mob_6.png" alt=""></div>
+  </div>
+</section>
+
+<section class="slide pad" id="s06">
+  <span class="eyebrow">Sistema</span>
+  <div class="sys">
+    <div class="type">
+      <div class="aa">Aa <span>Aa</span></div>
+      <div class="meta"><div><b>Helvetica Neue</b>Bold y Regular</div><div><b>Titulares</b>interletra −4,5 %, interlineado 0,86</div></div>
+    </div>
+    <div class="sw">
+      <div style="background:#0a0a0a;color:#fff"><b>Tinta</b>#0A0A0A</div>
+      <div style="background:#ffffff"><b>Papel</b>#FFFFFF</div>
+      <div style="background:#eeeeec"><b>Fondo paso</b>#EEEEEC</div>
+      <div style="background:var(--calabaza);color:#fff"><b>Calabaza</b>MATERIAL 3D</div>
+      <div style="background:var(--yerba);color:#fff"><b>Yerba</b>MATERIAL 3D</div>
+      <div style="background:#8a8a8a;color:#fff"><b>Texto suave</b>#8A8A8A</div>
+    </div>
+  </div>
+  <div class="rules">
+    <div><span class="num">01</span><h3>Un paso por pantalla</h3><p>Scroll con imán: cada gesto avanza exactamente un paso.</p></div>
+    <div><span class="num">02</span><h3>El objeto manda</h3><p>El mate en 3D es el centro; el texto le deja espacio.</p></div>
+    <div><span class="num">03</span><h3>Entra lo que hace falta</h3><p>Yerbera, vaso y termo aparecen solo en su momento.</p></div>
+    <div><span class="num">04</span><h3>El cierre cambia de tono</h3><p>El último paso pasa a negro, como las secciones de la tienda.</p></div>
+  </div>
+</section>
+
+<section class="slide" id="s07">
+  <img src="stills/cebar_desk_6.png" alt="">
+</section>
+
+<section class="slide" id="s08">
+  <span class="iso"></span>
+  <h2>gracias.</h2>
+  <div class="credits">
+    <div><b>Diseño y desarrollo</b>Facundo Laviano</div>
+    <div><b>Marca</b>Un Amargo · Uruguay</div>
+    <div><b>Herramientas</b>Figma · Three.js · HTML/CSS/JS</div>
+  </div>
+</section>
+
+<script>
+  const iso = document.getElementById('iso').innerHTML;
+  document.querySelectorAll('.iso').forEach(el => el.outerHTML = iso);
+  document.querySelectorAll('#s08 svg path').forEach(p => p.setAttribute('fill', '#0a0a0a'));
+</script>
+</body>
+</html>
