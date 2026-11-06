@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Milo Raciones — Ración y accesorios a domicilio en Ciudad de la Costa</title>
+  <meta name="description" content="Raciones para perros y gatos, snacks, antipulgas, arena y accesorios con entrega a domicilio en Ciudad de la Costa y alrededores. Pedí por WhatsApp y recibilo en el día." />
+  <meta property="og:title" content="Milo Raciones — Ración a domicilio en Ciudad de la Costa" />
+  <meta property="og:description" content="Pedí la ración de tu mascota por WhatsApp y recibila en tu casa, en el día." />
+  <meta name="theme-color" content="#F2652C" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23F2652C'/%3E%3Cg fill='%23fff'%3E%3Cellipse cx='32' cy='40' rx='12' ry='10'/%3E%3Ccircle cx='18' cy='26' r='5'/%3E%3Ccircle cx='27' cy='18' r='5'/%3E%3Ccircle cx='37' cy='18' r='5'/%3E%3Ccircle cx='46' cy='26' r='5'/%3E%3C/g%3E%3C/svg%3E" />
+</head>
+<body>
+
+  <!-- ── Barra de anuncio ───────────────────────────── -->
+  <div class="anuncio">
+    <span>🚚 Envío sin costo en Ciudad de la Costa desde <strong data-envio-gratis>$ 1.500</strong></span>
+    <span class="anuncio-sep">·</span>
+    <span>Pedí antes de las <strong data-hora-corte>14 h</strong> y lo recibís hoy</span>
+  </div>
+
+  <!-- ── Header ─────────────────────────────────────── -->
+  <header class="header">
+    <div class="contenedor header-in">
+      <a href="#inicio" class="logo" aria-label="Milo Raciones, inicio">
+        <span class="logo-marca" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><rect width="64" height="64" rx="18" fill="currentColor"/><g fill="#fff"><ellipse cx="32" cy="40" rx="12" ry="10"/><circle cx="18" cy="26" r="5"/><circle cx="27" cy="17" r="5"/><circle cx="37" cy="17" r="5"/><circle cx="46" cy="26" r="5"/></g></svg>
+        </span>
+        <span class="logo-texto">Milo<small>raciones</small></span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Principal">
+        <a href="#tienda" data-ir-cat="perros">Perros</a>
+        <a href="#tienda" data-ir-cat="gatos">Gatos</a>
+        <a href="#tienda" data-ir-cat="snacks">Snacks</a>
+        <a href="#tienda" data-ir-cat="antipulgas">Antipulgas</a>
+        <a href="#tienda" data-ir-cat="arena">Arena</a>
+        <a href="#tienda" data-ir-cat="accesorios">Accesorios</a>
+        <a href="#envios">Envíos</a>
+        <a href="#preguntas">Preguntas</a>
+      </nav>
+
+      <div class="header-acciones">
+        <a class="btn btn-wa btn-chico ocultar-movil" data-whatsapp target="_blank" rel="noopener">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3Z"/></svg>
+          Escribinos
+        </a>
+        <button class="btn-carrito" type="button" data-abrir-carrito aria-label="Ver mi pedido">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 7h12l-1 13H7L6 7Zm3 0a3 3 0 0 1 6 0"/></svg>
+          <span class="carrito-cuenta" data-cuenta hidden>0</span>
+        </button>
+        <button class="btn-menu" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav" data-menu>
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="inicio">
+
+    <!-- ── Hero ───────────────────────────────────────── -->
+    <section class="hero">
+      <div class="contenedor hero-in">
+        <div class="hero-texto">
+          <p class="etiqueta">Ciudad de la Costa y alrededores</p>
+          <h1>La ración de tu mascota, <span class="resaltado">en la puerta</span> de tu casa.</h1>
+          <p class="hero-bajada">Raciones para perros y gatos, snacks, antipulgas, arena y accesorios. Armá tu pedido acá, mandalo por WhatsApp y te lo llevamos.</p>
+          <div class="hero-botones">
+            <a href="#tienda" class="btn btn-primario">Ver productos</a>
+            <a class="btn btn-wa" data-whatsapp target="_blank" rel="noopener">Pedir por WhatsApp</a>
+          </div>
+
+          <form class="zona-rapida" data-form-zona>
+            <label for="zona-hero">¿Llegamos a tu barrio?</label>
+            <div class="zona-rapida-fila">
+              <select id="zona-hero" data-select-zona>
+                <option value="">Elegí tu barrio</option>
+              </select>
+            </div>
+            <p class="zona-resultado" data-resultado-zona aria-live="polite"></p>
+          </form>
+        </div>
+
+        <div class="hero-ilus" aria-hidden="true">
+          <svg viewBox="0 0 480 440" class="ilus">
+            <circle cx="250" cy="220" r="190" fill="#FFD9C2"/>
+            <circle cx="400" cy="90" r="34" fill="#FFC94A"/>
+            <!-- bolsa -->
+            <g transform="translate(150 70)">
+              <path d="M20 40 Q20 20 40 18 L170 18 Q190 20 190 40 L200 300 Q200 320 180 320 L30 320 Q10 320 10 300 Z" fill="#0F6E62"/>
+              <path d="M28 18 L182 18 L176 0 L34 0 Z" fill="#0B5A50"/>
+              <rect x="40" y="70" width="130" height="118" rx="20" fill="#FFF8EE"/>
+              <g fill="#F2652C" transform="translate(76 92) scale(.9)">
+                <ellipse cx="32" cy="44" rx="16" ry="13"/><circle cx="12" cy="24" r="7"/><circle cx="25" cy="11" r="7"/><circle cx="40" cy="11" r="7"/><circle cx="53" cy="24" r="7"/>
+              </g>
+              <text x="105" y="232" text-anchor="middle" font-family="Fredoka, sans-serif" font-weight="700" font-size="38" fill="#FFF8EE">Milo</text>
+              <text x="105" y="262" text-anchor="middle" font-family="Nunito, sans-serif" font-weight="800" font-size="15" letter-spacing="3" fill="#FFC94A">RACIONES</text>
+            </g>
+            <!-- perro -->
+            <g transform="translate(28 228)">
+              <ellipse cx="90" cy="196" rx="86" ry="10" fill="#E9B79A"/>
+              <path d="M40 190 Q34 120 70 104 L120 104 Q150 120 146 190 Z" fill="#C98A5B"/>
+              <circle cx="96" cy="78" r="50" fill="#D99B6C"/>
+              <path d="M48 52 Q30 70 38 112 Q58 100 62 66 Z" fill="#8A5634"/>
+              <path d="M144 52 Q162 70 154 112 Q134 100 130 66 Z" fill="#8A5634"/>
+              <ellipse cx="96" cy="100" rx="26" ry="20" fill="#F3D2B5"/>
+              <circle cx="78" cy="72" r="6" fill="#1F2A2E"/><circle cx="114" cy="72" r="6" fill="#1F2A2E"/>
+              <ellipse cx="96" cy="92" rx="9" ry="7" fill="#1F2A2E"/>
+              <path d="M88 106 Q96 114 104 106" stroke="#1F2A2E" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <path d="M96 110 Q98 126 106 122 Q110 112 102 108" fill="#F2652C"/>
+            </g>
+            <!-- gato -->
+            <g transform="translate(330 250)">
+              <ellipse cx="62" cy="174" rx="64" ry="9" fill="#E9B79A"/>
+              <path d="M20 170 Q14 110 40 96 L86 96 Q110 110 104 170 Z" fill="#4A4F55"/>
+              <path d="M104 160 Q140 150 128 110" stroke="#4A4F55" stroke-width="12" fill="none" stroke-linecap="round"/>
+              <circle cx="62" cy="70" r="40" fill="#5C6269"/>
+              <path d="M28 46 L30 12 L56 36 Z" fill="#5C6269"/><path d="M96 46 L94 12 L68 36 Z" fill="#5C6269"/>
+              <path d="M34 38 L35 22 L48 34 Z" fill="#F7A9A0"/><path d="M90 38 L89 22 L76 34 Z" fill="#F7A9A0"/>
+              <ellipse cx="48" cy="68" rx="6" ry="8" fill="#FFC94A"/><ellipse cx="76" cy="68" rx="6" ry="8" fill="#FFC94A"/>
+              <ellipse cx="48" cy="69" rx="2.4" ry="6" fill="#1F2A2E"/><ellipse cx="76" cy="69" rx="2.4" ry="6" fill="#1F2A2E"/>
+              <path d="M58 82 L66 82 L62 88 Z" fill="#F7A9A0"/>
+              <path d="M62 88 Q56 94 50 90 M62 88 Q68 94 74 90" stroke="#1F2A2E" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Beneficios ──────────────────────────────────── -->
+    <section class="beneficios" aria-label="Por qué Milo">
+      <div class="contenedor beneficios-grid">
+        <div class="beneficio">
+          <span class="beneficio-ico">⚡</span>
+          <div><strong>Entrega en el día</strong><p>Pedidos antes de las <span data-hora-corte>14 h</span> en Ciudad de la Costa.</p></div>
+        </div>
+        <div class="beneficio">
+          <span class="beneficio-ico">🏠</span>
+          <div><strong>Te lo subimos</strong><p>Bolsas pesadas hasta la puerta, sin que muevas un dedo.</p></div>
+        </div>
+        <div class="beneficio">
+          <span class="beneficio-ico">💳</span>
+          <div><strong>Pagás al recibir</strong><p>Efectivo, transferencia, Mercado Pago o POS.</p></div>
+        </div>
+        <div class="beneficio">
+          <span class="beneficio-ico">🔔</span>
+          <div><strong>Te avisamos</strong><p>Cuando se está por terminar la bolsa, te escribimos.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Categorías ──────────────────────────────────── -->
+    <section class="seccion" aria-labelledby="t-cat">
+      <div class="contenedor">
+        <div class="seccion-cab">
+          <h2 id="t-cat">¿Qué necesita hoy?</h2>
+        </div>
+        <div class="categorias">
+          <button type="button" class="categoria cat-perros" data-ir-cat="perros"><span class="categoria-emoji">🐶</span>Perros</button>
+          <button type="button" class="categoria cat-gatos" data-ir-cat="gatos"><span class="categoria-emoji">🐱</span>Gatos</button>
+          <button type="button" class="categoria cat-snacks" data-ir-cat="snacks"><span class="categoria-emoji">🦴</span>Snacks</button>
+          <button type="button" class="categoria cat-antipulgas" data-ir-cat="antipulgas"><span class="categoria-emoji">🛡️</span>Antipulgas</button>
+          <button type="button" class="categoria cat-arena" data-ir-cat="arena"><span class="categoria-emoji">🪣</span>Arena</button>
+          <button type="button" class="categoria cat-accesorios" data-ir-cat="accesorios"><span class="categoria-emoji">🎾</span>Accesorios</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Tienda ──────────────────────────────────────── -->
+    <section class="seccion seccion-tienda" id="tienda" aria-labelledby="t-tienda">
+      <div class="contenedor">
+        <div class="seccion-cab">
+          <h2 id="t-tienda">Nuestros productos</h2>
+          <p>Elegí la presentación, sumala a tu pedido y mandalo por WhatsApp. Confirmamos stock y horario al toque.</p>
+        </div>
+
+        <div class="filtros">
+          <div class="tabs" role="tablist" aria-label="Categorías" data-tabs>
+            <button role="tab" type="button" data-cat="todos" aria-selected="true">Todo</button>
+            <button role="tab" type="button" data-cat="perros" aria-selected="false">Perros</button>
+            <button role="tab" type="button" data-cat="gatos" aria-selected="false">Gatos</button>
+            <button role="tab" type="button" data-cat="snacks" aria-selected="false">Snacks</button>
+            <button role="tab" type="button" data-cat="antipulgas" aria-selected="false">Antipulgas</button>
+            <button role="tab" type="button" data-cat="arena" aria-selected="false">Arena</button>
+            <button role="tab" type="button" data-cat="accesorios" aria-selected="false">Accesorios</button>
+          </div>
+          <div class="filtros-extra">
+            <label class="buscador">
+              <span class="sr">Buscar</span>
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              <input type="search" placeholder="Buscar…" aria-label="Buscar producto o marca" data-buscar />
+            </label>
+            <label class="sr" for="filtro-marca">Marca</label>
+            <select id="filtro-marca" data-marca>
+              <option value="">Todas las marcas</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="productos" id="productos" aria-live="polite"></div>
+        <p class="sin-resultados" data-sin-resultados hidden>No encontramos productos con ese filtro. ¿Buscás algo en particular? <a data-whatsapp target="_blank" rel="noopener">Preguntanos por WhatsApp</a>.</p>
+        <p class="nota-precios">Precios en pesos uruguayos, IVA incluido. Pueden variar según stock; te confirmamos el total antes de salir.</p>
+      </div>
+    </section>
+
+    <!-- ── Cómo funciona ───────────────────────────────── -->
+    <section class="seccion" aria-labelledby="t-como">
+      <div class="contenedor">
+        <div class="seccion-cab">
+          <h2 id="t-como">Pedir es así de fácil</h2>
+        </div>
+        <ol class="pasos">
+          <li class="paso">
+            <span class="paso-num">1</span>
+            <h3>Armá tu pedido</h3>
+            <p>Elegí productos y presentaciones. Si no ves lo que buscás, preguntanos: lo conseguimos.</p>
+          </li>
+          <li class="paso">
+            <span class="paso-num">2</span>
+            <h3>Mandalo por WhatsApp</h3>
+            <p>Con tu barrio y dirección. Te confirmamos el total y la franja horaria.</p>
+          </li>
+          <li class="paso">
+            <span class="paso-num">3</span>
+            <h3>Recibilo en casa</h3>
+            <p>Te lo llevamos hasta la puerta y pagás como te quede cómodo.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ── Calculadora ─────────────────────────────────── -->
+    <section class="seccion seccion-calc" aria-labelledby="t-calc">
+      <div class="contenedor calc-in">
+        <div class="calc-texto">
+          <h2 id="t-calc">¿Cuánto le dura la bolsa?</h2>
+          <p>Calculá cada cuánto vas a necesitar ración y dejá que te avisemos antes de que se termine. Nada de quedarte sin comida un domingo.</p>
+        </div>
+        <form class="calc" data-calc>
+          <fieldset class="calc-especie">
+            <legend>Mi mascota es</legend>
+            <label><input type="radio" name="especie" value="perro" checked /> <span>🐶 Perro</span></label>
+            <label><input type="radio" name="especie" value="gato" /> <span>🐱 Gato</span></label>
+          </fieldset>
+          <div class="calc-campos">
+            <label>Pesa (kg)
+              <input type="number" name="peso" min="1" max="90" step="0.5" value="12" inputmode="decimal" />
+            </label>
+            <label>Bolsa de (kg)
+              <input type="number" name="bolsa" min="1" max="30" step="0.5" value="15" inputmode="decimal" />
+            </label>
+            <label>Actividad
+              <select name="actividad">
+                <option value="0.85">Tranquilo / castrado</option>
+                <option value="1" selected>Normal</option>
+                <option value="1.25">Muy activo</option>
+              </select>
+            </label>
+          </div>
+          <div class="calc-resultado" aria-live="polite">
+            <p class="calc-dias"><strong data-calc-dias>—</strong> días aprox.</p>
+            <p class="calc-gramos">Unos <span data-calc-gramos>—</span> g por día</p>
+          </div>
+          <a class="btn btn-wa btn-ancho" data-calc-aviso target="_blank" rel="noopener">Avisame cuando se esté por terminar</a>
+          <p class="calc-nota">Es una estimación. La porción exacta está en la tabla del envase y depende de cada ración.</p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ── Envíos ──────────────────────────────────────── -->
+    <section class="seccion" id="envios" aria-labelledby="t-envios">
+      <div class="contenedor">
+        <div class="seccion-cab">
+          <h2 id="t-envios">Envíos a domicilio</h2>
+          <p>Repartimos en toda Ciudad de la Costa y en las zonas de alrededor.</p>
+        </div>
+
+        <div class="envios-grid">
+          <article class="envio-card envio-costa">
+            <h3>Ciudad de la Costa</h3>
+            <p class="envio-dato"><strong>Lunes a sábado</strong> · entrega en el día si pedís antes de las <span data-hora-corte>14 h</span></p>
+            <p class="envio-dato">Sin costo desde <strong data-envio-gratis>$ 1.500</strong> · si no, <span data-costo-envio>$ 120</span></p>
+            <ul class="zonas" data-zonas="costa"></ul>
+          </article>
+          <article class="envio-card envio-cerca">
+            <h3>Alrededores</h3>
+            <p class="envio-dato"><strong>Días fijos</strong> por zona · entrega en 24 a 48 h</p>
+            <p class="envio-dato">Mismo mínimo para envío sin costo</p>
+            <ul class="zonas" data-zonas="cerca"></ul>
+            <p class="envio-otra">¿Tu zona no está? <a data-whatsapp target="_blank" rel="noopener">Escribinos</a> y lo coordinamos.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Sobre Milo ──────────────────────────────────── -->
+    <section class="seccion seccion-sobre" aria-labelledby="t-sobre">
+      <div class="contenedor sobre-in">
+        <div class="sobre-foto">
+          <img src="images/milo.jpg" alt="Milo, el perro que le da nombre a la tienda" data-ph="Milo" loading="lazy" width="560" height="560" />
+        </div>
+        <div class="sobre-texto">
+          <p class="etiqueta">Quiénes somos</p>
+          <h2 id="t-sobre">Somos vecinos de la Costa</h2>
+          <p>Milo Raciones nació de algo simple: cargar la bolsa de 20 kilos desde el súper no tiene gracia. Le pusimos el nombre de nuestro perro y salimos a repartir por el barrio.</p>
+          <p>Hoy llevamos ración, snacks, antipulgas y accesorios a cientos de familias de Ciudad de la Costa, con la misma idea del principio: atención cercana, precios justos y la bolsa en tu puerta.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Preguntas ───────────────────────────────────── -->
+    <section class="seccion" id="preguntas" aria-labelledby="t-faq">
+      <div class="contenedor faq-in">
+        <div class="seccion-cab">
+          <h2 id="t-faq">Preguntas frecuentes</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>¿Cuándo llega mi pedido?</summary>
+            <p>En Ciudad de la Costa, si pedís antes de las <span data-hora-corte>14 h</span> de lunes a sábado, lo recibís el mismo día. En las zonas de alrededor repartimos en días fijos (los ves en la sección Envíos).</p>
+          </details>
+          <details>
+            <summary>¿Cuánto cuesta el envío?</summary>
+            <p>Es sin costo en compras desde <span data-envio-gratis>$ 1.500</span>. Para pedidos menores el envío cuesta <span data-costo-envio>$ 120</span>.</p>
+          </details>
+          <details>
+            <summary>¿Cómo pago?</summary>
+            <p>Al recibir, en efectivo, con POS (débito o crédito) o con Mercado Pago. También podés pagar por transferencia bancaria antes de la entrega.</p>
+          </details>
+          <details>
+            <summary>No encuentro la ración que uso, ¿la consiguen?</summary>
+            <p>Seguramente sí. Trabajamos con muchas más marcas y presentaciones de las que ves en la web. Escribinos por WhatsApp y te pasamos precio y disponibilidad.</p>
+          </details>
+          <details>
+            <summary>¿Puedo recibir la ración todos los meses sin pedirla?</summary>
+            <p>Sí. Te armamos un pedido recurrente con la frecuencia que necesites y te escribimos un día antes para confirmar. Lo podés pausar o cambiar cuando quieras.</p>
+          </details>
+          <details>
+            <summary>¿Puedo cambiar un producto?</summary>
+            <p>Si la bolsa está cerrada y en buen estado, la cambiamos dentro de los 7 días. Si llegó algo dañado, avisanos y lo reponemos sin costo.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Marcas ──────────────────────────────────────── -->
+    <section class="seccion seccion-marcas" aria-labelledby="t-marcas">
+      <div class="contenedor">
+        <div class="seccion-cab">
+          <h2 id="t-marcas">Marcas con las que trabajamos</h2>
+        </div>
+        <ul class="marcas" data-lista-marcas></ul>
+      </div>
+    </section>
+
+    <!-- ── Banda final ─────────────────────────────────── -->
+    <section class="banda">
+      <div class="contenedor banda-in">
+        <div>
+          <h2>¿Se te termina la ración?</h2>
+          <p>Escribinos y te la llevamos hoy.</p>
+        </div>
+        <a class="btn btn-blanco" data-whatsapp target="_blank" rel="noopener">Pedir por WhatsApp</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="contenedor footer-grid">
+      <div class="footer-marca">
+        <a href="#inicio" class="logo logo-claro">
+          <span class="logo-marca" aria-hidden="true">
+            <svg viewBox="0 0 64 64"><rect width="64" height="64" rx="18" fill="currentColor"/><g fill="#fff"><ellipse cx="32" cy="40" rx="12" ry="10"/><circle cx="18" cy="26" r="5"/><circle cx="27" cy="17" r="5"/><circle cx="37" cy="17" r="5"/><circle cx="46" cy="26" r="5"/></g></svg>
+          </span>
+          <span class="logo-texto">Milo<small>raciones</small></span>
+        </a>
+        <p>Ración para mascotas y accesorios a domicilio en Ciudad de la Costa y alrededores.</p>
+      </div>
+      <div>
+        <h3>Tienda</h3>
+        <ul>
+          <li><a href="#tienda" data-ir-cat="perros">Raciones para perros</a></li>
+          <li><a href="#tienda" data-ir-cat="gatos">Raciones para gatos</a></li>
+          <li><a href="#tienda" data-ir-cat="antipulgas">Antipulgas</a></li>
+          <li><a href="#tienda" data-ir-cat="accesorios">Accesorios</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Ayuda</h3>
+        <ul>
+          <li><a href="#envios">Envíos y zonas</a></li>
+          <li><a href="#preguntas">Preguntas frecuentes</a></li>
+          <li><a href="#preguntas">Medios de pago</a></li>
+          <li><a href="#preguntas">Cambios</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contacto</h3>
+        <ul>
+          <li><a data-whatsapp target="_blank" rel="noopener" data-whatsapp-texto>WhatsApp</a></li>
+          <li><a data-instagram target="_blank" rel="noopener">Instagram</a></li>
+          <li><a data-email>Email</a></li>
+          <li>Lunes a sábado, 9 a 20 h</li>
+        </ul>
+      </div>
+    </div>
+    <div class="contenedor footer-base">
+      <p>© <span data-anio>2026</span> Milo Raciones · Ciudad de la Costa, Canelones, Uruguay</p>
+    </div>
+  </footer>
+
+  <!-- ── WhatsApp flotante ──────────────────────────── -->
+  <a class="wa-flotante" data-whatsapp target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3Z"/></svg>
+  </a>
+
+  <!-- ── Carrito ────────────────────────────────────── -->
+  <div class="carrito-fondo" data-cerrar-carrito hidden></div>
+  <aside class="carrito" id="carrito" aria-label="Mi pedido" aria-hidden="true" tabindex="-1">
+    <div class="carrito-cab">
+      <h2>Mi pedido</h2>
+      <button type="button" class="carrito-cerrar" data-cerrar-carrito aria-label="Cerrar">✕</button>
+    </div>
+
+    <div class="carrito-cuerpo">
+      <div class="carrito-vacio" data-carrito-vacio>
+        <p class="carrito-vacio-ico">🛍️</p>
+        <p>Todavía no agregaste nada.</p>
+        <a href="#tienda" class="btn btn-primario btn-chico" data-cerrar-carrito>Ver productos</a>
+      </div>
+      <ul class="carrito-items" data-carrito-items></ul>
+
+      <div class="envio-barra" data-envio-barra hidden>
+        <p data-envio-texto></p>
+        <div class="envio-progreso"><span data-envio-progreso></span></div>
+      </div>
+
+      <form class="carrito-form" data-carrito-form hidden novalidate>
+        <h3>Datos para la entrega</h3>
+        <label>Nombre
+          <input name="nombre" autocomplete="name" required />
+        </label>
+        <label>Barrio
+          <select name="barrio" data-select-zona required>
+            <option value="">Elegí tu barrio</option>
+          </select>
+        </label>
+        <label>Dirección
+          <input name="direccion" autocomplete="street-address" placeholder="Calle, número, esquina, solar…" required />
+        </label>
+        <label>¿Cómo pagás?
+          <select name="pago">
+            <option>Efectivo</option>
+            <option>POS (débito o crédito)</option>
+            <option>Mercado Pago</option>
+            <option>Transferencia</option>
+          </select>
+        </label>
+        <label>Comentarios <span class="opcional">(opcional)</span>
+          <textarea name="nota" rows="2" placeholder="Horario preferido, timbre, etc."></textarea>
+        </label>
+        <p class="form-error" data-form-error hidden>Completá nombre, barrio y dirección.</p>
+      </form>
+    </div>
+
+    <div class="carrito-pie" data-carrito-pie hidden>
+      <div class="carrito-totales">
+        <p><span>Subtotal</span> <span data-subtotal>$ 0</span></p>
+        <p><span>Envío</span> <span data-envio>—</span></p>
+        <p class="carrito-total"><span>Total</span> <span data-total>$ 0</span></p>
+      </div>
+      <button type="button" class="btn btn-wa btn-ancho" data-enviar-pedido>Enviar pedido por WhatsApp</button>
+      <button type="button" class="carrito-vaciar" data-vaciar>Vaciar pedido</button>
+    </div>
+  </aside>
+
+  <div class="aviso" data-aviso role="status" aria-live="polite"></div>
+
+  <script src="productos.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

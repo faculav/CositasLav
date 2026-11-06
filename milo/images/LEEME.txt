@@ -1,0 +1,51 @@
+FOTOS QUE ESPERA LA WEB DE MILO RACIONES
+=========================================
+Si una foto no está, la web dibuja un placeholder (no se rompe).
+Al subir el archivo con el nombre exacto, aparece solo.
+Formato recomendado: JPG cuadrado, 800 x 800, calidad 80 (menos de 150 KB).
+
+Foto de "Quiénes somos":
+  milo.jpg
+
+Productos (un archivo por cada id de productos.js):
+  equilibrio-adulto.jpg
+  proplan-adulto.jpg
+  dogchow-adulto.jpg
+  frost-cachorro.jpg
+  biofresh-adulto.jpg
+  pedigree-adulto.jpg
+  lager-adulto.jpg
+  catchow-adulto.jpg
+  equilibrio-gato.jpg
+  excellent-gato.jpg
+  whiskas-adulto.jpg
+  proplan-gato.jpg
+  dentastix.jpg
+  galletas-milo.jpg
+  churu.jpg
+  pipeta-perro.jpg
+  pipeta-gato.jpg
+  collar-antipulgas.jpg
+  arena-aglomerante.jpg
+  arena-silica.jpg
+  comedero-acero.jpg
+  correa.jpg
+  cama.jpg
+  rascador.jpg
+  bandeja-sanitaria.jpg
+  juguete-cuerda.jpg
+
+Logos de marcas (PNG con fondo transparente; si falta, se muestra el nombre):
+  marca-biofresh.png
+  marca-cat-chow.png
+  marca-dog-chow.png
+  marca-equilibrio.png
+  marca-excellent.png
+  marca-frost.png
+  marca-jazz.png
+  marca-lager.png
+  marca-pedigree.png
+  marca-power-ultra.png
+  marca-pro-plan.png
+  marca-toky.png
+  marca-whiskas.png
