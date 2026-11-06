@@ -10,7 +10,9 @@ Referencia de estructura: altoqueraciones.com (diseño y textos propios).
 - `milo/index.html` — estructura: anuncio, header, hero con "¿Llegamos a tu barrio?", beneficios,
   categorías, tienda, cómo funciona, calculadora "¿Cuánto le dura la bolsa?", envíos, quiénes somos,
   preguntas frecuentes, marcas, footer, carrito lateral.
-- `milo/styles.css` — estilos (crema / naranja / verde, tipografías Fredoka + Nunito).
+- `milo/styles.css` — estilos con la identidad de Milo: turquesa `#00B5B6`, naranja `#F29348`, blanco; Montserrat (títulos) + Nunito.
+- `milo/images/logo-turquesa.png` / `logo-blanco.png` — logo recortado con fondo transparente (sacado del PNG de Canva, ~300 px).
+- `milo/images/promo-*.jpg` — piezas de redes de Canva (sección "Novedades Milo").
 - `milo/script.js` — catálogo, filtros, buscador, carrito (se guarda en el navegador),
   armado del mensaje de WhatsApp, zonas y calculadora.
 - `milo/productos.js` — **único archivo a tocar para contenido**: `CONFIG` (WhatsApp, Instagram,
@@ -25,10 +27,11 @@ Referencia de estructura: altoqueraciones.com (diseño y textos propios).
 - Si falta una foto, se dibuja una bolsa con el color de la categoría; si falta un logo de marca, se muestra el nombre.
 
 ## Pendientes
-- [ ] WhatsApp real en `productos.js` (hoy `59899000000`).
-- [ ] Confirmar Instagram (`miloraciones`) y email (`hola@miloraciones.uy`).
+- [x] WhatsApp (`097 051 833`) y email (`infomiloraciones@gmail.com`) cargados.
+- [ ] Confirmar usuario de Instagram (hoy `miloraciones`).
 - [ ] Reemplazar productos y precios de ejemplo por los reales.
 - [ ] Confirmar zonas, días de reparto, mínimo de envío gratis, costo de envío y hora de corte.
-- [ ] Logo definitivo (hoy es una huella dibujada en SVG).
+- [ ] Logo en SVG o PNG grande (el actual sale de una imagen de 304 px; se ve bien en tamaño chico).
+- [ ] Piezas de Canva en mayor resolución (1080 px) para las promos.
 - [ ] Fotos de productos, logos de marcas y foto de Milo (`milo.jpg`).
 - [ ] Publicar el sitio (hosting y dominio).

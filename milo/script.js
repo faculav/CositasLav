@@ -41,9 +41,9 @@
      (o un ícono) con el color de la categoría. Al subir la
      foto real con ese nombre, el placeholder desaparece solo. */
   var COLORES = {
-    perros: ["#FFE1CF", "#F2652C"], gatos: ["#DDEBF7", "#3B6EA8"], snacks: ["#FFF0C4", "#C98A1A"],
-    antipulgas: ["#DDF0EA", "#0F6E62"], arena: ["#EDE4F7", "#7452A8"], accesorios: ["#FCE0E6", "#C2416B"],
-    otro: ["#FCEBD8", "#F2652C"]
+    perros: ["#FDE4D0", "#F29348"], gatos: ["#D6F2F2", "#00B5B6"], snacks: ["#FDE4D0", "#D9702A"],
+    antipulgas: ["#D6F2F2", "#008C8D"], arena: ["#D6F2F2", "#00B5B6"], accesorios: ["#FDE4D0", "#F29348"],
+    otro: ["#D6F2F2", "#00B5B6"]
   };
 
   function placeholder(p) {
@@ -54,11 +54,11 @@
       ? '<path d="M120 110 Q120 92 138 90 L262 90 Q280 92 280 110 L290 330 Q290 348 272 348 L128 348 Q110 348 110 330 Z" fill="' + c[1] + '"/>' +
         '<path d="M126 90 L274 90 L268 72 L132 72 Z" fill="' + c[1] + '" opacity=".75"/>' +
         '<rect x="138" y="150" width="124" height="96" rx="18" fill="#fff" opacity=".92"/>' +
-        '<text x="200" y="206" text-anchor="middle" font-family="Fredoka,Nunito,sans-serif" font-weight="700" font-size="' + (marca.length > 9 ? 20 : 26) + '" fill="' + c[1] + '">' + marca + '</text>' +
+        '<text x="200" y="206" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-weight="800" font-size="' + (marca.length > 9 ? 20 : 26) + '" fill="' + c[1] + '">' + marca + '</text>' +
         '<g fill="#fff" opacity=".85" transform="translate(178 274) scale(.7)"><ellipse cx="32" cy="44" rx="16" ry="13"/><circle cx="12" cy="24" r="7"/><circle cx="25" cy="11" r="7"/><circle cx="40" cy="11" r="7"/><circle cx="53" cy="24" r="7"/></g>'
       : '<circle cx="200" cy="200" r="104" fill="' + c[1] + '"/>' +
         '<g fill="#fff" transform="translate(152 140) scale(1.5)"><ellipse cx="32" cy="44" rx="16" ry="13"/><circle cx="12" cy="24" r="7"/><circle cx="25" cy="11" r="7"/><circle cx="40" cy="11" r="7"/><circle cx="53" cy="24" r="7"/></g>' +
-        '<text x="200" y="350" text-anchor="middle" font-family="Fredoka,Nunito,sans-serif" font-weight="700" font-size="24" fill="' + c[1] + '">' + marca + '</text>';
+        '<text x="200" y="350" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-weight="800" font-size="24" fill="' + c[1] + '">' + marca + '</text>';
     var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect width="400" height="400" fill="' + c[0] + '"/>' + figura + '</svg>';
     return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
   }
@@ -81,6 +81,7 @@
     var n = CONFIG.whatsapp.replace(/^598/, "0");
     a.textContent = n.replace(/(\d{3})(\d{3})(\d{3})/, "$1 $2 $3");
   });
+  $$("[data-instagram-link]").forEach(function (a) { a.href = "https://instagram.com/" + CONFIG.instagram; });
   $$("[data-instagram]").forEach(function (a) {
     a.href = "https://instagram.com/" + CONFIG.instagram;
     a.textContent = "@" + CONFIG.instagram;

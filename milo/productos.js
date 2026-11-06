@@ -5,10 +5,10 @@
    ========================================================= */
 
 const CONFIG = {
-  // TODO: número real de WhatsApp (formato internacional, sin + ni espacios)
-  whatsapp: "59899000000",
-  instagram: "miloraciones",
-  email: "hola@miloraciones.uy",
+  // WhatsApp en formato internacional, sin + ni espacios (097 051 833)
+  whatsapp: "59897051833",
+  instagram: "miloraciones" /* TODO: confirmar usuario */,
+  email: "infomiloraciones@gmail.com",
   // Compra mínima para envío sin costo (en pesos)
   envioGratisDesde: 1500,
   // Costo de envío cuando no se llega al mínimo
