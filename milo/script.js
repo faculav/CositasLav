@@ -153,6 +153,10 @@
   var contProductos = $("#productos");
   var sinResultados = $("[data-sin-resultados]");
   var estado = { cat: "todos", texto: "", marca: "" };
+  var POR_PAGINA = 24;
+  var mostrar = POR_PAGINA;
+  var btnVerMas = $("[data-ver-mas]");
+  var cuentaProductos = $("[data-cuenta-productos]");
 
   // Marcas para filtro y grilla
   var marcas = [];
@@ -176,6 +180,8 @@
     li.appendChild(img);
     listaMarcas.appendChild(li);
   });
+
+  function fotoDe(p) { return p.img || ("images/" + p.id + ".jpg"); }
 
   function claseTag(tag) { return "tag-" + slug(tag); }
 
@@ -211,7 +217,7 @@
 
     var img = $("img", art);
     cuidarImagen(img, p);
-    img.src = "images/" + p.id + ".jpg";
+    img.src = fotoDe(p);
 
     var elegido = 0;
     function pintarPrecio() {
@@ -248,19 +254,26 @@
     return { p: p, el: el };
   });
 
-  function filtrar() {
+  function filtrar(reiniciar) {
+    if (reiniciar !== false) mostrar = POR_PAGINA;
     var t = slug(estado.texto);
-    var visibles = 0;
+    var coinciden = 0;
     tarjetas.forEach(function (x) {
       var p = x.p;
       var ok = (estado.cat === "todos" || p.cat === estado.cat) &&
                (!estado.marca || p.marca === estado.marca) &&
                (!t || slug(p.nombre + " " + p.marca + " " + p.desc + " " + p.cat).indexOf(t) >= 0);
-      x.el.hidden = !ok;
-      if (ok) { visibles++; x.el.classList.add("visible"); }
+      if (ok) coinciden++;
+      x.el.hidden = !ok || coinciden > mostrar;
     });
-    sinResultados.hidden = visibles > 0;
+    sinResultados.hidden = coinciden > 0;
+    btnVerMas.hidden = coinciden <= mostrar;
+    cuentaProductos.textContent = coinciden > 0
+      ? "Mostrando " + Math.min(mostrar, coinciden) + " de " + coinciden + " productos"
+      : "";
   }
+  btnVerMas.addEventListener("click", function () { mostrar += POR_PAGINA; filtrar(false); });
+  filtrar();
 
   var tabs = $$("[data-tabs] [data-cat]");
   function elegirCat(cat) {
@@ -344,7 +357,7 @@
         "</div>";
       var img = $("img", li);
       cuidarImagen(img, p);
-      img.src = "images/" + p.id + ".jpg";
+      img.src = fotoDe(p);
       $("[data-mas]", li).addEventListener("click", function () { it.cant++; guardar(); pintarPedido(); });
       $("[data-menos]", li).addEventListener("click", function () {
         it.cant--;

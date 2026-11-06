@@ -201,6 +201,8 @@ select {
 .btn-agregar:hover, .btn-agregar.listo { background: var(--turquesa); color: var(--blanco); }
 .btn-agregar:disabled { border-color: var(--linea); color: var(--gris); background: none; cursor: not-allowed; }
 
+.ver-mas { text-align: center; margin-top: 40px; display: grid; justify-items: center; gap: 10px; }
+.ver-mas-cuenta { font-size: 13px; color: var(--gris); }
 .sin-resultados { text-align: center; padding: 30px; color: var(--gris); }
 .sin-resultados a { color: var(--turquesa-osc); font-weight: 800; cursor: pointer; }
 .nota-precios { font-size: 13px; color: var(--gris); margin-top: 32px; text-align: center; }

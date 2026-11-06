@@ -48,7 +48,7 @@ const ZONAS = [
 ];
 
 /* ---------------------------------------------------------
-   PRODUCTOS  (precios DE EJEMPLO — reemplazar por los reales)
+   PRODUCTOS  (snacks, antipulgas, arena y accesorios: precios DE EJEMPLO)
 
    id      : identificador corto, sin espacios (también es el
              nombre de la foto: images/<id>.jpg)
@@ -61,59 +61,11 @@ const ZONAS = [
              kg (número) para calcular el precio por kilo.
    tag     : "Más vendido" | "Oferta" | "Nuevo" | "Sin stock" | null
    --------------------------------------------------------- */
-const PRODUCTOS = [
-  // ── Perros ─────────────────────────────────────────────
-  { id: "equilibrio-adulto",  nombre: "Equilibrio Adulto Razas Medianas", marca: "Equilibrio", cat: "perros",
-    desc: "Alta digestibilidad, con omega 3 y 6",
-    opciones: [ { etiqueta: "2 kg", kg: 2, precio: 890 }, { etiqueta: "7,5 kg", kg: 7.5, precio: 2690 }, { etiqueta: "15 kg", kg: 15, precio: 4790 } ],
-    tag: "Más vendido" },
-  { id: "proplan-adulto",     nombre: "Pro Plan Adulto Razas Medianas",  marca: "Pro Plan", cat: "perros",
-    desc: "Con OptiHealth, pollo y arroz",
-    opciones: [ { etiqueta: "3 kg", kg: 3, precio: 1590 }, { etiqueta: "15 kg", kg: 15, precio: 6490 } ],
-    tag: null },
-  { id: "dogchow-adulto",     nombre: "Dog Chow Adulto",                 marca: "Dog Chow", cat: "perros",
-    desc: "Carne y pollo, todas las razas",
-    opciones: [ { etiqueta: "3 kg", kg: 3, precio: 790 }, { etiqueta: "21 kg", kg: 21, precio: 3990 } ],
-    tag: "Oferta" },
-  { id: "frost-cachorro",     nombre: "Frost Cachorro",                  marca: "Frost", cat: "perros",
-    desc: "Para cachorros de todas las razas",
-    opciones: [ { etiqueta: "3 kg", kg: 3, precio: 990 }, { etiqueta: "15 kg", kg: 15, precio: 3990 } ],
-    tag: null },
-  { id: "biofresh-adulto",    nombre: "BioFresh Adulto Razas Pequeñas",  marca: "BioFresh", cat: "perros",
-    desc: "Carnes frescas, sin conservantes artificiales",
-    opciones: [ { etiqueta: "1 kg", kg: 1, precio: 690 }, { etiqueta: "3 kg", kg: 3, precio: 1790 }, { etiqueta: "10,1 kg", kg: 10.1, precio: 4990 } ],
-    tag: "Nuevo" },
-  { id: "pedigree-adulto",    nombre: "Pedigree Adulto",                 marca: "Pedigree", cat: "perros",
-    desc: "Carne, pollo y vegetales",
-    opciones: [ { etiqueta: "3 kg", kg: 3, precio: 690 }, { etiqueta: "21 kg", kg: 21, precio: 3490 } ],
-    tag: null },
-  { id: "lager-adulto",       nombre: "Lager Adulto",                    marca: "Lager", cat: "perros",
-    desc: "Rendidora, ideal para perros activos",
-    opciones: [ { etiqueta: "22 kg", kg: 22, precio: 2690 } ],
-    tag: null },
-
-  // ── Gatos ──────────────────────────────────────────────
-  { id: "catchow-adulto",     nombre: "Cat Chow Adulto",                 marca: "Cat Chow", cat: "gatos",
-    desc: "Pescado y carne, defensas fortalecidas",
-    opciones: [ { etiqueta: "1 kg", kg: 1, precio: 490 }, { etiqueta: "8 kg", kg: 8, precio: 2990 } ],
-    tag: "Más vendido" },
-  { id: "equilibrio-gato",    nombre: "Equilibrio Gatos Castrados",      marca: "Equilibrio", cat: "gatos",
-    desc: "Control de peso y salud urinaria",
-    opciones: [ { etiqueta: "1,5 kg", kg: 1.5, precio: 890 }, { etiqueta: "7,5 kg", kg: 7.5, precio: 3490 } ],
-    tag: null },
-  { id: "excellent-gato",     nombre: "Excellent Gato Adulto",           marca: "Excellent", cat: "gatos",
-    desc: "Pollo y arroz, pelaje brillante",
-    opciones: [ { etiqueta: "1 kg", kg: 1, precio: 590 }, { etiqueta: "7,5 kg", kg: 7.5, precio: 3190 } ],
-    tag: null },
-  { id: "whiskas-adulto",     nombre: "Whiskas Adulto Carne",            marca: "Whiskas", cat: "gatos",
-    desc: "Sabor carne, croquetas crocantes",
-    opciones: [ { etiqueta: "1 kg", kg: 1, precio: 420 }, { etiqueta: "10 kg", kg: 10, precio: 3290 } ],
-    tag: "Oferta" },
-  { id: "proplan-gato",       nombre: "Pro Plan Gato Adulto",            marca: "Pro Plan", cat: "gatos",
-    desc: "Pollo y arroz, con prebióticos",
-    opciones: [ { etiqueta: "1,5 kg", kg: 1.5, precio: 1190 }, { etiqueta: "7,5 kg", kg: 7.5, precio: 4790 } ],
-    tag: null },
-
+// Los alimentos (perros y gatos) vienen de alimentos.js, generado
+// desde distribuidoralopez.com.uy con herramientas/importar_lopez.py.
+// Acá abajo van los demás productos (snacks, antipulgas, arena, accesorios).
+// "img" es opcional: si no está, se busca images/<id>.jpg.
+const PRODUCTOS = (typeof ALIMENTOS !== "undefined" ? ALIMENTOS : []).concat([
   // ── Snacks ─────────────────────────────────────────────
   { id: "dentastix",          nombre: "Dentastix Razas Medianas x7",     marca: "Pedigree", cat: "snacks",
     desc: "Limpieza dental diaria",
@@ -177,4 +129,4 @@ const PRODUCTOS = [
     desc: "Algodón trenzado, para morder y tironear",
     opciones: [ { etiqueta: "Único", precio: 220 } ],
     tag: null }
-];
+]);

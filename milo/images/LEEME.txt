@@ -7,19 +7,9 @@ Formato recomendado: JPG cuadrado, 800 x 800, calidad 80 (menos de 150 KB).
 Foto de "Quiénes somos":
   milo.jpg
 
-Productos (un archivo por cada id de productos.js):
-  equilibrio-adulto.jpg
-  proplan-adulto.jpg
-  dogchow-adulto.jpg
-  frost-cachorro.jpg
-  biofresh-adulto.jpg
-  pedigree-adulto.jpg
-  lager-adulto.jpg
-  catchow-adulto.jpg
-  equilibrio-gato.jpg
-  excellent-gato.jpg
-  whiskas-adulto.jpg
-  proplan-gato.jpg
+Alimentos: se bajan solos a images/alimentos/ con herramientas/importar_lopez.py.
+
+Otros productos (un archivo por cada id de productos.js):
   dentastix.jpg
   galletas-milo.jpg
   churu.jpg
