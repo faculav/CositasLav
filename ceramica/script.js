@@ -10,11 +10,12 @@ document.querySelectorAll('.nav__links a').forEach(a =>
 
 // Contacto
 const waLink = (txt) => `https://wa.me/${CONTACTO.whatsapp}?text=${encodeURIComponent(txt)}`;
-document.getElementById('c-wa').href = waLink('¡Hola! Te escribo desde la web.');
-document.getElementById('c-ig').href = `https://instagram.com/${CONTACTO.instagram}`;
-document.getElementById('c-ig').textContent = `@${CONTACTO.instagram}`;
-document.getElementById('c-mail').href = `mailto:${CONTACTO.email}`;
-document.getElementById('c-mail').textContent = CONTACTO.email;
+document.getElementById('c-wa').href = waLink('¡Hola Lucía! Te escribo desde la web.');
+document.getElementById('f-wa').href = waLink('¡Hola Lucía! Te escribo desde la web.');
+if (CONTACTO.instagram) {
+  document.getElementById('c-ig').innerHTML =
+    `<a href="https://instagram.com/${CONTACTO.instagram}" target="_blank" rel="noopener">@${CONTACTO.instagram}</a>`;
+}
 
 // Galería
 const ESTADOS = { disponible: 'Disponible', vendida: 'Vendida', encargo: 'Por encargo' };
@@ -25,7 +26,7 @@ PIEZAS.forEach((p, i) => {
   b.className = `pieza reveal${p.estado === 'vendida' ? ' pieza--vendida' : ''}`;
   b.innerHTML = `
     <div class="pieza__img"><img src="${p.foto}" alt="${p.nombre}" loading="lazy"></div>
-    <div class="pieza__meta"><span>${p.nombre}</span><span class="pieza__estado">${ESTADOS[p.estado] || ''}</span></div>`;
+    <div class="pieza__meta"><span>${p.nombre}</span><span class="pieza__estado">${p.nota ? 'Destacada' : (ESTADOS[p.estado] || '')}</span></div>`;
   b.addEventListener('click', () => abrirFicha(p));
   grid.appendChild(b);
 });
@@ -40,6 +41,7 @@ function abrirFicha(p) {
   ficha.querySelector('#f-material').textContent = p.material;
   ficha.querySelector('#f-medidas').textContent = p.medidas;
   ficha.querySelector('#f-precio').textContent = p.precio;
+  ficha.querySelector('#f-nota').textContent = p.nota || '';
   const cta = ficha.querySelector('#f-cta');
   cta.href = waLink(`¡Hola! Me interesa la pieza "${p.nombre}".`);
   cta.textContent = p.estado === 'vendida' ? 'PEDIR UNA SIMILAR ↗' : 'CONSULTAR POR ESTA PIEZA ↗';
@@ -54,15 +56,3 @@ const io = new IntersectionObserver(entries => entries.forEach(e => {
 }), { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// Ajusta el logotipo gigante al ancho disponible (sirve para cualquier nombre)
-function fitWordmarks() {
-  document.querySelectorAll('.wordmark').forEach(el => {
-    el.style.fontSize = '100px';
-    const r = document.createRange(); r.selectNodeContents(el);
-    const ratio = el.clientWidth / r.getBoundingClientRect().width;
-    const max = parseFloat(getComputedStyle(el).getPropertyValue('--wm-max')) || Infinity;
-    el.style.fontSize = Math.min(Math.floor(100 * ratio * 0.98), max) + 'px';
-  });
-}
-document.fonts.ready.then(fitWordmarks);
-addEventListener('resize', fitWordmarks);

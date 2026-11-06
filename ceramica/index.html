@@ -3,8 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BARRO — Cerámica hecha a mano</title>
-<meta name="description" content="Piezas de cerámica hechas a mano, en ediciones limitadas. Cada pieza es única.">
+<title>LU — Cerámica hecha a mano</title>
+<link rel="icon" href="img/logo-lu.svg" type="image/svg+xml">
+<meta name="description" content="LU — Cerámica de autor de Lucía Laviano, hecha a mano en Carrasco, Montevideo. Piezas únicas en ediciones limitadas.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800;900&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
@@ -14,7 +15,7 @@
 
 <!-- ============ NAV ============ -->
 <header class="nav">
-  <a href="#inicio" class="nav__logo">BARRO</a>
+  <a href="#inicio" class="nav__logo" aria-label="LU, inicio"><svg class="logo" viewBox="287 316 396 499" role="img" aria-label="LU"><path fill="currentColor" d="M287 316H344V540H459V540H515V712A55.5 53 0 0 0 626 712V540H683V712A112 102 0 0 1 459 712V587H287Z"/></svg></a>
   <nav class="nav__links" id="menu">
     <a href="#filosofia">Filosofía</a>
     <a href="#taller">El taller</a>
@@ -32,11 +33,11 @@
   <div class="hero__meta">
     <span>Edición limitada</span><span>Cerámica</span><span>Hecha a mano</span><span>2026</span>
   </div>
-  <h1 class="wordmark reveal">BARRO</h1>
+  <h1 class="hero__logo reveal"><svg class="logo" viewBox="287 316 396 499" role="img" aria-label="LU"><path fill="currentColor" d="M287 316H344V540H459V540H515V712A55.5 53 0 0 0 626 712V540H683V712A112 102 0 0 1 459 712V587H287Z"/></svg><span class="sr-only">LU — Cerámica de Lucía Laviano</span></h1>
   <img class="hero__img reveal" src="img/portada.webp" alt="Cuenco, porta sahumerio, jarra y escultura de Lucía Laviano sobre fondo blanco">
   <div class="hero__row">
     <p class="manifesto reveal">
-      BARRO es una colección de <em>cerámica de edición limitada</em> inspirada en
+      LU es una colección de <em>cerámica de edición limitada</em> inspirada en
       <em>texturas naturales y sensaciones táctiles.</em> Cada pieza es
       <em>hecha a mano, única en forma y textura,</em> y por eso no es solo un objeto
       de uso, sino <em>un objeto de arte.</em>
@@ -53,7 +54,7 @@
     <img class="split__img reveal" src="img/cuenco-lineas.webp" alt="Cuenco blanco con líneas esgrafiadas, sostenido en la mano">
     <div class="split__text reveal">
       <p>En un mundo de producción en serie, perdimos la conexión con los objetos que nos rodean. Lo que usamos todos los días dejó de tener historia, carácter e identidad.</p>
-      <p>Cada pieza de BARRO se modela a mano, se seca lento y pasa por el horno una o dos veces. Las marcas de los dedos, las variaciones del esmalte y las pequeñas imperfecciones no se corrigen: son la firma de cada objeto.</p>
+      <p>Cada pieza de LU se modela a mano, se seca lento y pasa por el horno una o dos veces. Las marcas de los dedos, las variaciones del esmalte y las pequeñas imperfecciones no se corrigen: son la firma de cada objeto.</p>
     </div>
   </div>
 </section>
@@ -65,7 +66,7 @@
     <img class="artista__img reveal" src="img/lucia.webp" alt="Retrato de Lucía Laviano, ceramista">
     <div class="artista__text">
       <h2 class="big-name reveal">LUCÍA<br>LAVIANO</h2>
-      <p>Ceramista y fundadora de BARRO. Trabaja desde su taller en [ciudad], donde modela cada pieza a mano, con torno o con placas, en series cortas que nunca se repiten.</p>
+      <p>Ceramista y creadora de LU. Trabaja desde su taller en Carrasco, Montevideo, donde modela cada pieza a mano, con torno o con placas, en series cortas que nunca se repiten.</p>
       <p>Su trabajo explora la tensión entre lo funcional y lo escultórico: objetos que se pueden usar, pero que también piden ser mirados.</p>
       <a href="#galeria" class="link-arrow">VER LA COLECCIÓN ↗</a>
     </div>
@@ -82,7 +83,10 @@
       <div><dt>Producción lenta</dt><dd>Series cortas, sin apuro. El tiempo también es un material.</dd></div>
       <div><dt>Materiales nobles</dt><dd>Arcillas y esmaltes seleccionados, aptos para uso diario.</dd></div>
     </dl>
-    <img class="valores__img reveal" src="img/abrazo.webp" alt="Escultura de figuras que se abrazan alrededor de una esfera">
+    <figure class="valores__fig reveal">
+      <img class="valores__img" src="img/abrazo.webp" alt="La magia del abrazo: escultura de figuras que se abrazan alrededor de una esfera">
+      <figcaption><span>La magia del abrazo</span>Proyecto destacado del taller «Lazos primordiales»</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -95,7 +99,7 @@
   <div class="galeria__grid" id="galeria-grid"><!-- se completa desde piezas.js --></div>
 </section>
 
-<!-- ============ BLOQUE COLOR ============ -->
+<!-- ============ EDICIÓN LIMITADA ============ -->
 <section class="bloque">
   <div class="bloque__top">
     <img class="bloque__img reveal" src="img/porta-sahumerio.webp" alt="Porta sahumerio de cerámica verde y ámbar">
@@ -118,16 +122,15 @@
   <div class="contacto__cols">
     <div>
       <h3>Consultas</h3>
-      <p><a id="c-wa" href="#">WhatsApp</a></p>
-      <p><a id="c-mail" href="#">email</a></p>
+      <p><a id="c-wa" href="#" target="_blank" rel="noopener">+598 98 590 483</a></p>
     </div>
     <div>
       <h3>Redes</h3>
-      <p><a id="c-ig" href="#" target="_blank" rel="noopener">Instagram</a></p>
+      <p id="c-ig">Instagram — próximamente</p>
     </div>
     <div>
       <h3>Taller</h3>
-      <p>[Ciudad], Argentina<br>Visitas con cita previa</p>
+      <p>Carrasco, Montevideo<br>Uruguay<br>Visitas con cita previa</p>
     </div>
   </div>
 </section>
@@ -139,18 +142,15 @@
   <div class="footer__top">
     <div>
       <p class="footer__claim">Elegí tu forma.</p>
-      <form class="footer__form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='¡Gracias!';">
-        <label for="mail">Enterate de las nuevas series</label>
-        <div><input id="mail" type="email" placeholder="tu@email.com" required><button>→</button></div>
-      </form>
+      <a id="f-wa" class="footer__wa" href="#" target="_blank" rel="noopener">Escribime por WhatsApp →</a>
     </div>
     <nav class="footer__links">
       <a href="#filosofia">Filosofía</a><a href="#taller">El taller</a>
       <a href="#galeria">Galería</a><a href="#contacto">Contacto</a>
     </nav>
   </div>
-  <p class="wordmark wordmark--footer">BARRO</p>
-  <p class="footer__legal">© 2026 BARRO — Cerámica hecha a mano</p>
+  <div class="footer__logo"><svg class="logo" viewBox="287 316 396 499" role="img" aria-label="LU"><path fill="currentColor" d="M287 316H344V540H459V540H515V712A55.5 53 0 0 0 626 712V540H683V712A112 102 0 0 1 459 712V587H287Z"/></svg></div>
+  <p class="footer__legal">© 2026 LU · Lucía Laviano — Cerámica hecha a mano en Montevideo</p>
 </footer>
 
 <!-- Ficha de pieza -->
@@ -163,6 +163,7 @@
     <p id="f-material"></p>
     <p id="f-medidas"></p>
     <p id="f-precio"></p>
+    <p id="f-nota" class="ficha__nota"></p>
     <a id="f-cta" class="btn" href="#" target="_blank" rel="noopener">CONSULTAR POR ESTA PIEZA ↗</a>
   </div>
 </dialog>
