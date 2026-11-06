@@ -49,10 +49,3 @@ function abrirFicha(p) {
 }
 ficha.querySelector('.ficha__close').addEventListener('click', () => ficha.close());
 ficha.addEventListener('click', e => { if (e.target === ficha) ficha.close(); });
-
-// Aparición al hacer scroll
-const io = new IntersectionObserver(entries => entries.forEach(e => {
-  if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
-}), { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
