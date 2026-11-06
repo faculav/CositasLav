@@ -19,6 +19,7 @@ document.getElementById('c-mail').textContent = CONTACTO.email;
 // Galería
 const ESTADOS = { disponible: 'Disponible', vendida: 'Vendida', encargo: 'Por encargo' };
 const grid = document.getElementById('galeria-grid');
+grid.style.setProperty('--cols', PIEZAS.length === 4 ? 4 : 3);
 PIEZAS.forEach((p, i) => {
   const b = document.createElement('button');
   b.className = `pieza reveal${p.estado === 'vendida' ? ' pieza--vendida' : ''}`;

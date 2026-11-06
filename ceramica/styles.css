@@ -79,7 +79,7 @@ em { font-style: normal; color: var(--clay); }
 .galeria__head { display: flex; align-items: flex-end; gap: 24px; margin-bottom: clamp(32px, 5vw, 64px); flex-wrap: wrap; }
 .big-word { font: 900 clamp(48px, 10vw, 150px)/.85 var(--display); color: var(--clay); letter-spacing: -.04em; }
 .galeria__sub { font: 500 clamp(16px, 2vw, 28px)/1.05 var(--sans); text-transform: uppercase; color: #b9b2a8; }
-.galeria__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 2vw, 24px); }
+.galeria__grid { display: grid; grid-template-columns: repeat(var(--cols, 3), 1fr); gap: clamp(12px, 2vw, 24px); }
 .pieza { cursor: pointer; text-align: left; background: none; border: 0; font: inherit; color: inherit; }
 .pieza:nth-child(3n+2) { margin-top: clamp(0px, 4vw, 56px); }
 .pieza__img { overflow: hidden; aspect-ratio: 4/5; background: #e5e2dd; }
