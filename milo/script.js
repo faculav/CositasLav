@@ -37,29 +37,16 @@
   }
 
   /* ---------- placeholders de imagen ----------
-     Mientras no exista images/<id>.jpg se dibuja una bolsa
-     (o un ícono) con el color de la categoría. Al subir la
-     foto real con ese nombre, el placeholder desaparece solo. */
-  var COLORES = {
-    perros: ["#FDE4D0", "#F29348"], gatos: ["#D6F2F2", "#00B5B6"], snacks: ["#FDE4D0", "#D9702A"],
-    antipulgas: ["#D6F2F2", "#008C8D"], arena: ["#D6F2F2", "#00B5B6"], accesorios: ["#FDE4D0", "#F29348"],
-    otro: ["#D6F2F2", "#00B5B6"]
-  };
+     Mientras no exista images/<id>.jpg se muestra un recuadro
+     liso con el nombre de la marca. Al subir la foto real con
+     ese nombre, el recuadro desaparece solo.                   */
 
   function placeholder(p) {
-    var c = COLORES[p ? p.cat : "otro"] || COLORES.otro;
     var marca = escapar(p ? p.marca : "Milo");
-    var bolsa = !p || /perros|gatos|arena/.test(p.cat);
-    var figura = bolsa
-      ? '<path d="M120 110 Q120 92 138 90 L262 90 Q280 92 280 110 L290 330 Q290 348 272 348 L128 348 Q110 348 110 330 Z" fill="' + c[1] + '"/>' +
-        '<path d="M126 90 L274 90 L268 72 L132 72 Z" fill="' + c[1] + '" opacity=".75"/>' +
-        '<rect x="138" y="150" width="124" height="96" rx="18" fill="#fff" opacity=".92"/>' +
-        '<text x="200" y="206" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-weight="800" font-size="' + (marca.length > 9 ? 20 : 26) + '" fill="' + c[1] + '">' + marca + '</text>' +
-        '<g fill="#fff" opacity=".85" transform="translate(178 274) scale(.7)"><ellipse cx="32" cy="44" rx="16" ry="13"/><circle cx="12" cy="24" r="7"/><circle cx="25" cy="11" r="7"/><circle cx="40" cy="11" r="7"/><circle cx="53" cy="24" r="7"/></g>'
-      : '<circle cx="200" cy="200" r="104" fill="' + c[1] + '"/>' +
-        '<g fill="#fff" transform="translate(152 140) scale(1.5)"><ellipse cx="32" cy="44" rx="16" ry="13"/><circle cx="12" cy="24" r="7"/><circle cx="25" cy="11" r="7"/><circle cx="40" cy="11" r="7"/><circle cx="53" cy="24" r="7"/></g>' +
-        '<text x="200" y="350" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-weight="800" font-size="24" fill="' + c[1] + '">' + marca + '</text>';
-    var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><rect width="400" height="400" fill="' + c[0] + '"/>' + figura + '</svg>';
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">' +
+      '<rect width="400" height="400" fill="#F5FAFA"/>' +
+      '<text x="200" y="208" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-weight="700" font-size="22" fill="#9AA7A9">' + marca + '</text>' +
+      '</svg>';
     return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
   }
 
@@ -289,7 +276,7 @@
       estado.texto = ""; $("[data-buscar]").value = "";
       estado.marca = ""; selMarca.value = "";
       elegirCat(el.dataset.irCat);
-      $("#tienda").scrollIntoView({ behavior: "smooth" });
+      $("#tienda").scrollIntoView();
       cerrarMenu();
     });
   });
@@ -323,8 +310,6 @@
     pintarPedido();
     var p = producto(id);
     avisar("Agregaste " + p.nombre + " (" + p.opciones[op].etiqueta + ")");
-    var c = $("[data-cuenta]");
-    c.classList.remove("salto"); void c.offsetWidth; c.classList.add("salto");
   }
 
   function subtotal() {
@@ -377,8 +362,8 @@
 
     var falta = CONFIG.envioGratisDesde - sub;
     $("[data-envio-texto]").textContent = falta > 0
-      ? "Te faltan " + pesos(falta) + " para el envío sin costo 🚚"
-      : "¡Tu envío es sin costo! 🎉";
+      ? "Te faltan " + pesos(falta) + " para el envío sin costo"
+      : "Tu envío es sin costo";
     $("[data-envio-progreso]").style.width = Math.min(100, (sub / CONFIG.envioGratisDesde) * 100) + "%";
   }
 

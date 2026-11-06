@@ -12,7 +12,7 @@ Referencia de estructura: altoqueraciones.com (diseño y textos propios).
   preguntas frecuentes, marcas, footer, carrito lateral.
 - `milo/styles.css` — estilos con la identidad de Milo: turquesa `#00B5B6`, naranja `#F29348`, blanco; Montserrat (títulos) + Nunito.
 - `milo/images/logo-turquesa.png` / `logo-blanco.png` — logo recortado con fondo transparente (sacado del PNG de Canva, ~300 px).
-- `milo/images/promo-*.jpg` — piezas de redes de Canva (sección "Novedades Milo").
+- `milo/images/promo-*.jpg` — piezas de redes de Canva (se muestran en la portada).
 - `milo/script.js` — catálogo, filtros, buscador, carrito (se guarda en el navegador),
   armado del mensaje de WhatsApp, zonas y calculadora.
 - `milo/productos.js` — **único archivo a tocar para contenido**: `CONFIG` (WhatsApp, Instagram,
@@ -24,7 +24,9 @@ Referencia de estructura: altoqueraciones.com (diseño y textos propios).
 - El carrito arma un mensaje de WhatsApp con productos, total, envío, nombre, barrio, dirección y forma de pago.
 - Envío sin costo desde $1.500; si no, $120 (editable en `CONFIG`).
 - Ciudad de la Costa: lunes a sábado, en el día si se pide antes de las 14 h. Alrededores: días fijos por zona.
-- Si falta una foto, se dibuja una bolsa con el color de la categoría; si falta un logo de marca, se muestra el nombre.
+- Estilo minimalista y sin animaciones: botones blancos con letra del color de fondo (turquesa), o con borde y sin relleno sobre fondo blanco.
+- La portada muestra las tres piezas de Canva (domicilio, envíos gratuitos, ración).
+- Si falta una foto, se muestra un recuadro liso con el nombre de la marca; si falta un logo de marca, se muestra el nombre.
 
 ## Pendientes
 - [x] WhatsApp (`097 051 833`) y email (`infomiloraciones@gmail.com`) cargados.
