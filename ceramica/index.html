@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BARRO — Cerámica hecha a mano</title>
+<meta name="description" content="Piezas de cerámica hechas a mano, en ediciones limitadas. Cada pieza es única.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800;900&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <a href="#inicio" class="nav__logo">BARRO</a>
+  <nav class="nav__links" id="menu">
+    <a href="#filosofia">Filosofía</a>
+    <a href="#taller">El taller</a>
+    <a href="#galeria">Galería</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+  <a href="#contacto" class="nav__cta">ENCARGOS ↗</a>
+  <button class="nav__burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="inicio">
+  <div class="hero__meta">
+    <span>Edición limitada</span><span>Cerámica</span><span>Hecha a mano</span><span>2026</span>
+  </div>
+  <h1 class="wordmark reveal">BARRO</h1>
+  <div class="hero__row">
+    <img class="hero__img reveal" src="img/pieza-1.svg" alt="Vasija de cerámica color terracota">
+    <p class="manifesto reveal">
+      BARRO es una colección de <em>cerámica de edición limitada</em> inspirada en
+      <em>texturas naturales y sensaciones táctiles.</em> Cada pieza es
+      <em>hecha a mano, única en forma y textura,</em> y por eso no es solo un objeto
+      de uso, sino <em>un objeto de arte.</em>
+    </p>
+  </div>
+  <a href="#galeria" class="link-arrow">VER LA COLECCIÓN ↗</a>
+</section>
+
+<!-- ============ FILOSOFÍA ============ -->
+<section class="section filosofia" id="filosofia">
+  <p class="label">01 — Filosofía</p>
+  <h2 class="title reveal">La forma nace del barro,<br><em>cambia con el tiempo<br>y adquiere carácter.</em></h2>
+  <div class="split">
+    <img class="split__img reveal" src="img/pieza-2.svg" alt="Pieza escultórica de cerámica negra">
+    <div class="split__text reveal">
+      <p>En un mundo de producción en serie, perdimos la conexión con los objetos que nos rodean. Lo que usamos todos los días dejó de tener historia, carácter e identidad.</p>
+      <p>Cada pieza de BARRO se modela a mano, se seca lento y pasa por el horno una o dos veces. Las marcas de los dedos, las variaciones del esmalte y las pequeñas imperfecciones no se corrigen: son la firma de cada objeto.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ARTISTA ============ -->
+<section class="section artista" id="taller">
+  <p class="label">02 — El taller</p>
+  <div class="artista__grid">
+    <img class="artista__img reveal" src="img/retrato.svg" alt="Retrato de la ceramista">
+    <div class="artista__text">
+      <h2 class="big-name reveal">NOMBRE<br>APELLIDO</h2>
+      <p>Ceramista y fundadora de BARRO. Trabaja desde su taller en [ciudad], donde modela cada pieza a mano, con torno o con placas, en series cortas que nunca se repiten.</p>
+      <p>Su trabajo explora la tensión entre lo funcional y lo escultórico: objetos que se pueden usar, pero que también piden ser mirados.</p>
+      <a href="#galeria" class="link-arrow">VER LA COLECCIÓN ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VALORES ============ -->
+<section class="section valores">
+  <h2 class="title reveal">Esta colección no es solo vajilla,<br><em>son objetos que cambian<br>lo cotidiano.</em></h2>
+  <div class="valores__grid">
+    <dl class="valores__list">
+      <div><dt>Hecho a mano</dt><dd>Cada pieza se modela, retoca y esmalta a mano, una por una.</dd></div>
+      <div><dt>Texturas únicas</dt><dd>Superficies que invitan a tocar: mates, rugosas, satinadas.</dd></div>
+      <div><dt>Producción lenta</dt><dd>Series cortas, sin apuro. El tiempo también es un material.</dd></div>
+      <div><dt>Materiales nobles</dt><dd>Arcillas y esmaltes seleccionados, aptos para uso diario.</dd></div>
+    </dl>
+    <img class="valores__img reveal" src="img/pieza-6.svg" alt="Botella de cerámica rosada">
+  </div>
+</section>
+
+<!-- ============ GALERÍA ============ -->
+<section class="section galeria" id="galeria">
+  <div class="galeria__head">
+    <h2 class="big-word reveal">GALERÍA</h2>
+    <p class="galeria__sub">Donde la forma<br>encuentra el alma</p>
+  </div>
+  <div class="galeria__grid" id="galeria-grid"><!-- se completa desde piezas.js --></div>
+</section>
+
+<!-- ============ BLOQUE COLOR ============ -->
+<section class="bloque">
+  <div class="bloque__top">
+    <img class="bloque__img reveal" src="img/pieza-5.svg" alt="Jarrón facetado azul">
+    <div>
+      <h2 class="bloque__title">Formas únicas.<br>Edición limitada.</h2>
+      <p>Cada serie tiene entre 3 y 10 piezas. Cuando se terminan, no se vuelven a hacer iguales: la próxima vez el barro, el esmalte y el horno van a dar otro resultado.</p>
+    </div>
+    <blockquote class="bloque__quote">
+      <p>“Lo que más me gusta es que cuando la toco me doy cuenta de que nadie más tiene una igual.”</p>
+      <cite>— Cliente</cite>
+    </blockquote>
+  </div>
+  <p class="bloque__claim reveal">SENTÍ<br>LA CERÁMICA.<br>TOCÁ<br>LA FORMA.</p>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section class="section contacto" id="contacto">
+  <p class="label">03 — Contacto</p>
+  <h2 class="contacto__title">¿Querés saber más de la colección, hacer un encargo o colaborar?<br>Escribime y te ayudo a encontrar tu pieza.</h2>
+  <div class="contacto__cols">
+    <div>
+      <h3>Consultas</h3>
+      <p><a id="c-wa" href="#">WhatsApp</a></p>
+      <p><a id="c-mail" href="#">email</a></p>
+    </div>
+    <div>
+      <h3>Redes</h3>
+      <p><a id="c-ig" href="#" target="_blank" rel="noopener">Instagram</a></p>
+    </div>
+    <div>
+      <h3>Taller</h3>
+      <p>[Ciudad], Argentina<br>Visitas con cita previa</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer__top">
+    <div>
+      <p class="footer__claim">Elegí tu forma.</p>
+      <form class="footer__form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='¡Gracias!';">
+        <label for="mail">Enterate de las nuevas series</label>
+        <div><input id="mail" type="email" placeholder="tu@email.com" required><button>→</button></div>
+      </form>
+    </div>
+    <nav class="footer__links">
+      <a href="#filosofia">Filosofía</a><a href="#taller">El taller</a>
+      <a href="#galeria">Galería</a><a href="#contacto">Contacto</a>
+    </nav>
+  </div>
+  <p class="wordmark wordmark--footer">BARRO</p>
+  <p class="footer__legal">© 2026 BARRO — Cerámica hecha a mano</p>
+</footer>
+
+<!-- Ficha de pieza -->
+<dialog class="ficha" id="ficha">
+  <button class="ficha__close" aria-label="Cerrar">×</button>
+  <img id="f-img" src="" alt="">
+  <div class="ficha__info">
+    <p class="label" id="f-estado"></p>
+    <h3 id="f-nombre"></h3>
+    <p id="f-material"></p>
+    <p id="f-medidas"></p>
+    <p id="f-precio"></p>
+    <a id="f-cta" class="btn" href="#" target="_blank" rel="noopener">CONSULTAR POR ESTA PIEZA ↗</a>
+  </div>
+</dialog>
+
+<script src="piezas.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

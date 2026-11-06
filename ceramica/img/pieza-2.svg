@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ecebe8"/><stop offset=".72" stop-color="#e2e0dc"/><stop offset="1" stop-color="#d9d6d1"/></linearGradient>
+<radialGradient id="sh"><stop offset="0" stop-color="#000" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+<linearGradient id="lt" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".18"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".18"/></linearGradient></defs>
+<rect width="400" height="500" fill="url(#bg)"/>
+<ellipse cx="200" cy="418" rx="120" ry="14" fill="url(#sh)"/>
+<g fill="#2f3a33"><path d="M110 415 c-5 -80 -10 -120 10 -170 c25 -60 60 -40 80 -90 c20 50 55 30 80 90 c20 50 15 90 10 170 h-40 c0 -60 -5 -95 -50 -95 c-45 0 -50 35 -50 95 z"/></g>
+<g fill="url(#lt)"><path d="M110 415 c-5 -80 -10 -120 10 -170 c25 -60 60 -40 80 -90 c20 50 55 30 80 90 c20 50 15 90 10 170 h-40 c0 -60 -5 -95 -50 -95 c-45 0 -50 35 -50 95 z"/></g>
+</svg>
