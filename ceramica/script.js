@@ -8,6 +8,21 @@ burger.addEventListener('click', () => {
 document.querySelectorAll('.nav__links a').forEach(a =>
   a.addEventListener('click', () => { nav.classList.remove('open'); burger.setAttribute('aria-expanded', false); }));
 
+// Enlaces internos: bajan a la sección sin escribir #seccion en la dirección,
+// así el enlace de la web siempre abre en el inicio
+document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+  const id = a.getAttribute('href').slice(1);
+  const destino = id && document.getElementById(id);
+  if (!destino) return;
+  e.preventDefault();
+  destino.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+}));
+
+// Abrir siempre en el inicio
+try { history.scrollRestoration = 'manual'; } catch (e) {}
+if (location.hash) { try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {} }
+scrollTo(0, 0);
+
 // Contacto
 const waLink = (txt) => `https://wa.me/${CONTACTO.whatsapp}?text=${encodeURIComponent(txt)}`;
 document.getElementById('c-wa').href = waLink('¡Hola Lucía! Te escribo desde la web.');
@@ -23,7 +38,7 @@ const grid = document.getElementById('galeria-grid');
 grid.style.setProperty('--cols', PIEZAS.length === 4 ? 4 : 3);
 PIEZAS.forEach((p, i) => {
   const b = document.createElement('button');
-  b.className = `pieza reveal${p.estado === 'vendida' ? ' pieza--vendida' : ''}`;
+  b.className = `pieza${p.estado === 'vendida' ? ' pieza--vendida' : ''}`;
   b.innerHTML = `
     <div class="pieza__img"><img src="${p.foto}" alt="${p.nombre}" loading="lazy"></div>
     <div class="pieza__meta"><span>${p.nombre}</span><span class="pieza__estado">${p.nota ? 'Destacada' : (ESTADOS[p.estado] || '')}</span></div>`;
@@ -57,6 +72,7 @@ fab.href = waLink('¡Hola Lucía! Quiero hacer un pedido.');
 // Transiciones al hacer scroll
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const ANIMADOS = [
+  '.hero__logo', '.hero__meta', '.hero__img', '.manifesto', '.hero__row .link-arrow',
   '.section .label', '.section .title', '.split__img', '.split__text',
   '.artista__img', '.big-name', '.artista__text > p, .artista__text > a',
   '.valores__list > div', '.valores__fig', '.galeria__head', '.pieza',
@@ -65,25 +81,24 @@ const ANIMADOS = [
 ].join(',');
 
 if (!reduceMotion && 'IntersectionObserver' in window) {
+  // Cada vez que un elemento entra en pantalla se anima; cuando sale del todo,
+  // vuelve a su estado inicial para animarse de nuevo la próxima vez.
   const io = new IntersectionObserver(entries => entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    e.target.classList.remove('pending');
-    io.unobserve(e.target);
-  }), { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    if (e.isIntersecting) e.target.classList.remove('pending');
+    else e.target.classList.add('pending');
+  }), { threshold: 0, rootMargin: '0px 0px -8% 0px' });
 
   const grupos = new Map();
-  document.querySelectorAll(ANIMADOS).forEach(el => {
+  const animados = [...document.querySelectorAll(ANIMADOS)];
+  animados.forEach(el => {
     el.dataset.anim = /^(IMG|FIGURE)$/.test(el.tagName) ? 'img' : 'up';
-    // escalonado entre hermanos animados
-    const n = grupos.get(el.parentElement) || 0;
+    const n = grupos.get(el.parentElement) || 0;          // escalonado entre hermanos
     grupos.set(el.parentElement, n + 1);
     el.style.setProperty('--d', Math.min(n * 0.09, 0.45) + 's');
-    // solo se ocultan los que están más abajo de la primera pantalla
-    if (el.getBoundingClientRect().top > innerHeight * 0.92) {
-      el.classList.add('pending');
-      io.observe(el);
-    }
+    el.classList.add('pending');
   });
+  // dos cuadros después, para que la portada también se anime al abrir
+  requestAnimationFrame(() => requestAnimationFrame(() => animados.forEach(el => io.observe(el))));
 }
 
 // Parallax suave, barra con borde al bajar y botón flotante
