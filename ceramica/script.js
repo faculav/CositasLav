@@ -49,3 +49,56 @@ function abrirFicha(p) {
 }
 ficha.querySelector('.ficha__close').addEventListener('click', () => ficha.close());
 ficha.addEventListener('click', e => { if (e.target === ficha) ficha.close(); });
+
+// Botón flotante de pedido: aparece después de la portada
+const fab = document.getElementById('fab');
+fab.href = waLink('¡Hola Lucía! Quiero hacer un pedido.');
+
+// Transiciones al hacer scroll
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ANIMADOS = [
+  '.section .label', '.section .title', '.split__img', '.split__text',
+  '.artista__img', '.big-name', '.artista__text > p, .artista__text > a',
+  '.valores__list > div', '.valores__fig', '.galeria__head', '.pieza',
+  '.bloque__img', '.bloque__top > div', '.bloque__quote', '.bloque__claim',
+  '.contacto__title', '.contacto__cols > div', '.footer__top > *', '.footer__logo'
+].join(',');
+
+if (!reduceMotion && 'IntersectionObserver' in window) {
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.remove('pending');
+    io.unobserve(e.target);
+  }), { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+
+  const grupos = new Map();
+  document.querySelectorAll(ANIMADOS).forEach(el => {
+    el.dataset.anim = /^(IMG|FIGURE)$/.test(el.tagName) ? 'img' : 'up';
+    // escalonado entre hermanos animados
+    const n = grupos.get(el.parentElement) || 0;
+    grupos.set(el.parentElement, n + 1);
+    el.style.setProperty('--d', Math.min(n * 0.09, 0.45) + 's');
+    // solo se ocultan los que están más abajo de la primera pantalla
+    if (el.getBoundingClientRect().top > innerHeight * 0.92) {
+      el.classList.add('pending');
+      io.observe(el);
+    }
+  });
+}
+
+// Parallax suave, barra con borde al bajar y botón flotante
+const parallax = reduceMotion ? [] : [...document.querySelectorAll('.hero__img, .valores__fig, .bloque__img')];
+let ticking = false;
+function onScroll() {
+  const y = scrollY;
+  nav.classList.toggle('nav--scrolled', y > 8);
+  fab.classList.toggle('fab--on', y > innerHeight * 0.6);
+  parallax.forEach(el => {
+    const r = el.getBoundingClientRect();
+    const centro = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+    el.style.translate = `0 ${(centro * -28).toFixed(1)}px`;
+  });
+  ticking = false;
+}
+addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+onScroll();

@@ -1,5 +1,5 @@
 /* =========================================================
-   PIEZAS — editá esta lista para cargar la colección.
+   PIEZAS — editá esta lista para cargar las piezas de LU.
    - foto: ruta a la imagen dentro de /img (jpg, png o webp)
    - estado: "disponible" | "vendida" | "encargo"
    - medidas / precio: dejar "" para no mostrarlos
