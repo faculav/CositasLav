@@ -239,6 +239,15 @@ body.lock{overflow:hidden}
 .done p{color:var(--mute);margin:6px 0 18px}
 .done .stamps{margin:16px auto 6px}
 @keyframes pop{from{transform:scale(.5);opacity:0}to{transform:none;opacity:1}}
+
+.top-actions{display:flex;align-items:center;gap:8px}
+.btn-sm{height:40px;padding:0 18px;font-size:15px}
+.btn-xl{height:56px;padding:0 28px;font-size:17px}
+.btn-xl svg{width:20px;height:20px}
+.hero-cta{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:20px}
+@media(max-width:600px){.hero-cta .btn-xl{flex:1 1 100%}}
+.next-free{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500;color:var(--ink-2);padding:8px 14px;border-radius:999px;background:var(--fill)}
+.next-free .dot{width:8px;height:8px;border-radius:50%;background:#34C759;box-shadow:0 0 0 4px rgba(52,199,89,.18)}
 /* team */
 .tcard{position:relative;width:min(64vw,290px);aspect-ratio:4/5;border-radius:var(--r-xl);overflow:hidden;background:#3a3a3c;box-shadow:inset 0 0 0 .5px var(--line)}
 .tcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
@@ -320,9 +329,10 @@ footer a:hover{color:var(--ink)}
 <header class="top" id="top">
   <div class="wrap">
     <a href="#" aria-label="Lavis Studio, inicio"><img src="assets/logo-lavis-wordmark-alpha.png" alt="Lavis Studio" width="68" height="20"></a>
-    <a class="icon-btn" href="https://wa.me/59895459911?text=Hola%20Lavis%2C%20quiero%20sacar%20un%20turno" aria-label="Escribir por WhatsApp">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12Z"/></svg>
-    </a>
+    <div class="top-actions">
+      <a class="icon-btn" href="https://wa.me/59895459911?text=Hola%20Lavis%2C%20quiero%20sacar%20un%20turno" aria-label="Escribir por WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12Z"/></svg></a>
+      <a class="btn btn-dark btn-sm" href="#reservar">Reservar</a>
+    </div>
   </div>
 </header>
 
@@ -330,6 +340,10 @@ footer a:hover{color:var(--ink)}
   <div class="wrap page-title" id="inicio">
     <h1>Lavis Studio</h1>
     <p>Barbería con visagismo en El Pinar. Antes de cortarte miramos tu cara.</p>
+    <div class="hero-cta">
+      <a class="btn btn-dark btn-xl" href="#reservar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Reservar turno</a>
+      <a class="next-free" href="#reservar" id="next-free" hidden><span class="dot"></span><span id="next-free-t"></span></a>
+    </div>
   </div>
 
   <!-- HERO RAIL -->
@@ -387,21 +401,21 @@ footer a:hover{color:var(--ink)}
       <div>
         <p class="glabel">Corte y barba</p>
         <div class="group">
-        <a class="row" href="#reservar"><span class="ic"><img src="assets/corte.jpg" alt=""></span><span class="tx"><b>Corte</b><small>40 min · Miramos tu cara y te hacemos el corte que te queda</small></span><span class="val">$750</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
-        <a class="row" href="#reservar"><span class="ic"><img src="assets/corte-barba.jpg" alt=""></span><span class="tx"><b>Corte y barba</b><small>40 min · Corte y barba perfilada según tu cara</small></span><span class="val">$750</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
-        <a class="row" href="#reservar"><span class="ic"><img src="assets/trans-poster-3.jpg" alt=""></span><span class="tx"><b>Corte y lavado</b><small>45 min</small></span><span class="val">$850</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
-        <a class="row" href="#reservar"><span class="ic"><img src="assets/cejas.jpg" alt=""></span><span class="tx"><b>Cejas con visagismo</b><small>5 min · Según tu cara, sin dejarlas finas</small></span><span class="val">$250</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="#reservar" data-serv="CORTE"><span class="ic"><img src="assets/corte.jpg" alt=""></span><span class="tx"><b>Corte</b><small>40 min · Miramos tu cara y te hacemos el corte que te queda</small></span><span class="val">$750</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="#reservar" data-serv="CORTE Y BARBA"><span class="ic"><img src="assets/corte-barba.jpg" alt=""></span><span class="tx"><b>Corte y barba</b><small>40 min · Corte y barba perfilada según tu cara</small></span><span class="val">$750</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="#reservar" data-serv="CORTE+LAVADO"><span class="ic"><img src="assets/trans-poster-3.jpg" alt=""></span><span class="tx"><b>Corte y lavado</b><small>45 min</small></span><span class="val">$850</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="#reservar" data-serv="cejas en base al visagismo"><span class="ic"><img src="assets/cejas.jpg" alt=""></span><span class="tx"><b>Cejas con visagismo</b><small>5 min · Según tu cara, sin dejarlas finas</small></span><span class="val">$250</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
         </div>
       </div>
       <div>
         <p class="glabel">Tratamientos y color</p>
         <div class="group">
-        <a class="row" href="#reservar"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1" fill="currentColor"/><circle cx="15" cy="10" r="1" fill="currentColor"/><path d="M9 15.5c1.8 1.2 4.2 1.2 6 0"/></svg></span><span class="tx"><b>Black mask</b><small>15 min</small></span><span class="val">$350</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
-        <a class="row" href="#reservar"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14Z"/><path d="M5 19 13 11"/></svg></span><span class="tx"><b>Tratamiento para rulos</b><small>10 min</small></span><span class="val">$650</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
-        <a class="row" href="#reservar"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4 2.5-2.5Z"/></svg></span><span class="tx"><b>Tratamiento reparador</b><small>10 min</small></span><span class="val">$650</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
-        <a class="row" href="#reservar"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c3 0 5-1.5 5-4a3 3 0 0 0-3-3c-2 0-2 2-2 4v3Z"/><path d="m9.5 13.5 9-9a1.8 1.8 0 0 1 2.5 2.5l-9 9"/></svg></span><span class="tx"><b>Mechas</b><small>2 h</small></span><span class="val">$2.000</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
-        <a class="row" href="#reservar"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor"/></svg></span><span class="tx"><b>Tinta</b><small>2 h</small></span><span class="val">$1.100</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
-<a class="row" href="#reservar"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor"/></svg></span><span class="tx"><b>Platinado</b><small>3 h</small></span><span class="val">$3.000</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="#reservar" data-serv="Black mask"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1" fill="currentColor"/><circle cx="15" cy="10" r="1" fill="currentColor"/><path d="M9 15.5c1.8 1.2 4.2 1.2 6 0"/></svg></span><span class="tx"><b>Black mask</b><small>15 min</small></span><span class="val">$350</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="#reservar" data-serv="Tratamiento especial para rulos"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14Z"/><path d="M5 19 13 11"/></svg></span><span class="tx"><b>Tratamiento para rulos</b><small>10 min</small></span><span class="val">$650</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="#reservar" data-serv="Tratamiento Reparador"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4 2.5-2.5Z"/></svg></span><span class="tx"><b>Tratamiento reparador</b><small>10 min</small></span><span class="val">$650</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="#reservar" data-serv="Mechas"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c3 0 5-1.5 5-4a3 3 0 0 0-3-3c-2 0-2 2-2 4v3Z"/><path d="m9.5 13.5 9-9a1.8 1.8 0 0 1 2.5 2.5l-9 9"/></svg></span><span class="tx"><b>Mechas</b><small>2 h</small></span><span class="val">$2.000</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="row" href="#reservar" data-serv="tinta"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor"/></svg></span><span class="tx"><b>Tinta</b><small>2 h</small></span><span class="val">$1.100</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
+<a class="row" href="#reservar" data-serv="platinado"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor"/></svg></span><span class="tx"><b>Platinado</b><small>3 h</small></span><span class="val">$3.000</span><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a>
         </div>
       </div>
     </div>
@@ -412,9 +426,9 @@ footer a:hover{color:var(--ink)}
   <section class="wrap fade" id="equipo">
     <div class="sh"><h2>El equipo</h2><a href="#reservar">Elegir barbero <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a></div>
     <div class="rail">
-      <a class="tcard" href="#reservar"><img src="assets/barbero-theo.jpg" alt="Matheo, barbero de Lavis" loading="lazy"><div class="tmeta"><b>Matheo</b><small>Barbero</small></div></a>
-      <a class="tcard" href="#reservar"><img src="assets/barbero-gabriel.jpg" alt="Gabriel, barbero de Lavis" loading="lazy"><div class="tmeta"><b>Gabriel</b><small>Barbero</small></div></a>
-      <a class="tcard" href="#reservar"><img src="assets/barbero-nacho.jpg" alt="Nacho, barbero de Lavis" loading="lazy"><div class="tmeta"><b>Nacho</b><small>Barbero</small></div></a>
+      <a class="tcard" href="#reservar" data-barb="Matheo"><img src="assets/barbero-theo.jpg" alt="Matheo, barbero de Lavis" loading="lazy"><div class="tmeta"><b>Matheo</b><small>Barbero</small></div></a>
+      <a class="tcard" href="#reservar" data-barb="Gabriel"><img src="assets/barbero-gabriel.jpg" alt="Gabriel, barbero de Lavis" loading="lazy"><div class="tmeta"><b>Gabriel</b><small>Barbero</small></div></a>
+      <a class="tcard" href="#reservar" data-barb="Nacho"><img src="assets/barbero-nacho.jpg" alt="Nacho, barbero de Lavis" loading="lazy"><div class="tmeta"><b>Nacho</b><small>Barbero</small></div></a>
     </div>
   </section>
 
@@ -586,7 +600,7 @@ footer a:hover{color:var(--ink)}
 const API='/api/turnos';
 const IMG={'CORTE':'assets/corte.jpg','CORTE Y BARBA':'assets/corte-barba.jpg','cejas en base al visagismo':'assets/cejas.jpg','CORTE+LAVADO':'assets/trans-poster-3.jpg'};
 const FOTO={'Gabriel':'assets/barbero-gabriel.jpg','Matheo':'assets/barbero-theo.jpg','Nacho':'assets/barbero-nacho.jpg'};
-const NOMBRE={'CORTE':'Corte','CORTE Y BARBA':'Corte y barba','cejas en base al visagismo':'Cejas con visagismo','CORTE+LAVADO':'Corte y lavado','Tratamiento especial para rulos':'Tratamiento para rulos','Tratamiento Reparador':'Tratamiento reparador','Black mask':'Black mask','Mechas':'Mechas','tinta':'Tinta','platinado':'Platinado'};
+const NOMBRE={'CORTE':'Corte','CORTE Y BARBA':'Corte y barba','cejas en base al visagismo':'Cejas con visagismo','CORTE+LAVADO':'Corte y lavado','Tratamiento especial para rulos':'Tratamiento para rulos','Tratamiento Reparador':'Tratamiento reparador','Black mask':'Black mask','Mechas':'Mechas','tinta':'Tinta','platinado':'Platinado','membresias vip':'Corte y barba (socios)','retoque membresia vip':'Retoque (socios)'};
 const FB_SERV=[
  {id:'62499335',nombre:'CORTE',duracion_min:40,precio:750,categoria:'Peluquería',destacado:1},
  {id:'f0513d4d',nombre:'CORTE Y BARBA',duracion_min:40,precio:750,categoria:'Peluquería',destacado:2},
@@ -597,7 +611,9 @@ const FB_SERV=[
  {id:'141d604f',nombre:'Tratamiento Reparador',duracion_min:10,precio:650,categoria:'Tratamientos',destacado:0},
  {id:'fc52d9a5',nombre:'tinta',duracion_min:120,precio:1100,categoria:'Tratamientos',destacado:0},
  {id:'91151c9b',nombre:'Mechas',duracion_min:120,precio:2000,categoria:'Tratamientos',destacado:0},
- {id:'0d1f84ce',nombre:'platinado',duracion_min:180,precio:3000,categoria:'Tratamientos',destacado:0}];
+ {id:'0d1f84ce',nombre:'platinado',duracion_min:180,precio:3000,categoria:'Tratamientos',destacado:0},
+ {id:'7cdeb302',nombre:'membresias vip',duracion_min:40,precio:0,categoria:'Membresía',destacado:0,solo_membresia:true},
+ {id:'bb794e76',nombre:'retoque membresia vip',duracion_min:25,precio:0,categoria:'Membresía',destacado:0,solo_membresia:true}];
 const FB_BARB=[{id:'g',nombre:'Gabriel'},{id:'m',nombre:'Matheo'},{id:'n',nombre:'Nacho'}];
 const DIAS=['DOM','LUN','MAR','MIÉ','JUE','VIE','SÁB'];
 const MESES=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
@@ -610,7 +626,7 @@ const st={mode:'reserva',step:1,sel:new Set(),barbero:'any',fecha:null,hora:null
 async function get(url){const c=new AbortController();const t=setTimeout(()=>c.abort(),4000);try{const r=await fetch(url,{signal:c.signal});if(!r.ok)throw 0;return await r.json()}finally{clearTimeout(t)}}
 async function boot(){
   if(serv.length)return;
-  try{if(location.protocol==='file:')throw 0;const [a,b]=await Promise.all([get(API+'/servicios'),get(API+'/barberos')]);serv=a.servicios.filter(s=>s.activo&&!s.solo_membresia);barb=b.barberos;live=true}
+  try{if(location.protocol==='file:')throw 0;const [a,b]=await Promise.all([get(API+'/servicios'),get(API+'/barberos')]);serv=a.servicios.filter(s=>s.activo);barb=b.barberos;live=true}
   catch(e){serv=FB_SERV;barb=FB_BARB;live=false}
   serv.sort((a,b)=>(b.destacado>0)-(a.destacado>0)||(a.destacado-b.destacado)||(a.orden||0)-(b.orden||0));
   $('#sh-demo').hidden=live&&typeof window.LAVIS_CONFIRMAR==='function';
@@ -619,11 +635,11 @@ const dur=()=>[...st.sel].reduce((t,id)=>t+serv.find(s=>s.id===id).duracion_min,
 const total=()=>[...st.sel].reduce((t,id)=>t+serv.find(s=>s.id===id).precio,0);
 const ymd=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 function days(){const out=[],d=new Date();d.setHours(0,0,0,0);while(out.length<15){const w=d.getDay();if(w>=2&&w<=6)out.push(new Date(d));d.setDate(d.getDate()+1)}return out}
-function demoSlots(f){const seed=[...f].reduce((a,c)=>a+c.charCodeAt(0),0);return barb.map((b,i)=>{const s=[];for(let m=600;m+dur()<=1140;m+=40){if(((m/40+seed+i*3)%5)>1)s.push(String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0'))}
+function demoSlots(f,D){D=D||dur();const seed=[...f].reduce((a,c)=>a+c.charCodeAt(0),0);return barb.map((b,i)=>{const s=[];for(let m=600;m+D<=1140;m+=40){if(((m/40+seed+i*3)%5)>1)s.push(String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0'))}
   const now=new Date();if(f===ymd(now)){const lim=now.getHours()*60+now.getMinutes()+60;return{barbero_id:b.id,barbero_nombre:b.nombre,slots:s.filter(h=>+h.slice(0,2)*60+ +h.slice(3)>=lim)}}
   return{barbero_id:b.id,barbero_nombre:b.nombre,slots:s}})}
-async function slots(f){const k=f+'|'+dur();if(st.slotsCache[k])return st.slotsCache[k];let r;
-  if(live){try{r=(await get(`${API}/disponibilidad?fecha=${f}&duracion_min=${dur()}`)).slots}catch(e){r=demoSlots(f)}}else r=demoSlots(f);
+async function slots(f,D){D=D||dur();const k=f+'|'+D;if(st.slotsCache[k])return st.slotsCache[k];let r;
+  if(live){try{r=(await get(`${API}/disponibilidad?fecha=${f}&duracion_min=${D}`)).slots}catch(e){r=demoSlots(f,D)}}else r=demoSlots(f,D);
   return st.slotsCache[k]=r}
 
 /* ---- render ---- */
@@ -634,13 +650,13 @@ function sumTxt(){const n=[...st.sel].map(id=>nom(serv.find(s=>s.id===id)));retu
 
 function renderServicios(){
   head('Paso 1 de 3','¿Qué te hacés?',false);
-  const main=serv.filter(s=>IMG[s.nombre]),rest=serv.filter(s=>!IMG[s.nombre]);
-  const item=(s,lite)=>`<button class="pick${lite?' lite':''}${st.sel.has(s.id)?' on':''}" data-s="${s.id}">${lite?'':`<span class="ic"><img src="${IMG[s.nombre]}" alt=""></span>`}<span class="tx"><b>${nom(s)}</b><small>${s.duracion_min} min</small></span><span class="pr">${money(s.precio)}</span><span class="ck"></span></button>`;
-  body().innerHTML=`<p class="sh-label">Elegí uno o varios. Van seguidos, con el mismo barbero.</p>${main.map(s=>item(s)).join('')}<p class="sh-label">Tratamientos y color</p>${rest.map(s=>item(s,1)).join('')}`;
+  const main=serv.filter(s=>IMG[s.nombre]),vip=serv.filter(s=>s.solo_membresia),rest=serv.filter(s=>!IMG[s.nombre]&&!s.solo_membresia);
+  const item=(s,lite)=>`<button class="pick${lite?' lite':''}${st.sel.has(s.id)?' on':''}" data-s="${s.id}">${lite?'':`<span class="ic"><img src="${IMG[s.nombre]}" alt=""></span>`}<span class="tx"><b>${nom(s)}</b><small>${s.duracion_min} min</small></span><span class="pr">${s.solo_membresia?'Incluido':money(s.precio)}</span><span class="ck"></span></button>`;
+  body().innerHTML=`<p class="sh-label">Elegí uno o varios. Van seguidos, con el mismo barbero.</p>${main.map(s=>item(s)).join('')}<p class="sh-label">Tratamientos y color</p>${rest.map(s=>item(s,1)).join('')}${vip.length?`<p class="sh-label">Socios VIP</p>${vip.map(s=>item(s,1)).join('')}`:''}`;
   body().querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{const id=b.dataset.s;st.sel.has(id)?st.sel.delete(id):st.sel.add(id);b.classList.toggle('on');st.hora=null;updServ()});
   updServ();
 }
-function updServ(){foot(sumTxt(),st.sel.size?`${dur()} min · ${money(total())}`:'Elegí uno o varios','Elegir día',st.sel.size>0)}
+function updServ(){const con=st.barbero!=='any'?' · con '+barb.find(b=>b.id===st.barbero).nombre:'';foot(sumTxt(),(st.sel.size?`${dur()} min · ${money(total())}`:'Elegí uno o varios')+con,'Elegir día',st.sel.size>0)}
 
 async function renderCuando(){
   head('Paso 2 de 3','¿Cuándo venís?',true);
@@ -721,13 +737,18 @@ function localStorageGet(k){try{return localStorage.getItem(k)}catch(e){return n
 function localStorageSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 
 function render(){body().scrollTop=0;if(st.mode==='cuenta')return renderCuenta();({1:renderServicios,2:renderCuando,3:renderDatos})[st.step]()}
-async function open(mode){st.mode=mode;st.step=1;if(mode==='reserva'){st.hora=null}await boot();render();$('#sheet').classList.add('open');$('#sheet').setAttribute('aria-hidden','false');document.body.classList.add('lock')}
+async function open(mode,pre={}){st.mode=mode;st.step=1;if(mode==='reserva'){st.hora=null}await boot();
+  if(pre.serv){const x=serv.find(s=>s.nombre===pre.serv);if(x){st.sel=new Set([x.id]);st.step=2}}
+  if(pre.barb){const x=barb.find(b=>b.nombre===pre.barb);if(x)st.barbero=x.id}
+  render();$('#sheet').classList.add('open');$('#sheet').setAttribute('aria-hidden','false');document.body.classList.add('lock')}
 function close(){$('#sheet').classList.remove('open');$('#sheet').setAttribute('aria-hidden','true');document.body.classList.remove('lock')}
 $('#sh-next').onclick=()=>{if(st.step===3)return confirmar();st.step++;render()};
 $('#sh-back').onclick=()=>{if(st.step>1){st.step--;render()}};
 document.querySelectorAll('[data-close]').forEach(b=>b.onclick=close);
 addEventListener('keydown',e=>{if(e.key==='Escape')close()});
-document.addEventListener('click',e=>{const a=e.target.closest('a[href="#reservar"],[data-open]');if(!a)return;e.preventDefault();open(a.dataset.open||'reserva')});
+document.addEventListener('click',e=>{const a=e.target.closest('a[href="#reservar"],[data-open]');if(!a)return;e.preventDefault();open(a.dataset.open||'reserva',{serv:a.dataset.serv,barb:a.dataset.barb})});
+/* próximo turno libre */
+(async()=>{await boot();const ds=days();const hoy=ymd(new Date());for(const d of ds.slice(0,6)){const f=ymd(d);const r=await slots(f,40);const all=[...new Set(r.flatMap(b=>b.slots))].sort();if(all.length){const lbl=f===hoy?'hoy':(ymd(new Date(Date.now()+864e5))===f?'mañana':DIAS[d.getDay()].toLowerCase()+' '+d.getDate());$('#next-free-t').textContent=`Próximo turno libre: ${lbl} a las ${all[0]}`;$('#next-free').hidden=false;return}}})();
 document.querySelectorAll('.stamps').forEach(el=>{const n=+localStorageGet('lavis_sellos_demo')||0;[...el.children].forEach((i,k)=>i.classList.toggle('on',k<n))});
 })();
 </script>
