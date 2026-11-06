@@ -143,10 +143,10 @@ strong { font-weight: 600; color: var(--ink); }
 
 /* ===== Botón flotante de pedido ===== */
 .fab { position: fixed; z-index: 30; right: calc(clamp(16px, 3vw, 32px) + env(safe-area-inset-right, 0px)); bottom: calc(clamp(16px, 3vw, 32px) + env(safe-area-inset-bottom, 0px));
-  display: flex; align-items: center; gap: 10px; padding: 14px 22px 14px 18px; border-radius: 999px; background: var(--clay); color: var(--white);
-  font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; box-shadow: 0 10px 30px rgba(156, 21, 21, .25);
+  display: flex; align-items: center; gap: 7px; padding: 9px 15px 9px 12px; border-radius: 999px; background: var(--clay); color: var(--white);
+  font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
   opacity: 0; transform: translateY(16px) scale(.96); pointer-events: none; transition: opacity .5s var(--ease), transform .5s var(--ease), background .3s; }
-.fab svg { width: 18px; height: 18px; flex: none; }
+.fab svg { width: 14px; height: 14px; flex: none; }
 .fab--on { opacity: 1; transform: none; pointer-events: auto; }
 .fab:hover { background: var(--ink); }
 .fab:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
@@ -183,5 +183,4 @@ strong { font-weight: 600; color: var(--ink); }
   .contacto__cols { grid-template-columns: 1fr 1fr; }
   .contacto__title { margin-left: 0; }
   .ficha img { aspect-ratio: 1; max-height: 50vh; }
-  .fab { padding: 13px 18px 13px 15px; }
 }
