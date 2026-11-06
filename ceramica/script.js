@@ -60,7 +60,8 @@ function fitWordmarks() {
     el.style.fontSize = '100px';
     const r = document.createRange(); r.selectNodeContents(el);
     const ratio = el.clientWidth / r.getBoundingClientRect().width;
-    el.style.fontSize = Math.floor(100 * ratio * 0.98) + 'px';
+    const max = parseFloat(getComputedStyle(el).getPropertyValue('--wm-max')) || Infinity;
+    el.style.fontSize = Math.min(Math.floor(100 * ratio * 0.98), max) + 'px';
   });
 }
 document.fonts.ready.then(fitWordmarks);
