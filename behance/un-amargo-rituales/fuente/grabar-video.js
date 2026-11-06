@@ -8,8 +8,8 @@ const SLOW = 0.15;
   const b = await chromium.launch({ args: ['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader'] });
   const tag = `${name}_${mode}${extra ? '_' + extra : ''}`;
   const size = mode === 'mob' ? { width: 390, height: 844 } : { width: 1440, height: 900 };
-  const base = mode === 'mob' ? { ...devices['iPhone 13'] } : { viewport: size };
-  const ctx = await b.newContext({ ...base, recordVideo: { dir: path.join(__dirname, 'rec', tag), size } });
+  const base = mode === 'mob' ? { ...devices['iPhone 13'], viewport: { width: 390, height: 844 } } : { viewport: size };
+  const ctx = await b.newContext({ ...base, recordVideo: { dir: path.join(__dirname, 'rec2', tag), size } });
   await ctx.addInitScript((SLOW) => {
     const pn = performance.now.bind(performance), t0 = pn();
     performance.now = () => t0 + (pn() - t0) * SLOW;
