@@ -8,7 +8,7 @@ const PIEZAS = [
   { nombre: "Jarra Musgo",      medidas: "a completar", material: "Gres, esmalte verde moteado, base sin esmaltar", precio: "", estado: "disponible", foto: "img/jarra-musgo.webp" },
   { nombre: "Cuenco Líneas",    medidas: "a completar", material: "Gres blanco mate, esgrafiado a mano",            precio: "", estado: "disponible", foto: "img/cuenco-lineas.webp" },
   { nombre: "Porta sahumerio",  medidas: "a completar", material: "Bandeja esmaltada verde oliva, soporte ámbar",  precio: "", estado: "disponible", foto: "img/porta-sahumerio.webp" },
-  { nombre: "Set de runas",     medidas: "a completar", material: "Terracota pulida, runas talladas y entintadas", precio: "", estado: "disponible", foto: "img/runas.webp" },
+  { nombre: "Abrazo",           medidas: "a completar", material: "Gres texturado, sin esmaltar, piezas encastrables", precio: "", estado: "disponible", foto: "img/abrazo.webp" },
 ];
 
 /* Datos de contacto: cambiá estos valores */

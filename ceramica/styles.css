@@ -1,6 +1,6 @@
 /* ===== Tokens ===== */
 :root {
-  --bg: #f5f3ef;
+  --bg: #ffffff;
   --ink: #141414;
   --clay: #9a3412;        /* terracota principal */
   --clay-dark: #7c2a0e;
@@ -51,8 +51,8 @@ em { font-style: normal; color: var(--clay); }
 /* ===== Hero ===== */
 .hero { padding: 24px var(--gutter) clamp(72px, 10vw, 120px); }
 .hero__meta { display: flex; justify-content: space-between; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--clay); margin-bottom: 24px; flex-wrap: wrap; gap: 8px; }
-.hero__row { display: grid; grid-template-columns: 1fr 1.4fr; gap: clamp(24px, 5vw, 80px); align-items: end; margin-top: clamp(40px, 6vw, 80px); }
-.hero__img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+.hero__img { width: 100%; height: auto; margin-top: clamp(16px, 3vw, 40px); }
+.hero__row { max-width: 820px; margin: clamp(24px, 4vw, 56px) 0 0 auto; }
 .manifesto { font: 500 clamp(20px, 2.6vw, 34px)/1.15 var(--sans); text-transform: uppercase; }
 
 /* ===== Split (filosofía) ===== */
@@ -82,7 +82,7 @@ em { font-style: normal; color: var(--clay); }
 .galeria__grid { display: grid; grid-template-columns: repeat(var(--cols, 3), 1fr); gap: clamp(12px, 2vw, 24px); }
 .pieza { cursor: pointer; text-align: left; background: none; border: 0; font: inherit; color: inherit; }
 .pieza:nth-child(3n+2) { margin-top: clamp(0px, 4vw, 56px); }
-.pieza__img { overflow: hidden; aspect-ratio: 4/5; background: #e5e2dd; }
+.pieza__img { overflow: hidden; aspect-ratio: 4/5; background: #fff; }
 .pieza__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease; }
 .pieza:hover .pieza__img img { transform: scale(1.05); }
 .pieza__meta { display: flex; justify-content: space-between; gap: 8px; margin-top: 10px; font-size: 12px; }
