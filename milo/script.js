@@ -30,6 +30,8 @@
   var avisoEl = $("[data-aviso]");
   var avisoTimer;
   function avisar(texto) {
+    // en el celular la barra de pedido ya muestra lo agregado: no tapamos la pantalla
+    if (window.matchMedia("(max-width: 720px)").matches) return;
     avisoEl.textContent = texto;
     avisoEl.classList.add("visible");
     clearTimeout(avisoTimer);
@@ -153,7 +155,8 @@
   var contProductos = $("#productos");
   var sinResultados = $("[data-sin-resultados]");
   var estado = { cat: "todos", texto: "", marca: "" };
-  var POR_PAGINA = 24;
+  var esCelular = window.matchMedia("(max-width: 720px)").matches;
+  var POR_PAGINA = esCelular ? 12 : 24;
   var mostrar = POR_PAGINA;
   var btnVerMas = $("[data-ver-mas]");
   var cuentaProductos = $("[data-cuenta-productos]");
@@ -372,6 +375,13 @@
     $("[data-subtotal]").textContent = pesos(sub);
     $("[data-envio]").textContent = env === 0 ? "Sin costo" : pesos(env);
     $("[data-total]").textContent = pesos(sub + env);
+
+    // barra fija de pedido (celular)
+    var barra = $("[data-barra]");
+    barra.hidden = cant === 0;
+    document.body.classList.toggle("con-pedido", cant > 0);
+    $("[data-barra-cant]").textContent = cant + (cant === 1 ? " producto" : " productos");
+    $("[data-barra-total]").textContent = pesos(sub + env);
 
     var falta = CONFIG.envioGratisDesde - sub;
     $("[data-envio-texto]").textContent = falta > 0
