@@ -7,11 +7,20 @@
 const CONFIG = {
   // WhatsApp en formato internacional, sin + ni espacios (097 051 833)
   whatsapp: "59897051833",
-  instagram: "miloraciones" /* TODO: confirmar usuario */,
+  instagram: "milo.raciones",
   email: "infomiloraciones@gmail.com",
   // El envío es siempre gratis (sin mínimo de compra).
   // Hora límite para recibir el pedido en el día
-  horaCorte: "14 h"
+  horaCorte: "14 h",
+
+  // Tienda física (sección "Dónde estamos" con Google Maps).
+  // TODO: poner la dirección real (calle y número). Mientras esté vacía,
+  // el mapa muestra Ciudad de la Costa y el texto dice "Dirección a confirmar".
+  tienda: {
+    direccion: "",
+    localidad: "Ciudad de la Costa, Canelones, Uruguay",
+    horario: "Lunes a sábado, 9 a 20 h."
+  }
 };
 
 /* ---------------------------------------------------------

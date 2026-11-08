@@ -240,15 +240,11 @@ select {
 
 /* ── Plaquit ───────────────────────────────────────────── */
 .plaquit { display: grid; grid-template-columns: .95fr 1.05fr; gap: 40px; align-items: center; padding: 28px; border-radius: var(--r-xl); }
-.plaquit-media { position: relative; background: var(--turquesa); border-radius: var(--r-lg); padding: 32px 24px; display: flex; justify-content: center; min-height: 100%; }
-.plaquit-telefono { position: relative; width: min(270px, 70%); aspect-ratio: 692 / 866; border-radius: 26px; overflow: hidden; background: #0d1a1a; box-shadow: 0 20px 40px -18px rgba(0, 40, 40, .6); }
-.plaquit-telefono video { width: 100%; height: 100%; object-fit: cover; }
 .plaquit-play {
   position: absolute; inset: 0; margin: auto; width: 64px; height: 64px; border-radius: 50%;
   background: var(--blanco); color: var(--turquesa-osc); display: grid; place-items: center; box-shadow: var(--sombra);
 }
 .plaquit-play svg { width: 26px; height: 26px; margin-left: 3px; }
-.plaquit-chapa { position: absolute; right: 14px; bottom: 14px; width: 112px; height: 112px; border-radius: 50%; object-fit: cover; border: 4px solid var(--blanco); box-shadow: var(--sombra); background: var(--turquesa); }
 .plaquit-info h2 { font-size: clamp(24px, 3vw, 34px); margin-bottom: 12px; }
 .plaquit-bajada { color: var(--gris); font-size: 16px; margin-bottom: 22px; }
 .plaquit-bajada strong { color: var(--tinta); }
@@ -260,6 +256,61 @@ select {
 .plaquit-pasos li { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; padding: 10px 12px; background: var(--blanco); border-radius: var(--r-sm); }
 .plaquit-pasos span { width: 26px; height: 26px; border-radius: 50%; background: var(--negro); color: var(--blanco); font-weight: 800; font-size: 13px; display: grid; place-items: center; flex: none; }
 .plaquit-botones { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* Plaquit: tarjeta "perfil de la mascota" */
+.mascota { background: var(--turquesa); border-radius: var(--r-lg); overflow: hidden; display: flex; flex-direction: column; }
+.mascota-foto { position: relative; aspect-ratio: 1 / .9; }
+.mascota-foto img { width: 100%; height: 100%; object-fit: cover; }
+.mascota-foto img.sin-perro { object-fit: contain; padding: 8% 10% 16%; }
+.mascota-avatar { position: absolute; top: 16px; left: 16px; width: 48px; height: 48px; border-radius: 50%; background: var(--blanco); color: var(--negro); display: grid; place-items: center; }
+.mascota-estado {
+  position: absolute; left: 16px; bottom: 30px; display: inline-flex; align-items: center; gap: 8px;
+  background: var(--blanco); color: var(--negro); font-weight: 700; font-size: 14px; padding: 9px 16px 9px 10px; border-radius: 999px;
+}
+.mascota-estado .ico { color: var(--turquesa-btn); }
+.mascota-hoja { position: relative; margin-top: -18px; background: var(--superficie); border-radius: var(--r-lg) var(--r-lg) 0 0; padding: 18px 16px 16px; display: grid; gap: 14px; flex: 1; }
+.mascota-hoja::before { content: ""; position: absolute; top: 8px; left: 50%; width: 36px; height: 4px; margin-left: -18px; border-radius: 4px; background: #CDD5D5; }
+.mascota-acciones { display: flex; gap: 10px; }
+.accion { width: 50px; height: 50px; border-radius: 50%; background: var(--blanco); color: var(--negro); display: grid; place-items: center; }
+.accion-activa { background: var(--turquesa); color: var(--blanco); }
+.mascota-tarjetas { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.mini { background: var(--blanco); border-radius: var(--r-md); padding: 12px; display: grid; gap: 8px; align-content: start; }
+.mini-titulo { font-size: 13px; font-weight: 700; }
+.mini img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--r-sm); background: var(--turquesa); }
+.mini-video-caja { position: relative; aspect-ratio: 1; border-radius: var(--r-sm); overflow: hidden; background: var(--negro); }
+.mini-video-caja video { width: 100%; height: 100%; object-fit: cover; }
+.mini-video-caja .plaquit-play { width: 48px; height: 48px; }
+
+/* ── Dónde estamos (mapa + panel tipo tracking) ────────── */
+.local { display: grid; grid-template-columns: 1.15fr .85fr; gap: 16px; }
+.local-mapa { position: relative; min-height: 420px; border-radius: var(--r-xl); overflow: hidden; background: var(--superficie); }
+.local-mapa iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: grayscale(.35) contrast(1.02); }
+.local-mapa-abrir {
+  position: absolute; left: 14px; bottom: 30px; display: inline-flex; align-items: center; gap: 8px;
+  background: var(--blanco); color: var(--negro); font-weight: 700; font-size: 14px; padding: 10px 16px; border-radius: 999px; text-decoration: none;
+  box-shadow: 0 6px 18px -8px rgba(0,0,0,.35);
+}
+.local-panel { display: grid; gap: 12px; align-content: start; }
+.local-tarjeta { display: flex; align-items: center; gap: 12px; background: var(--negro); color: var(--blanco); border-radius: var(--r-lg); padding: 14px; }
+.local-logo { width: 52px; height: 52px; padding: 10px 7px; border-radius: 50%; background: var(--turquesa); object-fit: contain; flex: none; }
+.local-datos { flex: 1; min-width: 0; }
+.local-nombre { font-weight: 800; font-size: 15px; }
+.local-dir { font-size: 13px; color: #AEB6B6; }
+.local-btn { width: 44px; height: 44px; border-radius: 50%; background: var(--negro-2); color: var(--turquesa); display: grid; place-items: center; flex: none; }
+.local-btn-wa { background: var(--turquesa-btn); color: var(--blanco); }
+.local-pasos { background: var(--superficie); border-radius: var(--r-lg); padding: 6px 16px; }
+.local-paso { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; }
+.local-paso + .local-paso { border-top: 1px solid var(--linea); }
+.local-paso-ico { color: var(--turquesa-btn); padding-top: 2px; }
+.local-paso strong { display: block; font-size: 14.5px; }
+.local-paso p { font-size: 13px; color: var(--gris); }
+.cobertura { background: var(--superficie); border-radius: var(--r-lg); padding: 14px 16px; }
+.cobertura-cab, .cobertura-pie { display: flex; justify-content: space-between; font-size: 13px; }
+.cobertura-cab { font-weight: 700; }
+.cobertura-pie { color: var(--gris); }
+.cobertura-barra { position: relative; height: 6px; margin: 14px 0; border-radius: 999px; background: linear-gradient(90deg, var(--turquesa) 0 100%); }
+.cobertura-milo { position: absolute; left: 38%; top: 50%; transform: translate(-50%, -50%); width: 32px; height: 32px; border-radius: 50%; background: var(--negro); color: var(--turquesa); display: grid; place-items: center; border: 3px solid var(--superficie); }
+.cobertura-milo .ico { width: 16px; height: 16px; }
 
 /* ── Pasos ─────────────────────────────────────────────── */
 .pasos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
@@ -411,7 +462,8 @@ select {
   .header-acciones { margin-left: auto; }
   .hero { grid-template-columns: 1fr; padding: 32px; }
   .hero-flyer { justify-self: start; max-width: 420px; }
-  .plaquit, .sobre-in, .seccion-calc .calc-in { grid-template-columns: 1fr; }
+  .plaquit, .sobre-in, .seccion-calc .calc-in, .local { grid-template-columns: 1fr; }
+  .local-mapa { min-height: 320px; }
   .sobre-in { padding: 18px; }
   .envios-layout { grid-template-columns: 1fr; }
   .envios-flyer { max-width: 420px; }
@@ -461,9 +513,9 @@ select {
   .btn-agregar { width: 40px; height: 40px; }
 
   .plaquit { padding: 12px; gap: 22px; border-radius: 28px; }
-  .plaquit-media { padding: 24px 16px; }
-  .plaquit-chapa { width: 84px; height: 84px; right: 10px; bottom: 10px; }
   .plaquit-info { padding: 0 8px 10px; }
+  .mascota-estado { bottom: 28px; font-size: 13px; }
+  .local-mapa { min-height: 260px; border-radius: 28px; }
   .plaquit-pasos { grid-template-columns: 1fr; }
   .plaquit-botones { display: grid; grid-template-columns: 1fr; }
 

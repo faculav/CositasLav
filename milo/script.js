@@ -493,23 +493,47 @@
     video.addEventListener("pause", function () { if (!video.ended) return; play.hidden = false; });
   }
 
+  /* ---------- tienda en Google Maps ---------- */
+  var tienda = CONFIG.tienda || {};
+  var lugar = (tienda.direccion ? tienda.direccion + ", " : "") + (tienda.localidad || "Ciudad de la Costa, Uruguay");
+  var mapa = $("[data-mapa]");
+  if (mapa) mapa.src = "https://www.google.com/maps?q=" + encodeURIComponent(lugar) + "&z=" + (tienda.direccion ? 16 : 12) + "&output=embed";
+  $$("[data-mapa-link]").forEach(function (a) {
+    a.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(lugar);
+  });
+  $$("[data-tienda-direccion]").forEach(function (el) {
+    el.textContent = tienda.direccion ? tienda.direccion : "Dirección a confirmar · " + (tienda.localidad || "").split(",")[0];
+  });
+  $$("[data-tienda-horario]").forEach(function (el) { if (tienda.horario) el.textContent = tienda.horario; });
+
+  /* ---------- foto del perro de Plaquit (si falta, se muestra la chapita) ---------- */
+  $$("[data-foto-perro]").forEach(function (img) {
+    function sinFoto() { img.removeEventListener("error", sinFoto); img.src = "images/plaquit-chapa.jpg"; img.classList.add("sin-perro"); }
+    img.addEventListener("error", sinFoto);
+    if (img.complete && img.naturalWidth === 0) sinFoto();
+  });
+
   /* ---------- barra inferior: marcar la sección activa ---------- */
   var itemsNav = $$(".nav-inferior a[href^='#']");
   function marcarNav(id) {
     itemsNav.forEach(function (a) { a.classList.toggle("activo", a.getAttribute("href") === "#" + id); });
   }
-  marcarNav("inicio");
-  if ("IntersectionObserver" in window) {
-    var secciones = ["tienda", "envios"].map(function (id) { return document.getElementById(id); }).filter(Boolean);
-    var visibles = {};
-    var obs = new IntersectionObserver(function (entradas) {
-      entradas.forEach(function (e) { visibles[e.target.id] = e.isIntersecting; });
-      var actual = secciones.filter(function (sec) { return visibles[sec.id]; }).map(function (sec) { return sec.id; }).pop();
-      var tienda = document.getElementById("tienda");
-      marcarNav(actual || (tienda && window.scrollY + innerHeight / 2 < tienda.offsetTop ? "inicio" : ""));
-    }, { rootMargin: "-45% 0px -45% 0px" });
-    secciones.forEach(function (sec) { obs.observe(sec); });
+  var seccionesNav = ["tienda", "envios"].map(function (id) { return document.getElementById(id); }).filter(Boolean);
+  var pendiente = false;
+  function actualizarNav() {
+    pendiente = false;
+    var medio = window.scrollY + innerHeight / 2;
+    var actual = "";
+    seccionesNav.forEach(function (sec) {
+      if (medio >= sec.offsetTop && medio < sec.offsetTop + sec.offsetHeight) actual = sec.id;
+    });
+    if (!actual && seccionesNav[0] && medio < seccionesNav[0].offsetTop) actual = "inicio";
+    marcarNav(actual);
   }
+  window.addEventListener("scroll", function () {
+    if (!pendiente) { pendiente = true; requestAnimationFrame(actualizarNav); }
+  }, { passive: true });
+  actualizarNav();
 
   /* ---------- botón buscar del header ---------- */
   $$("[data-ir-buscar]").forEach(function (b) {

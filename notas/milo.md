@@ -40,10 +40,17 @@ Referencia de estructura: altoqueraciones.com (diseño y textos propios).
 - Sección propia (`#plaquit`) con video (`images/plaquit-video.mp4`, comprimido, sin audio, se reproduce al tocar) y foto de las chapitas.
 - Producto `plaquit` en `productos.js` con `precio: null` → se muestra "Consultar" y en el pedido "precio a confirmar".
 
+## Dónde estamos (mapa)
+- Sección `#tienda-fisica`: Google Maps embebido + tarjeta negra con la tienda + pasos + barra de cobertura Carrasco → El Pinar.
+- La dirección se carga en `CONFIG.tienda.direccion` (productos.js). Vacía = mapa de Ciudad de la Costa y "Dirección a confirmar".
+- No se pudo leer el Instagram (bloquea el acceso automático): falta la dirección real.
+
 ## Pendientes
+- [ ] Dirección de la tienda en `CONFIG.tienda.direccion`.
+- [ ] Foto de un perro (ideal: Milo) con la chapita: `images/plaquit-perro.jpg` (cuadrada, ~900 px).
 - [ ] Precio de Plaquit (en `productos.js`).
 - [x] WhatsApp (`097 051 833`) y email (`infomiloraciones@gmail.com`) cargados.
-- [ ] Confirmar usuario de Instagram (hoy `miloraciones`).
+- [x] Instagram: `milo.raciones`.
 - [x] Alimentos cargados desde Distribuidora López (precios de la distribuidora, sin margen).
 - [ ] Definir margen sobre los precios de la distribuidora (`MARGEN` en el importador).
 - [ ] Revisar fotos: algunas muestran regalos/promos de la distribuidora (contenedores, galletitas).
