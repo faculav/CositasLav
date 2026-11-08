@@ -22,14 +22,15 @@ Referencia de estructura: altoqueraciones.com (diseño y textos propios).
   (`cd milo && python3 herramientas/importar_lopez.py`). Tiene `MARGEN` para sumar un % a los precios.
 - `milo/images/alimentos/` — fotos de los alimentos (bajadas por el importador).
 - `milo/productos.js` — contenido editable: `CONFIG` (WhatsApp, Instagram,
-  email, mínimo para envío sin costo, costo de envío, hora de corte), `ZONAS` y `PRODUCTOS`.
+  email, hora de corte), `ZONAS` y `PRODUCTOS`.
 - `milo/images/LEEME.txt` — nombres exactos de fotos y logos que espera la web.
 
 ## Decisiones
 - Cada producto tiene varias presentaciones (kg o tamaño) con su precio; si tiene `kg` muestra el precio por kilo.
 - El carrito arma un mensaje de WhatsApp con productos, total, envío, nombre, barrio, dirección y forma de pago.
-- Envío sin costo desde $1.500; si no, $120 (editable en `CONFIG`).
-- Ciudad de la Costa: lunes a sábado, en el día si se pide antes de las 14 h. Alrededores: días fijos por zona.
+- Envío siempre gratis, sin mínimo de compra.
+- Carrasco y Ciudad de la Costa: lunes a sábado, en el día si se pide antes de las 14 h. Alrededores (Paso Carrasco, Colonia Nicolich): días fijos.
+- No se reparte después del peaje (Neptunia, Pinamar, Salinas, etc.).
 - Estética tipo app (fondo gris suave, tarjetas blancas redondeadas, categorías en círculos con íconos, "+" naranja en cada producto, barra de navegación inferior en el celular). Sin animaciones.
 - Antes: botones blancos con letra del color de fondo (turquesa), o con borde y sin relleno sobre fondo blanco.
 - Logo grande en blanco en la portada; en el header, logo turquesa con la bajada "Raciones & Accesorios".
@@ -48,7 +49,7 @@ Referencia de estructura: altoqueraciones.com (diseño y textos propios).
 - [ ] Revisar fotos: algunas muestran regalos/promos de la distribuidora (contenedores, galletitas).
 - [ ] Confirmar permiso para usar las fotos de la distribuidora.
 - [ ] Snacks, antipulgas, arena y accesorios siguen siendo de ejemplo.
-- [ ] Confirmar zonas, días de reparto, mínimo de envío gratis, costo de envío y hora de corte.
+- [ ] Confirmar días de reparto y hora de corte.
 - [x] Logo vectorial y flyers en alta.
 - [ ] 68 fotos de alimentos vienen chicas desde la distribuidora (< 400 px): conseguir mejores si se puede.
 - [ ] Fotos de productos, logos de marcas y foto de Milo (`milo.jpg`).

@@ -81,8 +81,6 @@
     a.href = "mailto:" + CONFIG.email;
     a.textContent = CONFIG.email;
   });
-  $$("[data-envio-gratis]").forEach(function (el) { el.textContent = pesos(CONFIG.envioGratisDesde); });
-  $$("[data-costo-envio]").forEach(function (el) { el.textContent = pesos(CONFIG.costoEnvio); });
   $$("[data-hora-corte]").forEach(function (el) { el.textContent = CONFIG.horaCorte; });
   $$("[data-anio]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
@@ -111,7 +109,7 @@
   });
 
   $$("[data-select-zona]").forEach(function (sel) {
-    var grupos = { costa: "Ciudad de la Costa", cerca: "Alrededores" };
+    var grupos = { costa: "Carrasco y Ciudad de la Costa", cerca: "Alrededores" };
     Object.keys(grupos).forEach(function (tipo) {
       var og = document.createElement("optgroup");
       og.label = grupos[tipo];
@@ -337,7 +335,7 @@
   function subtotal() {
     return pedido.reduce(function (s, it) { return s + (producto(it.id).opciones[it.op].precio || 0) * it.cant; }, 0);
   }
-  function costoEnvio(sub) { return sub >= CONFIG.envioGratisDesde ? 0 : CONFIG.costoEnvio; }
+  function costoEnvio() { return 0; } // el envío es siempre gratis
 
   var ulItems = $("[data-carrito-items]");
   function pintarPedido() {
@@ -380,16 +378,12 @@
     var sub = subtotal();
     var env = costoEnvio(sub);
     $("[data-subtotal]").textContent = pesos(sub);
-    $("[data-envio]").textContent = env === 0 ? "Sin costo" : pesos(env);
+    $("[data-envio]").textContent = "Gratis";
     $("[data-total]").textContent = pesos(sub + env);
 
     document.body.classList.toggle("con-pedido", cant > 0);
 
-    var falta = CONFIG.envioGratisDesde - sub;
-    $("[data-envio-texto]").textContent = falta > 0
-      ? "Te faltan " + pesos(falta) + " para el envío sin costo"
-      : "Tu envío es sin costo";
-    $("[data-envio-progreso]").style.width = Math.min(100, (sub / CONFIG.envioGratisDesde) * 100) + "%";
+    $("[data-envio-texto]").textContent = "Envío gratis a tu casa";
   }
 
   // abrir / cerrar
@@ -460,7 +454,7 @@
     });
     lineas.push("");
     lineas.push("Subtotal: " + pesos(sub));
-    lineas.push("Envío: " + (env === 0 ? "sin costo" : pesos(env)));
+    lineas.push("Envío: gratis");
     lineas.push("*Total: " + pesos(sub + env) + "*");
     lineas.push("");
     lineas.push("Nombre: " + form.nombre.value.trim());

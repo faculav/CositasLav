@@ -9,10 +9,7 @@ const CONFIG = {
   whatsapp: "59897051833",
   instagram: "miloraciones" /* TODO: confirmar usuario */,
   email: "infomiloraciones@gmail.com",
-  // Compra mínima para envío sin costo (en pesos)
-  envioGratisDesde: 1500,
-  // Costo de envío cuando no se llega al mínimo
-  costoEnvio: 120,
+  // El envío es siempre gratis (sin mínimo de compra).
   // Hora límite para recibir el pedido en el día
   horaCorte: "14 h"
 };
@@ -21,10 +18,12 @@ const CONFIG = {
    ZONAS DE ENVÍO
    zona    : nombre del barrio / localidad
    dias    : días de reparto
-   tipo    : "costa" (Ciudad de la Costa, entrega en el día)
+   tipo    : "costa" (Carrasco y Ciudad de la Costa, entrega en el día)
              "cerca" (alrededores, entrega en 24/48 h)
+   Solo zonas de este lado del peaje.
    --------------------------------------------------------- */
 const ZONAS = [
+  { zona: "Carrasco",              dias: "Lunes a sábado", tipo: "costa" },
   { zona: "Barra de Carrasco",     dias: "Lunes a sábado", tipo: "costa" },
   { zona: "Parque de Carrasco",    dias: "Lunes a sábado", tipo: "costa" },
   { zona: "San José de Carrasco",  dias: "Lunes a sábado", tipo: "costa" },
@@ -40,11 +39,8 @@ const ZONAS = [
   { zona: "El Pinar",              dias: "Lunes a sábado", tipo: "costa" },
   { zona: "Pinar Norte",           dias: "Lunes a sábado", tipo: "costa" },
   { zona: "Paso Carrasco",         dias: "Martes, jueves y sábado", tipo: "cerca" },
-  { zona: "Colonia Nicolich",      dias: "Martes, jueves y sábado", tipo: "cerca" },
-  { zona: "Carrasco (Montevideo)", dias: "Martes, jueves y sábado", tipo: "cerca" },
-  { zona: "Neptunia",              dias: "Miércoles y sábado",      tipo: "cerca" },
-  { zona: "Pinamar",               dias: "Miércoles y sábado",      tipo: "cerca" },
-  { zona: "Salinas",               dias: "Miércoles y sábado",      tipo: "cerca" }
+  { zona: "Colonia Nicolich",      dias: "Martes, jueves y sábado", tipo: "cerca" }
+  // No llegamos a localidades después del peaje (Neptunia, Pinamar, Salinas, etc.)
 ];
 
 /* ---------------------------------------------------------
