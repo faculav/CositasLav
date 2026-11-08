@@ -30,11 +30,17 @@ Referencia de estructura: altoqueraciones.com (diseño y textos propios).
 - El carrito arma un mensaje de WhatsApp con productos, total, envío, nombre, barrio, dirección y forma de pago.
 - Envío sin costo desde $1.500; si no, $120 (editable en `CONFIG`).
 - Ciudad de la Costa: lunes a sábado, en el día si se pide antes de las 14 h. Alrededores: días fijos por zona.
-- Estilo minimalista y sin animaciones: botones blancos con letra del color de fondo (turquesa), o con borde y sin relleno sobre fondo blanco.
+- Estética tipo app (fondo gris suave, tarjetas blancas redondeadas, categorías en círculos con íconos, "+" naranja en cada producto, barra de navegación inferior en el celular). Sin animaciones.
+- Antes: botones blancos con letra del color de fondo (turquesa), o con borde y sin relleno sobre fondo blanco.
 - Logo grande en blanco en la portada; en el header, logo turquesa con la bajada "Raciones & Accesorios".
 - Si falta una foto, se muestra un recuadro liso con el nombre de la marca; si falta un logo de marca, se muestra el nombre.
 
+## Plaquit (chapita QR)
+- Sección propia (`#plaquit`) con video (`images/plaquit-video.mp4`, comprimido, sin audio, se reproduce al tocar) y foto de las chapitas.
+- Producto `plaquit` en `productos.js` con `precio: null` → se muestra "Consultar" y en el pedido "precio a confirmar".
+
 ## Pendientes
+- [ ] Precio de Plaquit (en `productos.js`).
 - [x] WhatsApp (`097 051 833`) y email (`infomiloraciones@gmail.com`) cargados.
 - [ ] Confirmar usuario de Instagram (hoy `miloraciones`).
 - [x] Alimentos cargados desde Distribuidora López (precios de la distribuidora, sin margen).

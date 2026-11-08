@@ -9,6 +9,8 @@
   var $$ = function (sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); };
 
   /* ---------- utilidades ---------- */
+  function precioTxt(n) { return n == null ? "A confirmar" : pesos(n); }
+
   function pesos(n) {
     return "$ " + Math.round(n).toLocaleString("es-UY");
   }
@@ -30,7 +32,7 @@
   var avisoEl = $("[data-aviso]");
   var avisoTimer;
   function avisar(texto) {
-    // en el celular la barra de pedido ya muestra lo agregado: no tapamos la pantalla
+    // en el celular el contador de la barra inferior ya muestra lo agregado: no tapamos la pantalla
     if (window.matchMedia("(max-width: 720px)").matches) return;
     avisoEl.textContent = texto;
     avisoEl.classList.add("visible");
@@ -184,6 +186,9 @@
     listaMarcas.appendChild(li);
   });
 
+  var ICONO_MAS = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>';
+  var ICONO_OK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
   function fotoDe(p) { return p.img || ("images/" + p.id + ".jpg"); }
 
   function claseTag(tag) { return "tag-" + slug(tag); }
@@ -212,8 +217,8 @@
         opciones +
         '<div class="producto-pie">' +
           '<p class="precio" data-precio></p>' +
-          '<button type="button" class="btn-agregar" data-agregar' + (sinStock ? " disabled" : "") + ">" +
-            (sinStock ? "Sin stock" : '<span aria-hidden="true">+</span> Agregar') +
+          '<button type="button" class="btn-agregar" data-agregar aria-label="Agregar ' + escapar(p.nombre) + ' a mi pedido"' + (sinStock ? " disabled" : "") + ">" +
+            ICONO_MAS +
           "</button>" +
         "</div>" +
       "</div>";
@@ -225,8 +230,8 @@
     var elegido = 0;
     function pintarPrecio() {
       var o = p.opciones[elegido];
-      $("[data-precio]", art).innerHTML = pesos(o.precio) +
-        (o.kg ? '<span class="precio-kg">' + porKilo(o.precio / o.kg) + "</span>" : "");
+      $("[data-precio]", art).innerHTML = (o.precio == null ? '<span class="precio-consultar">Consultar</span>' : pesos(o.precio)) +
+        (o.kg && o.precio != null ? '<span class="precio-kg">' + porKilo(o.precio / o.kg) + "</span>" : "");
     }
     pintarPrecio();
 
@@ -242,10 +247,10 @@
     btn.addEventListener("click", function () {
       agregar(p.id, elegido);
       btn.classList.add("listo");
-      btn.innerHTML = "✓ Agregado";
+      btn.innerHTML = ICONO_OK;
       setTimeout(function () {
         btn.classList.remove("listo");
-        btn.innerHTML = '<span aria-hidden="true">+</span> Agregar';
+        btn.innerHTML = ICONO_MAS;
       }, 1300);
     });
     return art;
@@ -324,21 +329,23 @@
     if (it) it.cant++; else pedido.push({ id: id, op: op, cant: 1 });
     guardar();
     pintarPedido();
+
     var p = producto(id);
     avisar("Agregaste " + p.nombre + " (" + p.opciones[op].etiqueta + ")");
   }
 
   function subtotal() {
-    return pedido.reduce(function (s, it) { return s + producto(it.id).opciones[it.op].precio * it.cant; }, 0);
+    return pedido.reduce(function (s, it) { return s + (producto(it.id).opciones[it.op].precio || 0) * it.cant; }, 0);
   }
   function costoEnvio(sub) { return sub >= CONFIG.envioGratisDesde ? 0 : CONFIG.costoEnvio; }
 
   var ulItems = $("[data-carrito-items]");
   function pintarPedido() {
     var cant = pedido.reduce(function (s, it) { return s + it.cant; }, 0);
-    var cuenta = $("[data-cuenta]");
-    cuenta.textContent = cant;
-    cuenta.hidden = cant === 0;
+    $$("[data-cuenta]").forEach(function (c) {
+      c.textContent = cant;
+      c.hidden = cant === 0;
+    });
 
     var vacio = pedido.length === 0;
     $("[data-carrito-vacio]").hidden = !vacio;
@@ -354,8 +361,8 @@
       li.className = "carrito-item";
       li.innerHTML =
         '<img alt="" />' +
-        '<div><p class="carrito-item-nombre">' + escapar(p.nombre) + '</p><p class="carrito-item-op">' + escapar(o.etiqueta) + " · " + pesos(o.precio) + "</p></div>" +
-        '<div class="carrito-item-der"><span class="carrito-item-precio">' + pesos(o.precio * it.cant) + "</span>" +
+        '<div><p class="carrito-item-nombre">' + escapar(p.nombre) + '</p><p class="carrito-item-op">' + escapar(o.etiqueta) + " · " + precioTxt(o.precio) + "</p></div>" +
+        '<div class="carrito-item-der"><span class="carrito-item-precio">' + (o.precio == null ? "A confirmar" : pesos(o.precio * it.cant)) + "</span>" +
           '<div class="cantidad"><button type="button" data-menos aria-label="Quitar uno">−</button><span>' + it.cant + '</span><button type="button" data-mas aria-label="Sumar uno">+</button></div>' +
         "</div>";
       var img = $("img", li);
@@ -376,12 +383,7 @@
     $("[data-envio]").textContent = env === 0 ? "Sin costo" : pesos(env);
     $("[data-total]").textContent = pesos(sub + env);
 
-    // barra fija de pedido (celular)
-    var barra = $("[data-barra]");
-    barra.hidden = cant === 0;
     document.body.classList.toggle("con-pedido", cant > 0);
-    $("[data-barra-cant]").textContent = cant + (cant === 1 ? " producto" : " productos");
-    $("[data-barra-total]").textContent = pesos(sub + env);
 
     var falta = CONFIG.envioGratisDesde - sub;
     $("[data-envio-texto]").textContent = falta > 0
@@ -454,7 +456,7 @@
     pedido.forEach(function (it) {
       var p = producto(it.id);
       var o = p.opciones[it.op];
-      lineas.push("• " + it.cant + " × " + p.nombre + " (" + o.etiqueta + ") — " + pesos(o.precio * it.cant));
+      lineas.push("• " + it.cant + " × " + p.nombre + " (" + o.etiqueta + ") — " + (o.precio == null ? "precio a confirmar" : pesos(o.precio * it.cant)));
     });
     lineas.push("");
     lineas.push("Subtotal: " + pesos(sub));
@@ -472,6 +474,38 @@
   });
 
   pintarPedido();
+
+  /* ---------- Plaquit ---------- */
+  $$("[data-agregar-id]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      if (!producto(b.dataset.agregarId)) return;
+      agregar(b.dataset.agregarId, 0);
+      var txt = b.innerHTML;
+      b.textContent = "¡Agregada a tu pedido!";
+      setTimeout(function () { b.innerHTML = txt; }, 1600);
+    });
+  });
+  $$("[data-whatsapp-plaquit]").forEach(function (a) {
+    a.href = linkWhatsapp("¡Hola Milo! Quiero saber más de la chapita Plaquit con QR para mi mascota.");
+  });
+  var video = $("[data-video-plaquit]");
+  var play = $("[data-play-plaquit]");
+  if (video && play) {
+    play.addEventListener("click", function () {
+      video.controls = true;
+      video.play();
+      play.hidden = true;
+    });
+    video.addEventListener("pause", function () { if (!video.ended) return; play.hidden = false; });
+  }
+
+  /* ---------- botón buscar del header ---------- */
+  $$("[data-ir-buscar]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      $("#tienda").scrollIntoView();
+      setTimeout(function () { $("[data-buscar]").focus(); }, 50);
+    });
+  });
 
   /* ---------- calculadora de duración ----------
      Energía de mantenimiento ≈ 70 × peso^0,75 kcal,

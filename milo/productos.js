@@ -105,6 +105,11 @@ const PRODUCTOS = (typeof ALIMENTOS !== "undefined" ? ALIMENTOS : []).concat([
     tag: null },
 
   // ── Accesorios ─────────────────────────────────────────
+  { id: "plaquit",            nombre: "Plaquit · Chapita QR de identificación", marca: "Plaquit", cat: "accesorios",
+    desc: "Perfil de tu mascota con un escaneo. Sin batería, sin apps",
+    // TODO: poner el precio real. Mientras sea null, la tarjeta dice "Consultar".
+    opciones: [ { etiqueta: "Chapita QR", precio: null } ],
+    tag: "Nuevo", img: "images/plaquit-chapa.jpg" },
   { id: "comedero-acero",     nombre: "Comedero de acero inoxidable",    marca: "Milo", cat: "accesorios",
     desc: "Base antideslizante, fácil de lavar",
     opciones: [ { etiqueta: "Chico", precio: 290 }, { etiqueta: "Mediano", precio: 390 }, { etiqueta: "Grande", precio: 490 } ],
