@@ -3,267 +3,190 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TIRRA — Cuero genuino hecho a mano en Uruguay</title>
+<title>TIRRA — Pieles hechas a mano en Uruguay</title>
 <meta name="description" content="TIRRA. Chalecos, collares, brazaletes y pulseras de cuero genuino, hechos a mano en Uruguay.">
-<meta property="og:title" content="TIRRA — Cuero genuino hecho a mano en Uruguay">
+<meta property="og:title" content="TIRRA — Pieles hechas a mano en Uruguay">
 <meta property="og:description" content="Chalecos, collares, brazaletes y pulseras de cuero genuino, hechos a mano en Uruguay.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="images/hero.jpg">
-<meta name="theme-color" content="#efe9df">
+<meta name="theme-color" content="#120e0b">
 <link rel="icon" href="images/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=23">
+<link rel="stylesheet" href="tirra.css?v=1">
 </head>
 <body>
 
-<!-- ============ PANTALLA DE CARGA ============ -->
-<div class="carga" id="carga" aria-hidden="true">
-  <img src="images/logo.png" alt="">
-  <span class="carga__num" id="cargaNum">0</span>
-</div>
-
-<!-- grano de película sobre toda la página -->
-<div class="grano" aria-hidden="true"></div>
-<!-- cursor propio (solo compu) -->
-<div class="cursor" id="cursor" aria-hidden="true"><span></span></div>
+<!-- =========================================================
+     TIRRA — "Pieles"
+     Versión 3 (principal). Las anteriores: v1.html y v2.html.
+     Datos de productos y contacto: productos.js
+     ========================================================= -->
 
 <!-- ============ HEADER ============ -->
 <header class="header" id="header">
+  <nav class="header__izq">
+    <button class="header__menu" id="burger" aria-label="Abrir menú" aria-expanded="false">Menú</button>
+    <a href="#coleccion">Colección</a>
+    <a href="#pieles">Pieles</a>
+    <a href="#taller">Taller</a>
+  </nav>
   <a class="logo" href="#top" aria-label="TIRRA — inicio">
-    <img class="logo__img" src="images/logo.png" alt="TIRRA" data-logo>
-    <span class="logo__marca">TIRRA</span>
+    <img class="logo__claro" src="images/logo-claro.png" alt="TIRRA">
+    <img class="logo__oscuro" src="images/logo.png" alt="">
   </a>
-  <div class="header__der">
-    <a class="header__link" href="#coleccion" data-cursor="Ver">Colección</a>
-    <button class="carrito-btn" id="carritoBtn" aria-label="Abrir carrito" data-cursor="Carrito">
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 8h14l-1.2 11.2a1 1 0 01-1 .8H7.2a1 1 0 01-1-.8L5 8z"/><path d="M9 8V6.5a3 3 0 016 0V8"/></svg>
-      <span class="carrito-btn__num" id="carritoNum">0</span>
-    </button>
-    <button class="burger" aria-label="Abrir menú" aria-expanded="false" id="burger">
-      <span class="burger__txt">Menú</span>
-      <span class="burger__lineas"><i></i><i></i></span>
-    </button>
-  </div>
+  <nav class="header__der">
+    <a href="#contacto">Contacto</a>
+    <button class="carrito-btn" id="carritoBtn" aria-label="Abrir carrito">Carrito <span id="carritoNum">(0)</span></button>
+  </nav>
 </header>
 
-<!-- ============ MENÚ ============ -->
+<!-- menú (celular y compu chica) -->
 <nav class="menu" id="menuMovil" aria-label="Menú">
-  <div class="menu__lista">
-    <a href="#top"><span>01</span>Inicio</a>
-    <a href="#pieza"><span>02</span>Pieza en 3D</a>
-    <a href="#categorias"><span>03</span>Categorías</a>
-    <a href="#coleccion"><span>04</span>Colección</a>
-    <a href="#cuero"><span>05</span>Nuestro cuero</a>
-    <a href="#contacto"><span>06</span>Contacto</a>
-  </div>
+  <a href="#coleccion">Colección</a>
+  <a href="#pieles">Pieles</a>
+  <a href="#taller">Taller</a>
+  <a href="#contacto">Contacto</a>
   <div class="menu__pie">
     <a data-ig href="#" target="_blank" rel="noopener">Instagram</a>
     <a data-whatsapp href="#" target="_blank" rel="noopener">WhatsApp</a>
-    <span>Montevideo, Uruguay</span>
   </div>
 </nav>
 
 <main id="top">
 
-<!-- ============ HERO: video ============ -->
-<section class="hero" id="hero">
-  <div class="hero__marco" id="heroMarco">
-    <!-- el video se elige según la pantalla (script.js): hero-720.mp4 en celu, hero.mp4 en compu -->
-    <video class="hero__video" id="heroVideo" muted loop playsinline autoplay preload="auto" poster="images/hero.jpg"
-           data-chico="images/hero-720.mp4" data-grande="images/hero.mp4"></video>
-    <div class="hero__velo"></div>
-  </div>
-  <div class="hero__contenido">
-    <p class="hero__kicker"><span>Taller uruguayo</span><span>Est. 2025</span></p>
-    <h1 class="hero__titulo" data-split>100% <strong>cuero</strong> genuino <strong>uruguayo</strong></h1>
+<!-- ============ PORTADA ============ -->
+<section class="hero">
+  <video class="hero__video" id="heroVideo" muted loop playsinline autoplay preload="auto" poster="images/hero.jpg"
+         data-chico="images/hero-720.mp4" data-grande="images/hero.mp4"></video>
+  <div class="hero__velo"></div>
+  <div class="hero__txt">
+    <h1 class="hero__titulo"><span>Pieles</span> <strong>de nuestra tierra</strong></h1>
     <div class="hero__pie">
-      <p>Piezas nobles, cortadas y cosidas a mano.<br>Pensadas para durar toda la vida.</p>
-      <a class="hero__scroll" href="#manifiesto" aria-label="Bajar"><span></span></a>
+      <p>Cuero genuino, cortado y cosido a mano en Montevideo.</p>
+      <a href="#coleccion" class="link-flecha">Ver colección <span>→</span></a>
     </div>
   </div>
 </section>
 
-<!-- ============ MANIFIESTO ============ -->
-<section class="manifiesto" id="manifiesto">
-  <p class="eti">(Tirra es tierra)</p>
-  <p class="manifiesto__txt" data-palabras>Elegimos cuero vacuno uruguayo de curtido natural. Cada pieza se corta, se bisela, se cose y se sella a mano. Por eso ninguna sale igual a la otra, y por eso dura.</p>
+<!-- ============ INTRO ============ -->
+<section class="intro">
+  <p class="eti">Tirra — Uruguay</p>
+  <p class="intro__txt"><strong>Piezas de cuero hechas una por una.</strong> Gamuza, cuero con pelo, grabados y estampas, trabajados a mano para durar toda la vida.</p>
 </section>
 
-<!-- ============ CINTA DE TEXTURAS DE CUERO (fotos de Pexels, ver images/LEEME.txt) ============
-     Se mueve hacia la izquierda y acelera con la velocidad del scroll. -->
-<div class="cinta" aria-hidden="true">
-  <div class="cinta__pista" id="cinta">
-    <img src="images/cinta-01-m.jpg" srcset="images/cinta-01-m.jpg 600w, images/cinta-01.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async"><img src="images/cinta-02-m.jpg" srcset="images/cinta-02-m.jpg 600w, images/cinta-02.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async"><img src="images/cinta-03-m.jpg" srcset="images/cinta-03-m.jpg 600w, images/cinta-03.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async"><img src="images/cinta-04-m.jpg" srcset="images/cinta-04-m.jpg 600w, images/cinta-04.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async"><img src="images/cinta-05-m.jpg" srcset="images/cinta-05-m.jpg 600w, images/cinta-05.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async"><img src="images/cinta-06-m.jpg" srcset="images/cinta-06-m.jpg 600w, images/cinta-06.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async"><img src="images/cinta-07-m.jpg" srcset="images/cinta-07-m.jpg 600w, images/cinta-07.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async"><img src="images/cinta-08-m.jpg" srcset="images/cinta-08-m.jpg 600w, images/cinta-08.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async"><img src="images/cinta-09-m.jpg" srcset="images/cinta-09-m.jpg 600w, images/cinta-09.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async">
-    <img src="images/cinta-01-m.jpg" srcset="images/cinta-01-m.jpg 600w, images/cinta-01.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async"><img src="images/cinta-02-m.jpg" srcset="images/cinta-02-m.jpg 600w, images/cinta-02.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async"><img src="images/cinta-03-m.jpg" srcset="images/cinta-03-m.jpg 600w, images/cinta-03.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async"><img src="images/cinta-04-m.jpg" srcset="images/cinta-04-m.jpg 600w, images/cinta-04.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async"><img src="images/cinta-05-m.jpg" srcset="images/cinta-05-m.jpg 600w, images/cinta-05.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async"><img src="images/cinta-06-m.jpg" srcset="images/cinta-06-m.jpg 600w, images/cinta-06.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async"><img src="images/cinta-07-m.jpg" srcset="images/cinta-07-m.jpg 600w, images/cinta-07.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async"><img src="images/cinta-08-m.jpg" srcset="images/cinta-08-m.jpg 600w, images/cinta-08.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async"><img src="images/cinta-09-m.jpg" srcset="images/cinta-09-m.jpg 600w, images/cinta-09.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async">
-    <img src="images/cinta-01-m.jpg" srcset="images/cinta-01-m.jpg 600w, images/cinta-01.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async"><img src="images/cinta-02-m.jpg" srcset="images/cinta-02-m.jpg 600w, images/cinta-02.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async"><img src="images/cinta-03-m.jpg" srcset="images/cinta-03-m.jpg 600w, images/cinta-03.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async"><img src="images/cinta-04-m.jpg" srcset="images/cinta-04-m.jpg 600w, images/cinta-04.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async"><img src="images/cinta-05-m.jpg" srcset="images/cinta-05-m.jpg 600w, images/cinta-05.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async"><img src="images/cinta-06-m.jpg" srcset="images/cinta-06-m.jpg 600w, images/cinta-06.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async"><img src="images/cinta-07-m.jpg" srcset="images/cinta-07-m.jpg 600w, images/cinta-07.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async"><img src="images/cinta-08-m.jpg" srcset="images/cinta-08-m.jpg 600w, images/cinta-08.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async"><img src="images/cinta-09-m.jpg" srcset="images/cinta-09-m.jpg 600w, images/cinta-09.jpg 1200w" sizes="(max-width:860px) 100px, 400px" alt="" loading="lazy" decoding="async">
+<!-- ============ PIELES (franjas que se abren) ============ -->
+<section class="pieles" id="pieles">
+  <div class="pieles__cabeza">
+    <p class="eti">Materiales</p>
+    <h2 class="titulo">Las <strong>pieles</strong></h2>
   </div>
-</div>
-
-<!-- ============ PIEZA EN 3D ============ -->
-<section class="pieza" id="pieza">
-  <div class="pieza__texto">
-    <p class="eti">(Pieza en 3D)</p>
-    <h2 class="titulo">Girala.<br><em>Sentí el cuero.</em></h2>
-    <p class="pieza__bajada">Arrastrá para mirar el brazalete desde todos los ángulos. Texturas reales de nuestras piezas.</p>
-    <div class="pieza__opciones" id="piezaOpciones">
-      <button class="is-activo" data-tex="origen" data-nombre="Brazalete Origen">Origen</button>
-      <button data-tex="brava" data-nombre="Brazalete Brava">Brava</button>
-      <button data-tex="sombra" data-nombre="Brazalete Sombra">Sombra</button>
-    </div>
-    <a class="btn" id="piezaBtn" data-whatsapp-pieza href="#" target="_blank" rel="noopener" data-cursor="Pedir">
-      <span>Consultar Brazalete Origen</span>
+  <div class="franjas" id="franjas">
+    <a class="franja is-abierta" href="#coleccion" data-ir="brazaletes">
+      <img src="images/piel-croco.jpg" alt="Textura de cuero croco" loading="lazy">
+      <div class="franja__txt"><span>01</span><h3>Croco</h3><p>Relieve profundo, brillo de noche.</p></div>
     </a>
-  </div>
-  <div class="pieza__escena" id="piezaEscena" data-cursor="Girar">
-    <canvas id="piezaCanvas" aria-label="Brazalete en 3D"></canvas>
-    <img class="pieza__respaldo" src="images/prod-bra-origen.jpg" alt="Brazalete Origen">
-    <span class="pieza__ayuda">↔ arrastrá</span>
-  </div>
-</section>
-
-<!-- ============ CATEGORÍAS (scroll horizontal) ============ -->
-<section class="cats" id="categorias">
-  <div class="cats__fijo">
-    <div class="cats__cabeza">
-      <p class="eti">(Categorías)</p>
-      <h2 class="titulo">Nuestro<br><em>estilo</em></h2>
-    </div>
-    <div class="cats__pista" id="catsPista">
-      <a class="cat" href="#coleccion" data-ir="chalecos" data-cursor="Ver">
-        <div class="cat__img"><img src="images/cat-chalecos.jpg" alt="Chalecos de gamuza" data-ph="Chalecos"></div>
-        <div class="cat__pie"><span>01</span><h3>Chalecos</h3></div>
-      </a>
-      <a class="cat" href="#coleccion" data-ir="collares" data-cursor="Ver">
-        <div class="cat__img"><img src="images/cat-collares.jpg" alt="Collar de cuero con piedra natural" data-ph="Collares"></div>
-        <div class="cat__pie"><span>02</span><h3>Collares</h3></div>
-      </a>
-      <a class="cat" href="#coleccion" data-ir="brazaletes" data-cursor="Ver">
-        <div class="cat__img"><img src="images/cat-brazaletes.jpg" alt="Brazaletes de cuero sobre madera" data-ph="Brazaletes"></div>
-        <div class="cat__pie"><span>03</span><h3>Brazaletes</h3></div>
-      </a>
-      <a class="cat" href="#coleccion" data-ir="pulseras" data-cursor="Ver">
-        <div class="cat__img"><img src="images/ig-1.jpg" alt="Pulseras de cuero sobre el lomo de un caballo" data-ph="Pulseras"></div>
-        <div class="cat__pie"><span>04</span><h3>Pulseras</h3></div>
-      </a>
-    </div>
+    <a class="franja" href="#coleccion" data-ir="chalecos">
+      <img src="images/piel-cebra.jpg" alt="Cuero con pelo estampado cebra y tachas" loading="lazy">
+      <div class="franja__txt"><span>02</span><h3>Cebra</h3><p>Pelo estampado, tachas de bronce.</p></div>
+    </a>
+    <a class="franja" href="#coleccion" data-ir="pulseras">
+      <img src="images/piel-pelo.jpg" alt="Cuero con pelo" loading="lazy">
+      <div class="franja__txt"><span>03</span><h3>Pelo</h3><p>Cuero vacuno con su pelo natural.</p></div>
+    </a>
+    <a class="franja" href="#coleccion" data-ir="chalecos">
+      <img src="images/piel-gamuza.jpg" alt="Gamuza color suela" loading="lazy">
+      <div class="franja__txt"><span>04</span><h3>Gamuza</h3><p>Suave, cálida, color suela.</p></div>
+    </a>
+    <a class="franja" href="#coleccion" data-ir="collares">
+      <img src="images/piel-grano.jpg" alt="Cuero negro con grano" loading="lazy">
+      <div class="franja__txt"><span>05</span><h3>Grano</h3><p>Cuero liso que se marca con el uso.</p></div>
+    </a>
   </div>
 </section>
 
 <!-- ============ COLECCIÓN ============ -->
 <section class="coleccion" id="coleccion">
   <div class="coleccion__cabeza">
-    <div>
-      <p class="eti">(Colección)</p>
-      <h2 class="titulo">Esenciales<br><em>Tirra</em></h2>
-    </div>
+    <h2 class="titulo">Colección <strong>2026</strong></h2>
     <div class="filtros" id="filtros">
-      <button class="filtro is-activo" data-filtro="todos">Todos</button>
+      <button class="filtro is-activo" data-filtro="todos">Todo</button>
       <button class="filtro" data-filtro="chalecos">Chalecos</button>
       <button class="filtro" data-filtro="collares">Collares</button>
       <button class="filtro" data-filtro="brazaletes">Brazaletes</button>
       <button class="filtro" data-filtro="pulseras">Pulseras</button>
     </div>
   </div>
-
-  <!-- Los productos se generan desde productos.js -->
   <div class="productos" id="productos"></div>
-
-  <div class="centro"><button class="btn btn--linea" id="verMas" data-cursor="Más"><span>Ver más</span></button></div>
-  <p class="nota-precios">Tocá una pieza para verla en grande y sumarla al carrito.</p>
 </section>
 
-<!-- ============ NUESTRO CUERO ============ -->
-<section class="cuero" id="cuero">
-  <div class="cuero__img cuero__img--a"><img src="images/caballo-tirra.jpg" alt="Caballo con la marca Tirra en el anca" data-ph="Cuero" data-parallax="-12"></div>
-  <div class="cuero__texto">
-    <p class="eti">(Nuestro cuero)</p>
-    <h2 class="titulo">Del campo<br><em>a la mano,</em><br>sin atajos.</h2>
-    <p>Elegimos cuero vacuno uruguayo de curtido natural: el que se marca con el uso, se oscurece con el sol y cuenta dónde estuvo.</p>
-    <p>No trabajamos con moldes industriales. Ningún material reemplaza el tacto, la nobleza y la duración del cuero de verdad.</p>
+<!-- ============ FRASE CON TEXTURA ============ -->
+<section class="frase" aria-label="Hecho a mano en Uruguay">
+  <p class="frase__txt" id="frase">Hecho<br>a mano</p>
+  <p class="frase__pie">Sin moldes industriales. Ninguna pieza sale igual a la otra.</p>
+</section>
+
+<!-- ============ GALERÍA HORIZONTAL ============ -->
+<section class="galeria" id="galeria">
+  <div class="galeria__pista" id="galeriaPista">
+    <figure class="g g--alta"><img src="images/v2-look-1.jpg" alt="Caballos corriendo entre el polvo" loading="lazy"><figcaption>Campo, atardecer</figcaption></figure>
+    <figure class="g"><img src="images/cat-chalecos.jpg" alt="Bolsillo cebra con tachas" loading="lazy"><figcaption>Pechera Cría — detalle</figcaption></figure>
+    <figure class="g g--alta"><img src="images/v2-look-2.jpg" alt="Manada en blanco y negro" loading="lazy"><figcaption>La manada</figcaption></figure>
+    <figure class="g"><img src="images/prod-cha-cruz-d.jpg" alt="Cordones cruzados del Chaleco Cruz" loading="lazy"><figcaption>Chaleco Cruz — cordones</figcaption></figure>
+    <figure class="g g--alta"><img src="images/caballo-tirra.jpg" alt="Caballo con la marca Tirra" loading="lazy"><figcaption>La marca</figcaption></figure>
+    <figure class="g"><img src="images/ig-1.jpg" alt="Pulseras sobre el lomo de un caballo" loading="lazy"><figcaption>Pulseras</figcaption></figure>
   </div>
-  <div class="cuero__img cuero__img--b"><img src="images/taller-tirra.jpg" alt="Caballo asomado en el box con el cartel de Tirra" data-ph="Taller" data-parallax="10"></div>
 </section>
 
-<!-- ============ CIFRAS ============ -->
-<section class="cifras">
-  <div class="cifra"><span class="cifra__num" data-contar="100">0</span><span class="cifra__suf">%</span><p>Cuero genuino</p></div>
-  <div class="cifra"><span class="cifra__num" data-contar="1">0</span><span class="cifra__suf">a 1</span><p>Hecho a mano, pieza por pieza</p></div>
-  <div class="cifra"><span class="cifra__num" data-contar="19">0</span><span class="cifra__suf">dptos.</span><p>Envíos a todo el país</p></div>
-  <div class="cifra"><span class="cifra__num" data-contar="2025">0</span><span class="cifra__suf"></span><p>Primeros días en Montevideo</p></div>
-</section>
-
-<!-- ============ CUIDADOS (acordeón) ============ -->
-<section class="cuidados" id="cuidados">
-  <div class="cuidados__cabeza">
-    <p class="eti">(Para que dure)</p>
-    <h2 class="titulo">Cuidado<br><em>del cuero</em></h2>
-  </div>
-  <div class="acordeon">
-    <details open><summary><span>01</span>Lejos del agua<i></i></summary><p>Si se moja, secalo a temperatura ambiente. Nunca con estufa ni secador.</p></details>
-    <details><summary><span>02</span>Nutrilo<i></i></summary><p>Una vez cada tres meses, un paño suave con grasa de caballo o cera neutra.</p></details>
-    <details><summary><span>03</span>Guardalo respirando<i></i></summary><p>En bolsa de tela, nunca en nylon cerrado. El cuero necesita aire.</p></details>
-    <details><summary><span>04</span>La pátina es tuya<i></i></summary><p>Las marcas del uso no son defectos: son la historia de la pieza.</p></details>
+<!-- ============ TALLER (sección clara) ============ -->
+<section class="taller" id="taller">
+  <div class="taller__img"><img src="images/taller-manos.jpg" alt="Manos cosiendo una pieza de cuero" loading="lazy"></div>
+  <div class="taller__txt">
+    <p class="eti">El taller</p>
+    <h2 class="titulo">Del campo<br><strong>a la mano.</strong></h2>
+    <p>Elegimos cuero vacuno uruguayo de curtido natural. Cada pieza se corta, se bisela, se cose y se sella a mano en Montevideo.</p>
+    <ul class="taller__lista">
+      <li><span>Lejos del agua</span> Si se moja, secalo a temperatura ambiente.</li>
+      <li><span>Nutrilo</span> Cada tres meses, con grasa de caballo o cera neutra.</li>
+      <li><span>Dejalo respirar</span> Guardalo en bolsa de tela.</li>
+      <li><span>La pátina es tuya</span> Las marcas del uso son su historia.</li>
+    </ul>
   </div>
 </section>
 
 <!-- ============ CONTACTO ============ -->
 <section class="contacto" id="contacto">
-  <p class="eti eti--claro">(Pedidos a medida)</p>
-  <h2 class="contacto__titulo" data-split>Hablemos</h2>
-  <p class="contacto__bajada">Color, largo, herraje e iniciales grabadas.<br>Escribinos y lo pensamos juntos.</p>
-  <div class="contacto__botones">
-    <a class="iman" data-whatsapp href="#" target="_blank" rel="noopener" data-cursor="Escribir"><span>WhatsApp</span></a>
-    <a class="iman iman--linea" data-ig href="#" target="_blank" rel="noopener" data-cursor="Seguir"><span>Instagram</span></a>
-  </div>
+  <p class="eti">Pedidos a medida</p>
+  <a class="contacto__link" data-whatsapp href="#" target="_blank" rel="noopener">Escribinos <span>→</span></a>
+  <p class="contacto__pie">Color, largo, herraje e iniciales grabadas. Envíos a todo Uruguay.</p>
 </section>
 
 </main>
 
 <!-- ============ FOOTER ============ -->
 <footer class="footer">
-  <div class="footer__cols">
-    <div class="footer__col">
-      <h4>Tienda</h4>
-      <a href="#coleccion" data-ir="chalecos">Chalecos</a>
-      <a href="#coleccion" data-ir="collares">Collares</a>
-      <a href="#coleccion" data-ir="brazaletes">Brazaletes</a>
-      <a href="#coleccion" data-ir="pulseras">Pulseras</a>
-    </div>
-    <div class="footer__col">
-      <h4>Tirra</h4>
-      <a href="#cuero">Nuestro cuero</a>
-      <a href="#cuidados">Cuidados</a>
-      <a href="#contacto">Pedidos a medida</a>
-    </div>
-    <div class="footer__col">
-      <h4>Contacto</h4>
+  <div class="footer__fila">
+    <img class="footer__logo" src="images/logo-claro.png" alt="TIRRA">
+    <nav>
+      <a data-ig data-ig-texto href="#" target="_blank" rel="noopener">Instagram</a>
       <a data-whatsapp href="#" target="_blank" rel="noopener">WhatsApp</a>
-      <a data-ig href="#" target="_blank" rel="noopener" data-ig-texto>Instagram</a>
-      <a data-email href="#" data-email-texto>Email</a>
-      <span>Montevideo, Uruguay</span>
-    </div>
-    <div class="footer__col footer__col--logo">
-      <img class="logo__img logo__img--footer" src="images/logo-claro.png" alt="TIRRA" data-logo>
-      <span class="logo__marca">TIRRA</span>
-    </div>
+      <a data-email data-email-texto href="#">Email</a>
+    </nav>
   </div>
-  <div class="footer__gigante" aria-hidden="true">TIRRA</div>
   <div class="footer__base">
-    <span>&copy; <span id="anio"></span> TIRRA</span>
-    <span>Cuero genuino hecho a mano en Uruguay</span>
-    <a href="#top">Volver arriba ↑</a>
+    <span>&copy; <span id="anio"></span> Tirra</span>
+    <span>Montevideo, Uruguay</span>
   </div>
 </footer>
 
-<!-- ============ FICHA DE PRODUCTO (foto grande + carrito) ============ -->
+<!-- ============ FICHA DE PRODUCTO ============ -->
 <div class="ficha" id="ficha" role="dialog" aria-modal="true" aria-labelledby="fichaNombre" hidden>
   <div class="ficha__fondo" data-cerrar></div>
   <div class="ficha__caja">
-    <button class="ficha__cerrar" data-cerrar aria-label="Cerrar">✕</button>
+    <button class="ficha__cerrar" data-cerrar aria-label="Cerrar">Cerrar</button>
     <div class="ficha__galeria">
-      <div class="ficha__foto" id="fichaFoto" data-cursor="Ampliar"><img id="fichaImg" src="" alt=""></div>
+      <div class="ficha__foto" id="fichaFoto"><img id="fichaImg" src="" alt=""></div>
       <div class="ficha__miniaturas" id="fichaMinis"></div>
     </div>
     <div class="ficha__info">
@@ -275,15 +198,14 @@
         <span>Cantidad</span>
         <button id="fichaMenos" aria-label="Menos">−</button><span id="fichaCant">1</span><button id="fichaMas" aria-label="Más">+</button>
       </div>
-      <button class="btn ficha__agregar" id="fichaAgregar"><span>Añadir al carrito</span></button>
-      <a class="ficha__consulta" id="fichaConsulta" href="#" target="_blank" rel="noopener">o consultar por WhatsApp →</a>
+      <button class="boton" id="fichaAgregar">Agregar al carrito</button>
+      <a class="ficha__consulta" id="fichaConsulta" href="#" target="_blank" rel="noopener">Consultar por WhatsApp</a>
     </div>
   </div>
 </div>
 
-<!-- foto a pantalla completa -->
 <div class="visor" id="visor" hidden>
-  <button class="visor__cerrar" id="visorCerrar" aria-label="Cerrar">✕</button>
+  <button class="visor__cerrar" id="visorCerrar" aria-label="Cerrar">Cerrar</button>
   <button class="visor__flecha visor__flecha--izq" id="visorPrev" aria-label="Anterior">←</button>
   <img id="visorImg" src="" alt="">
   <button class="visor__flecha visor__flecha--der" id="visorNext" aria-label="Siguiente">→</button>
@@ -292,32 +214,24 @@
 <!-- ============ CARRITO ============ -->
 <div class="carrito-fondo" id="carritoFondo"></div>
 <aside class="carrito" id="carrito" aria-label="Carrito">
-  <div class="carrito__cabeza">
-    <h3>Tu pedido</h3>
-    <button id="carritoCerrar" aria-label="Cerrar carrito">✕</button>
-  </div>
+  <div class="carrito__cabeza"><h3>Carrito</h3><button id="carritoCerrar" aria-label="Cerrar carrito">Cerrar</button></div>
   <div class="carrito__lista" id="carritoLista"></div>
   <div class="carrito__pie">
     <div class="carrito__total"><span>Total</span><strong id="carritoTotal">$ 0</strong></div>
     <p class="carrito__nota" id="carritoNota"></p>
-    <a class="btn carrito__finalizar" id="carritoFinalizar" href="#" target="_blank" rel="noopener"><span>Finalizar por WhatsApp</span></a>
-    <button class="carrito__vaciar" id="carritoVaciar">Vaciar carrito</button>
+    <a class="boton carrito__finalizar" id="carritoFinalizar" href="#" target="_blank" rel="noopener">Finalizar por WhatsApp</a>
+    <button class="carrito__vaciar" id="carritoVaciar">Vaciar</button>
   </div>
 </aside>
-
 <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
 
-<!-- ============ WHATSAPP FLOTANTE ============ -->
 <a class="wa" data-whatsapp href="#" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
-  <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm5.8 14.13c-.25.69-1.44 1.32-1.98 1.37-.53.05-1.02.24-3.44-.72-2.9-1.14-4.73-4.1-4.87-4.29-.14-.19-1.16-1.54-1.16-2.94 0-1.4.73-2.09.99-2.37.26-.29.57-.36.76-.36l.54.01c.17.01.41-.07.64.49.25.6.83 2.08.9 2.23.07.15.12.32.02.51-.09.19-.14.31-.28.48l-.42.48c-.14.14-.28.29-.12.57.16.29.72 1.18 1.54 1.91 1.06.94 1.95 1.24 2.23 1.38.28.14.44.12.6-.07.17-.19.69-.8.87-1.08.19-.29.37-.24.62-.14.26.09 1.63.77 1.91.91.28.14.47.21.53.32.07.12.07.67-.18 1.36z"/></svg>
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm5.8 14.13c-.25.69-1.44 1.32-1.98 1.37-.53.05-1.02.24-3.44-.72-2.9-1.14-4.73-4.1-4.87-4.29-.14-.19-1.16-1.54-1.16-2.94 0-1.4.73-2.09.99-2.37.26-.29.57-.36.76-.36l.54.01c.17.01.41-.07.64.49.25.6.83 2.08.9 2.23.07.15.12.32.02.51-.09.19-.14.31-.28.48l-.42.48c-.14.14-.28.29-.12.57.16.29.72 1.18 1.54 1.91 1.06.94 1.95 1.24 2.23 1.38.28.14.44.12.6-.07.17-.19.69-.8.87-1.08.19-.29.37-.24.62-.14.26.09 1.63.77 1.91.91.28.14.47.21.53.32.07.12.07.67-.18 1.36z"/></svg>
 </a>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="productos.js?v=23"></script>
-<script src="script.js?v=23"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="texturas.js?v=23"></script>
-<script src="pieza3d.js?v=23"></script>
+<script src="productos.js?v=24"></script>
+<script src="tirra.js?v=1"></script>
 </body>
 </html>

@@ -84,3 +84,9 @@ la página queda usable sin animaciones.
 
 ## Figma
 - Archivo `odW6QtxGYJebJXcswZqBB5` (UnAmargoMates), página TIRRA `1769:2`. El plan Starter de Figma tiene un límite chico de pedidos por MCP.
+
+## Versión 3 «Pieles» (actual, `index.html`)
+- Pedido: "minimalista, premium, exótica". Concepto: el cuero como protagonista.
+- Archivos: `index.html` + `tirra.css` + `tirra.js` (usa `productos.js`, mismo carrito `tirra-carrito`).
+- Secciones: hero con video → intro → "Las pieles" (5 franjas de textura que se abren: Croco, Cebra, Pelo, Gamuza, Grano) → Colección 2026 → "Hecho a mano" con letra rellena de cuero → galería horizontal → El taller (claro, manos en blanco y negro) → Escribinos → pie.
+- Versiones anteriores: `v1.html` (rama `tirra-v1`) y `v2.html` (estética editorial tipo Cría Cruz).
