@@ -32,10 +32,10 @@
   if (video) {
     video.muted = true; video.defaultMuted = true;
     var mp4 = video.canPlayType('video/mp4; codecs="avc1.4D401F"');
-    video.src = !mp4 ? "images/hero-720.webm" : (window.innerWidth < 900 ? video.dataset.chico : video.dataset.grande);
+    video.src = !mp4 ? "images/hero-720.webm?v=2" : (window.innerWidth < 900 ? video.dataset.chico : video.dataset.grande);
     var enPantalla = true, intentos = 0, trabado = null;
     var darPlay = function () { if (!enPantalla || document.hidden) return; var pr = video.play(); if (pr && pr.catch) pr.catch(function () {}); };
-    video.addEventListener("error", function () { if (video.src.indexOf(".webm") < 0) { video.src = "images/hero-720.webm"; darPlay(); } });
+    video.addEventListener("error", function () { if (video.src.indexOf(".webm") < 0) { video.src = "images/hero-720.webm?v=2"; darPlay(); } });
     ["loadeddata", "canplay"].forEach(function (ev) { video.addEventListener(ev, darPlay); });
     video.addEventListener("pause", function () { setTimeout(darPlay, 300); });
     video.addEventListener("waiting", function () {
