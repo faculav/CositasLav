@@ -241,8 +241,7 @@
   G.from(".hero__titulo > *", { yPercent: 100, opacity: 0, duration: 1.8, ease: "expo.out", stagger: 0.12, delay: 0.2 });
   G.from(".hero__pie", { opacity: 0, duration: 1.4, delay: 0.9 });
   G.from(".header", { opacity: 0, duration: 1.4, delay: 0.6 });
-  G.to(".hero__video", { scale: 1.12, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
-  G.to(".hero__txt", { yPercent: -30, opacity: 0, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+  G.to(".hero__txt", { opacity: 0, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
 
   // títulos y textos: aparecen suave
   document.querySelectorAll(".titulo, .intro__txt, .eti, .frase__pie, .taller__txt > p, .taller__lista li, .contacto__pie").forEach(function (el) {
@@ -250,21 +249,14 @@
   });
 
   // franjas: entran una tras otra
-  G.from(".franja", { clipPath: "inset(100% 0 0 0)", duration: 1.6, ease: "expo.inOut", stagger: 0.08, scrollTrigger: { trigger: ".franjas", start: "top 80%" } });
+  G.from(".franja", { opacity: 0, duration: 1.4, ease: "power2.out", stagger: 0.1, scrollTrigger: { trigger: ".franjas", start: "top 80%" } });
 
   // frase: la textura de cuero se desplaza con el scroll
   G.fromTo("#frase", { backgroundPosition: "50% 0%" }, { backgroundPosition: "50% 100%", ease: "none", scrollTrigger: { trigger: ".frase", start: "top bottom", end: "bottom top", scrub: true } });
-  G.from("#frase", { scale: 0.92, opacity: 0, duration: 1.6, ease: "expo.out", scrollTrigger: { trigger: ".frase", start: "top 75%" } });
+  G.from("#frase", { opacity: 0, duration: 1.6, ease: "expo.out", scrollTrigger: { trigger: ".frase", start: "top 75%" } });
 
-  // galería: se desplaza de costado al bajar (solo compu)
-  G.matchMedia().add("(min-width: 861px)", function () {
-    var pista = document.getElementById("galeriaPista");
-    var dist = function () { return Math.max(0, pista.scrollWidth - window.innerWidth); };
-    G.to(pista, { x: function () { return -dist(); }, ease: "none",
-      scrollTrigger: { trigger: ".galeria", start: "center center", end: function () { return "+=" + dist(); }, pin: true, scrub: 1, invalidateOnRefresh: true } });
-    // taller: la foto se mueve más lento
-    G.fromTo(".taller__img img", { yPercent: -6, scale: 1.12 }, { yPercent: 6, scale: 1.12, ease: "none", scrollTrigger: { trigger: ".taller", start: "top bottom", end: "bottom top", scrub: true } });
-  });
+  // galería: las fotos aparecen suave, una tras otra
+  G.from(".g", { opacity: 0, y: 30, duration: 1.4, ease: "expo.out", stagger: 0.1, scrollTrigger: { trigger: ".galeria", start: "top 80%" } });
 
   // contacto
   G.from(".contacto__link", { yPercent: 40, opacity: 0, duration: 1.6, ease: "expo.out", scrollTrigger: { trigger: ".contacto", start: "top 80%" } });
