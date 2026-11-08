@@ -591,35 +591,24 @@ const ALIMENTOS = [
  },
  {
   "id": "al-179679",
-  "nombre": "Connie Gato",
-  "marca": "Connie",
-  "cat": "gatos",
-  "desc": "",
-  "opciones": [
-   {
-    "etiqueta": "8 kg",
-    "kg": 8.0,
-    "precio": 902
-   }
-  ],
-  "tag": null,
-  "img": "images/alimentos/al-179679.jpg"
- },
- {
-  "id": "al-180079",
   "nombre": "Connie Gato Adulto",
   "marca": "Connie",
   "cat": "gatos",
   "desc": "",
   "opciones": [
    {
-    "etiqueta": "22 kg",
-    "kg": 22.0,
-    "precio": 2271
+    "etiqueta": "4 kg",
+    "kg": 4.0,
+    "precio": 2450
+   },
+   {
+    "etiqueta": "8 kg",
+    "kg": 8.0,
+    "precio": 990
    }
   ],
   "tag": null,
-  "img": "images/alimentos/al-180079.jpg"
+  "img": "images/alimentos/al-179679.jpg"
  },
  {
   "id": "al-179861",
@@ -3462,11 +3451,27 @@ const ALIMENTOS = [
    {
     "etiqueta": "25 kg",
     "kg": 25.0,
-    "precio": 1190
+    "precio": 1350
    }
   ],
   "tag": null,
   "img": "images/alimentos/al-2298860.jpg"
+ },
+ {
+  "id": "al-2301461",
+  "nombre": "Rex Perro Adulto",
+  "marca": "Rex",
+  "cat": "perros",
+  "desc": "",
+  "opciones": [
+   {
+    "etiqueta": "25 kg",
+    "kg": 25.0,
+    "precio": 1350
+   }
+  ],
+  "tag": null,
+  "img": "images/alimentos/al-2301461.jpg"
  },
  {
   "id": "al-2288766",

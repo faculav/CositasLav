@@ -4,7 +4,8 @@ Importa los alimentos (perros y gatos) de distribuidoralopez.com.uy
 a milo/alimentos.js y descarga las fotos a milo/images/alimentos/.
 
 Uso (desde la carpeta milo/):
-    python3 herramientas/importar_lopez.py
+    python3 herramientas/importar_lopez.py           (solo baja fotos nuevas)
+    python3 herramientas/importar_lopez.py --fotos   (vuelve a bajar todas las fotos)
 
 Se puede volver a correr cuando cambien los precios: regenera
 alimentos.js completo. Los precios son los publicados por la
@@ -236,6 +237,22 @@ def precio_final(pesos):
     return int(round(v / REDONDEO) * REDONDEO) if MARGEN != 1.0 else int(round(v))
 
 
+def mejor_foto(img):
+    """La versión más grande disponible hasta ~800 px (o la original)."""
+    opciones = []
+    for parte in (img.get("srcset") or "").split(","):
+        trozos = parte.strip().split()
+        if len(trozos) == 2 and trozos[1].endswith("w"):
+            opciones.append((int(trozos[1][:-1]), trozos[0]))
+    buenas = [o for o in opciones if o[0] <= 1024]
+    if buenas:
+        return max(buenas)[1]
+    return img.get("src") or img.get("thumbnail")
+
+
+FORZAR_FOTOS = "--fotos" in sys.argv
+
+
 def bajar_foto(url, destino):
     from PIL import Image  # pillow
     try:
@@ -243,8 +260,8 @@ def bajar_foto(url, destino):
         im = im.convert("RGBA")
         fondo = Image.new("RGB", im.size, (255, 255, 255))
         fondo.paste(im, mask=im.split()[3])
-        fondo.thumbnail((360, 360))
-        fondo.save(destino, "JPEG", quality=80, optimize=True)
+        fondo.thumbnail((640, 640), Image.LANCZOS)
+        fondo.save(destino, "JPEG", quality=84, optimize=True, progressive=True)
         return True
     except Exception as e:  # noqa: BLE001
         print("  sin foto:", url, e, file=sys.stderr)
@@ -283,7 +300,7 @@ def main():
         if p.get("on_sale"):
             g["oferta"] = True
         if p["images"]:
-            g["fotos"].append((p["id"], p["images"][0].get("thumbnail") or p["images"][0]["src"]))
+            g["fotos"].append((p["id"], mejor_foto(p["images"][0])))
         etiqueta = etiqueta or atributo(p, "pa_peso-de-la-unidad") or "Unidad"
         previo = g["opciones"].get(etiqueta)
         if previo is None or precio < previo["precio"]:
@@ -294,7 +311,7 @@ def main():
         pid = "al-" + str(min(g["ids"]))
         foto = None
         destino = os.path.join(DIR_FOTOS, pid + ".jpg")
-        if os.path.exists(destino):
+        if os.path.exists(destino) and not FORZAR_FOTOS:
             foto = "images/alimentos/" + pid + ".jpg"
         else:
             for _, url in g["fotos"]:

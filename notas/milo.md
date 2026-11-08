@@ -11,8 +11,9 @@ Referencia de estructura: altoqueraciones.com (diseño y textos propios).
   categorías, tienda, cómo funciona, calculadora "¿Cuánto le dura la bolsa?", envíos, quiénes somos,
   preguntas frecuentes, marcas, footer, carrito lateral.
 - `milo/styles.css` — estilos con la identidad de Milo: turquesa `#00B5B6`, naranja `#F29348`, blanco; Montserrat (títulos) + Nunito.
-- `milo/images/logo-turquesa.png` / `logo-blanco.png` — logo recortado con fondo transparente (sacado del PNG de Canva, ~300 px).
-- `milo/images/promo-*.jpg` — piezas de redes de Canva (se muestran en la portada).
+- `milo/images/logo-turquesa.svg` / `logo-blanco.svg` — logo vectorial (trazado del PNG de 2000 px): nítido en cualquier tamaño.
+- `milo/images/flyer-*-800.jpg` / `-1400.jpg` — flyers en alta (2000 px de origen), cada uno en su sección:
+  domicilio → portada · envíos gratuitos → sección Envíos · ración (calidad + pagos + contacto) → Quiénes somos.
 - `milo/script.js` — catálogo, filtros, buscador, carrito (se guarda en el navegador),
   armado del mensaje de WhatsApp, zonas y calculadora.
 - `milo/alimentos.js` — alimentos para perros y gatos (247 productos, 320 presentaciones) importados de
@@ -30,7 +31,7 @@ Referencia de estructura: altoqueraciones.com (diseño y textos propios).
 - Envío sin costo desde $1.500; si no, $120 (editable en `CONFIG`).
 - Ciudad de la Costa: lunes a sábado, en el día si se pide antes de las 14 h. Alrededores: días fijos por zona.
 - Estilo minimalista y sin animaciones: botones blancos con letra del color de fondo (turquesa), o con borde y sin relleno sobre fondo blanco.
-- La portada muestra las tres piezas de Canva (domicilio, envíos gratuitos, ración).
+- Logo grande en blanco en la portada; en el header, logo turquesa con la bajada "Raciones & Accesorios".
 - Si falta una foto, se muestra un recuadro liso con el nombre de la marca; si falta un logo de marca, se muestra el nombre.
 
 ## Pendientes
@@ -42,7 +43,7 @@ Referencia de estructura: altoqueraciones.com (diseño y textos propios).
 - [ ] Confirmar permiso para usar las fotos de la distribuidora.
 - [ ] Snacks, antipulgas, arena y accesorios siguen siendo de ejemplo.
 - [ ] Confirmar zonas, días de reparto, mínimo de envío gratis, costo de envío y hora de corte.
-- [ ] Logo en SVG o PNG grande (el actual sale de una imagen de 304 px; se ve bien en tamaño chico).
-- [ ] Piezas de Canva en mayor resolución (1080 px) para las promos.
+- [x] Logo vectorial y flyers en alta.
+- [ ] 68 fotos de alimentos vienen chicas desde la distribuidora (< 400 px): conseguir mejores si se puede.
 - [ ] Fotos de productos, logos de marcas y foto de Milo (`milo.jpg`).
 - [ ] Publicar el sitio (hosting y dominio).
