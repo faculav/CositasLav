@@ -499,6 +499,24 @@
     video.addEventListener("pause", function () { if (!video.ended) return; play.hidden = false; });
   }
 
+  /* ---------- barra inferior: marcar la sección activa ---------- */
+  var itemsNav = $$(".nav-inferior a[href^='#']");
+  function marcarNav(id) {
+    itemsNav.forEach(function (a) { a.classList.toggle("activo", a.getAttribute("href") === "#" + id); });
+  }
+  marcarNav("inicio");
+  if ("IntersectionObserver" in window) {
+    var secciones = ["tienda", "envios"].map(function (id) { return document.getElementById(id); }).filter(Boolean);
+    var visibles = {};
+    var obs = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) { visibles[e.target.id] = e.isIntersecting; });
+      var actual = secciones.filter(function (sec) { return visibles[sec.id]; }).map(function (sec) { return sec.id; }).pop();
+      var tienda = document.getElementById("tienda");
+      marcarNav(actual || (tienda && window.scrollY + innerHeight / 2 < tienda.offsetTop ? "inicio" : ""));
+    }, { rootMargin: "-45% 0px -45% 0px" });
+    secciones.forEach(function (sec) { obs.observe(sec); });
+  }
+
   /* ---------- botón buscar del header ---------- */
   $$("[data-ir-buscar]").forEach(function (b) {
     b.addEventListener("click", function () {
