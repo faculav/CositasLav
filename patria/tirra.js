@@ -211,7 +211,7 @@
   var PERCHA = [
     { id: "col-tierra", img: "images/perch-col-tierra.webp" },
     { id: "col-ocre",   img: "images/perch-col-ocre.webp" },
-    { id: "pec-cria",   img: "images/perch-pec-cria.webp?v=2", espalda: "images/perch-pec-cria-b.webp?v=2" },
+    { id: "pec-cria",   img: "images/perch-pec-cria.webp?v=4", espalda: "images/perch-pec-cria-b.webp?v=4" },
     { id: "cha-cruz",   img: "images/perch-cha-cruz.webp?v=2", espalda: "images/perch-cha-cruz-b.webp?v=2" },
     { id: "col-pampa",  img: "images/perch-col-pampa.webp" },
     { id: "col-greda",  img: "images/perch-col-greda.webp" }
