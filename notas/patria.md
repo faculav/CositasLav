@@ -96,3 +96,4 @@ la página queda usable sin animaciones.
 - Al tocar una pieza: las demás se desenfocan, la elegida va al centro, se balancea y muestra nombre, precio, Frente/Espalda (solo chalecos), Agregar al carrito y Ver detalle. Flechas, deslizar en celular, Esc o "Volver al perchero".
 - Fotos recortadas con fondo transparente: `images/perch-*.webp` (salen de las fotos en fondo blanco `prod-*`).
 - Para sumar una pieza (ej. Chaleco Latte): recortar su foto a `perch-<id>.webp` y agregarla a la lista `PERCHA` en `tirra.js`.
+- Perchas: foto real de la percha de madera con logo TIRRA y gancho dorado (`images/percha-tirra.webp`, recortada). Se compone por detrás de cada chaleco (se ve por el escote) con `images/percha-componer.py` → `perch-<id>.webp` y `perch-<id>-b.webp`.

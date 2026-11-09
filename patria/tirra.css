@@ -116,13 +116,11 @@ body.menu-abierto .header .logo__claro{ display:none; } body.menu-abierto .heade
 .perchero__barra::before{ left:-7px; } .perchero__barra::after{ right:-7px; }
 .perchero__fila{ position:absolute; left:0; right:0; top:calc(var(--barra) - 1px); display:flex; justify-content:center; align-items:flex-start; gap:var(--gap); }
 .percha{ position:relative; flex:none; width:var(--col); transform-origin:50% 0; transition:transform 1.1s var(--ease), filter .8s, opacity .8s; z-index:1; }
-.percha--chaleco{ width:var(--cha); margin-top:-12px; }
+.percha--chaleco{ width:var(--cha); margin-top:calc(var(--cha) * -.012 - 3px); } /* el gancho dorado abraza la barra */
 .percha__mece{ transform-origin:50% 0; animation:mecer 7s ease-in-out infinite; }
 .percha:nth-child(2n) .percha__mece{ animation-duration:8.5s; animation-delay:-2s; }
 .percha:nth-child(3n) .percha__mece{ animation-delay:-4s; }
-.percha__gancho{ display:block; width:46%; margin:0 auto; overflow:visible; }
 .percha__img{ display:block; width:100%; height:auto; pointer-events:none; filter:drop-shadow(0 14px 16px rgba(31,24,19,.16)); transition:transform .28s ease-in; }
-.percha--chaleco .percha__img{ margin-top:-14%; }
 .percha__img.is-girando{ transform:scaleX(.02); }
 @media (hover:hover){ .perchero__escena:not(.is-foco) .percha:hover{ transform:scale(1.07); z-index:3; } }
 .perchero__escena.is-foco .percha{ filter:blur(7px); opacity:.28; }

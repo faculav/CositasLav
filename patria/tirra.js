@@ -211,20 +211,19 @@
   var PERCHA = [
     { id: "col-tierra", img: "images/perch-col-tierra.webp" },
     { id: "col-ocre",   img: "images/perch-col-ocre.webp" },
-    { id: "pec-cria",   img: "images/perch-pec-cria.webp", espalda: "images/perch-pec-cria-b.webp" },
-    { id: "cha-cruz",   img: "images/perch-cha-cruz.webp", espalda: "images/perch-cha-cruz-b.webp" },
+    { id: "pec-cria",   img: "images/perch-pec-cria.webp?v=2", espalda: "images/perch-pec-cria-b.webp?v=2" },
+    { id: "cha-cruz",   img: "images/perch-cha-cruz.webp?v=2", espalda: "images/perch-cha-cruz-b.webp?v=2" },
     { id: "col-pampa",  img: "images/perch-col-pampa.webp" },
     { id: "col-greda",  img: "images/perch-col-greda.webp" }
   ].filter(function (x) { return producto(x.id); });
   var escena = document.getElementById("perchEscena"), fila = document.getElementById("perchFila");
-  var GANCHO = '<svg class="percha__gancho" viewBox="0 0 100 46" aria-hidden="true"><path d="M50 22 V13 a7 7 0 1 1 7 -7" fill="none" stroke="#2a1d14" stroke-width="3" stroke-linecap="round"/><path d="M4 44 L50 21 L96 44 Z" fill="none" stroke="#6b4a32" stroke-width="4.5" stroke-linejoin="round"/></svg>';
   var elegida = -1, lado = "frente", soltarPercha = function () {};
   if (escena) {
     PERCHA.forEach(function (x, k) {
       var p = producto(x.id), b = document.createElement("button");
       b.type = "button"; b.className = "percha" + (p.cat === "chalecos" ? " percha--chaleco" : "");
       b.setAttribute("aria-label", p.nombre);
-      b.innerHTML = '<div class="percha__mece">' + (p.cat === "chalecos" ? GANCHO : "") + '<img class="percha__img" src="' + x.img + '" alt="' + p.nombre + '"></div>';
+      b.innerHTML = '<div class="percha__mece"><img class="percha__img" src="' + x.img + '" alt="' + p.nombre + '"></div>';
       b.addEventListener("click", function (e) { e.stopPropagation(); if (elegida === k) return; enfocar(k); });
       fila.appendChild(b);
       if (x.espalda) { var pre = new Image(); pre.src = x.espalda; }
