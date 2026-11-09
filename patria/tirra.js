@@ -207,6 +207,90 @@
   }
   pintarCarrito();
 
+  /* ---------- el perchero ---------- */
+  var PERCHA = [
+    { id: "col-tierra", img: "images/perch-col-tierra.webp" },
+    { id: "col-ocre",   img: "images/perch-col-ocre.webp" },
+    { id: "pec-cria",   img: "images/perch-pec-cria.webp", espalda: "images/perch-pec-cria-b.webp" },
+    { id: "cha-cruz",   img: "images/perch-cha-cruz.webp", espalda: "images/perch-cha-cruz-b.webp" },
+    { id: "col-pampa",  img: "images/perch-col-pampa.webp" },
+    { id: "col-greda",  img: "images/perch-col-greda.webp" }
+  ].filter(function (x) { return producto(x.id); });
+  var escena = document.getElementById("perchEscena"), fila = document.getElementById("perchFila");
+  var GANCHO = '<svg class="percha__gancho" viewBox="0 0 100 46" aria-hidden="true"><path d="M50 22 V13 a7 7 0 1 1 7 -7" fill="none" stroke="#2a1d14" stroke-width="3" stroke-linecap="round"/><path d="M4 44 L50 21 L96 44 Z" fill="none" stroke="#6b4a32" stroke-width="4.5" stroke-linejoin="round"/></svg>';
+  var elegida = -1, lado = "frente", soltarPercha = function () {};
+  if (escena) {
+    PERCHA.forEach(function (x, k) {
+      var p = producto(x.id), b = document.createElement("button");
+      b.type = "button"; b.className = "percha" + (p.cat === "chalecos" ? " percha--chaleco" : "");
+      b.setAttribute("aria-label", p.nombre);
+      b.innerHTML = '<div class="percha__mece">' + (p.cat === "chalecos" ? GANCHO : "") + '<img class="percha__img" src="' + x.img + '" alt="' + p.nombre + '"></div>';
+      b.addEventListener("click", function (e) { e.stopPropagation(); if (elegida === k) return; enfocar(k); });
+      fila.appendChild(b);
+      if (x.espalda) { var pre = new Image(); pre.src = x.espalda; }
+    });
+    var perchas = Array.prototype.slice.call(fila.children);
+
+    function enfocar(k) {
+      elegida = (k + perchas.length) % perchas.length; lado = "frente";
+      var x = PERCHA[elegida], p = producto(x.id);
+      perchas.forEach(function (b, i) { b.style.transform = ""; b.classList.remove("is-elegida"); b.querySelector(".percha__img").src = PERCHA[i].img; });
+      var b = perchas[elegida];
+      if (!escena.classList.contains("is-foco")) {
+        // la escena se estira: medimos la altura final y la animamos
+        var h0 = escena.offsetHeight;
+        escena.style.transition = "none"; escena.classList.add("is-foco");
+        var h1 = escena.offsetHeight; escena.style.height = h0 + "px"; void escena.offsetHeight;
+        escena.style.transition = ""; escena.style.height = h1 + "px";
+        setTimeout(function () { escena.style.height = ""; }, 1100);
+      }
+      // medir sin transformación y llevar la pieza al centro, más grande
+      var re = escena.getBoundingClientRect(), rb = b.getBoundingClientRect();
+      var altoEscena = parseFloat(escena.style.height) || re.height;
+      var panel = parseFloat(getComputedStyle(escena).getPropertyValue("--panel")) || 178;
+      var alto = altoEscena - (rb.top - re.top) - panel - 28;
+      var s = Math.min(alto / rb.height, (re.width * 0.62) / rb.width, 3.2);
+      var dx = (re.left + re.width / 2) - (rb.left + rb.width / 2);
+      void b.offsetWidth;
+      b.style.transform = "translateX(" + dx + "px) scale(" + s + ")";
+      b.classList.add("is-elegida");
+      document.getElementById("perchNombre").textContent = p.nombre;
+      document.getElementById("perchPrecio").textContent = precio(p.precio);
+      var ld = document.getElementById("perchLado"); ld.hidden = !x.espalda;
+      ld.querySelectorAll("button").forEach(function (c) { c.classList.toggle("is-activo", c.dataset.lado === "frente"); });
+    }
+    function soltar() {
+      elegida = -1; escena.classList.remove("is-foco");
+      perchas.forEach(function (b, i) { b.style.transform = ""; b.classList.remove("is-elegida"); b.querySelector(".percha__img").src = PERCHA[i].img; });
+    }
+    function girar(nuevo) {
+      if (elegida < 0 || nuevo === lado) return;
+      var x = PERCHA[elegida]; if (!x.espalda) return;
+      lado = nuevo;
+      var img = perchas[elegida].querySelector(".percha__img"), m = perchas[elegida].querySelector(".percha__mece");
+      document.querySelectorAll("#perchLado button").forEach(function (c) { c.classList.toggle("is-activo", c.dataset.lado === lado); });
+      img.classList.add("is-girando");
+      setTimeout(function () {
+        img.src = lado === "espalda" ? x.espalda : x.img; img.classList.remove("is-girando");
+        m.style.animation = "none"; void m.offsetWidth; m.style.animation = "";
+      }, 280);
+    }
+    document.getElementById("perchLado").addEventListener("click", function (e) { var c = e.target.closest("button"); if (c) girar(c.dataset.lado); });
+    document.getElementById("perchPrev").addEventListener("click", function (e) { e.stopPropagation(); enfocar(elegida - 1); });
+    document.getElementById("perchNext").addEventListener("click", function (e) { e.stopPropagation(); enfocar(elegida + 1); });
+    document.getElementById("perchVolver").addEventListener("click", function (e) { e.stopPropagation(); soltar(); });
+    document.getElementById("perchAgregar").addEventListener("click", function (e) { e.stopPropagation(); var p = producto(PERCHA[elegida].id); agregar(p.id, 1); avisar(p.nombre + " — agregado"); });
+    document.getElementById("perchVer").addEventListener("click", function (e) { e.stopPropagation(); abrirFicha(producto(PERCHA[elegida].id)); });
+    document.getElementById("perchPanel").addEventListener("click", function (e) { e.stopPropagation(); });
+    escena.addEventListener("click", function () { if (elegida >= 0) soltar(); });
+    soltarPercha = soltar;
+    var px = null;
+    escena.addEventListener("touchstart", function (e) { px = e.touches[0].clientX; }, { passive: true });
+    escena.addEventListener("touchend", function (e) { if (px == null || elegida < 0) return; var dx = e.changedTouches[0].clientX - px; px = null; if (Math.abs(dx) > 50) enfocar(elegida + (dx < 0 ? 1 : -1)); });
+    var anchoPrev = window.innerWidth;
+    window.addEventListener("resize", function () { if (window.innerWidth !== anchoPrev) { anchoPrev = window.innerWidth; if (elegida >= 0) enfocar(elegida); } });
+  }
+
   /* ---------- menú ---------- */
   var burger = document.getElementById("burger"), menu = document.getElementById("menuMovil");
   function abrirMenu(si) {
@@ -216,7 +300,11 @@
   burger.addEventListener("click", function () { abrirMenu(!menu.classList.contains("is-abierto")); });
   menu.addEventListener("click", function (e) { if (e.target.closest("a")) abrirMenu(false); });
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") { if (!visor.hidden) cerrarVisor(); else if (!ficha.hidden) cerrarFicha(); else if (carritoEl.classList.contains("is-abierto")) abrirCarrito(false); else abrirMenu(false); }
+    if (e.key === "Escape") { if (!visor.hidden) cerrarVisor(); else if (!ficha.hidden) cerrarFicha(); else if (carritoEl.classList.contains("is-abierto")) abrirCarrito(false); else if (escena && elegida >= 0) soltarPercha(); else abrirMenu(false); }
+    if (escena && elegida >= 0 && ficha.hidden && !carritoEl.classList.contains("is-abierto")) {
+      if (e.key === "ArrowRight") document.getElementById("perchNext").click();
+      if (e.key === "ArrowLeft") document.getElementById("perchPrev").click();
+    }
     if (!visor.hidden && e.key === "ArrowRight") moverVisor(1);
     if (!visor.hidden && e.key === "ArrowLeft") moverVisor(-1);
   });
@@ -247,6 +335,9 @@
   document.querySelectorAll(".titulo, .intro__txt, .eti, .frase__pie, .taller__txt > p, .taller__lista li, .contacto__pie").forEach(function (el) {
     G.from(el, { y: 40, opacity: 0, duration: 1.4, ease: "expo.out", scrollTrigger: { trigger: el, start: "top 90%" } });
   });
+
+  // perchero: las piezas bajan a la barra una tras otra
+  G.from(".percha", { y: -40, opacity: 0, duration: 1.4, ease: "expo.out", stagger: 0.09, clearProps: "transform,opacity", scrollTrigger: { trigger: ".perchero__escena", start: "top 75%" } });
 
   // franjas: entran una tras otra
   G.from(".franja", { opacity: 0, duration: 1.4, ease: "power2.out", stagger: 0.1, scrollTrigger: { trigger: ".franjas", start: "top 80%" } });

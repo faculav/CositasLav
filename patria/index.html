@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="tirra.css?v=3">
+<link rel="stylesheet" href="tirra.css?v=4">
 </head>
 <body>
 
@@ -29,6 +29,7 @@
   <nav class="header__izq">
     <button class="header__menu" id="burger" aria-label="Abrir menú" aria-expanded="false">Menú</button>
     <a href="#coleccion">Colección</a>
+    <a href="#perchero">Perchero</a>
     <a href="#pieles">Pieles</a>
     <a href="#taller">Taller</a>
   </nav>
@@ -45,6 +46,7 @@
 <!-- menú (celular y compu chica) -->
 <nav class="menu" id="menuMovil" aria-label="Menú">
   <a href="#coleccion">Colección</a>
+  <a href="#perchero">Perchero</a>
   <a href="#pieles">Pieles</a>
   <a href="#taller">Taller</a>
   <a href="#contacto">Contacto</a>
@@ -77,6 +79,34 @@
 </section>
 
 <!-- ============ PIELES (franjas que se abren) ============ -->
+<!-- EL PERCHERO: las piezas colgadas; al tocar una, queda sola al frente -->
+<section class="perchero" id="perchero">
+  <div class="perchero__cabeza">
+    <h2 class="titulo">El <strong>perchero</strong></h2>
+    <p class="eti">Tocá una pieza para verla de cerca</p>
+  </div>
+  <div class="perchero__escena" id="perchEscena">
+    <div class="perchero__barra" aria-hidden="true"></div>
+    <div class="perchero__fila" id="perchFila"></div>
+    <button class="perchero__flecha perchero__flecha--izq" id="perchPrev" aria-label="Pieza anterior">←</button>
+    <button class="perchero__flecha perchero__flecha--der" id="perchNext" aria-label="Pieza siguiente">→</button>
+    <div class="perchero__panel" id="perchPanel" aria-live="polite">
+      <div class="perchero__datos">
+        <h3 class="perchero__nombre" id="perchNombre"></h3>
+        <span class="perchero__precio" id="perchPrecio"></span>
+      </div>
+      <div class="perchero__lado" id="perchLado">
+        <button data-lado="frente" class="is-activo">Frente</button><button data-lado="espalda">Espalda</button>
+      </div>
+      <div class="perchero__acciones">
+        <button class="boton" id="perchAgregar">Agregar al carrito</button>
+        <button class="perchero__ver" id="perchVer">Ver detalle →</button>
+      </div>
+      <button class="perchero__volver" id="perchVolver">Volver al perchero</button>
+    </div>
+  </div>
+</section>
+
 <section class="pieles" id="pieles">
   <div class="pieles__cabeza">
     <p class="eti">Materiales</p>
@@ -232,6 +262,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="productos.js?v=24"></script>
-<script src="tirra.js?v=3"></script>
+<script src="tirra.js?v=4"></script>
 </body>
 </html>

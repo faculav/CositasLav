@@ -90,3 +90,9 @@ la página queda usable sin animaciones.
 - Archivos: `index.html` + `tirra.css` + `tirra.js` (usa `productos.js`, mismo carrito `tirra-carrito`).
 - Secciones: hero con video → intro → "Las pieles" (5 franjas de textura que se abren: Croco, Cebra, Pelo, Gamuza, Grano) → Colección 2026 → "Hecho a mano" con letra rellena de cuero → galería horizontal → El taller (claro, manos en blanco y negro) → Escribinos → pie.
 - Versiones anteriores: `v1.html` (rama `tirra-v1`) y `v2.html` (estética editorial tipo Cría Cruz).
+
+## Perchero interactivo (sección `#perchero`)
+- Inspirado en un video de referencia (perchero de ropa en web). Barra con los 2 chalecos en perchas y 4 collares colgados.
+- Al tocar una pieza: las demás se desenfocan, la elegida va al centro, se balancea y muestra nombre, precio, Frente/Espalda (solo chalecos), Agregar al carrito y Ver detalle. Flechas, deslizar en celular, Esc o "Volver al perchero".
+- Fotos recortadas con fondo transparente: `images/perch-*.webp` (salen de las fotos en fondo blanco `prod-*`).
+- Para sumar una pieza (ej. Chaleco Latte): recortar su foto a `perch-<id>.webp` y agregarla a la lista `PERCHA` en `tirra.js`.

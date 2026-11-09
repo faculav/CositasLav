@@ -89,3 +89,10 @@ VERSION 3 «PIELES»
 piel-croco.jpg (Pexels 35385654), piel-pelo.jpg (Pexels 6045249),
 piel-grano.jpg (Pexels 7598667), taller-manos.jpg (Pexels 982657, B/N).
 piel-cebra.jpg y piel-gamuza.jpg: recortes de fotos propias de Tirra.
+
+
+PERCHERO
+--------
+perch-*.webp: recortes con fondo transparente (frente y espalda de chalecos,
+collares) generados desde las fotos en fondo blanco. Se usan en la sección
+"El perchero" (lista PERCHA en tirra.js).
