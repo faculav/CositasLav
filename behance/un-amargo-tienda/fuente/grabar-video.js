@@ -1,6 +1,6 @@
 const { chromium, devices } = require('playwright');
 const path = require('path');
-const kill = () => { const css = () => { if (!document.getElementById('nohide')) { const st = document.createElement('style'); st.id = 'nohide'; st.textContent = 'dialog.aviso{display:none!important}'; (document.head || document.documentElement).appendChild(st); } }; document.addEventListener('DOMContentLoaded', css); setInterval(() => { css(); document.querySelectorAll('dialog.aviso[open]').forEach(x => { try { x.close(); } catch (e) {} }); }, 300); };
+const kill = () => { const css = () => { if (!document.getElementById('nohide')) { const st = document.createElement('style'); st.id = 'nohide'; st.textContent = 'dialog.aviso{display:none!important} #envios{display:none!important}'; (document.head || document.documentElement).appendChild(st); } }; document.addEventListener('DOMContentLoaded', css); setInterval(() => { css(); document.querySelectorAll('dialog.aviso[open]').forEach(x => { try { x.close(); } catch (e) {} }); }, 300); };
 const which = process.argv[2];
 async function smooth(p, to, ms) {
   await p.evaluate(async ([to, ms]) => {
@@ -12,7 +12,7 @@ async function smooth(p, to, ms) {
   const b = await chromium.launch();
   const mob = which.startsWith('mob');
   const size = mob ? { width: 390, height: 844 } : { width: 1440, height: 900 };
-  const ctx = await b.newContext({ ...(mob ? devices['iPhone 13'] : {}), viewport: size, recordVideo: { dir: path.join(__dirname, 'rec', which), size } });
+  const ctx = await b.newContext({ ...(mob ? devices['iPhone 13'] : {}), viewport: size, recordVideo: { dir: path.join(__dirname, 'rec2', which), size } });
   const p = await ctx.newPage();
   await p.addInitScript(kill);
   const t = Date.now();
@@ -39,14 +39,16 @@ async function smooth(p, to, ms) {
     await p.keyboard.press('Escape'); await p.waitForTimeout(800);
     for (const n of ['Bombillón Pico Loro Dorado', 'Yerbero Un Amargo']) { await p.evaluate(n => document.querySelector(`button[aria-label="Agregar ${n} al pedido"]`)?.click(), n); await p.waitForTimeout(900); await p.keyboard.press('Escape'); await p.waitForTimeout(400); }
     await p.evaluate(() => { const b = [...document.querySelectorAll('header button, header a')].find(e => /Pedido/.test(e.textContent) || /pedido/i.test(e.getAttribute('aria-label') || '')); b && b.click(); });
-    await p.waitForTimeout(2200);
-    await p.evaluate(() => [...document.querySelectorAll('button')].find(e => /Continuar/.test(e.textContent))?.click()); await p.waitForTimeout(1600);
-    await p.evaluate(() => { const sel = document.querySelector('dialog select, aside select, select'); if (sel) { sel.selectedIndex = 3; sel.dispatchEvent(new Event('change', { bubbles: true })); } }); await p.waitForTimeout(1300);
-    await p.evaluate(() => [...document.querySelectorAll('button')].find(e => e.textContent.trim() === 'Transferencia bancaria')?.click()); await p.waitForTimeout(2200);
+    await p.waitForTimeout(3200);
+  } else if (which === 'spotify' || which === 'mob_spotify') {
+    await p.waitForTimeout(1500);
+    await p.evaluate(() => [...document.querySelectorAll('button')].find(e => /playlist/i.test(e.getAttribute('aria-label') || ''))?.click());
+    await p.waitForTimeout(5000);
+    await smooth(p, await top('tienda'), 1800); await p.waitForTimeout(2500);
   } else if (which === 'recorrido' || which === 'mob_recorrido') {
     await p.waitForTimeout(1500);
     const H = await p.evaluate(() => document.body.scrollHeight - innerHeight);
-    for (const id of ['tienda', 'nosotros', 'personalizados', 'empresas', 'envios', 'guias', 'contacto']) { await smooth(p, await top(id), 1400); await p.waitForTimeout(1100); }
+    for (const id of ['tienda', 'nosotros', 'personalizados', 'empresas', 'guias', 'contacto']) { await smooth(p, await top(id), 1400); await p.waitForTimeout(1100); }
     await smooth(p, H, 1400); await p.waitForTimeout(1200);
   }
   const end = (Date.now() - t) / 1000;

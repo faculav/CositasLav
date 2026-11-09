@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <title>Tienda — láminas Behance</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&display=swap">
 <style>
   :root {
     --tinta: #0a0a0a;
@@ -15,7 +14,7 @@
     --verde: #0e6e50;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: #777; font-family: Geist, 'Helvetica Neue', Arial, sans-serif; color: var(--tinta); -webkit-font-smoothing: antialiased; }
+  body { background: #777; font-family: 'Helvetica Neue', Helvetica, Inter, Arial, sans-serif; color: var(--tinta); -webkit-font-smoothing: antialiased; }
   .slide { width: 1400px; position: relative; overflow: hidden; background: var(--humo); margin: 0 auto 40px; }
   .pad { padding: 96px 104px; }
   .eyebrow { font-size: 15px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
@@ -77,19 +76,15 @@
   #s06 .three > div:nth-child(3) { margin-top: 140px; }
   #s06 .wpp { display: inline-flex; align-items: center; gap: 10px; margin-top: 64px; background: var(--verde); color: #fff; border-radius: 100px; padding: 14px 24px; font-size: 18px; font-weight: 500; }
 
-  /* 07 envíos */
+  #s06 .two-p { display: grid; grid-template-columns: 1.75fr 1fr; gap: 40px; align-items: start; }
+  /* 07 spotify */
   #s07 { background: var(--tinta); color: var(--papel); }
   #s07 .head p { color: rgba(255,255,255,.6); }
   #s07 .eyebrow { color: rgba(255,255,255,.45); }
-  #s07 .browser { box-shadow: 0 30px 80px -30px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.08); }
-  #s07 .browser .bar { background: #1a1a1a; border-color: #222; }
-  #s07 .browser .bar i { background: #333; }
-  #s07 .zones { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 28px; margin-top: 44px; }
-  #s07 .zones .browser .bar { height: 24px; }
-  #s07 .zones .z { font-size: 18px; margin-top: 16px; display: flex; justify-content: space-between; }
-  #s07 .zones .z span { color: rgba(255,255,255,.5); }
-  #s07 .zones .z b { color: #3fbf8f; font-weight: 500; }
-
+  #s07 .sp { position: relative; padding-bottom: 120px; }
+  #s07 .browser { width: 88%; box-shadow: 0 30px 80px -30px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.08); }
+  #s07 .player { position: absolute; right: 0; bottom: 0; width: 46%; border-radius: 22px; overflow: hidden; box-shadow: 0 40px 90px -20px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.1); }
+  #s07 .player img { display: block; width: 100%; }
   /* 08 secciones */
   #s08 { background: var(--papel); }
   #s08 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px 44px; }
@@ -141,7 +136,7 @@
   </div>
   <h1>La tienda.</h1>
   <div class="sub">
-    <p>Tienda online de mates artesanales: catálogo, pedido y envío por zonas, con la venta cerrada por WhatsApp.</p>
+    <p>Tienda online de mates artesanales: catálogo, ficha de producto, carrito y la playlist de la marca sonando mientras comprás.</p>
     <span class="eyebrow">34 productos · Montevideo</span>
   </div>
   <div class="browser"><div class="bar"><i></i><i></i><i></i><span>unamargo.com</span></div><img src="shots/d_top.png" alt=""></div>
@@ -151,9 +146,9 @@
   <span class="eyebrow">El concepto</span>
   <h2>Un amargo, sin vueltas. <em>Comprarlo, también.</em></h2>
   <div class="cols">
-    <div><h3>Desafío</h3><p>Un Amargo vendía por Instagram, con preguntas que se repetían: precio, stock, envío a cada barrio. Cada venta llevaba varios mensajes antes de cerrarse.</p></div>
-    <div><h3>Idea</h3><p>Una tienda que responda todo antes de que alguien escriba: catálogo ordenado, ficha de cada producto y el costo de envío calculado según el barrio.</p></div>
-    <div><h3>Resultado</h3><p>El cliente arma el pedido solo y lo manda armado por WhatsApp, con productos, zona, dirección y forma de pago. La marca solo confirma y entrega.</p></div>
+    <div><h3>Desafío</h3><p>Llevar a la web una marca que vivía en Instagram, sin perder su tono: directo, cercano y con el mate como protagonista.</p></div>
+    <div><h3>Idea</h3><p>Una tienda en blanco y negro donde el producto manda: catálogo ordenado, una ficha clara para cada pieza y un carrito que nunca te saca de la página.</p></div>
+    <div><h3>Resultado</h3><p>Una sola página que vende y cuenta la marca a la vez: tienda, personalizados, empresas, guías y una playlist propia para acompañar el amargo.</p></div>
   </div>
 </section>
 
@@ -173,26 +168,23 @@
 
 <section class="slide pad" id="s06">
   <div class="head">
-    <div><span class="eyebrow">El pedido</span><h2>Tres pasos <em>y a WhatsApp.</em></h2></div>
-    <p>El carrito suma, el barrio define el envío y el pedido sale escrito, listo para confirmar.</p>
+    <div><span class="eyebrow">El pedido</span><h2>De la ficha <em>al carrito.</em></h2></div>
+    <p>Cada producto abre su ficha con material, forma y cuidados. Se agrega con un toque y el carrito se arma al costado, sin cambiar de página.</p>
   </div>
-  <div class="three">
-    <div><div class="panel"><img src="shots/drawer_cart.png" alt=""></div><div class="cap"><span class="num">01</span><b>Tu pedido</b></div></div>
-    <div><div class="panel"><img src="shots/drawer_checkout.png" alt=""></div><div class="cap"><span class="num">02</span><b>Barrio, dirección y pago</b></div></div>
-    <div><div class="panel"><img src="shots/drawer_checkout2.png" alt=""></div><div class="cap"><span class="num">03</span><b>Envío calculado por zona</b></div></div>
+  <div class="two-p">
+    <div><div class="panel"><img src="shots/ficha_pulido.png" alt=""></div><div class="cap"><span class="num">01</span><b>Ficha de producto</b></div></div>
+    <div><div class="panel"><img src="shots/drawer_cart.png" alt=""></div><div class="cap"><span class="num">02</span><b>Tu pedido</b></div></div>
   </div>
 </section>
 
 <section class="slide pad" id="s07">
   <div class="head">
-    <div><span class="eyebrow">Envíos</span><h2>Montevideo, <em>zona por zona.</em></h2></div>
-    <p>Un mapa que se arma con el scroll: cada zona se ilumina con su precio y sus barrios. Arriba, la zona 3 a $250.</p>
+    <div><span class="eyebrow">Spotify</span><h2>Un amargo <em>suena así.</em></h2></div>
+    <p>Un botón flotante abre la playlist de la marca dentro de la web: se escucha mientras recorrés la tienda, sin salir a otra app. La portada también es parte de la identidad.</p>
   </div>
-  <div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="shots/d_envios4.png" alt=""></div>
-  <div class="zones">
-    <div><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="shots/d_envios.png" alt=""></div><div class="z"><span>Envío gratis en Montevideo</span><b>desde $3.490</b></div></div>
-    <div><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="shots/d_envios2.png" alt=""></div><div class="z"><span>Zona 1 · Centro y costa sur</span><b>$195</b></div></div>
-    <div><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="shots/d_envios3.png" alt=""></div><div class="z"><span>Zona 2 · Centro norte y costa este</span><b>$235</b></div></div>
+  <div class="sp">
+    <div class="browser"><div class="bar"><i></i><i></i><i></i><span>unamargo.com</span></div><img src="shots/d_spotify.png" alt=""></div>
+    <div class="player"><img src="shots/spotify_player.png" alt=""></div>
   </div>
 </section>
 
@@ -212,12 +204,12 @@
 <section class="slide pad" id="s09">
   <span class="eyebrow" style="color:rgba(255,255,255,.45)">Mobile</span>
   <h2 style="margin-top:22px">Se compra <em>con el pulgar.</em></h2>
-  <p>Buena parte de las visitas llega desde Instagram, en el celular. Carriles que se deslizan, ficha a pantalla completa y un pedido que se completa sin teclear de más.</p>
+  <p>Buena parte de las visitas llega desde Instagram, en el celular. Carriles que se deslizan, ficha a pantalla completa, carrito a mano y la playlist siempre a un toque.</p>
   <div class="row">
     <div class="phone"><img src="shots/m_top.png" alt=""></div>
     <div class="phone"><img src="shots/m_modal.png" alt=""></div>
     <div class="phone"><img src="shots/m_cart.png" alt=""></div>
-    <div class="phone"><img src="shots/m_envios.png" alt=""></div>
+    <div class="phone"><img src="shots/m_spotify.png" alt=""></div>
   </div>
 </section>
 
@@ -226,7 +218,7 @@
   <div class="sys">
     <div>
       <div class="aa">Aa <span>Aa</span></div>
-      <div class="meta"><div><b>Geist</b>Bold y Regular</div><div><b>Titulares</b>grandes y apretados, como la marca</div></div>
+      <div class="meta"><div><b>Helvetica Neue</b>Bold y Regular</div><div><b>Titulares</b>grandes y apretados, como la marca</div></div>
     </div>
     <div class="sw">
       <div style="background:#0a0a0a;color:#fff"><b>Tinta</b>#0A0A0A</div>
@@ -239,9 +231,9 @@
   </div>
   <div class="rules">
     <div><span class="num">01</span><h3>El producto primero</h3><p>Fotos sobre blanco, sin ruido, todas con el mismo encuadre.</p></div>
-    <div><span class="num">02</span><h3>Verde solo para avanzar</h3><p>El color de la marca marca envío gratis, zonas y el envío del pedido.</p></div>
-    <div><span class="num">03</span><h3>Precios claros</h3><p>Pesos uruguayos, envío por zona y total antes de escribir.</p></div>
-    <div><span class="num">04</span><h3>Negro para contar</h3><p>Las secciones oscuras explican: envíos, guías y cierre.</p></div>
+    <div><span class="num">02</span><h3>Verde con medida</h3><p>El verde de la marca aparece poco y en lo importante, como la playlist.</p></div>
+    <div><span class="num">03</span><h3>Precios claros</h3><p>Pesos uruguayos, a la vista en cada producto y en el carrito.</p></div>
+    <div><span class="num">04</span><h3>Negro para contar</h3><p>Las secciones oscuras cuentan: guías, contacto y cierre.</p></div>
   </div>
 </section>
 
@@ -249,7 +241,7 @@
   <span class="iso"></span>
   <h2>gracias.</h2>
   <div class="credits">
-    <div><b>Diseño y desarrollo</b>Facundo Laviano</div>
+    <div><b>Diseño UI/UX y front-end</b>Facundo Laviano</div>
     <div><b>Marca</b>Un Amargo · Uruguay</div>
     <div><b>Herramientas</b>Figma · Next.js · Tailwind</div>
   </div>

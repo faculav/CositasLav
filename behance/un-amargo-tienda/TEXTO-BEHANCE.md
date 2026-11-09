@@ -8,26 +8,31 @@
 ## Descripción corta
 
 **ES:**
-Tienda online para Un Amargo, marca uruguaya de mates artesanales: catálogo de 34 productos, carrito, envío calculado por zona de Montevideo y pedido enviado por WhatsApp. Diseño UI/UX y desarrollo.
+Tienda online para Un Amargo, marca uruguaya de mates artesanales: catálogo de 34 productos, ficha de producto, carrito y la playlist de la marca integrada en la web. Diseño UI/UX y front-end.
 
 **EN:**
-Online store for Un Amargo, a Uruguayan handcrafted mate brand: 34-product catalog, cart, shipping priced by Montevideo zone and orders sent through WhatsApp. UI/UX design and development.
+Online store for Un Amargo, a Uruguayan handcrafted mate brand: 34-product catalog, product sheets, cart and the brand's own playlist built into the site. UI/UX design and front-end.
 
 ## Texto largo (bloque de texto antes de la lámina "gracias")
 
 **ES:**
-Un Amargo vendía por Instagram, y cada venta empezaba con las mismas preguntas: precio, stock, cuánto sale el envío a mi barrio. La tienda nació para responder todo eso antes de que alguien tenga que escribir.
+Un Amargo nació en Instagram, y el desafío era llevar la marca a la web sin perder su tono: directo, cercano y con el mate como protagonista.
 
-El catálogo ordena 34 productos en carriles por categoría, con filtros por material y una ficha para cada pieza. El carrito suma, el barrio elegido define el costo de envío según tres zonas de Montevideo, y el pedido sale armado por WhatsApp: productos, dirección, zona y forma de pago.
+La tienda ordena 34 productos en carriles por categoría, con filtros por material y una ficha para cada pieza: material, forma, cuidados y stock. Se agrega con un toque y el carrito se arma al costado, sin salir de la página.
 
-Además de vender, la página reúne toda la marca: grabados personalizados, pedidos para empresas, guías para curar y cebar el mate, y las preguntas frecuentes. Todo en blanco y negro, con el verde de la marca reservado para lo que hace avanzar la compra.
+Además de vender, la web reúne toda la marca: grabados personalizados, pedidos para empresas, guías para curar y cebar el mate, y "Un amargo suena así", la playlist de la marca, que se escucha desde un reproductor flotante mientras recorrés la tienda.
 
 **EN:**
-Un Amargo used to sell through Instagram, and every sale started with the same questions: price, stock, delivery cost to my neighborhood. The store was built to answer all of that before anyone has to write.
+Un Amargo was born on Instagram, and the challenge was to bring the brand to the web without losing its tone: direct, warm and with the mate front and center.
 
-The catalog arranges 34 products into category rows, with material filters and a detail sheet for every piece. The cart adds up, the chosen neighborhood sets the delivery cost across three Montevideo zones, and the order goes out ready-made through WhatsApp: products, address, zone and payment method.
+The store arranges 34 products into category rows, with material filters and a sheet for every piece: material, shape, care and stock. Products are added with one tap and the cart builds up on the side, without leaving the page.
 
-Beyond selling, the page holds the whole brand: custom engravings, corporate orders, guides to cure and prepare a mate, and FAQs. All in black and white, with the brand green kept for whatever moves the purchase forward.
+Beyond selling, the site holds the whole brand: custom engravings, corporate orders, guides to cure and prepare a mate, and "Un amargo suena así", the brand's playlist, playing from a floating player while you browse.
+
+## Créditos
+
+Diseño UI/UX y front-end: Facundo Laviano.
+Back-end y envíos: [nombre del equipo]. Si tienen cuenta en Behance, agregalos como colaboradores (co-owners) al publicar.
 
 ## Categorías (3)
 
@@ -35,7 +40,7 @@ Diseño web (*Web Design*) · UI/UX · Diseño de interacción (*Interaction Des
 
 ## Etiquetas (10, en inglés)
 
-e-commerce, web design, UI/UX, online store, mate, Uruguay, WhatsApp, Next.js, product design, landing page
+e-commerce, web design, UI/UX, online store, front-end, mate, Uruguay, Spotify, Next.js, landing page
 
 ## Herramientas
 
