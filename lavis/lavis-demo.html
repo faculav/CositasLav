@@ -2,6 +2,7 @@
 <html lang="es-UY">
 <head>
 <meta name="robots" content="noindex,nofollow">
+<script>document.documentElement.classList.add('js')</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Propuesta de diseño — Lavis (demo)</title>
@@ -627,6 +628,13 @@ footer a:hover{color:var(--ink)}
 .fade{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
 .fade.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.fade{opacity:1;transform:none}}
+
+/* sin JavaScript (visores de archivos del celular): todo visible y sin animaciones */
+html:not(.js) .fade,html:not(.js) .fade *,html:not(.js) .hero .hcard,html:not(.js) .ln>span,html:not(.js) .h3-text p,html:not(.js) .h3-text .btn-line-w,html:not(.js) .h3-side,html:not(.js) .h3-foot,html:not(.js) .marquee,html:not(.js) .rv .w>span{opacity:1!important;transform:none!important;clip-path:none!important}
+html:not(.js) .sheet,html:not(.js) .hero3d canvas,html:not(.js) .h3-light{display:none!important}
+html:not(.js) .hero3d{height:auto;min-height:0;padding:150px 0 120px}
+html:not(.js) .h3-text{position:relative;top:auto}
+html:not(.js) .h3-side,html:not(.js) .h3-foot{position:relative;left:auto;right:auto;top:auto;bottom:auto;margin:28px var(--gut) 0}
 </style>
 </head>
 <body>
@@ -1391,5 +1399,6 @@ hero.classList.add('ready');
    b.innerHTML=`<span class="ihb-dot" aria-hidden="true"></span><span class="ihb-t">${b.innerHTML}</span><span class="ihb-h" aria-hidden="true">${label}${arrow}</span>`;
  })})();
 </script>
+<script>setTimeout(()=>{document.querySelectorAll(".fade:not(.in),.marquee:not(.in)").forEach(e=>{const r=e.getBoundingClientRect();if(r.top<innerHeight)e.classList.add("in")});const h=document.querySelector(".hero");if(h)h.classList.add("go")},3000)</script>
 </body>
 </html>
