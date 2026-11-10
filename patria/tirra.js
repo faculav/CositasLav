@@ -548,20 +548,18 @@
     }, { threshold: 0.35 }).observe(riel);
   })();
 
-  /* ---------- los collares: busto sobre tronco ---------- */
+  /* ---------- los collares: busto sobre tronco ----------
+     Cada collar es el real (tira de cuero, argolla y piedra) recortado de su
+     foto y apoyado sobre el busto: images/collar-*.webp, mismo tamaño que
+     images/exhibidor.jpg (script: images/collar-en-busto.py). Sin animación. */
   var filaCol = document.getElementById("collaresFila");
   if (filaCol) {
-    var COLLARES = [
-      { id: "col-tierra", img: "images/perch-col-tierra.webp" },
-      { id: "col-ocre",   img: "images/perch-col-ocre.webp" },
-      { id: "col-pampa",  img: "images/perch-col-pampa.webp" },
-      { id: "col-greda",  img: "images/perch-col-greda.webp" }
-    ].filter(function (x) { return producto(x.id); });
-    COLLARES.forEach(function (x, i) {
-      var p = producto(x.id), b = document.createElement("button");
+    ["tierra", "ocre", "pampa", "greda"].forEach(function (nombre) {
+      var p = producto("col-" + nombre); if (!p) return;
+      var b = document.createElement("button");
       b.type = "button"; b.className = "exhib"; b.setAttribute("aria-label", "Ver " + p.nombre);
       b.innerHTML = '<span class="exhib__marco"><img class="exhib__base" src="images/exhibidor.jpg" alt="" loading="lazy">' +
-        '<img class="exhib__collar" src="' + x.img + '" alt="' + p.nombre + '" loading="lazy" style="animation-delay:' + (-i * 1.7) + 's"></span>' +
+        '<img class="exhib__collar" src="images/collar-' + nombre + '.webp" alt="' + p.nombre + '" loading="lazy"></span>' +
         '<span class="exhib__nombre">' + p.nombre + '</span><span class="exhib__precio">' + precio(p.precio) + '</span>';
       b.addEventListener("click", function () { abrirFicha(p); });
       filaCol.appendChild(b);
