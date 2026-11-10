@@ -11,7 +11,7 @@
 <meta name="theme-color" content="#FFFFFF">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Unbounded:wght@200;300;700;800&family=Jost:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Unbounded:wght@200;300;700;800&family=Jost:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
   "@context":"https://schema.org","@type":"BarberShop","name":"Lavis Studio",
@@ -259,8 +259,10 @@ body.lock{overflow:hidden}
   background:radial-gradient(14% 70% at var(--bx) 0%,rgba(255,244,228,.12),rgba(255,244,228,.03) 45%,transparent 75%)}
 .h3-text{position:absolute;left:0;right:0;top:clamp(190px,27vh,270px);z-index:4;pointer-events:none}
 .h3-text>*{pointer-events:auto}
-.h3-text h1{font-family:'Jost',var(--font);font-weight:400;font-size:clamp(40px,4.4vw,68px);line-height:1.08;letter-spacing:-.01em;white-space:nowrap}
-.h3-text p{margin-top:20px;font-size:14px;line-height:1.6;color:rgba(255,255,255,.62);max-width:300px}
+.h3-text h1{font-family:'Jost',var(--font);font-weight:600;font-size:clamp(42px,4.3vw,70px);line-height:.88;letter-spacing:-.025em;white-space:nowrap}
+.h3-text h1 b{font-weight:800}
+.h3-text h1 .ln{padding-bottom:.1em;margin-bottom:-.1em}
+.h3-text p{margin-top:24px;font-size:14px;line-height:1.6;color:rgba(255,255,255,.62);max-width:300px}
 .btn-line-w{display:inline-flex;align-items:center;margin-top:44px;height:42px;padding:0 20px;border-radius:10px;border:1px solid rgba(255,255,255,.55);color:#fff;font-size:14px;font-weight:500;transition:background .25s,color .25s,border-color .25s}
 .btn-line-w:hover{background:#fff;color:#000;border-color:#fff}
 .ln{display:block;overflow:hidden;padding-bottom:.06em}
@@ -505,6 +507,10 @@ a.row:hover .go{transform:scale(1.05)}
   a.row:hover{transform:none}
   .rv-card{transition:transform .3s}.rv-card:hover{transform:scale(1.04)}
 }
+
+.sh-memb{display:flex;align-items:center;gap:10px;justify-content:space-between;padding:12px 14px;border-radius:16px;margin-bottom:8px;background:linear-gradient(120deg,#151515,#2a2a2a 60%,#151515);color:#fff;font-size:13px}
+.sh-memb span{color:rgba(255,255,255,.75)}
+.sh-memb a{flex:none;height:32px;display:inline-flex;align-items:center;padding:0 14px;border-radius:999px;font-weight:600;color:#111;background:linear-gradient(120deg,#f4f5f6,#c4c8cd 45%,#eef0f2 60%,#aeb2b7)}
 /* team */
 .tcard{position:relative;width:min(64vw,290px);aspect-ratio:4/5;border-radius:var(--r-xl);overflow:hidden;background:#3a3a3c;box-shadow:inset 0 0 0 .5px var(--line)}
 .tcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
@@ -600,7 +606,7 @@ footer a:hover{color:var(--ink)}
     <div class="h3-light" id="h3-light" aria-hidden="true"></div>
     <canvas id="chair3d" aria-hidden="true"></canvas>
     <div class="wrap h3-text">
-      <h1><span class="ln"><span>Viví tu</span></span><span class="ln"><span>propio estilo.</span></span></h1>
+      <h1><span class="ln"><span>Viví <b>tu</b></span></span><span class="ln"><span>propio <b>estilo.</b></span></span></h1>
       <p>Barbería con visagismo en El Pinar.<br>Antes de cortarte, miramos tu cara.</p>
       <a class="btn-line-w mag" href="#reservar">Reservar turno</a>
     </div>
@@ -907,7 +913,7 @@ footer a:hover{color:var(--ink)}
 const API='/api/turnos';
 const IMG={'CORTE':'assets/corte.jpg','CORTE Y BARBA':'assets/corte-barba.jpg','cejas en base al visagismo':'assets/cejas.jpg','CORTE+LAVADO':'assets/trans-poster-3.jpg'};
 const FOTO={'Gabriel':'assets/barbero-gabriel.jpg','Matheo':'assets/barbero-theo.jpg','Nacho':'assets/barbero-nacho.jpg'};
-const NOMBRE={'CORTE':'Corte','CORTE Y BARBA':'Corte y barba','cejas en base al visagismo':'Cejas con visagismo','CORTE+LAVADO':'Corte y lavado','Tratamiento especial para rulos':'Tratamiento para rulos','Tratamiento Reparador':'Tratamiento reparador','Black mask':'Black mask','Mechas':'Mechas','tinta':'Tinta','platinado':'Platinado','membresias vip':'Corte y barba (socios)','retoque membresia vip':'Retoque (socios)'};
+const NOMBRE={'CORTE':'Corte','CORTE Y BARBA':'Corte y barba','cejas en base al visagismo':'Cejas con visagismo','CORTE+LAVADO':'Corte y lavado','Tratamiento especial para rulos':'Tratamiento para rulos','Tratamiento Reparador':'Tratamiento reparador','Black mask':'Black mask','Mechas':'Mechas','tinta':'Tinta','platinado':'Platinado','membresias vip':'Corte y barba · Membresía','retoque membresia vip':'Retoque · Membresía'};
 const FB_SERV=[
  {id:'62499335',nombre:'CORTE',duracion_min:40,precio:750,categoria:'Peluquería',destacado:1},
  {id:'f0513d4d',nombre:'CORTE Y BARBA',duracion_min:40,precio:750,categoria:'Peluquería',destacado:2},
@@ -959,7 +965,7 @@ function renderServicios(){
   head('Paso 1 de 3','¿Qué te hacés?',false);
   const main=serv.filter(s=>IMG[s.nombre]),vip=serv.filter(s=>s.solo_membresia),rest=serv.filter(s=>!IMG[s.nombre]&&!s.solo_membresia);
   const item=(s,lite)=>`<button class="pick${lite?' lite':''}${st.sel.has(s.id)?' on':''}" data-s="${s.id}">${lite?'':`<span class="ic"><img src="${IMG[s.nombre]}" alt=""></span>`}<span class="tx"><b>${nom(s)}</b><small>${s.duracion_min} min</small></span><span class="pr">${s.solo_membresia?'Incluido':money(s.precio)}</span><span class="ck"></span></button>`;
-  body().innerHTML=`<p class="sh-label">Elegí uno o varios. Van seguidos, con el mismo barbero.</p>${main.map(s=>item(s)).join('')}<p class="sh-label">Tratamientos y color</p>${rest.map(s=>item(s,1)).join('')}${vip.length?`<p class="sh-label">Socios VIP</p>${vip.map(s=>item(s,1)).join('')}`:''}`;
+  body().innerHTML=`<p class="sh-label">Elegí uno o varios. Van seguidos, con el mismo barbero.</p>${main.map(s=>item(s)).join('')}${vip.length?`<p class="sh-label">Membresía · Lavis Members</p><div class="sh-memb"><span>¿Todavía no sos socio? Corte y barba ilimitados por $1.300/mes.</span><a href="https://www.mercadopago.com.uy/subscriptions/checkout?preapproval_plan_id=2c93808490edce280190ef6848ec0048">Hacerme socio</a></div>${vip.map(s=>item(s,1)).join('')}`:''}<p class="sh-label">Tratamientos y color</p>${rest.map(s=>item(s,1)).join('')}`;
   body().querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{const id=b.dataset.s;st.sel.has(id)?st.sel.delete(id):st.sel.add(id);b.classList.toggle('on');st.hora=null;updServ()});
   updServ();
 }
