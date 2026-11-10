@@ -212,12 +212,13 @@
      de frente y empuja a las vecinas; cada percha se balancea según cómo se
      mueve. Clic (o segundo toque) la descuelga y se puede girar arrastrando. */
   var PIEZAS = [
-    { id: "col-tierra", img: "images/perch-col-tierra.webp" },
-    { id: "col-ocre",   img: "images/perch-col-ocre.webp" },
-    { id: "pec-cria",   img: "images/perch-pec-cria.webp?v=4", espalda: "images/perch-pec-cria-b.webp?v=4" },
-    { id: "cha-cruz",   img: "images/perch-cha-cruz.webp?v=2", espalda: "images/perch-cha-cruz-b.webp?v=2" },
-    { id: "col-pampa",  img: "images/perch-col-pampa.webp" },
-    { id: "col-greda",  img: "images/perch-col-greda.webp" }
+    // hookX / hookXb: dónde está el gancho en cada foto (0 = izquierda, 1 = derecha)
+    { id: "col-tierra", img: "images/perch-col-tierra.webp?v=5", hookX: 0.5 },
+    { id: "col-ocre",   img: "images/perch-col-ocre.webp?v=5", hookX: 0.5 },
+    { id: "pec-cria",   img: "images/perch-pec-cria.webp?v=5", espalda: "images/perch-pec-cria-b.webp?v=5", hookX: 0.483, hookXb: 0.487 },
+    { id: "cha-cruz",   img: "images/perch-cha-cruz.webp?v=5", espalda: "images/perch-cha-cruz-b.webp?v=5", hookX: 0.502, hookXb: 0.502 },
+    { id: "col-pampa",  img: "images/perch-col-pampa.webp?v=5", hookX: 0.5 },
+    { id: "col-greda",  img: "images/perch-col-greda.webp?v=5", hookX: 0.5 }
   ].filter(function (x) { return producto(x.id); });
   var riel = document.getElementById("riel");
   var perchero = { abierto: false, cerrar: function () {}, girar: function () {} };
@@ -233,6 +234,7 @@
 
     var slots = PIEZAS.map(function (x, i) {
       var p = producto(x.id), b = document.createElement("button");
+      x._collar = p.cat === "collares";
       b.type = "button"; b.className = "pieza" + (p.cat === "collares" ? " pieza--collar" : "");
       b.setAttribute("aria-label", p.nombre); b.tabIndex = i === 0 ? 0 : -1; b.dataset.i = i;
       b.innerHTML = '<span class="pieza__mece"><span class="pieza__giro"><img class="pieza__img" src="' + x.img + '" alt="" draggable="false"></span></span>';
@@ -244,6 +246,18 @@
       var d = document.createElement("button"); d.type = "button"; d.setAttribute("aria-label", "Ver " + producto(x.id).nombre);
       d.addEventListener("click", function () { elegir(i); }); puntos.appendChild(d);
     });
+
+    // 3D real (three.js) si hay WebGL y la página no se abrió como archivo suelto
+    var R3 = null, D3 = null;
+    if (window.Perchero3D && location.protocol !== "file:") {
+      var lienzo = document.createElement("canvas"); lienzo.className = "riel__3d"; lienzo.setAttribute("aria-hidden", "true");
+      riel.insertBefore(lienzo, riel.firstChild.nextSibling);
+      R3 = window.Perchero3D.riel(lienzo, PIEZAS.map(function (x) { return { img: x.img, espalda: x.espalda, hookX: x.hookX || 0.5, hookXb: x.hookXb || x.hookX || 0.5, collar: producto(x.id).cat === "collares" }; }));
+      if (R3) { R3.listo(function () { riel.classList.add("es-3d"); }); } else lienzo.remove();
+      var lienzoD = document.createElement("canvas"); lienzoD.className = "detalle__3d";
+      D3 = window.Perchero3D.detalle(lienzoD);
+      if (D3) { document.getElementById("detArrastre").appendChild(lienzoD); document.getElementById("detalle").classList.add("es-3d"); }
+    }
 
     function medir() {
       var w = riel.clientWidth;
@@ -257,6 +271,7 @@
       barra.style.top = (y - 3) + "px";
       barra.style.left = carrusel ? "-20px" : ""; barra.style.right = carrusel ? "-20px" : "";
       riel.style.height = Math.round(y + h + h * 0.04) + "px";
+      if (R3) R3.tam(w, Math.round(y + h + h * 0.04));
       slots.forEach(function (s) { s.el.style.width = bw + "px"; s.el.style.height = h + "px"; s.el.style.top = (y - Math.round(h * 0.012) - 2) + "px"; });
       if (puntos) puntos.hidden = !carrusel;
       objetivos(); 
@@ -288,6 +303,7 @@
       s.mece.style.transform = "rotate(" + (S.mece[i] || 0).toFixed(3) + "deg)";
       s.giro.style.transform = "perspective(" + PERSP + "px) rotateY(" + ang.toFixed(2) + "deg)";
       s.img.style.filter = "brightness(" + luz(ang).toFixed(3) + ") drop-shadow(0 18px 18px rgba(31,24,19,.18))";
+      if (R3) R3.poner(i, S.x[i] || 0, parseFloat(s.el.style.top) || 0, PIEZAS[i]._collar ? w * 0.7 : w, ang, S.mece[i] || 0);
     }
     function paso(ahora) {
       var dt = S.ult ? Math.min(0.034, (ahora - S.ult) / 1000) : 1 / 60; S.ult = ahora;
@@ -417,20 +433,21 @@
     /* pieza descolgada: vuela al frente y se gira arrastrando */
     var det = document.getElementById("detalle"), fig = document.getElementById("detFigura"), giroEl = document.getElementById("detGiro");
     var A = { v: 0, obj: 0, vel: 0, raf: 0, ult: 0, arr: false, x0: 0, a0: 0 }, ladoAct = "frente", cerrando = false, animIda = null;
+    function aplicarGiro() { if (D3) D3.girar(A.v); else giroEl.style.transform = "rotateY(" + A.v.toFixed(2) + "deg)"; }
     function girarBucle(ahora) {
       var dt = A.ult ? Math.min(0.034, (ahora - A.ult) / 1000) : 1 / 60; A.ult = ahora;
       A.vel += (-90 * (A.v - A.obj) - 2 * Math.sqrt(90) * 0.82 * A.vel) * dt; A.v += A.vel * dt;
-      giroEl.style.transform = "rotateY(" + A.v.toFixed(2) + "deg)";
-      if (Math.abs(A.v - A.obj) < 0.05 && Math.abs(A.vel) < 0.05) { A.v = A.obj; giroEl.style.transform = "rotateY(" + A.v + "deg)"; A.raf = 0; A.ult = 0; return; }
+      aplicarGiro();
+      if (Math.abs(A.v - A.obj) < 0.05 && Math.abs(A.vel) < 0.05) { A.v = A.obj; aplicarGiro(); A.raf = 0; A.ult = 0; return; }
       A.raf = requestAnimationFrame(girarBucle);
     }
     function girarA(lado) {
-      if (abierta == null || !PIEZAS[abierta].espalda) lado = "frente";
+      if (abierta == null || (!PIEZAS[abierta].espalda && !D3)) lado = "frente";
       var base = Math.round(A.v / 360) * 360; A.obj = base + (lado === "espalda" ? 180 : 0);
       if (Math.abs(A.obj - A.v) > 180) A.obj -= 360 * Math.sign(A.obj - A.v);
       ladoAct = lado;
       document.querySelectorAll("#detLados button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lado === lado)); });
-      if (REDUCIR) { A.v = A.obj; giroEl.style.transform = "rotateY(" + A.v + "deg)"; return; }
+      if (REDUCIR) { A.v = A.obj; aplicarGiro(); return; }
       if (!A.raf) A.raf = requestAnimationFrame(girarBucle);
     }
     function origen(i) { return slots[i].giro.getBoundingClientRect(); }
@@ -445,14 +462,16 @@
       document.getElementById("detPrecio").textContent = precio(p.precio);
       document.getElementById("detDesc").textContent = p.desc;
       document.getElementById("detLados").hidden = !x.espalda; document.getElementById("detPista").hidden = !x.espalda;
-      A.v = 0; A.obj = 0; A.vel = 0; giroEl.style.transform = "rotateY(0deg)"; ladoAct = "frente"; girarA("frente");
       det.hidden = false; document.body.classList.add("con-modal");
+      if (D3) { D3.mostrar({ img: x.img, espalda: x.espalda, hookX: x.hookX || 0.5, hookXb: x.hookXb || x.hookX || 0.5, collar: x._collar }); D3.tam(fig.clientWidth * 1.5, fig.clientHeight); }
+      A.v = 0; A.obj = 0; A.vel = 0; aplicarGiro(); ladoAct = "frente"; girarA("frente");
+      document.getElementById("detPista").hidden = !(x.espalda || D3);
       var de = origen(i);
       requestAnimationFrame(function () { det.classList.add("is-visible"); });
       if (!REDUCIR && de.width > 0 && fig.animate) {
         var a = fig.getBoundingClientRect(), esc = de.height / a.height;
         var dx = de.left + de.width / 2 - (a.left + a.width / 2), dy = de.top - a.top, alza = Math.min(90, Math.abs(dy) * 0.25 + 30);
-        oculta = i; slots[i].el.style.visibility = "hidden";
+        oculta = i; slots[i].el.style.visibility = "hidden"; if (R3) R3.ocultar(i, true);
         animIda = fig.animate([
           { transform: "translate(" + dx + "px," + dy + "px) scale(" + esc + ")" },
           { transform: "translate(" + dx * 0.4 + "px," + (dy * 0.4 - alza) + "px) scale(" + ((esc + 1) / 2 * 1.03) + ") rotate(" + (dx > 0 ? -2.5 : 2.5) + "deg)", offset: 0.5 },
@@ -467,7 +486,7 @@
       var i = abierta, hacia = origen(i);
       var fin = function () {
         det.hidden = true; document.body.classList.remove("con-modal");
-        slots[i].el.style.visibility = ""; oculta = null; abierta = null; perchero.abierto = false; cerrando = false;
+        slots[i].el.style.visibility = ""; if (R3) R3.ocultar(i, false); oculta = null; abierta = null; perchero.abierto = false; cerrando = false;
         empujar(i, (i % 2 ? 1 : -1) * 44); slots[i].el.focus({ preventScroll: true });
       };
       if (animIda) { animIda.cancel(); animIda = null; }
@@ -488,8 +507,8 @@
     document.getElementById("detAgregar").addEventListener("click", function () { var p = producto(PIEZAS[abierta].id); agregar(p.id, 1); avisar(p.nombre + " — agregado"); });
     document.getElementById("detFicha").addEventListener("click", function () { var p = producto(PIEZAS[abierta].id); cerrar(); setTimeout(function () { abrirFicha(p); }, 420); });
     var arr = document.getElementById("detArrastre");
-    arr.addEventListener("pointerdown", function (e) { if (!PIEZAS[abierta].espalda) return; A.arr = true; A.x0 = e.clientX; A.a0 = A.v; cancelAnimationFrame(A.raf); A.raf = 0; A.ult = 0; try { arr.setPointerCapture(e.pointerId); } catch (er) {} });
-    arr.addEventListener("pointermove", function (e) { if (!A.arr) return; A.v = clamp(A.a0 + (e.clientX - A.x0) * 0.45, A.a0 - 220, A.a0 + 220); giroEl.style.transform = "rotateY(" + A.v.toFixed(2) + "deg)"; });
+    arr.addEventListener("pointerdown", function (e) { if (!PIEZAS[abierta].espalda && !D3) return; A.arr = true; A.x0 = e.clientX; A.a0 = A.v; cancelAnimationFrame(A.raf); A.raf = 0; A.ult = 0; try { arr.setPointerCapture(e.pointerId); } catch (er) {} });
+    arr.addEventListener("pointermove", function (e) { if (!A.arr) return; A.v = A.a0 + (e.clientX - A.x0) * 0.5; aplicarGiro(); });
     arr.addEventListener("pointerup", function () { if (!A.arr) return; A.arr = false; var f = ((A.v % 360) + 360) % 360; girarA(f > 90 && f < 270 ? "espalda" : "frente"); });
     arr.addEventListener("pointercancel", function () { A.arr = false; girarA(ladoAct); });
 
