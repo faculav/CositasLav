@@ -97,3 +97,8 @@ la página queda usable sin animaciones.
 - Fotos recortadas con fondo transparente: `images/perch-*.webp` (salen de las fotos en fondo blanco `prod-*`).
 - Para sumar una pieza (ej. Chaleco Latte): recortar su foto a `perch-<id>.webp` y agregarla a la lista `PERCHA` en `tirra.js`.
 - Perchas: foto real de la percha de madera con logo TIRRA y gancho dorado (`images/percha-tirra.webp`, recortada). Se compone por detrás de cada chaleco (se ve por el escote) con `images/percha-componer.py` → `perch-<id>.webp` y `perch-<id>-b.webp`.
+
+### Perchero v2 (riel con física)
+- Reescrito en JS común (la web no usa React), tomando el comportamiento del componente "ClothingRailHero" que pasó Facundo como referencia: piezas de perfil (−70°) que giran de frente al pasar el mouse, resortes que empujan a las vecinas, balanceo según la aceleración, perchas que se arrastran por la barra, carrusel con deslizar en celular y pieza "descolgada" que vuela al frente y se gira arrastrando (frente/espalda).
+- Código: bloque "el perchero" en `tirra.js` (lista `PIEZAS`), estilos `.riel`, `.pieza`, `.detalle` en `tirra.css`.
+- Fotos: `images/perch-*.webp` con la percha incluida y el gancho arriba de todo (las de la Pechera Cría las hizo Facundo; frente = bolsillo cebra).

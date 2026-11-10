@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="tirra.css?v=6">
+<link rel="stylesheet" href="tirra.css?v=7">
 </head>
 <body>
 
@@ -79,33 +79,51 @@
 </section>
 
 <!-- ============ PIELES (franjas que se abren) ============ -->
-<!-- EL PERCHERO: las piezas colgadas; al tocar una, queda sola al frente -->
+<!-- EL PERCHERO: las piezas descansan de perfil; al pasar, giran de frente; al tocar, se descuelgan -->
 <section class="perchero" id="perchero">
   <div class="perchero__cabeza">
     <h2 class="titulo">El <strong>perchero</strong></h2>
-    <p class="eti">Tocá una pieza para verla de cerca</p>
+    <p class="eti" id="rielAyuda">Recorré la barra · tocá una pieza para descolgarla</p>
   </div>
-  <div class="perchero__escena" id="perchEscena">
-    <div class="perchero__barra" aria-hidden="true"></div>
-    <div class="perchero__fila" id="perchFila"></div>
-    <button class="perchero__flecha perchero__flecha--izq" id="perchPrev" aria-label="Pieza anterior">←</button>
-    <button class="perchero__flecha perchero__flecha--der" id="perchNext" aria-label="Pieza siguiente">→</button>
-    <div class="perchero__panel" id="perchPanel" aria-live="polite">
-      <div class="perchero__datos">
-        <h3 class="perchero__nombre" id="perchNombre"></h3>
-        <span class="perchero__precio" id="perchPrecio"></span>
-      </div>
-      <div class="perchero__lado" id="perchLado">
-        <button data-lado="frente" class="is-activo">Frente</button><button data-lado="espalda">Espalda</button>
-      </div>
-      <div class="perchero__acciones">
-        <button class="boton" id="perchAgregar">Agregar al carrito</button>
-        <button class="perchero__ver" id="perchVer">Ver detalle →</button>
-      </div>
-      <button class="perchero__volver" id="perchVolver">Volver al perchero</button>
-    </div>
+  <div class="riel" id="riel" role="group" aria-label="Perchero">
+    <div class="riel__barra" aria-hidden="true"><span></span><span></span></div>
+  </div>
+  <div class="riel__puntos" id="rielPuntos" hidden></div>
+  <div class="riel__pie" aria-live="polite">
+    <p class="riel__nombre" id="rielNombre">&nbsp;</p>
+    <p class="riel__info" id="rielInfo">&nbsp;</p>
   </div>
 </section>
+
+<!-- pieza descolgada -->
+<div class="detalle" id="detalle" role="dialog" aria-modal="true" aria-labelledby="detNombre" hidden>
+  <div class="detalle__fondo" data-cerrar-det></div>
+  <button class="detalle__cerrar" data-cerrar-det type="button">Cerrar ✕</button>
+  <div class="detalle__grilla">
+    <div class="detalle__figura" id="detFigura">
+      <div class="detalle__hilo" aria-hidden="true"></div>
+      <div class="detalle__arrastre" id="detArrastre">
+        <div class="detalle__giro" id="detGiro">
+          <div class="detalle__cara"><img id="detFrente" alt=""></div>
+          <div class="detalle__cara detalle__cara--espalda"><img id="detEspalda" alt=""></div>
+        </div>
+      </div>
+    </div>
+    <div class="detalle__info">
+      <p class="detalle__num" id="detNum"></p>
+      <h3 class="detalle__nombre" id="detNombre"></h3>
+      <p class="detalle__precio" id="detPrecio"></p>
+      <p class="detalle__desc" id="detDesc"></p>
+      <div class="detalle__lados" id="detLados">
+        <button type="button" data-lado="frente" aria-pressed="true">Frente</button>
+        <button type="button" data-lado="espalda" aria-pressed="false">Espalda</button>
+      </div>
+      <p class="detalle__pista" id="detPista">Arrastrá la pieza para girarla</p>
+      <button class="boton" id="detAgregar" type="button">Agregar al carrito</button>
+      <button class="detalle__ficha" id="detFicha" type="button">Ver todas las fotos →</button>
+    </div>
+  </div>
+</div>
 
 <section class="pieles" id="pieles">
   <div class="pieles__cabeza">
@@ -262,6 +280,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="productos.js?v=25"></script>
-<script src="tirra.js?v=7"></script>
+<script src="tirra.js?v=8"></script>
 </body>
 </html>
