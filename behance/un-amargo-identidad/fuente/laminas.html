@@ -149,6 +149,29 @@
   #s12 .two div { border-radius: 22px; overflow: hidden; height: 980px; display: flex; align-items: center; }
   #s12 .two img { width: 100%; height: 100%; object-fit: contain; }
 
+  #s12 .one { margin-top: 70px; border-radius: 22px; overflow: hidden; background: #fff; height: 1100px; display: flex; align-items: center; justify-content: center; }
+  #s12 .one img { height: 100%; }
+
+  /* 17 playlist */
+  #s17 { background: var(--beige); color: var(--verde); padding: 100px 72px 110px; }
+  #s17 .body { display: grid; grid-template-columns: 640px 1fr; gap: 80px; margin-top: 80px; align-items: start; }
+  #s17 .vin { position: relative; width: 560px; height: 560px; }
+  #s17 .rec { position: absolute; top: 20px; left: 150px; width: 520px; height: 520px; border-radius: 50%; background: repeating-radial-gradient(circle, #111 0 2px, #1c1c1c 2px 4px); box-shadow: 0 30px 60px -25px rgba(0,0,0,.6); display: flex; align-items: center; justify-content: center; }
+  #s17 .rec::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 30deg, rgba(255,255,255,.0), rgba(255,255,255,.12), rgba(255,255,255,0) 25%, rgba(255,255,255,.0) 50%, rgba(255,255,255,.1) 60%, rgba(255,255,255,0) 75%); }
+  #s17 .lab { width: 180px; height: 180px; border-radius: 50%; background: var(--verde); display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
+  #s17 .lab img { width: 100px; }
+  #s17 .lab::after { content: ""; position: absolute; width: 14px; height: 14px; border-radius: 50%; background: var(--beige); }
+  #s17 .sleeve { position: absolute; left: 0; top: 0; width: 560px; height: 560px; border-radius: 4px; overflow: hidden; box-shadow: 0 2px 2px rgba(0,0,0,.1), 0 40px 70px -30px rgba(8,64,47,.55); z-index: 2; }
+  #s17 .sleeve img { width: 100%; height: 100%; }
+  #s17 .list { border-top: 2px solid var(--verde); }
+  #s17 .list div { display: grid; grid-template-columns: 46px 1fr auto; align-items: baseline; padding: 15px 0; border-bottom: 1px solid rgba(12,90,67,.25); font-size: 21px; }
+  #s17 .list .n { font-size: 15px; opacity: .6; font-variant-numeric: tabular-nums; }
+  #s17 .list .a { font-size: 16px; opacity: .7; }
+  #s17 .more { margin-top: 22px; font-size: 17px; opacity: .8; }
+  #s17 .web { display: grid; grid-template-columns: 360px 1fr; align-items: center; gap: 30px; margin-top: 56px; }
+  #s17 .web img { width: 360px; border-radius: 16px; box-shadow: 0 20px 40px -20px rgba(0,0,0,.4); }
+  #s17 .web p { font-size: 18px; line-height: 1.5; color: #2f4d43; }
+
   /* 15 digital */
   #s15 { background: var(--beige); color: var(--verde); padding: 100px 72px 110px; }
   #s15 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 70px; }
@@ -291,6 +314,31 @@
   </div></div>
 </section>
 
+<section class="slide" id="s17">
+  <div class="h">
+    <div><span class="cap">Playlist</span><div class="mega">Un amargo <span class="reg">suena así.</span></div></div>
+    <p style="color:#2f4d43">La marca también se escucha: 100 canciones de rock rioplatense para acompañar la ronda, con portada propia y presencia en la web.</p>
+  </div>
+  <div class="body">
+    <div class="vin"><div class="rec"><div class="lab"><img src="logos/iso_beige.png" alt=""></div></div><div class="sleeve"><img src="playlist_cover.jpg" alt=""></div></div>
+    <div>
+      <div class="list">
+      <div><span class="n">01</span><span>El Viejo</span><span class="a">La Vela Puerca</span></div>
+      <div><span class="n">02</span><span>Pupilas Lejanas</span><span class="a">Los Pericos</span></div>
+      <div><span class="n">03</span><span>Así Soy Yo</span><span class="a">El Cuarteto de Nos</span></div>
+      <div><span class="n">04</span><span>Puesto</span><span class="a">Babasónicos</span></div>
+      <div><span class="n">05</span><span>Puede Ser</span><span class="a">Conociendo Rusia</span></div>
+      <div><span class="n">06</span><span>Cielo de un Solo Color</span><span class="a">No Te Va Gustar</span></div>
+      <div><span class="n">07</span><span>Por Mil Noches</span><span class="a">Airbag</span></div>
+      <div><span class="n">08</span><span>Lamento Boliviano</span><span class="a">Los Enanitos Verdes</span></div>
+      <div><span class="n">09</span><span>Túnel de la Vida</span><span class="a">El Plan de la Mariposa</span></div>
+      </div>
+      <p class="more">+ 91 canciones más · Spotify</p>
+      <div class="web"><img src="spotify_player.png" alt=""><p>Un botón flotante en la tienda abre la playlist sin salir de la web.</p></div>
+    </div>
+  </div>
+</section>
+
 <section class="slide" id="s11">
   <div class="h">
     <div><span class="cap">Sistema de producto</span><div class="mega">Cada pieza, <span class="reg">su ficha.</span></div></div>
@@ -305,12 +353,9 @@
 <section class="slide" id="s12">
   <div class="h">
     <div><span class="cap" style="color:rgba(239,232,216,.6)">Packaging</span><div class="mega">Hola, <span class="reg">te llegó un amargo.</span></div></div>
-    <p>La bolsa saluda antes de abrirla. La yerba llega como suero: sin vueltas, sin azúcar.</p>
+    <p>La bolsa saluda antes de abrirla: cada pedido llega diciendo hola.</p>
   </div>
-  <div class="two">
-    <div style="background:#ffffff"><img src="crops/packaging.png" alt=""></div>
-    <div style="background:linear-gradient(#f0f0f0,#fffafa)"><img src="crops/yerba.png" alt=""></div>
-  </div>
+  <div class="one"><img src="packaging_clean.png" alt=""></div>
 </section>
 
 <section class="slide" id="s13"><img src="crops/foto.png" style="width:100%" alt=""></section>
