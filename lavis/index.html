@@ -927,6 +927,7 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 const hero=document.getElementById('inicio'), canvas=document.getElementById('chair3d');
+const POSE=(()=>{const v=new URLSearchParams(location.search).get('pose');return v===null?null:+v})();
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const mobile=matchMedia('(max-width: 820px)').matches;
 let renderer;
@@ -953,7 +954,7 @@ const rb=(w,h,d,r)=>new RoundedBoxGeometry(w,h,d,6,r);
 const cyl=(rt,rbm,h,s=64)=>new THREE.CylinderGeometry(rt,rbm,h,s);
 
 /* === Silla reclinable heavy-duty (modelo de referencia del cliente) === */
-const gloss=new THREE.MeshPhysicalMaterial({color:0x050505,roughness:.12,metalness:.2,clearcoat:1,clearcoatRoughness:.06,envMapIntensity:.7});
+const gloss=new THREE.MeshPhysicalMaterial({color:0x141414,roughness:.18,metalness:.35,clearcoat:1,clearcoatRoughness:.05,envMapIntensity:2.6});
 const groove=new THREE.MeshStandardMaterial({color:0x020202,roughness:.9});
 const ext=(pts,depth,bevel=.0)=>{const sh=new THREE.Shape();pts.forEach(([x,y],i)=>i?sh.lineTo(x,y):sh.moveTo(x,y));sh.closePath();
   const g=new THREE.ExtrudeGeometry(sh,{depth,bevelEnabled:bevel>0,bevelThickness:bevel,bevelSize:bevel,bevelSegments:6,curveSegments:12});g.translate(0,0,-depth/2);return g};
@@ -965,9 +966,8 @@ add(cyl(.06,.06,.2),chrome,0,.18,0);
 add(cyl(.1,.085,.06),chrome,0,.29,0);
 /* carcasa central y paneles laterales brillantes (hexagonales) */
 add(rb(.5,.2,.5,.04),gloss,0,.42,0);
-const hex=[[-.31,.31],[.27,.31],[.33,.43],[.29,.58],[-.31,.58],[-.35,.45]];
-for(const sx of[-1,1]){const g=ext(hex.map(([z,y])=>[z,y]),.045,.012);const m=add(g,gloss,sx*.3,0,0,0,Math.PI/2,0);m.rotation.y=Math.PI/2;
-  add(rb(.004,.035,.11,.002),chrome,sx*.33,.5,.18);}
+const hex=[[-.33,.27],[.25,.27],[.34,.44],[.3,.64],[-.33,.64],[-.38,.46]];
+for(const sx of[-1,1]){const g=ext(hex.map(([z,y])=>[z,y]),.045,.012);const m=add(g,gloss,sx*.31,0,0,0,Math.PI/2,0);m.rotation.y=Math.PI/2;}
 /* asiento */
 add(rb(.6,.15,.56,.07),leather,0,.665,-.01);
 add(cyl(.075,.075,.58,48),leather,0,.635,.27,0,0,Math.PI/2);
@@ -980,14 +980,29 @@ const fr=new THREE.Mesh(rb(.5,.028,.2,.01),darkMetal);fr.position.set(0,-.47,.11
 for(let i=-3;i<=3;i++){const rib=new THREE.Mesh(rb(.46,.006,.012,.003),gloss);rib.position.set(0,-.454,.04+(i+3)*.023);leg.add(rib)}
 for(const sx of[-1,1]){const l=new THREE.Mesh(cyl(.013,.013,.1,16),darkMetal);l.position.set(sx*.18,-.52,.17);leg.add(l);
   const f=new THREE.Mesh(cyl(.025,.025,.012,20),darkMetal);f.position.set(sx*.18,-.57,.17);leg.add(f)}
-/* respaldo alto, ensanchado en los hombros */
-const back=new THREE.Group();back.position.set(0,.7,-.26);back.rotation.x=-.24;chair.add(back);
-const bs=[[-.28,0],[.28,0],[.3,.42],[.34,.62],[.31,.78],[.1,.8],[-.1,.8],[-.31,.78],[-.34,.62],[-.3,.42]];
-const bm=new THREE.Mesh(ext(bs,.07,.035),leather);bm.castShadow=bm.receiveShadow=true;back.add(bm);
-const bk=new THREE.Mesh(ext(bs,.03,.008),gloss);bk.position.z=-.07;bk.castShadow=true;back.add(bk);
-for(let i=-4;i<=4;i++){const gm=new THREE.Mesh(rb(.007,.4,.006,.003),groove);gm.position.set(i*.06,.24,.072);back.add(gm)}
-const seamH=new THREE.Mesh(rb(.62,.007,.006,.003),groove);seamH.position.set(0,.46,.072);back.add(seamH);
-const hr=new THREE.Mesh(rb(.2,.09,.05,.02),leather);hr.position.set(0,.69,.085);hr.castShadow=true;back.add(hr);
+/* respaldo: parte baja con costuras verticales, almohadón superior con borde en curva, hombros y cabezal encastrado */
+const back=new THREE.Group();back.position.set(0,.7,-.27);back.rotation.x=-.2;chair.add(back);
+const arcY=x=>.3+.1*Math.pow(x/.3,2);
+// parte baja (costuras verticales)
+const low=new THREE.Mesh(rb(.56,.42,.12,.045),leather);low.position.set(0,.2,0);low.castShadow=low.receiveShadow=true;back.add(low);
+for(let i=-4;i<=4;i++){const x=i*.055,h=arcY(x)-.03;const gm=new THREE.Mesh(rb(.008,h,.008,.003),groove);gm.position.set(x,.02+h/2,.061);back.add(gm)}
+// almohadón superior: borde inferior en curva, hombros redondeados y hueco para el cabezal
+const up=new THREE.Shape();const NS=24;
+up.moveTo(-.3,arcY(-.3));
+for(let i=1;i<=NS;i++){const x=-.3+.6*i/NS;up.lineTo(x,arcY(x))}
+up.lineTo(.31,.62);up.quadraticCurveTo(.32,.78,.22,.79);up.lineTo(.15,.79);up.quadraticCurveTo(.125,.79,.125,.76);up.lineTo(.125,.7);
+up.lineTo(-.125,.7);up.lineTo(-.125,.76);up.quadraticCurveTo(-.125,.79,-.15,.79);up.lineTo(-.22,.79);up.quadraticCurveTo(-.32,.78,-.31,.62);up.closePath();
+const ug=new THREE.ExtrudeGeometry(up,{depth:.1,bevelEnabled:true,bevelThickness:.045,bevelSize:.035,bevelSegments:8,curveSegments:16});ug.translate(0,0,-.05);
+const upper=new THREE.Mesh(ug,leather);upper.position.z=.02;upper.castShadow=upper.receiveShadow=true;back.add(upper);
+// costura que sigue la curva
+const sc=new THREE.CatmullRomCurve3([...Array(17)].map((_,i)=>{const x=-.28+.56*i/16;return new THREE.Vector3(x,arcY(x)+.035,.118)}));
+const seamC=new THREE.Mesh(new THREE.TubeGeometry(sc,64,.004,8,false),groove);back.add(seamC);
+// cabezal encastrado entre los hombros
+const hr=new THREE.Mesh(rb(.235,.15,.13,.05),leather);hr.position.set(0,.775,.035);hr.castShadow=true;back.add(hr);
+const hrs=new THREE.Mesh(rb(.2,.006,.006,.002),groove);hrs.position.set(0,.775,.102);back.add(hrs);
+// carcasa trasera brillante
+const shell=new THREE.Mesh(rb(.6,.8,.05,.04),gloss);shell.position.set(0,.4,-.085);shell.castShadow=true;back.add(shell);
+
 /* apoyabrazos gruesos con puntas cromadas y soporte con ranuras */
 for(const sx of[-1,1]){
   add(rb(.11,.085,.52,.04),leather,sx*.37,.86,.0);
@@ -1054,7 +1069,7 @@ function loop(now){
   // la luz sigue al puntero
   const lx=baseX+cur.x*1.6, lz=.6+cur.y*.9;
   spot.position.set(lx,3.6,lz);spot.target.position.set(baseX+cur.x*.35,.45,cur.y*.25);
-  chair.rotation.y=-.78+cur.x*.38+Math.sin(t*.4)*.05;
+  chair.rotation.y=(POSE!==null?POSE:-.78+cur.x*.38+Math.sin(t*.4)*.05);
   chair.rotation.x=cur.y*.03;
   // polvo
   const a=pg.attributes.position.array;
