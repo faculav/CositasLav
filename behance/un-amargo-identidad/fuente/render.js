@@ -6,6 +6,7 @@ const path = require('path'), fs = require('fs');
   await p.goto('file://' + path.join(__dirname, 'slides.html'), { waitUntil: 'networkidle' });
   await p.waitForTimeout(600);
   fs.mkdirSync(path.join(__dirname, 'laminas'), { recursive: true });
-  for (const id of ['cover','s01','s02','s04','s05','s13','s14']) { const el = await p.$('#' + id); await el.screenshot({ path: path.join(__dirname, 'laminas', id + '.png') }); }
+  const ids = process.argv.slice(2).length ? process.argv.slice(2) : ['cover','s01','s02','s03','s04','s05','s06','s07','s08','s09','s10','s11','s11b','s12','s13'];
+  for (const id of ids) { const el = await p.$('#' + id); await el.screenshot({ path: path.join(__dirname, 'laminas', id + '.png') }); }
   await b.close();
 })();
