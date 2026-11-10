@@ -143,11 +143,11 @@ body.menu-abierto .header .logo__claro{ display:none; } body.menu-abierto .heade
 .detalle__mini:hover{ opacity:1; }
 .detalle__mini[aria-pressed="true"]{ border-color:var(--tinta); opacity:1; }
 .detalle__mini img{ width:100%; height:100%; object-fit:contain; padding:6px; }
-.detalle__mini--foto img{ object-fit:cover; padding:0; }
+.detalle__mini--foto img{ padding:4px; }
 .detalle__mini--pronto{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; border-style:dashed; cursor:default; opacity:.6; background:transparent; }
 .detalle__mini--pronto span{ font-size:10px; font-weight:700; letter-spacing:-.01em; color:var(--suave); }
 .detalle__mini--pronto small{ font-size:7.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--gris); }
-.detalle__foto{ position:absolute; left:-14%; top:0; width:128%; aspect-ratio:3/4; object-fit:cover; opacity:0; pointer-events:none; transition:opacity .45s; }
+.detalle__foto{ position:absolute; left:0; top:4%; width:100%; height:92%; object-fit:contain; object-position:50% 50%; opacity:0; pointer-events:none; transition:opacity .45s; }
 .detalle__figura.ver-foto .detalle__foto{ opacity:1; }
 .detalle__figura .detalle__arrastre, .detalle__figura .detalle__hilo{ transition:opacity .45s; }
 .detalle__figura.ver-foto .detalle__arrastre, .detalle__figura.ver-foto .detalle__hilo{ opacity:0; pointer-events:none; }
@@ -368,8 +368,9 @@ body.con-modal .wa, body.menu-abierto .wa{ opacity:0; pointer-events:none; }
   .detalle__minis > :first-child{ margin-left:auto; } .detalle__minis > :last-child{ margin-right:auto; }
   .detalle__minis::-webkit-scrollbar{ display:none; }
   .detalle__mini{ width:58px; height:72px; }
+  .detalle__mini--pronto small{ font-size:6px; letter-spacing:.04em; } .detalle__mini--pronto span{ font-size:9px; }
   .detalle__figura{ order:1; } .detalle__info{ order:3; }
-  .detalle__foto{ left:-8%; width:116%; top:0; }
+
   .detalle__figura{ height:min(48vh,420px); }
   .detalle__info{ text-align:center; align-items:center; }
   .detalle__ficha{ text-align:center; }

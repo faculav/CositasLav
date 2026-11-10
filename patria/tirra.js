@@ -455,7 +455,7 @@
       minis.innerHTML = "";
       var lista = [{ clave: "frente", src: x.img, txt: "Frente" }];
       if (x.espalda) lista.push({ clave: "espalda", src: x.espalda, txt: "Espalda" });
-      (p.fotos || []).forEach(function (f, k) { lista.push({ clave: "foto" + k, src: f, txt: "Detalle " + (k + 1), foto: true }); });
+      (p.fotos || []).forEach(function (f, k) { lista.push({ clave: "foto" + k, src: f, txt: "Detalle", foto: true }); });
       lista.push({ clave: "pronto", txt: "Más fotos próximamente" });
       lista.forEach(function (m) {
         var b = document.createElement("button"); b.type = "button"; b.dataset.clave = m.clave; b.setAttribute("aria-label", m.txt);
