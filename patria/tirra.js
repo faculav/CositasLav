@@ -213,9 +213,9 @@
      mueve. Clic (o segundo toque) la descuelga y se puede girar arrastrando. */
   var PIEZAS = [
     // fotos con la percha, todas en el mismo lienzo (gancho centrado arriba)
-    { id: "pec-cria",  img: "images/perch-pec-cria.webp?v=7",  espalda: "images/perch-pec-cria-b.webp?v=7" },
-    { id: "cha-cruz",  img: "images/perch-cha-cruz.webp?v=7",  espalda: "images/perch-cha-cruz-b.webp?v=7" },
-    { id: "cha-latte", img: "images/perch-cha-latte.webp?v=7", espalda: "images/perch-cha-latte-b.webp?v=7" }
+    { id: "pec-cria",  img: "images/perch-pec-cria.webp?v=8",  espalda: "images/perch-pec-cria-b.webp?v=8" },
+    { id: "cha-cruz",  img: "images/perch-cha-cruz.webp?v=8",  espalda: "images/perch-cha-cruz-b.webp?v=8" },
+    { id: "cha-latte", img: "images/perch-cha-latte.webp?v=8", espalda: "images/perch-cha-latte-b.webp?v=8" }
   ].filter(function (x) { return producto(x.id); });
   var riel = document.getElementById("riel");
   var perchero = { abierto: false, cerrar: function () {}, girar: function () {} };
@@ -240,7 +240,8 @@
       if (x.espalda) { var pre = new Image(); pre.src = x.espalda; }
       var orig = ((x._collar ? 0.5 : (x.hookX || 0.5)) * 100).toFixed(1) + "% 0";
       b.firstChild.style.transformOrigin = orig; b.firstChild.firstChild.style.transformOrigin = orig;
-      return { el: b, mece: b.firstChild, giro: b.firstChild.firstChild, img: b.querySelector("img") };
+      var tapa = document.createElement("span"); tapa.className = "pieza__tapa"; tapa.setAttribute("aria-hidden", "true"); b.appendChild(tapa);
+      return { el: b, mece: b.firstChild, giro: b.firstChild.firstChild, img: b.querySelector("img"), tapa: tapa };
     });
     if (puntos) PIEZAS.forEach(function (x, i) {
       var d = document.createElement("button"); d.type = "button"; d.setAttribute("aria-label", "Ver " + producto(x.id).nombre);
@@ -259,7 +260,13 @@
       barra.style.top = (y - 3) + "px";
       barra.style.left = carrusel ? "-20px" : ""; barra.style.right = carrusel ? "-20px" : "";
       riel.style.height = Math.round(y + h + h * 0.2) + "px";
-      slots.forEach(function (s) { s.el.style.width = bw + "px"; s.el.style.height = h + "px"; s.el.style.top = (y - Math.round(h * 0.012) - 2) + "px"; });
+      // la barra apoya en la parte interna de la curva del gancho (y = 18 px de 820 en las fotos)
+      var apoyo = bw * 18 / 820;
+      slots.forEach(function (s) {
+        s.el.style.width = bw + "px"; s.el.style.height = h + "px"; s.el.style.top = (y - 3 - apoyo) + "px";
+        // un pedacito de barra por delante de la punta del gancho: así la punta queda por detrás
+        s.tapa.style.top = apoyo + "px"; s.tapa.style.left = (bw * 0.528) + "px"; s.tapa.style.width = (bw * 0.072) + "px";
+      });
       if (puntos) puntos.hidden = !carrusel;
       objetivos(); 
     }
@@ -289,6 +296,7 @@
       s.el.style.zIndex = i === activa ? 30 : 10 + i;
       s.mece.style.transform = "rotate(" + (S.mece[i] || 0).toFixed(3) + "deg)";
       s.giro.style.transform = "scale(" + esc.toFixed(4) + ")";
+      s.tapa.style.transform = "translateX(" + ((esc - 1) * w * 0.06 + Math.sin((S.mece[i] || 0) * Math.PI / 180) * w * 0.03).toFixed(2) + "px)";
     }
     function paso(ahora) {
       var dt = S.ult ? Math.min(0.034, (ahora - S.ult) / 1000) : 1 / 60; S.ult = ahora;
