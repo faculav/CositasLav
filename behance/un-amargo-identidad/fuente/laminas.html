@@ -172,6 +172,28 @@
   #s17 .web img { width: 360px; border-radius: 16px; box-shadow: 0 20px 40px -20px rgba(0,0,0,.4); }
   #s17 .web p { font-size: 18px; line-height: 1.5; color: #2f4d43; }
 
+  #s12 .hero3d { margin-top: 60px; border-radius: 22px; overflow: hidden; background: var(--beige); }
+  #s12 .hero3d img { width: 100%; }
+  #s18 { background: var(--papel); padding: 100px 72px 110px; color: var(--verde); }
+  #s18 .lid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 70px; align-items: center; }
+  #s18 .flat { position: relative; border-radius: 6px; box-shadow: 0 0 0 1px #ddd, 0 30px 60px -30px rgba(0,0,0,.25); }
+  #s18 .flat img { width: 100%; display: block; }
+  #s18 .band { position: absolute; left: 0; right: 0; top: 0; height: 32.5%; background: repeating-linear-gradient(135deg, rgba(12,90,67,.16) 0 10px, rgba(12,90,67,.05) 10px 20px); border-bottom: 2px dashed var(--verde); display: flex; align-items: center; justify-content: center; }
+  #s18 .band span { font-size: 14px; letter-spacing: .2em; text-transform: uppercase; background: var(--verde); color: var(--beige); padding: 6px 12px; border-radius: 100px; }
+  #s18 .mid { position: absolute; left: 0; right: 0; top: 66.25%; border-top: 1.5px solid #c0392b; }
+  #s18 .lbl { position: absolute; right: 12px; top: calc(66.25% + 8px); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #c0392b; }
+  #s18 .leg { margin-top: 18px; font-size: 15px; color: #3c4a44; display: flex; align-items: center; gap: 10px; }
+  #s18 .leg i { width: 28px; border-top: 2px solid #c0392b; }
+  #s18 .open { border-radius: 22px; overflow: hidden; background: var(--beige); }
+  #s18 .open img { width: 100%; display: block; }
+  #s19 { background: var(--beige); padding: 100px 72px 0; color: var(--verde); }
+  #s19 .faces { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 64px; }
+  #s19 .faces img { width: 100%; display: block; border-radius: 4px; box-shadow: 0 0 0 1px rgba(0,0,0,.06), 0 18px 30px -18px rgba(0,0,0,.3); }
+  #s19 figcaption { margin-top: 14px; font-size: 15px; line-height: 1.4; color: #2f4d43; }
+  #s19 figcaption b { display: block; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--verde); margin-bottom: 3px; }
+  #s19 .back { margin: 50px -72px 0; }
+  #s19 .back img { width: 100%; height: 980px; object-fit: cover; object-position: 50% 55%; display: block; }
+
   /* 15 digital */
   #s15 { background: var(--beige); color: var(--verde); padding: 100px 72px 110px; }
   #s15 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 70px; }
@@ -353,9 +375,38 @@
 <section class="slide" id="s12">
   <div class="h">
     <div><span class="cap" style="color:rgba(239,232,216,.6)">Packaging</span><div class="mega">Hola, <span class="reg">te llegó un amargo.</span></div></div>
-    <p>La bolsa saluda antes de abrirla: cada pedido llega diciendo hola.</p>
+    <p>Una caja con tapa y manijas de cinta. Cada cara dice algo distinto, en blanco y negro, para que el pedido llegue saludando.</p>
   </div>
-  <div class="one"><img src="packaging_clean.png" alt=""></div>
+  <div class="hero3d"><img src="caja/frente.png" alt=""></div>
+</section>
+
+<section class="slide" id="s18">
+  <div class="h">
+    <div><span class="cap">Detalle de diseño</span><div class="mega">La tapa <span class="reg">manda.</span></div></div>
+    <p style="color:#3c4a44">El arte no está centrado en la cara: está más abajo a propósito. La tapa cierra sobre la caja y cubre la franja de arriba, así que con la caja cerrada cada mensaje queda centrado en lo que se ve.</p>
+  </div>
+  <div class="lid2">
+    <div><div class="flat">
+      <img src="caja/frente.jpg" alt="">
+      <div class="band"><span>Tapa</span></div>
+      <div class="mid"></div>
+    </div><p class="leg"><i></i>Centro de la parte visible con la caja cerrada</p></div>
+    <div class="open"><img src="caja/abierta.png" alt=""></div>
+  </div>
+</section>
+
+<section class="slide" id="s19">
+  <div class="h">
+    <div><span class="cap">Packaging</span><div class="mega">Cuatro caras, <span class="reg">cuatro mensajes.</span></div></div>
+    <p style="color:#3c4a44">Saludo al frente, la frase de la marca a un costado, el origen al otro y la firma atrás.</p>
+  </div>
+  <div class="faces">
+    <figure><img src="caja/frente.jpg" alt=""><figcaption><b>Frente</b>hola, te llegó un amargo</figcaption></figure>
+    <figure><img src="caja/derecho.jpg" alt=""><figcaption><b>Lateral derecho</b>un amargo, sin vueltas, sin azúcar.</figcaption></figure>
+    <figure><img src="caja/detras.jpg" alt=""><figcaption><b>Atrás</b>Isotipo y @unamargo_</figcaption></figure>
+    <figure><img src="caja/izquierdo.jpg" alt=""><figcaption><b>Lateral izquierdo</b>Based in UY</figcaption></figure>
+  </div>
+  <div class="back"><img src="caja/espalda.png" alt=""></div>
 </section>
 
 <section class="slide" id="s13"><img src="crops/foto.png" style="width:100%" alt=""></section>

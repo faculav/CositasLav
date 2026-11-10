@@ -1,0 +1,90 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>html,body{margin:0;background:#efe8d8;overflow:hidden}canvas{display:block}</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+</head><body>
+<script type="module">
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+const P = new URLSearchParams(location.search);
+const W = +(P.get('w') || 1600), H = +(P.get('h') || 1600);
+const BG = P.get('bg') || '#efe8d8';
+document.body.style.background = BG;
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(1);
+renderer.setSize(W, H);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.VSMShadowMap;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(BG);
+const pmrem = new THREE.PMREMGenerator(renderer);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+
+const camera = new THREE.PerspectiveCamera(28, W / H, 0.1, 100);
+
+// medidas: caras de 1999 x 1538 px -> base cuadrada; tapa ~500 px de alto
+const S = 1 / 1000;
+const BW = 1999 * S, BH = 1538 * S, LID = 500 * S;
+
+const loader = new THREE.TextureLoader();
+const tex = n => { const t = loader.load('tex/' + n + '.jpg'); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t; };
+const paper = (map) => new THREE.MeshStandardMaterial({ color: 0xffffff, map: map || null, roughness: 0.82, metalness: 0 });
+
+const box = new THREE.Group(); scene.add(box);
+
+// cuerpo: +x derecho, -x izquierdo, +y arriba, -y abajo, +z frente, -z atrás
+const body = new THREE.Mesh(new THREE.BoxGeometry(BW, BH, BW), [
+  paper(tex('derecho')), paper(tex('izquierdo')), paper(), paper(), paper(tex('frente')), paper(tex('detras'))
+]);
+body.position.y = BH / 2; body.castShadow = true; body.receiveShadow = true; box.add(body);
+
+// tapa: un poco más grande que el cuerpo, cubre la franja superior
+const lid = new THREE.Group(); box.add(lid);
+const T = 0.012;
+const lidMesh = new THREE.Mesh(new RoundedBoxGeometry(BW + 2 * T, LID, BW + 2 * T, 2, 0.006), paper());
+lidMesh.castShadow = true; lidMesh.receiveShadow = true; lid.add(lidMesh);
+const lidBaseY = BH - LID / 2 + 0.002;
+lid.position.y = lidBaseY;
+
+// manijas de cinta negra, como en tu render
+const ribbonMat = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.45, metalness: 0.05 });
+function handle(x) {
+  const pts = [new THREE.Vector3(0, LID / 2, BW * 0.30), new THREE.Vector3(0, LID / 2 + 0.55, BW * 0.24), new THREE.Vector3(0, LID / 2 + 0.78, 0), new THREE.Vector3(0, LID / 2 + 0.55, -BW * 0.24), new THREE.Vector3(0, LID / 2, -BW * 0.30)];
+  const curve = new THREE.CatmullRomCurve3(pts);
+  const g = new THREE.TubeGeometry(curve, 80, 0.028, 12, false);
+  g.scale(3.2, 1, 1); g.translate(x, 0, 0);
+  const m = new THREE.Mesh(g, ribbonMat); m.castShadow = true; return m;
+}
+lid.add(handle(-0.33)); lid.add(handle(0.33));
+
+// piso que solo recibe sombra
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(30, 30), new THREE.ShadowMaterial({ opacity: 0.16 }));
+floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+
+const key = new THREE.DirectionalLight(0xffffff, 2.1);
+key.position.set(-3.2, 6.5, 3.2); key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048); key.shadow.radius = 18; key.shadow.blurSamples = 25; key.shadow.bias = -0.0005;
+Object.assign(key.shadow.camera, { left: -4, right: 4, top: 4, bottom: -4, near: 0.5, far: 20 });
+scene.add(key);
+scene.add(new THREE.HemisphereLight(0xffffff, 0xd8cfbb, 0.9));
+const fill = new THREE.DirectionalLight(0xffffff, 0.9); fill.position.set(4, 3, -4); scene.add(fill);
+
+window.setView = ({ az = 35, el = 18, dist = 8.6, lidUp = 0, ty = 1.05 }) => {
+  const a = THREE.MathUtils.degToRad(az), e = THREE.MathUtils.degToRad(el);
+  camera.position.set(Math.sin(a) * Math.cos(e) * dist, ty + Math.sin(e) * dist, Math.cos(a) * Math.cos(e) * dist);
+  camera.lookAt(0, ty, 0);
+  lid.position.y = lidBaseY + lidUp;
+  renderer.render(scene, camera);
+  return renderer.domElement.toDataURL('image/png');
+};
+THREE.DefaultLoadingManager.onLoad = () => { window.ready = true; };
+</script>
+</body></html>
