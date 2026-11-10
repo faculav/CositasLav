@@ -8,26 +8,26 @@
 ## Descripción corta
 
 **ES:**
-Identidad de marca para Un Amargo, marca uruguaya de mates artesanales: logotipo, color, tipografía, fotografía, piezas para redes, íconos y packaging. Diseño con propósito, del isotipo al ritual.
+Identidad de marca para Un Amargo, marca uruguaya de mates artesanales: logotipo, color, tipografía, papelería, tono de voz en redes, fichas de producto y packaging. Sin vueltas, sin azúcar.
 
 **EN:**
-Brand identity for Un Amargo, a Uruguayan handcrafted mate brand: logo, color, typography, photography, social media pieces, icons and packaging. Purpose-driven design, from the symbol to the ritual.
+Brand identity for Un Amargo, a Uruguayan handcrafted mate brand: logo, color, typography, stationery, social media voice, product sheets and packaging. No fuss, no sugar.
 
 ## Texto largo (bloque de texto antes de la lámina "gracias")
 
 **ES:**
-Un Amargo busca resignificar la experiencia de tomar mates desde lo visual. El isotipo junta un mate y su bombilla en un solo trazo que se lee como "ua", y funciona igual en un avatar de Instagram, en un grabado láser o en una bolsa.
+Sin vueltas, sin azúcar. Un Amargo es una marca uruguaya de mates que cree que lo mejor es lo simple: un buen amargo, risas y charla, sin enmascarar la esencia.
 
-La paleta se reduce a dos colores: un verde profundo, que habla de naturaleza y calma, y un beige cálido, que deja respirar al producto. Helvetica en regular y bold completa un sistema simple y reconocible.
+El isotipo junta un mate y su bombilla en un solo trazo que se lee como "ua". La paleta se reduce a un verde profundo y un beige cálido, y Helvetica en regular y bold completa un sistema simple y reconocible, que funciona igual en una tarjeta, en un sticker o grabado en una virola.
 
-La fotografía saca el mate de la cocina: la playa, el auto, la calle, un bolso con el isotipo colgando. Desde ahí la marca se extiende a fichas de producto, piezas para redes, packaging y una campaña, y llega a lo digital con una tienda online y dos guías interactivas en 3D.
+La voz de la marca es la de quien toma mate: corta, cómplice y con humor. Cada post es una idea ("Como atraparme:", "Las flores amarillas que ellos necesitan"), y las fichas de producto mantienen el mismo molde para todo el catálogo. Desde ahí la identidad llega al packaging, a una campaña y a lo digital, con una tienda online y dos guías interactivas en 3D.
 
 **EN:**
-Un Amargo sets out to reframe the experience of drinking mate through design. The symbol joins a mate and its bombilla in a single stroke that reads as "ua", and it works just as well as an Instagram avatar, a laser engraving or a shopping bag.
+No fuss, no sugar. Un Amargo is a Uruguayan mate brand that believes the best things are simple: a good mate, laughs and conversation, with nothing covering up the essence.
 
-The palette comes down to two colors: a deep green that speaks of nature and calm, and a warm beige that lets the product breathe. Helvetica in regular and bold completes a simple, recognizable system.
+The symbol joins a mate and its bombilla in a single stroke that reads as "ua". The palette comes down to a deep green and a warm beige, and Helvetica in regular and bold completes a simple, recognizable system that works just as well on a business card, a sticker or engraved on a metal rim.
 
-The photography takes mate out of the kitchen: the beach, the car, the street, a bag with the symbol hanging from it. From there the brand extends to product sheets, social media pieces, packaging and a campaign, and reaches digital with an online store and two interactive 3D guides.
+The brand speaks like someone sharing a mate: short, knowing and funny. Every post is an idea, and product sheets follow the same template across the whole catalog. From there the identity reaches packaging, a campaign and digital, with an online store and two interactive 3D guides.
 
 ## Categorías (3)
 

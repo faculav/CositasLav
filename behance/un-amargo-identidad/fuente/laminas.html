@@ -2,12 +2,12 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>Identidad editorial — láminas</title>
+<title>Identidad Un Amargo — láminas</title>
 <style>
   :root {
     --verde: #0c5a43;
-    --verde-osc: #08402f;
     --beige: #efe8d8;
+    --kraft: #c7a57a;
     --tinta: #0a0a0a;
     --papel: #ffffff;
   }
@@ -15,185 +15,216 @@
   body { background: #777; font-family: 'Helvetica Neue', Helvetica, Inter, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
   .slide { width: 1400px; position: relative; overflow: hidden; margin: 0 auto 40px; }
   .cap { font-size: 14px; letter-spacing: .2em; text-transform: uppercase; }
-  .mega { font-weight: 700; letter-spacing: -.06em; line-height: .82; }
+  .mega { font-weight: 700; letter-spacing: -.06em; line-height: .84; }
   .reg { font-weight: 400; }
   img { display: block; }
+  .h { display: flex; justify-content: space-between; align-items: flex-end; gap: 60px; }
+  .h .mega { font-size: 96px; margin-top: 24px; }
+  .h p { max-width: 400px; text-align: right; font-size: 19px; line-height: 1.5; }
+  .noise { position: absolute; inset: 0; background: url(noise.png); mix-blend-mode: multiply; opacity: .18; pointer-events: none; }
 
-  /* portada Behance 808x632 */
+  /* portada Behance */
   #cover { width: 808px; height: 632px; background: var(--verde); margin: 0 auto 40px; position: relative; overflow: hidden; }
-  #cover .ph { position: absolute; right: 0; top: 0; height: 100%; width: 400px; object-fit: cover; object-position: 50% 60%; }
-  #cover .t { position: absolute; left: 40px; bottom: 40px; color: var(--beige); font-size: 96px; z-index: 2; }
-  #cover .logo { position: absolute; left: 44px; top: 42px; width: 110px; }
-  #cover .c { position: absolute; left: 44px; top: 200px; color: rgba(239,232,216,.7); }
+  #cover .logo { position: absolute; left: 50%; top: 44%; transform: translate(-50%, -50%); width: 300px; }
+  #cover .t { position: absolute; left: 0; right: 0; bottom: 46px; text-align: center; color: var(--beige); font-size: 30px; letter-spacing: -.03em; font-weight: 700; }
+  #cover .t span { font-weight: 400; }
 
   /* 01 portada */
-  #s01 { height: 1500px; background: var(--verde); color: var(--beige); }
-  #s01 .ph { position: absolute; right: 0; top: 0; width: 700px; height: 100%; object-fit: cover; object-position: 50% 50%; }
-  #s01 .top { position: absolute; left: 72px; top: 64px; display: flex; flex-direction: column; gap: 46px; }
-  #s01 .top img { width: 190px; }
-  #s01 .t { position: absolute; left: 64px; bottom: 120px; font-size: 118px; z-index: 2; mix-blend-mode: normal; }
-  #s01 .foot { position: absolute; left: 72px; bottom: 58px; color: rgba(239,232,216,.7); }
+  #s01 { height: 1300px; background: var(--verde); color: var(--beige); }
+  #s01 .logo { position: absolute; left: 50%; top: 44%; transform: translate(-50%, -50%); width: 540px; }
+  #s01 .t { position: absolute; left: 0; right: 0; bottom: 150px; text-align: center; font-size: 62px; }
+  #s01 .row { position: absolute; left: 72px; right: 72px; bottom: 64px; display: flex; justify-content: space-between; color: rgba(239,232,216,.7); }
 
   /* 02 manifiesto */
-  #s02 { background: var(--beige); color: var(--verde); padding: 120px 72px 110px; }
-  #s02 .big { font-size: 128px; }
-  #s02 .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 110px; padding-top: 36px; border-top: 2px solid var(--verde); }
-  #s02 .cols p { font-size: 23px; line-height: 1.5; }
-  #s02 .cols b { font-weight: 700; }
+  #s02 { background: var(--beige); color: var(--verde); padding: 120px 72px 120px; }
+  #s02 .big { font-size: 150px; margin-top: 34px; }
+  #s02 .q { font-size: 34px; line-height: 1.35; letter-spacing: -.02em; max-width: 1100px; margin-top: 90px; padding-top: 40px; border-top: 2px solid var(--verde); }
+  #s02 .src { margin-top: 26px; opacity: .7; }
 
-  /* 03 tira */
-  #s03 { background: var(--papel); padding: 100px 0 110px; }
-  #s03 .h { display: flex; justify-content: space-between; align-items: flex-end; padding: 0 72px; color: var(--verde); }
-  #s03 .h .mega { font-size: 96px; }
-  #s03 .h p { max-width: 380px; text-align: right; font-size: 19px; line-height: 1.5; color: #555; }
-  #s03 .row { display: flex; gap: 20px; margin-top: 70px; margin-left: -120px; align-items: flex-start; }
-  #s03 .row img { height: 520px; width: auto; border-radius: 18px; flex-shrink: 0; }
-  #s03 .row img:nth-child(even) { margin-top: 70px; }
+  /* 03 isotipo */
+  #s03 { height: 1300px; background: var(--papel); color: var(--verde); }
+  #s03 .iso { position: absolute; right: -330px; top: 300px; width: 1100px; }
+  #s03 .txt { position: absolute; left: 72px; top: 100px; width: 600px; }
+  #s03 .txt .mega { font-size: 120px; margin-top: 26px; }
+  #s03 .txt p { font-size: 22px; line-height: 1.5; margin-top: 40px; color: #3c4a44; }
+  #s03 .eq { position: absolute; left: 72px; bottom: 90px; display: flex; align-items: center; gap: 26px; font-size: 64px; font-weight: 700; letter-spacing: -.04em; }
+  #s03 .eq span { font-weight: 400; opacity: .5; }
 
-  /* 04 isotipo */
-  #s04 { height: 1300px; background: var(--beige); color: var(--verde); }
-  #s04 .iso { position: absolute; right: -330px; top: 300px; width: 1100px; }
-  #s04 .txt { position: absolute; left: 72px; top: 100px; width: 600px; }
-  #s04 .txt .mega { font-size: 120px; margin-top: 26px; }
-  #s04 .txt p { font-size: 22px; line-height: 1.5; margin-top: 40px; }
-  #s04 .eq { position: absolute; left: 72px; bottom: 90px; display: flex; align-items: center; gap: 26px; font-size: 64px; font-weight: 700; letter-spacing: -.04em; }
-  #s04 .eq span { font-weight: 400; opacity: .6; }
-
-  /* 05 logo en uso */
+  /* 05 versiones */
   #s05 { background: var(--papel); padding: 100px 72px; color: var(--verde); }
-  #s05 .mega { font-size: 96px; }
-  #s05 .grid { display: grid; grid-template-columns: 1.15fr 1fr 1fr; grid-template-rows: 330px 330px; gap: 18px; margin-top: 64px; }
-  #s05 .grid > * { border-radius: 18px; overflow: hidden; }
-  #s05 .grid .ph { grid-row: span 2; }
-  #s05 .grid .ph img { width: 100%; height: 100%; object-fit: cover; object-position: 40% 62%; }
-  #s05 .tile { display: flex; align-items: center; justify-content: center; position: relative; }
-  #s05 .tile img { width: 52%; }
+  #s05 .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 64px; }
+  #s05 .tile { height: 360px; border-radius: 18px; display: flex; align-items: center; justify-content: center; position: relative; }
+  #s05 .tile img { width: 50%; }
   #s05 .tile span { position: absolute; left: 18px; bottom: 14px; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; }
 
-  /* 06 color */
-  #s06 { background: var(--papel); }
-  #s06 .split { display: grid; grid-template-columns: 1fr 1fr; height: 900px; }
-  #s06 .split > div { padding: 72px; display: flex; flex-direction: column; justify-content: space-between; }
-  #s06 .hex { font-size: 122px; }
-  #s06 .split p { font-size: 21px; line-height: 1.5; max-width: 500px; }
-  #s06 .sw { display: grid; grid-template-columns: repeat(4, 1fr); }
-  #s06 .sw div { position: relative; }
-  #s06 .sw img { width: 100%; height: 350px; object-fit: cover; }
-  #s06 .sw span { position: absolute; left: 18px; bottom: 16px; color: #fff; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; text-shadow: 0 1px 8px rgba(0,0,0,.4); }
+  /* 06 papelería */
+  #s06 { height: 1500px; background: var(--beige); }
+  #s06 .lbl { position: absolute; left: 72px; top: 90px; color: var(--verde); z-index: 5; }
+  #s06 .lbl .mega { font-size: 96px; margin-top: 24px; }
+  .card { position: absolute; width: 420px; height: 250px; border-radius: 6px; box-shadow: 0 1px 1px rgba(0,0,0,.08), 0 18px 30px -12px rgba(40,30,10,.35), 0 40px 60px -30px rgba(40,30,10,.3); overflow: hidden; }
+  .card .noise { opacity: .12; }
+  .c1 { left: 120px; top: 520px; background: var(--verde); transform: rotate(-9deg); display: flex; align-items: center; justify-content: center; }
+  .c1 img { width: 190px; }
+  .c2 { left: 330px; top: 760px; background: #fbf9f4; transform: rotate(5deg); padding: 34px 36px; color: var(--verde); }
+  .c2 img { width: 54px; }
+  .c2 .n { font-size: 26px; font-weight: 700; letter-spacing: -.03em; margin-top: 46px; }
+  .c2 .d { font-size: 15px; line-height: 1.6; margin-top: 8px; color: #44544d; }
+  .tag { position: absolute; left: 860px; top: 380px; width: 230px; height: 420px; background: var(--kraft); border-radius: 14px 14px 10px 10px; transform: rotate(7deg); box-shadow: 0 18px 30px -12px rgba(40,30,10,.4), 0 40px 70px -30px rgba(40,30,10,.3); display: flex; flex-direction: column; align-items: center; padding-top: 120px; color: #3b2a14; overflow: hidden; }
+  .tag::before { content: ""; position: absolute; top: 34px; left: 50%; width: 30px; height: 30px; margin-left: -15px; border-radius: 50%; background: var(--beige); box-shadow: inset 0 2px 4px rgba(0,0,0,.35); }
+  .tag img { width: 120px; }
+  .tag .t1 { font-size: 22px; font-weight: 700; letter-spacing: -.02em; margin-top: 40px; }
+  .tag .t2 { font-size: 13px; letter-spacing: .18em; text-transform: uppercase; margin-top: 8px; opacity: .75; }
+  .tag .noise { opacity: .35; }
+  .string { position: absolute; left: 960px; top: 170px; width: 4px; height: 260px; background: linear-gradient(#e9e2d0, #d8ccb0); transform: rotate(-14deg); transform-origin: bottom; border-radius: 2px; box-shadow: 1px 2px 3px rgba(0,0,0,.15); }
+  .sticker { position: absolute; width: 200px; height: 200px; border-radius: 50%; background: var(--verde); display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 2px rgba(0,0,0,.12), 0 14px 24px -10px rgba(40,30,10,.4); }
+  .sticker img { width: 120px; }
+  .s1 { left: 1110px; top: 880px; }
+  .s2 { left: 1000px; top: 1110px; width: 150px; height: 150px; background: var(--papel); }
+  .s2 img { width: 90px; }
+  .thanks { position: absolute; left: 160px; top: 1080px; width: 640px; height: 330px; background: #fbf9f4; border-radius: 6px; transform: rotate(-3deg); box-shadow: 0 1px 1px rgba(0,0,0,.08), 0 22px 36px -14px rgba(40,30,10,.35); padding: 48px 54px; color: var(--verde); overflow: hidden; }
+  .thanks .mega { font-size: 64px; }
+  .thanks img { position: absolute; right: 50px; bottom: 44px; width: 90px; }
+  .thanks .s { position: absolute; left: 54px; bottom: 48px; font-size: 14px; letter-spacing: .18em; text-transform: uppercase; opacity: .7; }
 
-  /* 07 tipografía */
-  #s07 { background: var(--verde); color: var(--beige); padding: 100px 72px 110px; }
-  #s07 .top { display: flex; justify-content: space-between; align-items: flex-start; }
-  #s07 .aa { font-size: 420px; line-height: .78; letter-spacing: -.07em; }
-  #s07 .meta { text-align: right; font-size: 20px; line-height: 1.6; color: rgba(239,232,216,.75); }
-  #s07 .meta b { display: block; font-size: 34px; color: var(--beige); letter-spacing: -.02em; }
-  #s07 .lines { margin-top: 90px; border-top: 2px solid rgba(239,232,216,.35); }
-  #s07 .lines div { display: flex; justify-content: space-between; align-items: baseline; padding: 26px 0; border-bottom: 2px solid rgba(239,232,216,.35); }
-  #s07 .lines .s { font-size: 82px; letter-spacing: -.045em; line-height: 1; }
-  #s07 .lines .l { font-size: 14px; letter-spacing: .2em; text-transform: uppercase; color: rgba(239,232,216,.6); }
+  /* 07 color */
+  #s07 { background: var(--papel); }
+  #s07 .split { display: grid; grid-template-columns: 1fr 1fr; height: 820px; }
+  #s07 .split > div { padding: 72px; display: flex; flex-direction: column; justify-content: space-between; }
+  #s07 .hex { font-size: 122px; }
+  #s07 .split p { font-size: 21px; line-height: 1.5; max-width: 500px; }
+  #s07 .sw { display: grid; grid-template-columns: repeat(4, 1fr); }
+  #s07 .sw div { position: relative; }
+  #s07 .sw img { width: 100%; height: 350px; object-fit: cover; }
+  #s07 .sw span { position: absolute; left: 18px; bottom: 16px; color: #fff; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; text-shadow: 0 1px 8px rgba(0,0,0,.45); }
 
-  /* 08 / 10 / 11 fotos a sangre */
-  .bleed img { width: 100%; }
-  .bleed .over { position: absolute; left: 72px; bottom: 64px; color: #fff; }
-  .bleed .over .mega { font-size: 150px; text-shadow: 0 2px 30px rgba(0,0,0,.25); }
+  /* 08 tipografía */
+  #s08 { background: var(--verde); color: var(--beige); padding: 100px 72px 110px; }
+  #s08 .top { display: flex; justify-content: space-between; align-items: flex-start; }
+  #s08 .aa { font-size: 420px; line-height: .78; letter-spacing: -.07em; }
+  #s08 .meta { text-align: right; font-size: 20px; line-height: 1.6; color: rgba(239,232,216,.75); }
+  #s08 .meta b { display: block; font-size: 34px; color: var(--beige); letter-spacing: -.02em; }
+  #s08 .lines { margin-top: 90px; border-top: 2px solid rgba(239,232,216,.35); }
+  #s08 .lines div { display: flex; justify-content: space-between; align-items: baseline; padding: 26px 0; border-bottom: 2px solid rgba(239,232,216,.35); }
+  #s08 .lines .s { font-size: 82px; letter-spacing: -.045em; line-height: 1; }
+  #s08 .lines .l { font-size: 14px; letter-spacing: .2em; text-transform: uppercase; color: rgba(239,232,216,.6); }
 
-  /* 09 fichas */
-  #s09 { background: var(--papel); }
-  #s09 .h { padding: 100px 72px 10px; display: flex; justify-content: space-between; align-items: flex-end; color: var(--verde); }
-  #s09 .h .mega { font-size: 96px; }
-  #s09 .h p { max-width: 400px; text-align: right; font-size: 19px; line-height: 1.5; color: #555; }
-  #s09 img.f { width: 100%; }
+  /* 09 tono */
+  #s09 { background: var(--beige); padding: 100px 72px 110px; color: var(--verde); }
+  #s09 .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 70px; }
+  #s09 .grid figure img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 14px; box-shadow: 0 24px 50px -28px rgba(8,64,47,.45); }
+  #s09 figcaption { margin-top: 14px; font-size: 17px; line-height: 1.4; color: #2f4d43; }
 
-  /* 10 packaging */
-  #s10 { background: var(--verde); padding: 100px 72px; color: var(--beige); }
-  #s10 .h { display: flex; justify-content: space-between; align-items: flex-end; }
-  #s10 .h .mega { font-size: 120px; }
-  #s10 .h p { max-width: 380px; text-align: right; font-size: 19px; line-height: 1.5; color: rgba(239,232,216,.75); }
-  #s10 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 70px; }
-  #s10 .two div { border-radius: 22px; overflow: hidden; height: 980px; display: flex; align-items: center; }
-  #s10 .two img { width: 100%; height: 100%; object-fit: contain; }
+  /* 10 feed */
+  #s10 { height: 1450px; background: var(--verde); color: var(--beige); }
+  #s10 .lbl { position: absolute; left: 72px; top: 100px; width: 520px; }
+  #s10 .lbl .mega { font-size: 96px; margin-top: 24px; }
+  #s10 .lbl p { font-size: 21px; line-height: 1.5; margin-top: 34px; color: rgba(239,232,216,.8); }
+  .phone { position: absolute; width: 470px; height: 1000px; border-radius: 64px; background: #111; padding: 14px; box-shadow: 0 60px 120px -40px rgba(0,0,0,.6), inset 0 0 0 2px #333; }
+  .phone .scr { width: 100%; height: 100%; border-radius: 52px; overflow: hidden; background: #fff; color: #111; position: relative; }
+  .phone .notch { position: absolute; top: 12px; left: 50%; width: 120px; height: 32px; margin-left: -60px; background: #111; border-radius: 20px; z-index: 3; }
+  .phone .top { padding: 62px 22px 0; }
+  .phone .handle { font-size: 19px; font-weight: 700; text-align: center; }
+  .phone .prof { display: flex; align-items: center; gap: 22px; margin-top: 20px; }
+  .phone .av { width: 92px; height: 92px; border-radius: 50%; background: var(--verde); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .phone .av img { width: 58px; }
+  .phone .bio { font-size: 14px; line-height: 1.45; }
+  .phone .bio b { display: block; font-size: 15px; }
+  .phone .btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 18px 0 16px; }
+  .phone .btns span { background: #efefef; border-radius: 9px; text-align: center; font-size: 13px; font-weight: 600; padding: 9px 0; }
+  .phone .feed { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .phone .feed img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+  .ph1 { left: 690px; top: 230px; transform: rotate(4deg); }
 
-  /* 12 digital */
-  #s12 { background: var(--beige); color: var(--verde); padding: 100px 72px 110px; }
-  #s12 .h { display: flex; justify-content: space-between; align-items: flex-end; }
-  #s12 .h .mega { font-size: 96px; }
-  #s12 .h p { max-width: 420px; text-align: right; font-size: 19px; line-height: 1.5; }
-  #s12 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 70px; }
-  #s12 .browser { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 30px 70px -30px rgba(8,64,47,.45); }
-  #s12 .browser .bar { height: 30px; display: flex; align-items: center; gap: 7px; padding: 0 14px; background: #fafafa; border-bottom: 1px solid #ececec; }
-  #s12 .browser .bar i { width: 10px; height: 10px; border-radius: 50%; background: #dedede; }
-  #s12 .browser img { width: 100%; }
-  #s12 .c { display: flex; justify-content: space-between; margin-top: 20px; }
-  #s12 .c b { font-size: 28px; letter-spacing: -.02em; }
+  /* 11 fichas */
+  #s11 { background: var(--papel); padding: 100px 72px 110px; color: var(--verde); }
+  #s11 .row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 64px; }
+  #s11 .row img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 12px; box-shadow: 0 0 0 1px #eee; }
+  #s11 .big { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; margin-top: 16px; }
+  #s11 .big img { width: 100%; height: 640px; object-fit: cover; border-radius: 12px; box-shadow: 0 0 0 1px #eee; }
 
-  /* 13 cierre */
-  #s13 { height: 900px; background: var(--verde); color: var(--beige); }
-  #s13 .ph { position: absolute; left: 72px; top: 90px; width: 576px; height: 720px; object-fit: cover; border-radius: 22px; }
-  #s13 .r { position: absolute; left: 700px; right: 72px; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: center; }
-  #s13 .r img { width: 120px; }
-  #s13 .r .mega { font-size: 170px; margin-top: 50px; }
-  #s13 .cr { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 40px; margin-top: 70px; font-size: 18px; color: rgba(239,232,216,.75); }
-  #s13 .cr b { display: block; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--beige); margin-bottom: 4px; }
+  /* 12 packaging */
+  #s12 { background: var(--verde); padding: 100px 72px; color: var(--beige); }
+  #s12 .h p { color: rgba(239,232,216,.75); }
+  #s12 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 70px; }
+  #s12 .two div { border-radius: 22px; overflow: hidden; height: 980px; display: flex; align-items: center; }
+  #s12 .two img { width: 100%; height: 100%; object-fit: contain; }
+
+  /* 15 digital */
+  #s15 { background: var(--beige); color: var(--verde); padding: 100px 72px 110px; }
+  #s15 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 70px; }
+  #s15 .browser { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 30px 70px -30px rgba(8,64,47,.45); }
+  #s15 .browser .bar { height: 30px; display: flex; align-items: center; gap: 7px; padding: 0 14px; background: #fafafa; border-bottom: 1px solid #ececec; }
+  #s15 .browser .bar i { width: 10px; height: 10px; border-radius: 50%; background: #dedede; }
+  #s15 .browser img { width: 100%; }
+  #s15 .c { display: flex; justify-content: space-between; margin-top: 20px; }
+  #s15 .c b { font-size: 28px; letter-spacing: -.02em; }
+
+  /* 16 cierre */
+  #s16 { height: 900px; background: var(--verde); color: var(--beige); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  #s16 img { width: 150px; }
+  #s16 .mega { font-size: 180px; margin-top: 50px; }
+  #s16 .cr { display: flex; gap: 72px; margin-top: 70px; font-size: 18px; color: rgba(239,232,216,.75); text-align: left; }
+  #s16 .cr b { display: block; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--beige); margin-bottom: 4px; }
 </style>
 </head>
 <body>
 
 <div id="cover">
   <img class="logo" src="logos/full_beige.png" alt="">
-  <img class="ph" src="strip/bolso_2x.jpg" alt="">
-  <span class="cap c">Identidad de marca</span>
-  <div class="mega t">sin<br>vueltas.</div>
+  <div class="t">sin vueltas, <span>sin azúcar.</span></div>
 </div>
 
 <section class="slide" id="s01">
-  <img class="ph" src="strip/bolso_2x.jpg" alt="">
-  <div class="top"><img src="logos/full_beige.png" alt="Un Amargo"><span class="cap" style="color:rgba(239,232,216,.7)">Identidad de marca · Uruguay 2025</span></div>
-  <div class="mega t">un amargo,<br>sin vueltas,<br><span class="reg">sin azúcar.</span></div>
-  <span class="cap foot">Mates · Bombillas · Accesorios</span>
+  <img class="logo" src="logos/full_beige.png" alt="Un Amargo">
+  <div class="mega t">sin vueltas, <span class="reg">sin azúcar.</span></div>
+  <div class="row cap"><span>Identidad de marca</span><span>Uruguay · 2025</span></div>
 </section>
 
 <section class="slide" id="s02">
   <span class="cap">Manifiesto</span>
-  <div class="mega big" style="margin-top:34px">El mate de siempre, <span class="reg">mirado de nuevo.</span></div>
-  <div class="cols">
-    <p>Un Amargo busca resignificar la experiencia de tomar mates desde lo visual, presentando los productos con un toque distintivo. Desde el día uno apostamos a algo claro: <b>diseño con propósito.</b></p>
-    <p>Diseño gráfico, piezas digitales y principios de UI/UX para redes, al servicio de una identidad sólida, cercana y coherente. Esto no es solo branding: es hablar en el lenguaje de quienes están del otro lado.</p>
-  </div>
+  <div class="mega big">Lo mejor <span class="reg">es lo simple.</span></div>
+  <p class="q">"Sin vueltas, sin azúcar. Ese sabor intenso y natural nos invita a compartir momentos, a compartir con amigos, porque lo mejor es lo simple: disfrutar de un buen amargo, rodeado de risas y charlas, sin necesidad de enmascarar la esencia."</p>
+  <p class="cap src">Un Amargo</p>
 </section>
 
 <section class="slide" id="s03">
-  <div class="h">
-    <div><span class="cap">Fotografía</span><div class="mega" style="margin-top:24px">El mate <span class="reg">fuera de la cocina.</span></div></div>
-    <p>En la playa, en el auto, colgando de un bolso. La marca se fotografía donde se toma mate de verdad.</p>
-  </div>
-  <div class="row">
-    <img src="strip/t05_2x.jpg" alt=""><img src="strip/t01_2x.jpg" alt=""><img src="strip/t02_2x.jpg" alt=""><img src="strip/t04_2x.jpg" alt=""><img src="strip/t03_2x.jpg" alt=""><img src="strip/bolso_2x.jpg" alt="">
-  </div>
-</section>
-
-<section class="slide" id="s04">
   <img class="iso" src="logos/iso_verde.png" alt="">
   <div class="txt">
     <span class="cap">Isotipo</span>
     <div class="mega">Un mate. <span class="reg">Una bombilla.</span></div>
-    <p>La bombilla dibuja la "u" y el mate cierra la "a". Un solo trazo que se lee como marca y se entiende como objeto, igual de claro en un avatar, en un grabado láser o colgando de un bolso.</p>
+    <p>La bombilla dibuja la "u" y el mate cierra la "a". Un solo trazo que se lee como marca y se entiende como objeto, igual de claro en un avatar, en un sticker o grabado en una virola.</p>
   </div>
   <div class="eq">u <span>+</span> a <span>=</span> <img src="logos/iso_verde.png" style="width:110px" alt=""></div>
 </section>
 
 <section class="slide" id="s05">
-  <span class="cap">Logotipo</span>
-  <div class="mega" style="margin-top:24px">En todos lados, <span class="reg">igual de claro.</span></div>
+  <div class="h">
+    <div><span class="cap">Logotipo</span><div class="mega">Versiones.</div></div>
+    <p style="color:#3c4a44">El logo completo para cuando hay lugar para el nombre. El isotipo solo, para todo lo demás.</p>
+  </div>
   <div class="grid">
-    <div class="ph"><img src="strip/bolso_2x.jpg" alt=""></div>
-    <div class="tile" style="background:var(--verde)"><img src="logos/full_beige.png" alt=""><span style="color:var(--beige)">Sobre verde</span></div>
+    <div class="tile" style="background:var(--verde)"><img src="logos/full_beige.png" alt=""><span style="color:var(--beige)">Principal</span></div>
     <div class="tile" style="background:var(--beige)"><img src="logos/full_verde.png" alt=""><span style="color:var(--verde)">Sobre beige</span></div>
+    <div class="tile" style="background:#fff;box-shadow:inset 0 0 0 1.5px #e6e6e6"><img src="logos/full_verde.png" alt=""><span style="color:var(--verde)">Sobre blanco</span></div>
     <div class="tile" style="background:var(--tinta)"><img src="logos/full_blanco.png" alt=""><span style="color:#fff">Negativo</span></div>
-    <div class="tile" style="background:#fff;box-shadow:inset 0 0 0 1.5px #e6e6e6"><img src="logos/iso_verde.png" style="width:40%" alt=""><span style="color:var(--verde)">Isotipo</span></div>
+    <div class="tile" style="background:#fff;box-shadow:inset 0 0 0 1.5px #e6e6e6"><img src="logos/full_negro.png" alt=""><span>Monocromo</span></div>
+    <div class="tile" style="background:var(--kraft)"><img src="logos/iso_verde.png" style="width:40%" alt=""><span style="color:#3b2a14">Isotipo sobre kraft</span></div>
   </div>
 </section>
 
 <section class="slide" id="s06">
+  <div class="noise" style="opacity:.14"></div>
+  <div class="lbl"><span class="cap">Aplicaciones</span><div class="mega">Papelería.</div></div>
+  <div class="string"></div>
+  <div class="tag"><img src="logos/iso_verde.png" alt=""><div class="t1">Hecho a mano</div><div class="t2">Uruguay</div><div class="noise"></div></div>
+  <div class="card c1"><img src="logos/full_beige.png" alt=""><div class="noise"></div></div>
+  <div class="card c2"><img src="logos/iso_verde.png" alt=""><div class="n">@unamargo_</div><div class="d">unamargo.info@gmail.com<br>Montevideo · Uruguay</div><div class="noise"></div></div>
+  <div class="thanks"><div class="mega">hola, <span class="reg">te llegó<br>un amargo.</span></div><span class="s">Gracias por elegirnos</span><img src="logos/iso_verde.png" alt=""><div class="noise" style="opacity:.1"></div></div>
+  <div class="sticker s1"><img src="logos/iso_beige.png" alt=""></div>
+  <div class="sticker s2"><img src="logos/iso_verde.png" alt=""></div>
+</section>
+
+<section class="slide" id="s07">
   <div class="split">
     <div style="background:var(--verde);color:var(--beige)">
       <span class="cap">Verde Un Amargo</span>
@@ -205,14 +236,14 @@
     </div>
   </div>
   <div class="sw">
-    <div><img src="strip/sw_buzo.jpg" alt=""><span>Buzo</span></div>
-    <div><img src="strip/sw_calabaza.jpg" alt=""><span>Calabaza</span></div>
-    <div><img src="strip/sw_hojas.jpg" alt=""><span>Yerba</span></div>
-    <div><img src="strip/sw_pared.jpg" alt=""><span>Pared</span></div>
+    <div><img src="sw/verde.jpg" alt=""><span>Verde</span></div>
+    <div><img src="sw/madera.jpg" alt=""><span>Algarrobo</span></div>
+    <div><img src="sw/cuero.jpg" alt=""><span>Cuero</span></div>
+    <div><img src="sw/kraft.jpg" alt=""><span>Kraft</span></div>
   </div>
 </section>
 
-<section class="slide" id="s07">
+<section class="slide" id="s08">
   <div class="top">
     <div class="mega aa">Aa</div>
     <div class="meta"><b>Helvetica</b>Bold para decir.<br>Regular para contar.</div>
@@ -224,21 +255,56 @@
   </div>
 </section>
 
-<section class="slide bleed" id="s08">
-  <img src="crops/foto.png" alt="">
-</section>
-
 <section class="slide" id="s09">
   <div class="h">
-    <div><span class="cap">Sistema</span><div class="mega" style="margin-top:24px">Cada producto, <span class="reg">su ficha.</span></div></div>
-    <p>Una plantilla para todo el catálogo: foto sobre fondo claro, etiqueta verde y el isotipo firmando abajo.</p>
+    <div><span class="cap">Tono de voz</span><div class="mega">Humor <span class="reg">sin azúcar.</span></div></div>
+    <p style="color:#2f4d43">La marca habla como habla quien toma mate: corto, cómplice y con chiste. Cada post es una idea, no un catálogo.</p>
   </div>
-  <img class="f" src="crops/fichas.png" alt="">
+  <div class="grid">
+    <figure><img src="pins/p03.jpg" alt=""><figcaption>"Como atraparme:"</figcaption></figure>
+    <figure><img src="pins/p04.jpg" alt=""><figcaption>"Las flores amarillas que ellos necesitan."</figcaption></figure>
+    <figure><img src="pins/p06.jpg" alt=""><figcaption>"¿Querés pasar el resto de tu vida tomando matesitos conmigo?"</figcaption></figure>
+    <figure><img src="pins/p14.jpg" alt=""><figcaption>"Wtf es desayunar café."</figcaption></figure>
+    <figure><img src="pins/p01.jpg" alt=""><figcaption>"Abrí la foto."</figcaption></figure>
+    <figure><img src="pins/p02.jpg" alt="" style="object-position:50% 40%"><figcaption>"Soñé contigo anoche. ¿Estaba tomando mate? No. Entonces no era yo."</figcaption></figure>
+  </div>
 </section>
 
 <section class="slide" id="s10">
+  <div class="lbl">
+    <span class="cap" style="color:rgba(239,232,216,.6)">Redes</span>
+    <div class="mega">El feed, <span class="reg">como sistema.</span></div>
+    <p>Posts con chiste, fichas de producto y detalles de textura se alternan en una grilla reconocible: verde, blanco y el isotipo firmando cada pieza.</p>
+  </div>
+  <div class="phone ph1"><div class="scr"><div class="notch"></div>
+    <div class="top">
+      <div class="handle">unamargo_</div>
+      <div class="prof"><div class="av"><img src="logos/iso_beige.png" alt=""></div><div class="bio"><b>Un Amargo</b>Sin vueltas, sin azúcar.<br>Mates, bombillas y accesorios · Uruguay</div></div>
+      <div class="btns"><span>Seguir</span><span>Mensaje</span></div>
+    </div>
+    <div class="feed">
+      <img src="pins/p03.jpg" alt=""><img src="pins/p17.jpg" alt=""><img src="pins/p04.jpg" alt="">
+      <img src="pins/p10.jpg" alt=""><img src="pins/p06.jpg" alt=""><img src="pins/p15.jpg" alt="">
+      <img src="pins/p14.jpg" alt=""><img src="pins/p19.jpg" alt=""><img src="pins/p01.jpg" alt="">
+      <img src="pins/p05.jpg" alt=""><img src="pins/p12.jpg" alt=""><img src="pins/p02.jpg" alt="">
+    </div>
+  </div></div>
+</section>
+
+<section class="slide" id="s11">
   <div class="h">
-    <div><span class="cap" style="color:rgba(239,232,216,.6)">Packaging</span><div class="mega" style="margin-top:24px">Hola, <span class="reg">te llegó un amargo.</span></div></div>
+    <div><span class="cap">Sistema de producto</span><div class="mega">Cada pieza, <span class="reg">su ficha.</span></div></div>
+    <p style="color:#3c4a44">Fondo claro, etiqueta verde con nombre y atributos, y el logo firmando abajo. El mismo molde para mates, bombillas y accesorios.</p>
+  </div>
+  <div class="row">
+    <img src="pins/p07.jpg" alt=""><img src="pins/p09.jpg" alt=""><img src="pins/p10.jpg" alt=""><img src="pins/p13.jpg" alt="">
+  </div>
+  <div class="big"><img src="pins/p15.jpg" alt="" style="object-position:50% 40%"><img src="pins/p17.jpg" alt=""></div>
+</section>
+
+<section class="slide" id="s12">
+  <div class="h">
+    <div><span class="cap" style="color:rgba(239,232,216,.6)">Packaging</span><div class="mega">Hola, <span class="reg">te llegó un amargo.</span></div></div>
     <p>La bolsa saluda antes de abrirla. La yerba llega como suero: sin vueltas, sin azúcar.</p>
   </div>
   <div class="two">
@@ -247,17 +313,13 @@
   </div>
 </section>
 
-<section class="slide bleed" id="s11">
-  <img src="crops/campana.png" alt="">
-</section>
+<section class="slide" id="s13"><img src="crops/foto.png" style="width:100%" alt=""></section>
 
-<section class="slide bleed" id="s11b">
-  <img src="crops/posts.png" alt="">
-</section>
+<section class="slide" id="s14"><img src="crops/campana.png" style="width:100%" alt=""></section>
 
-<section class="slide" id="s12">
+<section class="slide" id="s15">
   <div class="h">
-    <div><span class="cap">Digital</span><div class="mega" style="margin-top:24px">De la marca <span class="reg">a la pantalla.</span></div></div>
+    <div><span class="cap">Digital</span><div class="mega">De la marca <span class="reg">a la pantalla.</span></div></div>
     <p>La identidad sigue en la web: una tienda online y dos guías interactivas en 3D, cada una con su proyecto en este perfil.</p>
   </div>
   <div class="two">
@@ -266,16 +328,10 @@
   </div>
 </section>
 
-<section class="slide" id="s13">
-  <img class="ph" src="strip/t04_2x.jpg" alt="">
-  <div class="r">
-    <img src="logos/iso_beige.png" alt="">
-    <div class="mega">gracias.</div>
-    <div class="cr">
-      <div><b>Identidad y diseño</b>Facundo Laviano</div>
-      <div><b>Marca</b>Un Amargo · Uruguay</div>
-    </div>
-  </div>
+<section class="slide" id="s16">
+  <img src="logos/iso_beige.png" alt="">
+  <div class="mega">gracias.</div>
+  <div class="cr"><div><b>Identidad y diseño</b>Facundo Laviano</div><div><b>Marca</b>Un Amargo · Uruguay</div></div>
 </section>
 </body>
 </html>
