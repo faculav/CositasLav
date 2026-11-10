@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Identidad — láminas Behance</title>
+<style>
+  :root {
+    --verde: #0c5a43;
+    --beige: #efe8d8;
+    --tinta: #0a0a0a;
+    --papel: #ffffff;
+    --suave: #5c5c5c;
+    --muted: #8a8a8a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #777; font-family: 'Helvetica Neue', Helvetica, Inter, Arial, sans-serif; color: var(--tinta); -webkit-font-smoothing: antialiased; }
+  .slide { width: 1400px; position: relative; overflow: hidden; background: var(--papel); margin: 0 auto 40px; }
+  .pad { padding: 96px 104px; }
+  .eyebrow { font-size: 15px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+  h1, h2 { font-weight: 700; letter-spacing: -.045em; line-height: .9; }
+  h2 em { font-style: normal; font-weight: 400; display: block; }
+  p { font-size: 21px; line-height: 1.55; color: var(--suave); }
+  .num { font-variant-numeric: tabular-nums; font-size: 15px; letter-spacing: .12em; color: var(--muted); }
+  .head { display: flex; justify-content: space-between; align-items: flex-end; gap: 60px; margin-bottom: 72px; }
+  .head h2 { font-size: 96px; margin-top: 22px; }
+  .head p { max-width: 420px; text-align: right; font-size: 19px; }
+
+  /* portada Behance */
+  #cover { width: 808px; height: 632px; background: var(--beige); margin: 0 auto 40px; position: relative; overflow: hidden; }
+  #cover .logo { position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%); width: 330px; }
+  #cover .tag { position: absolute; left: 0; right: 0; bottom: 44px; text-align: center; font-size: 15px; letter-spacing: .2em; text-transform: uppercase; color: var(--verde); }
+
+  /* 01 portada */
+  #s01 { height: 1150px; background: var(--beige); }
+  #s01 .logo { position: absolute; left: 50%; top: 47%; transform: translate(-50%, -50%); width: 560px; }
+  #s01 .row { position: absolute; left: 104px; right: 104px; bottom: 72px; display: flex; justify-content: space-between; font-size: 15px; letter-spacing: .18em; text-transform: uppercase; color: var(--verde); }
+
+  /* 02 concepto */
+  #s02 { padding-bottom: 120px; }
+  #s02 .wrap { display: grid; grid-template-columns: 220px 1fr; gap: 80px; margin-top: 70px; }
+  #s02 .wrap img { width: 170px; }
+  #s02 .lead { font-size: 54px; font-weight: 700; letter-spacing: -.035em; line-height: 1.04; color: var(--verde); }
+  #s02 .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; margin-top: 70px; padding-top: 36px; border-top: 1.5px solid var(--verde); }
+  #s02 .cols p { font-size: 21px; color: var(--verde); }
+  #s02 .cols b { font-weight: 700; }
+
+  /* 04 versiones */
+  #s04 .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  #s04 .tile { height: 380px; border-radius: 22px; display: flex; align-items: center; justify-content: center; position: relative; box-shadow: inset 0 0 0 1px rgba(0,0,0,.06); }
+  #s04 .tile img { width: 46%; }
+  #s04 .tile img.iso { width: 40%; }
+  #s04 .tile span { position: absolute; left: 22px; bottom: 18px; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; }
+  #s04 .min { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+  #s04 .min > div { border-radius: 22px; padding: 34px 40px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.08); display: flex; align-items: center; gap: 36px; }
+  #s04 .min h3 { font-size: 22px; letter-spacing: -.02em; margin-bottom: 6px; }
+  #s04 .min p { font-size: 17px; }
+  #s04 .sizes { display: flex; align-items: flex-end; gap: 22px; }
+
+  /* 05 paleta */
+  #s05 .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  #s05 .card { border-radius: 26px; padding: 48px 48px 44px; min-height: 560px; display: flex; flex-direction: column; justify-content: space-between; }
+  #s05 .card .hex { font-size: 64px; font-weight: 700; letter-spacing: -.03em; }
+  #s05 .card .name { font-size: 16px; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 12px; opacity: .8; }
+  #s05 .card p { font-size: 20px; line-height: 1.5; color: inherit; max-width: 520px; }
+  #s05 .card .meta { display: flex; gap: 28px; font-size: 15px; letter-spacing: .06em; margin-top: 26px; opacity: .8; font-variant-numeric: tabular-nums; }
+  #s05 .type { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 28px; }
+  #s05 .type > div { border-radius: 26px; padding: 40px 48px; display: flex; align-items: center; justify-content: space-between; box-shadow: inset 0 0 0 1.5px var(--verde); color: var(--verde); }
+  #s05 .type .aa { font-size: 110px; letter-spacing: -.05em; line-height: .8; }
+  #s05 .type .lbl { text-align: right; font-size: 18px; line-height: 1.5; }
+  #s05 .type .lbl b { display: block; font-size: 24px; }
+
+  /* 13 digital */
+  #s13 { background: var(--verde); color: var(--beige); }
+  #s13 .eyebrow { color: rgba(239,232,216,.6); }
+  #s13 .head p { color: rgba(239,232,216,.75); }
+  #s13 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; }
+  #s13 .browser { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 30px 80px -30px rgba(0,0,0,.5); }
+  #s13 .browser .bar { height: 30px; display: flex; align-items: center; gap: 7px; padding: 0 14px; background: #fafafa; border-bottom: 1px solid #ececec; }
+  #s13 .browser .bar i { width: 10px; height: 10px; border-radius: 50%; background: #dedede; }
+  #s13 .browser img { display: block; width: 100%; }
+  #s13 .cap { margin-top: 22px; display: flex; justify-content: space-between; align-items: baseline; }
+  #s13 .cap b { font-size: 26px; letter-spacing: -.02em; }
+  #s13 .cap span { font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: rgba(239,232,216,.6); }
+
+  /* 14 gracias */
+  #s14 { height: 860px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  #s14 img { width: 150px; }
+  #s14 h2 { font-size: 150px; margin-top: 56px; color: var(--verde); }
+  #s14 .credits { display: flex; gap: 72px; margin-top: 76px; font-size: 17px; color: var(--suave); text-align: left; }
+  #s14 .credits b { display: block; color: var(--verde); margin-bottom: 4px; font-size: 13px; letter-spacing: .18em; text-transform: uppercase; }
+</style>
+</head>
+<body>
+
+<div id="cover">
+  <img class="logo" src="logos/full_verde.png" alt="">
+  <span class="tag">Identidad de marca</span>
+</div>
+
+<section class="slide" id="s01">
+  <img class="logo" src="logos/full_verde.png" alt="Un Amargo">
+  <div class="row"><span>Identidad de marca</span><span>Uruguay · 2025</span></div>
+</section>
+
+<section class="slide pad" id="s02">
+  <span class="eyebrow">El concepto</span>
+  <div class="wrap">
+    <img src="logos/iso_verde.png" alt="">
+    <div>
+      <p class="lead">Un Amargo busca resignificar la experiencia de tomar mates desde lo visual, presentando los productos con un toque distintivo.</p>
+      <div class="cols">
+        <p>Desde el día uno apostamos a algo claro: <b>diseño con propósito</b>. Aplicando diseño gráfico, creación de piezas digitales y principios de UI/UX para redes, construimos una identidad sólida, cercana y coherente.</p>
+        <p>Esto no es solo branding. Es estrategia visual, es entender la experiencia del usuario, es hablar en el lenguaje de quienes están del otro lado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide pad" id="s04">
+  <div class="head">
+    <div><span class="eyebrow">Logotipo</span><h2>Versiones <em>del logo.</em></h2></div>
+    <p>Un mate y su bombilla que se leen como "ua". El isotipo funciona solo y el logo completo suma el nombre.</p>
+  </div>
+  <div class="grid">
+    <div class="tile" style="background:#fff"><img src="logos/full_verde.png" alt=""><span style="color:var(--verde)">Principal</span></div>
+    <div class="tile" style="background:var(--verde)"><img src="logos/full_beige.png" alt=""><span style="color:var(--beige)">Sobre verde</span></div>
+    <div class="tile" style="background:var(--beige)"><img src="logos/full_verde.png" alt=""><span style="color:var(--verde)">Sobre beige</span></div>
+    <div class="tile" style="background:#fff"><img src="logos/full_negro.png" alt=""><span style="color:var(--tinta)">Monocromo</span></div>
+    <div class="tile" style="background:var(--tinta)"><img src="logos/full_blanco.png" alt=""><span style="color:#fff">Negativo</span></div>
+    <div class="tile" style="background:var(--beige)"><img class="iso" src="logos/iso_verde.png" alt=""><span style="color:var(--verde)">Isotipo</span></div>
+  </div>
+  <div class="min">
+    <div><div class="sizes"><img src="logos/iso_verde.png" style="width:72px" alt=""><img src="logos/iso_verde.png" style="width:44px" alt=""><img src="logos/iso_verde.png" style="width:24px" alt=""></div><div><h3>Isotipo en tamaño chico</h3><p>Para avatar de redes, favicon y grabados en mates y bombillas.</p></div></div>
+    <div><div class="sizes"><img src="logos/full_verde.png" style="width:120px" alt=""><img src="logos/full_verde.png" style="width:72px" alt=""></div><div><h3>Logo completo</h3><p>Cuando hay lugar para el nombre: packaging, web y piezas impresas.</p></div></div>
+  </div>
+</section>
+
+<section class="slide pad" id="s05">
+  <div class="head">
+    <div><span class="eyebrow">Color y tipografía</span><h2>Verde y beige, <em>nada más.</em></h2></div>
+    <p>Dos colores y una tipografía. Lo justo para que la marca sea reconocible y el mate sea el protagonista.</p>
+  </div>
+  <div class="cards">
+    <div class="card" style="background:var(--verde);color:var(--beige)">
+      <div><div class="name">Verde Un Amargo</div><div class="hex">#0C5A43</div></div>
+      <div>
+        <p>El color que define la identidad de Un Amargo. Representa la naturaleza, la calma y la conexión con lo esencial: el ritual del mate. Un tono profundo, con carácter, que transmite equilibrio y madurez, y une la tradición con una mirada contemporánea.</p>
+        <div class="meta"><span>RGB 12 · 90 · 67</span></div>
+      </div>
+    </div>
+    <div class="card" style="background:var(--beige);color:var(--verde)">
+      <div><div class="name">Beige</div><div class="hex">#EFE8D8</div></div>
+      <div>
+        <p>Complementa al verde desde un lugar cálido y sutil. Aporta serenidad y cercanía, y deja que se destaquen los materiales y las texturas reales del producto. Es el espacio en blanco de la marca, donde el diseño respira y el mate habla por sí mismo.</p>
+        <div class="meta"><span>RGB 239 · 232 · 216</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="type">
+    <div><span class="aa" style="font-weight:400">Aa</span><span class="lbl"><b>Helvetica Regular</b>Textos y descripciones</span></div>
+    <div><span class="aa" style="font-weight:700">Aa</span><span class="lbl"><b>Helvetica Bold</b>Títulos y mensajes</span></div>
+  </div>
+</section>
+
+<section class="slide pad" id="s13">
+  <div class="head">
+    <div><span class="eyebrow">La marca en digital</span><h2>De la identidad <em>a la pantalla.</em></h2></div>
+    <p>La identidad se extiende a la web: una tienda online y dos guías interactivas en 3D. Cada una tiene su propio proyecto en este perfil.</p>
+  </div>
+  <div class="two">
+    <div><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="d_top.png" alt=""></div><div class="cap"><b>La tienda</b><span>E-commerce</span></div></div>
+    <div><div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="cebar_desk_0.png" alt=""></div><div class="cap"><b>Rituales</b><span>Guías 3D</span></div></div>
+  </div>
+</section>
+
+<section class="slide" id="s14">
+  <img src="logos/iso_verde.png" alt="">
+  <h2>gracias.</h2>
+  <div class="credits">
+    <div><b>Identidad y diseño</b>Facundo Laviano</div>
+    <div><b>Marca</b>Un Amargo · Uruguay</div>
+    <div><b>Herramientas</b>Figma · Canva</div>
+  </div>
+</section>
+</body>
+</html>
