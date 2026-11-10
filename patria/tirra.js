@@ -212,22 +212,23 @@
      de frente y empuja a las vecinas; cada percha se balancea según cómo se
      mueve. Clic (o segundo toque) la descuelga y se puede girar arrastrando. */
   var PIEZAS = [
-    // hookX / hookXb: dónde está el gancho en cada foto (0 = izquierda, 1 = derecha)
-    { id: "pec-cria",   img: "images/perch-pec-cria.webp?v=6", espalda: "images/perch-pec-cria-b.webp?v=6", hookX: 0.482, hookXb: 0.486 },
-    { id: "cha-cruz",   img: "images/perch-cha-cruz.webp?v=6", espalda: "images/perch-cha-cruz-b.webp?v=6", hookX: 0.506, hookXb: 0.495 }
+    // fotos con la percha, todas en el mismo lienzo (gancho centrado arriba)
+    { id: "pec-cria",  img: "images/perch-pec-cria.webp?v=7",  espalda: "images/perch-pec-cria-b.webp?v=7" },
+    { id: "cha-cruz",  img: "images/perch-cha-cruz.webp?v=7",  espalda: "images/perch-cha-cruz-b.webp?v=7" },
+    { id: "cha-latte", img: "images/perch-cha-latte.webp?v=7", espalda: "images/perch-cha-latte-b.webp?v=7" }
   ].filter(function (x) { return producto(x.id); });
   var riel = document.getElementById("riel");
   var perchero = { abierto: false, cerrar: function () {}, girar: function () {} };
   if (riel && PIEZAS.length) (function () {
-    var ASPECT = 200 / 310, ZOOM = 1.1, GAP = 0.06, MAX_H = 470, MIN_ANCHO = 170, CARRUSEL_H = 360;
-    var n = PIEZAS.length, FAC_MEDIO = PIEZAS.reduce(function (a, x) { return a + (producto(x.id).cat === "collares" ? 0.74 : 1.02); }, 0) / PIEZAS.length, barra = riel.querySelector(".riel__barra");
+    var ASPECT = 200 / 310, ZOOM = 1.1, GAP = 0.06, MAX_H = 470, MIN_ANCHO = 200, CARRUSEL_H = 360;
+    var n = PIEZAS.length, FAC_MEDIO = PIEZAS.reduce(function (a, x) { return a + (producto(x.id).cat === "collares" ? 0.74 : 0.92); }, 0) / PIEZAS.length, barra = riel.querySelector(".riel__barra");
     var nombreEl = document.getElementById("rielNombre"), infoEl = document.getElementById("rielInfo"), puntos = document.getElementById("rielPuntos");
     var tam = { ancho: 0, h: 300, carrusel: false }, activa = null, idxCarrusel = 0, abierta = null, oculta = null;
     var S = { x: [], vx: [], tx: [], esc: [], vesc: [], tesc: [], mece: [], vmece: [], arrastre: -1, agarre: 0, libre: 0, ult: 0, raf: 0 };
     function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
     // lugar que ocupa una pieza en la barra (crece con el zoom)
     // los chalecos ocupan toda su caja; los collares, menos
-    function huella(h, esc, i) { var f = i == null ? FAC_MEDIO : (PIEZAS[i]._collar ? 0.74 : 1.02); return h * ASPECT * f * (esc || 1); }
+    function huella(h, esc, i) { var f = i == null ? FAC_MEDIO : (PIEZAS[i]._collar ? 0.74 : 0.92); return h * ASPECT * f * (esc || 1); }
 
     var slots = PIEZAS.map(function (x, i) {
       var p = producto(x.id), b = document.createElement("button");
@@ -430,9 +431,35 @@
       var base = Math.round(A.v / 360) * 360; A.obj = base + (lado === "espalda" ? 180 : 0);
       if (Math.abs(A.obj - A.v) > 180) A.obj -= 360 * Math.sign(A.obj - A.v);
       ladoAct = lado;
-      document.querySelectorAll("#detLados button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lado === lado)); });
+      verFoto(null);
+      marcarMini(lado);
       if (REDUCIR) { A.v = A.obj; aplicarGiro(); return; }
       if (!A.raf) A.raf = requestAnimationFrame(girarBucle);
+    }
+    // miniaturas: frente, espalda, detalles y "próximamente"
+    var minis = document.getElementById("detMinis"), fotoEl = document.getElementById("detFoto");
+    function marcarMini(clave) { Array.prototype.forEach.call(minis.children, function (b) { b.setAttribute("aria-pressed", String(b.dataset.clave === clave)); }); }
+    function verFoto(src) {
+      if (!src) { fig.classList.remove("ver-foto"); return; }
+      fotoEl.src = src; fig.classList.add("ver-foto");
+    }
+    function armarMinis(x, p) {
+      minis.innerHTML = "";
+      var lista = [{ clave: "frente", src: x.img, txt: "Frente" }];
+      if (x.espalda) lista.push({ clave: "espalda", src: x.espalda, txt: "Espalda" });
+      (p.fotos || []).forEach(function (f, k) { lista.push({ clave: "foto" + k, src: f, txt: "Detalle " + (k + 1), foto: true }); });
+      lista.push({ clave: "pronto", txt: "Más fotos próximamente" });
+      lista.forEach(function (m) {
+        var b = document.createElement("button"); b.type = "button"; b.dataset.clave = m.clave; b.setAttribute("aria-label", m.txt);
+        if (m.clave === "pronto") { b.className = "detalle__mini detalle__mini--pronto"; b.setAttribute("aria-disabled", "true"); b.innerHTML = "<span>Más fotos</span><small>Próximamente</small>"; }
+        else { b.className = "detalle__mini" + (m.foto ? " detalle__mini--foto" : ""); b.innerHTML = '<img src="' + m.src + '" alt="" loading="lazy">'; }
+        b.addEventListener("click", function () {
+          if (m.clave === "pronto") return;
+          if (m.foto) { verFoto(m.src); marcarMini(m.clave); }
+          else girarA(m.clave);
+        });
+        minis.appendChild(b);
+      });
     }
     function origen(i) { return slots[i].giro.getBoundingClientRect(); }
     function abrir(i) {
@@ -445,10 +472,10 @@
       document.getElementById("detNombre").textContent = p.nombre;
       document.getElementById("detPrecio").textContent = precio(p.precio);
       document.getElementById("detDesc").textContent = p.desc;
-      document.getElementById("detLados").hidden = !x.espalda; document.getElementById("detPista").hidden = !x.espalda;
+      armarMinis(x, p); verFoto(null);
+      document.getElementById("detConsulta").href = linkWhatsapp(CONFIG.mensajeBase + p.nombre + (p.precio == null ? "" : " (" + precio(p.precio) + ")") + ". ¿Está disponible?");
       det.hidden = false; document.body.classList.add("con-modal");
       A.v = 0; A.obj = 0; A.vel = 0; aplicarGiro(); ladoAct = "frente"; girarA("frente");
-      document.getElementById("detPista").hidden = !x.espalda;
       var de = origen(i);
       requestAnimationFrame(function () { det.classList.add("is-visible"); });
       if (!REDUCIR && de.width > 0 && fig.animate) {
@@ -486,11 +513,9 @@
     perchero.cerrar = cerrar;
     perchero.girar = function () { girarA(ladoAct === "frente" ? "espalda" : "frente"); };
     det.addEventListener("click", function (e) { if (e.target.closest("[data-cerrar-det]")) cerrar(); });
-    document.getElementById("detLados").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; if (b.dataset.lado) girarA(b.dataset.lado); });
     document.getElementById("detAgregar").addEventListener("click", function () { var p = producto(PIEZAS[abierta].id); agregar(p.id, 1); avisar(p.nombre + " — agregado"); });
-    document.getElementById("detFicha").addEventListener("click", function () { var p = producto(PIEZAS[abierta].id); cerrar(); setTimeout(function () { abrirFicha(p); }, 420); });
     var arr = document.getElementById("detArrastre");
-    arr.addEventListener("pointerdown", function (e) { if (!PIEZAS[abierta].espalda) return; A.arr = true; A.x0 = e.clientX; A.a0 = A.v; cancelAnimationFrame(A.raf); A.raf = 0; A.ult = 0; try { arr.setPointerCapture(e.pointerId); } catch (er) {} });
+    arr.addEventListener("pointerdown", function (e) { if (!PIEZAS[abierta].espalda || fig.classList.contains("ver-foto")) return; A.arr = true; A.x0 = e.clientX; A.a0 = A.v; cancelAnimationFrame(A.raf); A.raf = 0; A.ult = 0; try { arr.setPointerCapture(e.pointerId); } catch (er) {} });
     arr.addEventListener("pointermove", function (e) { if (!A.arr) return; A.v = clamp(A.a0 + (e.clientX - A.x0) * 0.45, A.a0 - 220, A.a0 + 220); aplicarGiro(); });
     arr.addEventListener("pointerup", function () { if (!A.arr) return; A.arr = false; var f = ((A.v % 360) + 360) % 360; girarA(f > 90 && f < 270 ? "espalda" : "frente"); });
     arr.addEventListener("pointercancel", function () { A.arr = false; girarA(ladoAct); });

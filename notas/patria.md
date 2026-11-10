@@ -107,3 +107,6 @@ la página queda usable sin animaciones.
 - **Vuelta a plano (pedido de Facundo):** el 3D no convenció. Ahora las piezas cuelgan de frente; al pasar se agrandan (zoom) y las vecinas se corren hacia los costados, con balanceo. La pieza descolgada se mantiene (Frente/Espalda con fotos planas). Se borró `perchero3d.js`.
 - Fondo general más blanco: `--fondo:#fbfaf8`, `--caja:#f1eee8`.
 - Perchero solo con chalecos (se sacaron los collares). Sin sombras (en celular se veían raras). En la pieza abierta: Frente / Espalda / "Más fotos" (próximamente, desactivado).
+- Tercer chaleco: **Chaleco Latte Básico** ($1990, gamuza chocolate, abierto). Fotos `prod-cha-latte(-b).jpg` y `perch-cha-latte(-b).webp`.
+- Las 6 fotos del perchero se rearmaron en un **mismo lienzo** (820×1341, gancho centrado) para que todas las perchas tengan el mismo tamaño. Script: `images/recortar-percha.py`.
+- Pieza abierta estilo tienda: columna de miniaturas a la izquierda (frente, espalda, detalles `det-*.jpg` recortados de las fotos en alta, y "Más fotos · Próximamente"), foto grande al centro, datos + carrito + WhatsApp a la derecha. En celular las miniaturas van en fila debajo.

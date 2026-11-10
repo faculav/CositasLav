@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="tirra.css?v=11">
+<link rel="stylesheet" href="tirra.css?v=13">
 </head>
 <body>
 
@@ -100,6 +100,7 @@
   <div class="detalle__fondo" data-cerrar-det></div>
   <button class="detalle__cerrar" data-cerrar-det type="button">Cerrar ✕</button>
   <div class="detalle__grilla">
+    <div class="detalle__minis" id="detMinis" aria-label="Fotos de la pieza"></div>
     <div class="detalle__figura" id="detFigura">
       <div class="detalle__hilo" aria-hidden="true"></div>
       <div class="detalle__arrastre" id="detArrastre">
@@ -108,20 +109,16 @@
           <div class="detalle__cara detalle__cara--espalda"><img id="detEspalda" alt=""></div>
         </div>
       </div>
+      <img class="detalle__foto" id="detFoto" alt="">
     </div>
     <div class="detalle__info">
       <p class="detalle__num" id="detNum"></p>
       <h3 class="detalle__nombre" id="detNombre"></h3>
       <p class="detalle__precio" id="detPrecio"></p>
       <p class="detalle__desc" id="detDesc"></p>
-      <div class="detalle__lados" id="detLados">
-        <button type="button" data-lado="frente" aria-pressed="true">Frente</button>
-        <button type="button" data-lado="espalda" aria-pressed="false">Espalda</button>
-        <button type="button" class="detalle__mas" aria-disabled="true" title="Próximamente">Más fotos <span>Próximamente</span></button>
-      </div>
-      <p class="detalle__pista" id="detPista">Arrastrá la pieza para girarla</p>
+      <p class="detalle__pista" id="detPista">Tocá las fotos de la izquierda para ver frente, espalda y detalles</p>
       <button class="boton" id="detAgregar" type="button">Agregar al carrito</button>
-      <button class="detalle__ficha" id="detFicha" type="button">Ver todas las fotos →</button>
+      <a class="detalle__ficha" id="detConsulta" href="#" target="_blank" rel="noopener">Consultar por WhatsApp →</a>
     </div>
   </div>
 </div>
@@ -280,7 +277,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="productos.js?v=25"></script>
-<script src="tirra.js?v=16"></script>
+<script src="productos.js?v=26"></script>
+<script src="tirra.js?v=17"></script>
 </body>
 </html>
