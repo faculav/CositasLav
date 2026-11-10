@@ -511,6 +511,51 @@ a.row:hover .go{transform:scale(1.05)}
 .sh-memb{display:flex;align-items:center;gap:10px;justify-content:space-between;padding:12px 14px;border-radius:16px;margin-bottom:8px;background:linear-gradient(120deg,#151515,#2a2a2a 60%,#151515);color:#fff;font-size:13px}
 .sh-memb span{color:rgba(255,255,255,.75)}
 .sh-memb a{flex:none;height:32px;display:inline-flex;align-items:center;padding:0 14px;border-radius:999px;font-weight:600;color:#111;background:linear-gradient(120deg,#f4f5f6,#c4c8cd 45%,#eef0f2 60%,#aeb2b7)}
+
+/* ===== Pasarela de trabajos recientes ===== */
+.pasarela{overflow:hidden;margin-top:4px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.pas-track{display:flex;gap:12px;width:max-content;animation:pas 60s linear infinite;will-change:transform}
+.pas-track figure{margin:0;width:clamp(170px,18vw,240px);aspect-ratio:3/4;border-radius:var(--r-lg);overflow:hidden;flex:none;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.pas-track img{width:100%;height:100%;object-fit:cover;filter:grayscale(.15)}
+@keyframes pas{to{transform:translateX(calc(-50% - 6px))}}
+.pasarela-sec{padding-top:48px}
+@media(min-width:768px){.pasarela-sec{padding-top:72px}}
+@media(prefers-reduced-motion:reduce){.pas-track{animation:none}}
+
+/* ===== Texto que se enciende palabra por palabra ===== */
+.manifesto{padding-top:clamp(80px,12vw,150px);padding-bottom:clamp(30px,6vw,60px)}
+.manifesto-k{color:var(--mute);margin-bottom:22px}
+.magic{font-family:'Jost',var(--font);font-weight:600;font-size:clamp(30px,4.2vw,62px);line-height:1.08;letter-spacing:-.025em;max-width:22ch;display:flex;flex-wrap:wrap;column-gap:.26em}
+.magic .mw{position:relative;display:inline-block}
+.magic .mw .g{opacity:.14}
+.magic .mw .o{position:absolute;left:0;top:0;opacity:var(--o,0);transition:opacity .15s linear}
+
+/* ===== Botón con punto que se expande (interactive hover) ===== */
+.ihb{position:relative;overflow:hidden;isolation:isolate;--ihb-fill:#fff;--ihb-fg:#111}
+.btn-light.ihb,.go.silver.ihb{--ihb-fill:#111;--ihb-fg:#fff}
+.btn-fill.ihb,.go.alt.ihb{--ihb-fill:#111;--ihb-fg:#fff}
+.btn-line-w.ihb,.go.ghost.ihb,.btn-ghost.ihb{--ihb-fill:#fff;--ihb-fg:#111}
+.ihb .ihb-dot{position:absolute;z-index:-1;left:16px;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:999px;background:var(--ihb-fill);transition:all .35s cubic-bezier(.2,.7,.2,1)}
+.ihb .ihb-t{display:inline-flex;align-items:center;gap:8px;transform:translateX(6px);transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .3s}
+.ihb .ihb-h{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:6px;color:var(--ihb-fg);opacity:0;transform:translateX(40px);transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .3s}
+.ihb .ihb-h svg{width:15px;height:15px}
+@media(hover:hover){
+  .ihb:hover .ihb-dot{left:0;top:0;width:100%;height:100%;margin-top:0;border-radius:inherit;transform:scale(1.8)}
+  .ihb:hover .ihb-t{transform:translateX(48px);opacity:0}
+  .ihb:hover .ihb-h{transform:none;opacity:1}
+  .ihb:hover{transform:none!important}
+}
+.go.ihb .ihb-dot{left:11px;width:5px;height:5px;margin-top:-2.5px}
+.go.ihb .ihb-t{transform:translateX(4px)}
+.btn.ihb,.btn-line-w.ihb{padding-left:30px;padding-right:30px}
+.go.ihb{padding-left:22px;padding-right:16px}
+.tabbar .book.ihb{padding-left:28px}
+.top .btn-sm.ihb{padding-left:28px}
+.ihb .ihb-h{white-space:nowrap}
+@media(hover:hover){
+  .go.ihb:hover .ihb-dot,.ihb:hover .ihb-dot{left:0;top:0;width:100%;height:100%;margin-top:0;border-radius:inherit;transform:scale(1.8)}
+  .go.ihb:hover .ihb-t{transform:translateX(40px);opacity:0}
+}
 /* team */
 .tcard{position:relative;width:min(64vw,290px);aspect-ratio:4/5;border-radius:var(--r-xl);overflow:hidden;background:#3a3a3c;box-shadow:inset 0 0 0 .5px var(--line)}
 .tcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
@@ -650,6 +695,12 @@ footer a:hover{color:var(--ink)}
     </div>
   </div>
 
+  <!-- MANIFIESTO: texto que se enciende al bajar -->
+  <section class="wrap manifesto" aria-label="Nuestra forma de cortar">
+    <p class="mono manifesto-k">Visagismo · Lavis</p>
+    <p class="magic" data-magic>No hay un corte de moda. Hay un corte para tu cara. Antes de agarrar la tijera miramos tu frente, tu mentón y cómo crece tu pelo, y con eso elegimos el corte que te queda a vos.</p>
+  </section>
+
   <!-- TRABAJOS -->
   <section class="wrap fade" id="trabajo">
     <div class="sh"><h2>Antes y después</h2><a href="https://www.instagram.com/laviss_studio/">Instagram <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a></div>
@@ -660,15 +711,6 @@ footer a:hover{color:var(--ink)}
       <figure class="vcard"><video src="assets/trans-video-4.mp4" poster="assets/trans-poster-4.jpg" muted loop playsinline preload="none" aria-label="Antes y después: Textura arriba"></video><span class="pill">Antes → después</span><figcaption class="hmeta"><div><b>Textura arriba</b><small>Corte · en Lavis</small></div></figcaption></figure>
     </div>
     <p class="mute" style="font-size:14px;margin-top:10px">Grabados en el salón, en la silla, con clientes de verdad.</p>
-    <div class="sh" style="margin-top:40px"><h2>Trabajos recientes</h2></div>
-    <div class="rail">
-      <div class="scard"><figure><img src="assets/trans-poster-1.jpg" alt="Corte terminado" loading="lazy"></figure><h3>Textura natural</h3><p>Corte · 40 min</p></div>
-      <div class="scard"><figure><img src="assets/corte.jpg" alt="Fade con textura" loading="lazy"></figure><h3>Fade <span>texturizado</span></h3><p>Corte · 40 min</p></div>
-      <div class="scard"><figure><img src="assets/trans-poster-3.jpg" alt="Corte clásico peinado" loading="lazy"></figure><h3>Flequillo <span>suelto</span></h3><p>Corte · 40 min</p></div>
-      <div class="scard"><figure><img src="assets/trans-poster-4.jpg" alt="Rulos definidos" loading="lazy"></figure><h3>Rulos <span>definidos</span></h3><p>Corte · 40 min</p></div>
-      <div class="scard"><figure><img src="assets/trans-poster-2.jpg" alt="Corte y barba" loading="lazy"></figure><h3>Barba <span>perfilada</span></h3><p>Corte y barba · 40 min</p></div>
-      <div class="scard"><figure><img src="assets/cejas.jpg" alt="Cejas emparejadas" loading="lazy"></figure><h3>Cejas</h3><p>5 min · $250</p></div>
-    </div>
   </section>
 
   <!-- SERVICIOS -->
@@ -756,6 +798,12 @@ footer a:hover{color:var(--ink)}
       <div class="pcard"><figure><img src="assets/producto-impact-texture.jpg" alt="Impact Texture spray 120 mL" loading="lazy"></figure><h3>Impact Texture</h3><p>Spray texturizante · 120 mL</p></div>
     </div>
     <p class="mute" style="font-size:14px;margin-top:10px">De venta en el salón. Los socios tienen descuento.</p>
+  </section>
+
+  <!-- TRABAJOS RECIENTES: pasarela -->
+  <section class="fade pasarela-sec" id="recientes">
+    <div class="wrap"><div class="sh"><h2>Trabajos recientes</h2><a href="https://www.instagram.com/laviss_studio/">Ver más <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg></a></div></div>
+    <div class="pasarela" aria-label="Fotos de cortes recientes"><div class="pas-track"><figure><img src="assets/trans-poster-1.jpg" alt="Corte terminado" loading="lazy"></figure><figure><img src="assets/corte.jpg" alt="Fade con textura" loading="lazy"></figure><figure><img src="assets/trans-poster-3.jpg" alt="Corte clásico peinado" loading="lazy"></figure><figure><img src="assets/trans-poster-4.jpg" alt="Rulos definidos" loading="lazy"></figure><figure><img src="assets/trans-poster-2.jpg" alt="Corte y barba" loading="lazy"></figure><figure><img src="assets/cejas.jpg" alt="Cejas emparejadas" loading="lazy"></figure><figure aria-hidden="true"><img src="assets/trans-poster-1.jpg" alt="Corte terminado" loading="lazy"></figure><figure aria-hidden="true"><img src="assets/corte.jpg" alt="Fade con textura" loading="lazy"></figure><figure aria-hidden="true"><img src="assets/trans-poster-3.jpg" alt="Corte clásico peinado" loading="lazy"></figure><figure aria-hidden="true"><img src="assets/trans-poster-4.jpg" alt="Rulos definidos" loading="lazy"></figure><figure aria-hidden="true"><img src="assets/trans-poster-2.jpg" alt="Corte y barba" loading="lazy"></figure><figure aria-hidden="true"><img src="assets/cejas.jpg" alt="Cejas emparejadas" loading="lazy"></figure></div></div>
   </section>
 
   <!-- RESEÑAS -->
@@ -1319,6 +1367,27 @@ function loop(now){
 }
 requestAnimationFrame(loop);
 hero.classList.add('ready');
+</script>
+
+<script>
+/* texto mágico: cada palabra se enciende con el scroll */
+(()=>{const el=document.querySelector('[data-magic]');if(!el)return;
+ const words=el.textContent.trim().split(/\s+/);
+ el.innerHTML=words.map(w=>`<span class="mw"><span class="g">${w}</span><span class="o" aria-hidden="true">${w}</span></span>`).join('');
+ const spans=[...el.querySelectorAll('.o')],n=spans.length;
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches){spans.forEach(s=>s.style.setProperty('--o',1));return}
+ let ticking=false;const upd=()=>{ticking=false;const r=el.getBoundingClientRect(),vh=innerHeight;
+   const p=Math.min(1,Math.max(0,(vh*.9-r.top)/(vh*.9-vh*.25)));
+   spans.forEach((s,i)=>{const a=i/n,b=(i+1)/n;s.style.setProperty('--o',Math.min(1,Math.max(0,(p-a)/(b-a))).toFixed(2))})};
+ addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(upd)}},{passive:true});upd()})();
+/* botones: punto que se expande y texto con flecha */
+(()=>{const arrow='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+ document.querySelectorAll('.btn,.btn-line-w,.go,.tabbar .book').forEach(b=>{
+   if(b.closest('#sheet')||b.classList.contains('ihb'))return;
+   const label=b.textContent.trim();if(!label)return;
+   b.classList.add('ihb');
+   b.innerHTML=`<span class="ihb-dot" aria-hidden="true"></span><span class="ihb-t">${b.innerHTML}</span><span class="ihb-h" aria-hidden="true">${label}${arrow}</span>`;
+ })})();
 </script>
 </body>
 </html>
