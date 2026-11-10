@@ -223,14 +223,15 @@
   var riel = document.getElementById("riel");
   var perchero = { abierto: false, cerrar: function () {}, girar: function () {} };
   if (riel && PIEZAS.length) (function () {
-    var ASPECT = 200 / 310, REST = -70, PERSP = 1100, GAP = 0.035, MAX_H = 430, MIN_ANCHO = 200, CARRUSEL_H = 360, LADO = 0.4;
-    var n = PIEZAS.length, barra = riel.querySelector(".riel__barra");
+    var ASPECT = 200 / 310, ZOOM = 1.14, GAP = 0.03, MAX_H = 380, MIN_ANCHO = 170, CARRUSEL_H = 360;
+    var n = PIEZAS.length, FAC_MEDIO = PIEZAS.reduce(function (a, x) { return a + (producto(x.id).cat === "collares" ? 0.74 : 1.02); }, 0) / PIEZAS.length, barra = riel.querySelector(".riel__barra");
     var nombreEl = document.getElementById("rielNombre"), infoEl = document.getElementById("rielInfo"), puntos = document.getElementById("rielPuntos");
     var tam = { ancho: 0, h: 300, carrusel: false }, activa = null, idxCarrusel = 0, abierta = null, oculta = null;
-    var S = { x: [], vx: [], tx: [], giro: [], vgiro: [], tgiro: [], mece: [], vmece: [], arrastre: -1, agarre: 0, libre: 0, ult: 0, raf: 0 };
+    var S = { x: [], vx: [], tx: [], esc: [], vesc: [], tesc: [], mece: [], vmece: [], arrastre: -1, agarre: 0, libre: 0, ult: 0, raf: 0 };
     function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
-    function huella(h, ang) { var e = clamp(1 - ang / REST, 0, 1), s = e * e * (3 - 2 * e); return h * ASPECT * (LADO + (0.94 - LADO) * s); }
-    function luz(ang) { var r = ang * Math.PI / 180; return 0.66 + 0.34 * Math.max(0, Math.sin(r) * 0.42 + Math.cos(r) * 0.91); }
+    // lugar que ocupa una pieza en la barra (crece con el zoom)
+    // los chalecos ocupan toda su caja; los collares, menos
+    function huella(h, esc, i) { var f = i == null ? FAC_MEDIO : (PIEZAS[i]._collar ? 0.74 : 1.02); return h * ASPECT * f * (esc || 1); }
 
     var slots = PIEZAS.map(function (x, i) {
       var p = producto(x.id), b = document.createElement("button");
@@ -240,6 +241,8 @@
       b.innerHTML = '<span class="pieza__mece"><span class="pieza__giro"><img class="pieza__img" src="' + x.img + '" alt="" draggable="false"></span></span>';
       riel.appendChild(b);
       if (x.espalda) { var pre = new Image(); pre.src = x.espalda; }
+      var orig = ((x._collar ? 0.5 : (x.hookX || 0.5)) * 100).toFixed(1) + "% 0";
+      b.firstChild.style.transformOrigin = orig; b.firstChild.firstChild.style.transformOrigin = orig;
       return { el: b, mece: b.firstChild, giro: b.firstChild.firstChild, img: b.querySelector("img") };
     });
     if (puntos) PIEZAS.forEach(function (x, i) {
@@ -247,21 +250,9 @@
       d.addEventListener("click", function () { elegir(i); }); puntos.appendChild(d);
     });
 
-    // 3D real (three.js) si hay WebGL y la página no se abrió como archivo suelto
-    var R3 = null, D3 = null;
-    if (window.Perchero3D && location.protocol !== "file:") {
-      var lienzo = document.createElement("canvas"); lienzo.className = "riel__3d"; lienzo.setAttribute("aria-hidden", "true");
-      riel.insertBefore(lienzo, riel.firstChild.nextSibling);
-      R3 = window.Perchero3D.riel(lienzo, PIEZAS.map(function (x) { return { img: x.img, espalda: x.espalda, hookX: x.hookX || 0.5, hookXb: x.hookXb || x.hookX || 0.5, collar: producto(x.id).cat === "collares" }; }));
-      if (R3) { R3.listo(function () { riel.classList.add("es-3d"); }); } else lienzo.remove();
-      var lienzoD = document.createElement("canvas"); lienzoD.className = "detalle__3d";
-      D3 = window.Perchero3D.detalle(lienzoD);
-      if (D3) { document.getElementById("detArrastre").appendChild(lienzoD); document.getElementById("detalle").classList.add("es-3d"); }
-    }
-
     function medir() {
       var w = riel.clientWidth;
-      var k0 = huella(1, REST) + GAP, k1 = huella(1, 0) + GAP;
+      var k0 = huella(1, 1) + GAP, k1 = huella(1, ZOOM) + GAP;
       var cabe = (w - 24) / (n * k0 + (k1 - k0));
       var carrusel = cabe < MIN_ANCHO;
       var h = Math.round(carrusel ? Math.min(CARRUSEL_H, Math.max(240, w * 0.9)) : Math.min(MAX_H, cabe));
@@ -270,15 +261,14 @@
       tam.y = y;
       barra.style.top = (y - 3) + "px";
       barra.style.left = carrusel ? "-20px" : ""; barra.style.right = carrusel ? "-20px" : "";
-      riel.style.height = Math.round(y + h + h * 0.04) + "px";
-      if (R3) R3.tam(w, Math.round(y + h + h * 0.04));
+      riel.style.height = Math.round(y + h + h * 0.2) + "px";
       slots.forEach(function (s) { s.el.style.width = bw + "px"; s.el.style.height = h + "px"; s.el.style.top = (y - Math.round(h * 0.012) - 2) + "px"; });
       if (puntos) puntos.hidden = !carrusel;
       objetivos(); 
     }
     function objetivos() {
       var h = tam.h, frente = tam.carrusel ? (activa == null ? idxCarrusel : activa) : activa;
-      var pies = PIEZAS.map(function (_, i) { return huella(h, i === frente ? 0 : REST) + h * GAP; }), xs = [];
+      var pies = PIEZAS.map(function (_, i) { return huella(h, i === frente ? ZOOM : 1, i) + h * GAP; }), xs = [];
       if (tam.carrusel) {
         var c = frente || 0; xs[c] = tam.ancho / 2;
         for (var i = c + 1; i < n; i++) xs[i] = xs[i - 1] + (pies[i - 1] + pies[i]) / 2;
@@ -289,21 +279,19 @@
       }
       var nuevo = S.x.length !== n;
       for (var j = 0; j < n; j++) {
-        S.tx[j] = xs[j] + (tam.carrusel ? desliz : 0); S.tgiro[j] = j === frente ? 0 : REST;
-        if (nuevo || REDUCIR) { S.x[j] = S.tx[j]; S.vx[j] = 0; S.giro[j] = S.tgiro[j]; S.vgiro[j] = 0; S.mece[j] = S.mece[j] || 0; S.vmece[j] = S.vmece[j] || 0; }
+        S.tx[j] = xs[j] + (tam.carrusel ? desliz : 0); S.tesc[j] = j === frente ? ZOOM : 1;
+        if (nuevo || REDUCIR) { S.x[j] = S.tx[j]; S.vx[j] = 0; S.esc[j] = S.tesc[j]; S.vesc[j] = 0; S.mece[j] = S.mece[j] || 0; S.vmece[j] = S.vmece[j] || 0; }
       }
       if (puntos) Array.prototype.forEach.call(puntos.children, function (d, k) { d.classList.toggle("is-activo", k === frente); });
       for (j = 0; j < n; j++) pintar(j);
       andar();
     }
     function pintar(i) {
-      var h = tam.h, w = h * ASPECT, s = slots[i], ang = S.giro[i] == null ? REST : S.giro[i];
+      var h = tam.h, w = h * ASPECT, s = slots[i], esc = S.esc[i] || 1;
       s.el.style.transform = "translate3d(" + ((S.x[i] || 0) - w / 2).toFixed(2) + "px,0,0)";
       s.el.style.zIndex = i === activa ? 30 : 10 + i;
       s.mece.style.transform = "rotate(" + (S.mece[i] || 0).toFixed(3) + "deg)";
-      s.giro.style.transform = "perspective(" + PERSP + "px) rotateY(" + ang.toFixed(2) + "deg)";
-      s.img.style.filter = "brightness(" + luz(ang).toFixed(3) + ") drop-shadow(0 18px 18px rgba(31,24,19,.18))";
-      if (R3) R3.poner(i, S.x[i] || 0, parseFloat(s.el.style.top) || 0, PIEZAS[i]._collar ? w * 0.7 : w, ang, S.mece[i] || 0);
+      s.giro.style.transform = "scale(" + esc.toFixed(4) + ")";
     }
     function paso(ahora) {
       var dt = S.ult ? Math.min(0.034, (ahora - S.ult) / 1000) : 1 / 60; S.ult = ahora;
@@ -317,34 +305,34 @@
             S.x[i] += S.vx[i] * sdt;
           }
           var acel = (S.vx[i] - antes) / sdt;
-          S.vgiro[i] += (-150 * (S.giro[i] - S.tgiro[i]) - 2 * Math.sqrt(150) * 0.78 * S.vgiro[i]) * sdt;
-          S.giro[i] += S.vgiro[i] * sdt;
+          S.vesc[i] += (-170 * (S.esc[i] - S.tesc[i]) - 2 * Math.sqrt(170) * 0.8 * S.vesc[i]) * sdt;
+          S.esc[i] += S.vesc[i] * sdt;
           S.vmece[i] += (-24 * S.mece[i] - 2.1 * S.vmece[i] - clamp(acel, -6000, 6000) * 0.0045) * sdt;
           S.mece[i] = clamp(S.mece[i] + S.vmece[i] * sdt, -12, 12);
         }
         for (var pasada = 0; pasada < 2; pasada++) for (i = 0; i < n - 1; i++) {
           var a = S.x[i], b = S.x[i + 1];
-          var min = (huella(h, S.giro[i]) + huella(h, S.giro[i + 1])) / 2 + h * 0.012, sobra = min - (b - a);
+          var min = (huella(h, S.esc[i], i) + huella(h, S.esc[i + 1], i + 1)) / 2 + h * 0.012, sobra = min - (b - a);
           if (sobra <= 0) continue;
           if (i === S.arrastre) S.x[i + 1] = b + sobra; else if (i + 1 === S.arrastre) S.x[i] = a - sobra; else { S.x[i] = a - sobra / 2; S.x[i + 1] = b + sobra / 2; }
           if (S.vx[i] > S.vx[i + 1]) { var comp = (S.vx[i] + S.vx[i + 1]) / 2; if (i !== S.arrastre) S.vx[i] = comp; if (i + 1 !== S.arrastre) S.vx[i + 1] = comp; }
         }
         if (!tam.carrusel) {
-          var borde = h * 0.06, pri = borde + huella(h, S.giro[0]) / 2, ulti = tam.ancho - borde - huella(h, S.giro[n - 1]) / 2;
+          var borde = h * 0.06, pri = borde + huella(h, S.esc[0], 0) / 2, ulti = tam.ancho - borde - huella(h, S.esc[n - 1], n - 1) / 2;
           if (S.x[0] < pri) { S.x[0] = pri; S.vx[0] = Math.abs(S.vx[0]) * 0.3; }
           if (S.x[n - 1] > ulti) { S.x[n - 1] = ulti; S.vx[n - 1] = -Math.abs(S.vx[n - 1]) * 0.3; }
         }
       }
       for (i = 0; i < n; i++) {
         pintar(i);
-        if (Math.abs(S.vx[i]) > 0.4 || (ahora > S.libre && Math.abs(S.x[i] - S.tx[i]) > 0.25) || Math.abs(S.giro[i] - S.tgiro[i]) > 0.05 || Math.abs(S.vgiro[i]) > 0.05 || Math.abs(S.mece[i]) > 0.02 || Math.abs(S.vmece[i]) > 0.05) ocupado = true;
+        if (Math.abs(S.vx[i]) > 0.4 || (ahora > S.libre && Math.abs(S.x[i] - S.tx[i]) > 0.25) || Math.abs(S.esc[i] - S.tesc[i]) > 0.0005 || Math.abs(S.vesc[i]) > 0.001 || Math.abs(S.mece[i]) > 0.02 || Math.abs(S.vmece[i]) > 0.05) ocupado = true;
       }
       if (S.arrastre >= 0 || ahora < S.libre) ocupado = true;
       if (ocupado) S.raf = requestAnimationFrame(paso);
       else { S.raf = 0; S.ult = 0; for (i = 0; i < n; i++) { if (ahora > S.libre) S.x[i] = S.tx[i]; S.mece[i] = 0; S.vmece[i] = 0; pintar(i); } }
     }
     function andar() {
-      if (REDUCIR) { for (var i = 0; i < n; i++) { S.x[i] = S.tx[i]; S.giro[i] = S.tgiro[i]; S.mece[i] = 0; pintar(i); } return; }
+      if (REDUCIR) { for (var i = 0; i < n; i++) { S.x[i] = S.tx[i]; S.esc[i] = S.tesc[i]; S.mece[i] = 0; pintar(i); } return; }
       if (!S.raf) { S.ult = 0; S.raf = requestAnimationFrame(paso); }
     }
     function empujar(i, v) { if (REDUCIR || i < 0 || i >= n) return; S.vmece[i] += v; andar(); }
@@ -352,7 +340,7 @@
       var i = tam.carrusel ? (activa == null ? idxCarrusel : activa) : activa;
       var p = i == null ? null : producto(PIEZAS[i].id);
       nombreEl.textContent = p ? p.nombre : "Pasá por la barra";
-      infoEl.textContent = p ? precio(p.precio) + " · " + (TACTIL ? "Tocá de nuevo para descolgarla" : "Clic para descolgarla") : "Cada pieza gira para mostrarse";
+      infoEl.textContent = p ? precio(p.precio) + " · " + (TACTIL ? "Tocá de nuevo para descolgarla" : "Clic para descolgarla") : "Cada pieza se acerca al pasar";
       [nombreEl, infoEl].forEach(function (e) { e.classList.remove("is-nuevo"); void e.offsetWidth; e.classList.add("is-nuevo"); });
     }
     function elegir(i) {
@@ -367,7 +355,7 @@
       var r = riel.getBoundingClientRect(), x = cx - r.left, y = cy - r.top;
       if (y < 0 || y > tam.y + tam.h) return null;
       var mejor = null, d0 = Infinity;
-      for (var i = 0; i < n; i++) { var m = huella(tam.h, S.giro[i]) / 2 + 4, d = Math.abs(x - S.x[i]); if (d < m && d < d0) { mejor = i; d0 = d; } }
+      for (var i = 0; i < n; i++) { var m = huella(tam.h, S.esc[i], i) / 2 + 4, d = Math.abs(x - S.x[i]); if (d < m && d < d0) { mejor = i; d0 = d; } }
       return mejor;
     }
 
@@ -396,7 +384,7 @@
       var hit = cercana(e.clientX, e.clientY);
       if (activa != null && hit !== activa) {
         var r = riel.getBoundingClientRect();
-        if (Math.abs(e.clientX - r.left - S.x[activa]) < huella(tam.h, 0) / 2 + 14 && e.clientY - r.top < tam.y + tam.h + 40) return;
+        if (Math.abs(e.clientX - r.left - S.x[activa]) < huella(tam.h, ZOOM, activa) / 2 + 14 && e.clientY - r.top < tam.y + tam.h + 40) return;
       }
       if (hit != null) elegir(hit);
     });
@@ -433,7 +421,7 @@
     /* pieza descolgada: vuela al frente y se gira arrastrando */
     var det = document.getElementById("detalle"), fig = document.getElementById("detFigura"), giroEl = document.getElementById("detGiro");
     var A = { v: 0, obj: 0, vel: 0, raf: 0, ult: 0, arr: false, x0: 0, a0: 0 }, ladoAct = "frente", cerrando = false, animIda = null;
-    function aplicarGiro() { if (D3) D3.girar(A.v); else giroEl.style.transform = "rotateY(" + A.v.toFixed(2) + "deg)"; }
+    function aplicarGiro() { giroEl.style.transform = "rotateY(" + A.v.toFixed(2) + "deg)"; }
     function girarBucle(ahora) {
       var dt = A.ult ? Math.min(0.034, (ahora - A.ult) / 1000) : 1 / 60; A.ult = ahora;
       A.vel += (-90 * (A.v - A.obj) - 2 * Math.sqrt(90) * 0.82 * A.vel) * dt; A.v += A.vel * dt;
@@ -442,7 +430,7 @@
       A.raf = requestAnimationFrame(girarBucle);
     }
     function girarA(lado) {
-      if (abierta == null || (!PIEZAS[abierta].espalda && !D3)) lado = "frente";
+      if (abierta == null || (!PIEZAS[abierta].espalda)) lado = "frente";
       var base = Math.round(A.v / 360) * 360; A.obj = base + (lado === "espalda" ? 180 : 0);
       if (Math.abs(A.obj - A.v) > 180) A.obj -= 360 * Math.sign(A.obj - A.v);
       ladoAct = lado;
@@ -463,15 +451,14 @@
       document.getElementById("detDesc").textContent = p.desc;
       document.getElementById("detLados").hidden = !x.espalda; document.getElementById("detPista").hidden = !x.espalda;
       det.hidden = false; document.body.classList.add("con-modal");
-      if (D3) { D3.mostrar({ img: x.img, espalda: x.espalda, hookX: x.hookX || 0.5, hookXb: x.hookXb || x.hookX || 0.5, collar: x._collar }); D3.tam(fig.clientWidth * 1.5, fig.clientHeight); }
       A.v = 0; A.obj = 0; A.vel = 0; aplicarGiro(); ladoAct = "frente"; girarA("frente");
-      document.getElementById("detPista").hidden = !(x.espalda || D3);
+      document.getElementById("detPista").hidden = !x.espalda;
       var de = origen(i);
       requestAnimationFrame(function () { det.classList.add("is-visible"); });
       if (!REDUCIR && de.width > 0 && fig.animate) {
         var a = fig.getBoundingClientRect(), esc = de.height / a.height;
         var dx = de.left + de.width / 2 - (a.left + a.width / 2), dy = de.top - a.top, alza = Math.min(90, Math.abs(dy) * 0.25 + 30);
-        oculta = i; slots[i].el.style.visibility = "hidden"; if (R3) R3.ocultar(i, true);
+        oculta = i; slots[i].el.style.visibility = "hidden";
         animIda = fig.animate([
           { transform: "translate(" + dx + "px," + dy + "px) scale(" + esc + ")" },
           { transform: "translate(" + dx * 0.4 + "px," + (dy * 0.4 - alza) + "px) scale(" + ((esc + 1) / 2 * 1.03) + ") rotate(" + (dx > 0 ? -2.5 : 2.5) + "deg)", offset: 0.5 },
@@ -486,7 +473,7 @@
       var i = abierta, hacia = origen(i);
       var fin = function () {
         det.hidden = true; document.body.classList.remove("con-modal");
-        slots[i].el.style.visibility = ""; if (R3) R3.ocultar(i, false); oculta = null; abierta = null; perchero.abierto = false; cerrando = false;
+        slots[i].el.style.visibility = ""; oculta = null; abierta = null; perchero.abierto = false; cerrando = false;
         empujar(i, (i % 2 ? 1 : -1) * 44); slots[i].el.focus({ preventScroll: true });
       };
       if (animIda) { animIda.cancel(); animIda = null; }
@@ -507,8 +494,8 @@
     document.getElementById("detAgregar").addEventListener("click", function () { var p = producto(PIEZAS[abierta].id); agregar(p.id, 1); avisar(p.nombre + " — agregado"); });
     document.getElementById("detFicha").addEventListener("click", function () { var p = producto(PIEZAS[abierta].id); cerrar(); setTimeout(function () { abrirFicha(p); }, 420); });
     var arr = document.getElementById("detArrastre");
-    arr.addEventListener("pointerdown", function (e) { if (!PIEZAS[abierta].espalda && !D3) return; A.arr = true; A.x0 = e.clientX; A.a0 = A.v; cancelAnimationFrame(A.raf); A.raf = 0; A.ult = 0; try { arr.setPointerCapture(e.pointerId); } catch (er) {} });
-    arr.addEventListener("pointermove", function (e) { if (!A.arr) return; A.v = A.a0 + (e.clientX - A.x0) * 0.5; aplicarGiro(); });
+    arr.addEventListener("pointerdown", function (e) { if (!PIEZAS[abierta].espalda) return; A.arr = true; A.x0 = e.clientX; A.a0 = A.v; cancelAnimationFrame(A.raf); A.raf = 0; A.ult = 0; try { arr.setPointerCapture(e.pointerId); } catch (er) {} });
+    arr.addEventListener("pointermove", function (e) { if (!A.arr) return; A.v = clamp(A.a0 + (e.clientX - A.x0) * 0.45, A.a0 - 220, A.a0 + 220); aplicarGiro(); });
     arr.addEventListener("pointerup", function () { if (!A.arr) return; A.arr = false; var f = ((A.v % 360) + 360) % 360; girarA(f > 90 && f < 270 ? "espalda" : "frente"); });
     arr.addEventListener("pointercancel", function () { A.arr = false; girarA(ladoAct); });
 

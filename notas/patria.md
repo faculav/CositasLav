@@ -104,3 +104,5 @@ la página queda usable sin animaciones.
 - Fotos: `images/perch-*.webp` con la percha incluida y el gancho arriba de todo (las de la Pechera Cría las hizo Facundo; frente = bolsillo cebra).
 - **3D real (three.js r128, `perchero3d.js`)**: cada pieza es una malla curvada con la foto de frente adelante, la de espalda atrás (espejada y alineada por el gancho) y "rebanadas" intermedias que dan el espesor del cuero; luces reales. El riel usa la misma física y dibuja en un `<canvas>`; la pieza descolgada gira 360°. Si la página se abre como archivo suelto (file://) o no hay WebGL, se ven las fotos planas de antes.
 - Fotos del perchero limpiadas: sin halo blanco ni sombras grises de la pared.
+- **Vuelta a plano (pedido de Facundo):** el 3D no convenció. Ahora las piezas cuelgan de frente; al pasar se agrandan (zoom) y las vecinas se corren hacia los costados, con balanceo. La pieza descolgada se mantiene (Frente/Espalda con fotos planas). Se borró `perchero3d.js`.
+- Fondo general más blanco: `--fondo:#fbfaf8`, `--caja:#f1eee8`.
