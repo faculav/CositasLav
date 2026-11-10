@@ -187,6 +187,23 @@ body.menu-abierto .header .logo__claro{ display:none; } body.menu-abierto .heade
 .detalle__ficha{ font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--suave); text-align:left; }
 .detalle__ficha:hover{ color:var(--tinta); }
 
+/* ---------- los collares (busto sobre tronco) ---------- */
+.collares{ padding:0 var(--pad) clamp(80px,10vw,150px); }
+.collares__cabeza{ display:flex; justify-content:space-between; align-items:flex-end; gap:20px; margin-bottom:clamp(20px,3vw,40px); }
+.collares__cabeza .eti{ margin:0; }
+.collares__fila{ display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(12px,2vw,32px); }
+.exhib{ display:flex; flex-direction:column; align-items:center; gap:4px; padding:0; text-align:center; cursor:pointer; }
+.exhib__marco{ position:relative; display:block; width:100%; aspect-ratio:900/1165; margin-bottom:10px; }
+.exhib__base{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; mix-blend-mode:multiply; transition:transform 1s var(--ease); transform-origin:50% 100%; }
+/* el collar cuelga del cuello del busto y se mece apenas */
+.exhib__collar{ position:absolute; left:37%; top:14%; width:26%; height:auto; transform-origin:50% 0; animation:collar 6s ease-in-out infinite; transition:transform 1s var(--ease); }
+@keyframes collar{ 0%,100%{ transform:rotate(-1.2deg); } 50%{ transform:rotate(1.2deg); } }
+.exhib:hover .exhib__base{ transform:scale(1.03); }
+.exhib:hover .exhib__collar{ animation-duration:2.4s; }
+.exhib__nombre{ font-weight:700; font-size:15px; letter-spacing:-.02em; }
+.exhib__precio{ font-size:12px; color:var(--suave); }
+.exhib:focus-visible{ outline:1px solid var(--tinta); outline-offset:6px; }
+
 /* ---------- pieles: franjas ---------- */
 .pieles{ padding:0 var(--pad) clamp(100px,12vw,180px); }
 .pieles__cabeza{ display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:clamp(30px,4vw,52px); }
@@ -216,6 +233,7 @@ body.menu-abierto .header .logo__claro{ display:none; } body.menu-abierto .heade
 .producto__media img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:opacity .8s var(--ease), transform 1.6s var(--ease); }
 .producto__media img.a{ object-fit:contain; padding:9%; mix-blend-mode:multiply; }
 .producto__media img.b{ opacity:0; transform:scale(1.06); }
+.producto__media img.b.plano{ object-fit:contain; padding:9%; }
 .producto:hover img.a{ opacity:0; }
 .producto:hover img.b{ opacity:1; transform:scale(1); }
 .producto__tag{ position:absolute; top:14px; left:14px; z-index:2; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--tinta); }
@@ -236,8 +254,9 @@ body.menu-abierto .header .logo__claro{ display:none; } body.menu-abierto .heade
 
 /* ---------- galería (grilla tranquila) ---------- */
 .galeria{ padding:clamp(100px,12vw,180px) var(--pad); }
-.galeria__pista{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(36px,4vw,64px) clamp(12px,1.6vw,24px); }
+.galeria__pista{ display:grid; grid-template-columns:repeat(6,1fr); gap:clamp(36px,4vw,64px) clamp(12px,1.6vw,24px); }
 .g{ margin:0; min-width:0; }
+.g{ grid-column:span 2; } .g:nth-child(-n+2){ grid-column:span 3; } .g:nth-child(-n+2) img{ aspect-ratio:4/3; }
 .g img{ width:100%; aspect-ratio:4/5; object-fit:cover; }
 .g figcaption{ margin-top:12px; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--gris); }
 
@@ -369,6 +388,11 @@ body.con-modal .wa, body.menu-abierto .wa{ opacity:0; pointer-events:none; }
   .intro{ padding:90px var(--pad); }
   .intro__txt{ font-size:26px; }
   .perchero__cabeza{ flex-direction:column; align-items:flex-start; gap:10px; }
+  .collares{ padding:0 0 80px; }
+  .collares__cabeza{ flex-direction:column; align-items:flex-start; gap:10px; padding:0 var(--pad); }
+  .collares__fila{ display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:4px; padding:0 var(--pad); scrollbar-width:none; }
+  .collares__fila::-webkit-scrollbar{ display:none; }
+  .exhib{ flex:none; width:64vw; scroll-snap-align:center; }
   .detalle{ align-items:flex-start; padding:56px 20px 30px; }
   .detalle__grilla{ grid-template-columns:1fr; gap:18px; padding-top:20px; }
   .detalle__minis{ order:2; flex-direction:row; overflow-x:auto; justify-content:flex-start; padding:2px; scrollbar-width:none; }

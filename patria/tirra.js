@@ -69,7 +69,7 @@
       '<div class="producto__media">' +
         (p.tag ? '<span class="producto__tag">' + p.tag + "</span>" : "") +
         '<img class="a" src="' + p.img + '" alt="' + p.nombre + '" loading="lazy">' +
-        (p.img2 ? '<img class="b" src="' + p.img2 + '" alt="" loading="lazy">' : "") +
+        (p.img2 ? '<img class="b' + (/\.webp/.test(p.img2) ? " plano" : "") + '" src="' + p.img2 + '" alt="" loading="lazy">' : "") +
       "</div>" +
       '<div class="producto__info"><span class="producto__nombre">' + p.nombre + '</span><span class="producto__precio">' + precio(p.precio) + "</span></div>" +
       '<span class="producto__mas">Ver pieza →</span>';
@@ -547,6 +547,26 @@
       if (es[0].isIntersecting && !rozado) { rozado = true; ob.disconnect(); PIEZAS.forEach(function (_, i) { setTimeout(function () { empujar(i, 46 - i * 2.5); }, 120 + i * 55); }); }
     }, { threshold: 0.35 }).observe(riel);
   })();
+
+  /* ---------- los collares: busto sobre tronco ---------- */
+  var filaCol = document.getElementById("collaresFila");
+  if (filaCol) {
+    var COLLARES = [
+      { id: "col-tierra", img: "images/perch-col-tierra.webp" },
+      { id: "col-ocre",   img: "images/perch-col-ocre.webp" },
+      { id: "col-pampa",  img: "images/perch-col-pampa.webp" },
+      { id: "col-greda",  img: "images/perch-col-greda.webp" }
+    ].filter(function (x) { return producto(x.id); });
+    COLLARES.forEach(function (x, i) {
+      var p = producto(x.id), b = document.createElement("button");
+      b.type = "button"; b.className = "exhib"; b.setAttribute("aria-label", "Ver " + p.nombre);
+      b.innerHTML = '<span class="exhib__marco"><img class="exhib__base" src="images/exhibidor.jpg" alt="" loading="lazy">' +
+        '<img class="exhib__collar" src="' + x.img + '" alt="' + p.nombre + '" loading="lazy" style="animation-delay:' + (-i * 1.7) + 's"></span>' +
+        '<span class="exhib__nombre">' + p.nombre + '</span><span class="exhib__precio">' + precio(p.precio) + '</span>';
+      b.addEventListener("click", function () { abrirFicha(p); });
+      filaCol.appendChild(b);
+    });
+  }
 
   /* ---------- menú ---------- */
   var burger = document.getElementById("burger"), menu = document.getElementById("menuMovil");

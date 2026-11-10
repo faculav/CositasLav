@@ -115,3 +115,7 @@ la página queda usable sin animaciones.
 - Gancho real: la barra apoya en la parte interna de la curva y un pedacito de barra (`.pieza__tapa`) tapa la punta, así la punta queda por detrás. En la pieza abierta el hilo baja centrado hasta adentro de la curva del gancho.
 - Detalles: una foto por chaleco (bolsillo → Pechera Cría, costado suela → Cruz, costado chocolate → Latte), sin pared y con el tono igualado al chaleco: `images/det-*.webp` (script `images/procesar-detalle.py`). Se muestran centradas en el mismo lugar que frente/espalda.
 - Detalle del Cruz sin la sombra de la pared (filtro de grises + borde izquierdo parejo). Pieza abierta con flechas flotantes (‹ ›) y teclas ← → para pasar entre frente, espalda y detalle.
+- **Sección Los collares** (`#collares`): cada collar sobre un busto blanco apoyado en un tronco (`images/exhibidor.jpg`, imagen de Facundo con el fondo emparejado a blanco; se usa con `mix-blend-mode:multiply`). El collar (`perch-col-*.webp`) se superpone en el cuello y se mece. Clic → ficha del producto.
+- Colección: los chalecos usan las fotos del perchero (`perch-*.webp` frente/espalda).
+- Galería: se sacó la foto de las pulseras sobre el caballo (`ig-1.jpg`); ahora 2 fotos grandes arriba y 3 abajo.
+- Pendiente: textura de croco nueva (Facundo pasó referencia de croco negro brillante; falta el archivo).
