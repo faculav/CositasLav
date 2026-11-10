@@ -149,6 +149,13 @@ body.menu-abierto .header .logo__claro{ display:none; } body.menu-abierto .heade
 .detalle__mini--pronto small{ font-size:7.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--gris); }
 .detalle__foto{ position:absolute; left:0; top:4%; width:100%; height:92%; object-fit:contain; object-position:50% 50%; opacity:0; pointer-events:none; transition:opacity .45s; }
 .detalle__figura.ver-foto .detalle__foto{ opacity:1; }
+.detalle__flecha{ position:absolute; top:50%; z-index:3; width:40px; height:40px; margin-top:-20px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  background:rgba(251,250,248,.72); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); border:1px solid var(--linea); color:var(--tinta);
+  opacity:.55; transition:opacity .3s, transform .4s var(--ease), background .3s; }
+.detalle__flecha:hover{ opacity:1; background:#fff; }
+.detalle__flecha svg{ width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round; }
+.detalle__flecha--izq{ left:-64px; } .detalle__flecha--der{ right:-64px; }
+.detalle__flecha--izq:hover{ transform:translateX(-3px); } .detalle__flecha--der:hover{ transform:translateX(3px); }
 .detalle__figura .detalle__arrastre, .detalle__figura .detalle__hilo{ transition:opacity .45s; }
 .detalle__figura.ver-foto .detalle__arrastre, .detalle__figura.ver-foto .detalle__hilo{ opacity:0; pointer-events:none; }
 .detalle__figura{ position:relative; margin:0 auto; height:min(66vh,600px); aspect-ratio:200/310; transform-origin:50% 0; }
@@ -368,6 +375,7 @@ body.con-modal .wa, body.menu-abierto .wa{ opacity:0; pointer-events:none; }
   .detalle__minis > :first-child{ margin-left:auto; } .detalle__minis > :last-child{ margin-right:auto; }
   .detalle__minis::-webkit-scrollbar{ display:none; }
   .detalle__mini{ width:58px; height:72px; }
+  .detalle__flecha{ width:34px; height:34px; margin-top:-17px; opacity:.8; } .detalle__flecha--izq{ left:-6px; } .detalle__flecha--der{ right:-6px; }
   .detalle__mini--pronto small{ font-size:6px; letter-spacing:.04em; } .detalle__mini--pronto span{ font-size:9px; }
   .detalle__figura{ order:1; } .detalle__info{ order:3; }
 

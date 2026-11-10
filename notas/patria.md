@@ -114,3 +114,4 @@ la página queda usable sin animaciones.
 - Pechera Cría: costados emparejados de la sisa al ruedo (`images/emparejar-costados.py`, se corre después de `recortar-percha.py`).
 - Gancho real: la barra apoya en la parte interna de la curva y un pedacito de barra (`.pieza__tapa`) tapa la punta, así la punta queda por detrás. En la pieza abierta el hilo baja centrado hasta adentro de la curva del gancho.
 - Detalles: una foto por chaleco (bolsillo → Pechera Cría, costado suela → Cruz, costado chocolate → Latte), sin pared y con el tono igualado al chaleco: `images/det-*.webp` (script `images/procesar-detalle.py`). Se muestran centradas en el mismo lugar que frente/espalda.
+- Detalle del Cruz sin la sombra de la pared (filtro de grises + borde izquierdo parejo). Pieza abierta con flechas flotantes (‹ ›) y teclas ← → para pasar entre frente, espalda y detalle.

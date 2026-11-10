@@ -1,7 +1,7 @@
 # Foto de detalle: saca la pared, iguala luz/color al chaleco y la deja centrada
 import sys, numpy as np, cv2
 from PIL import Image
-def procesar(src, ref, dst):
+def procesar(src, ref, dst, sin_grises=False):
     rgb=np.asarray(Image.open(src).convert('RGB')); H,W=rgb.shape[:2]
     hsv=cv2.cvtColor(rgb,cv2.COLOR_RGB2HSV).astype(float)
     pared=((hsv[...,2]>98)&(hsv[...,1]<75)).astype(np.uint8)
@@ -30,6 +30,27 @@ def procesar(src, ref, dst):
     for k in range(1,n):
         x,y,w,h,ar=st[k]
         if ar<H*W*0.01 and x>0 and y>0 and x+w<W and y+h<H: keep[lab==k]=255
+    if sin_grises:   # cuero de color fuerte: todo lo gris claro es pared o sombra en la pared
+        gris=(((hsv[...,1]<70)&(hsv[...,2]>110))|((hsv[...,1]<140)&(hsv[...,2]>80))).astype(np.uint8)
+        gris=cv2.morphologyEx(gris,cv2.MORPH_OPEN,np.ones((3,3),np.uint8))
+        keep[cv2.dilate(gris,np.ones((5,5),np.uint8))>0]=0
+        mitad=int(W*0.5)
+        izq=cv2.morphologyEx(keep[:,:mitad],cv2.MORPH_OPEN,cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(11,11)))
+        keep[:,:mitad]=izq
+        # borde izquierdo parejo: mediana móvil del primer píxel de cuero en cada fila
+        filas=np.arange(H); xs=np.full(H,-1)
+        for y in range(H):
+            r=np.nonzero(keep[y,:mitad]>127)[0]
+            if len(r): xs[y]=r[0]
+        val=xs>=0; ys=filas[val]; xv=xs[val].astype(float)
+        if len(ys)>50:
+            med=np.array([np.median(xv[max(0,i-30):i+30]) for i in range(len(xv))])
+            for y,x0 in zip(ys,med):
+                keep[y,:int(round(x0))+3]=0
+        inv=(keep==0).astype(np.uint8); n2,l2,s2,_=cv2.connectedComponentsWithStats(inv,4)
+        for k in range(1,n2):
+            x,y,w,h,ar=s2[k]
+            if ar<3000 and x>0 and y>0 and x+w<W and y+h<H: keep[l2==k]=255
     # manchas sueltas de sombra: componentes chicos lejos de la prenda principal
     n,lab,st,_=cv2.connectedComponentsWithStats((keep>127).astype(np.uint8),8)
     if n>2:
@@ -63,5 +84,5 @@ def procesar(src, ref, dst):
     bb=im.getchannel('A').point(lambda v:255 if v>60 else 0).getbbox(); im=im.crop(bb); im.thumbnail((1000,1300))
     im.save(dst,quality=88,method=6); print(dst,im.size)
 I='/tmp/claude-0/-home-user-CositasLav/a0c7a990-b18e-5cae-9d74-25293d1b0935/images/'; P='/home/user/CositasLav/patria/images/'
-for s,r,d in [('26','perch-pec-cria','det-pec-cria'),('27','perch-cha-cruz','det-cha-cruz'),('28','perch-cha-latte','det-cha-latte')]:
-    procesar(I+s+'.webp',P+r+'.webp',P+d+'.webp')
+for s,r,d,g in [('26','perch-pec-cria','det-pec-cria',False),('27','perch-cha-cruz','det-cha-cruz',True),('28','perch-cha-latte','det-cha-latte',False)]:
+    procesar(I+s+'.webp',P+r+'.webp',P+d+'.webp',g)

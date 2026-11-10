@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="tirra.css?v=16">
+<link rel="stylesheet" href="tirra.css?v=17">
 </head>
 <body>
 
@@ -110,13 +110,15 @@
         </div>
       </div>
       <img class="detalle__foto" id="detFoto" alt="">
+      <button class="detalle__flecha detalle__flecha--izq" id="detPrev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button class="detalle__flecha detalle__flecha--der" id="detNext" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
     </div>
     <div class="detalle__info">
       <p class="detalle__num" id="detNum"></p>
       <h3 class="detalle__nombre" id="detNombre"></h3>
       <p class="detalle__precio" id="detPrecio"></p>
       <p class="detalle__desc" id="detDesc"></p>
-      <p class="detalle__pista" id="detPista">Tocá las fotos de la izquierda para ver frente, espalda y detalles</p>
+      <p class="detalle__pista" id="detPista">Usá las flechas o las fotos para ver frente, espalda y detalle</p>
       <button class="boton" id="detAgregar" type="button">Agregar al carrito</button>
       <a class="detalle__ficha" id="detConsulta" href="#" target="_blank" rel="noopener">Consultar por WhatsApp →</a>
     </div>
@@ -278,6 +280,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="productos.js?v=28"></script>
-<script src="tirra.js?v=19"></script>
+<script src="tirra.js?v=20"></script>
 </body>
 </html>

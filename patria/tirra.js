@@ -469,6 +469,16 @@
         minis.appendChild(b);
       });
     }
+    // flechas: recorren frente, espalda y detalles
+    function moverFoto(d) {
+      var bs = Array.prototype.filter.call(minis.children, function (b) { return b.dataset.clave !== "pronto"; });
+      if (!bs.length) return;
+      var k = bs.findIndex(function (b) { return b.getAttribute("aria-pressed") === "true"; });
+      bs[(k + d + bs.length) % bs.length].click();
+    }
+    document.getElementById("detPrev").addEventListener("click", function (e) { e.stopPropagation(); moverFoto(-1); });
+    document.getElementById("detNext").addEventListener("click", function (e) { e.stopPropagation(); moverFoto(1); });
+    ["detPrev", "detNext"].forEach(function (id) { document.getElementById(id).addEventListener("pointerdown", function (e) { e.stopPropagation(); }); });
     function origen(i) { return slots[i].giro.getBoundingClientRect(); }
     function abrir(i) {
       var x = PIEZAS[i], p = producto(x.id);
@@ -519,7 +529,7 @@
       an.onfinish = function () { fin(); an.cancel(); };
     }
     perchero.cerrar = cerrar;
-    perchero.girar = function () { girarA(ladoAct === "frente" ? "espalda" : "frente"); };
+    perchero.girar = function (d) { moverFoto(d || 1); };
     det.addEventListener("click", function (e) { if (e.target.closest("[data-cerrar-det]")) cerrar(); });
     document.getElementById("detAgregar").addEventListener("click", function () { var p = producto(PIEZAS[abierta].id); agregar(p.id, 1); avisar(p.nombre + " — agregado"); });
     var arr = document.getElementById("detArrastre");
@@ -548,7 +558,7 @@
   menu.addEventListener("click", function (e) { if (e.target.closest("a")) abrirMenu(false); });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") { if (!visor.hidden) cerrarVisor(); else if (!ficha.hidden) cerrarFicha(); else if (carritoEl.classList.contains("is-abierto")) abrirCarrito(false); else if (perchero.abierto) perchero.cerrar(); else abrirMenu(false); }
-    if (perchero.abierto && ficha.hidden && (e.key === "ArrowRight" || e.key === "ArrowLeft")) perchero.girar();
+    if (perchero.abierto && ficha.hidden && (e.key === "ArrowRight" || e.key === "ArrowLeft")) perchero.girar(e.key === "ArrowRight" ? 1 : -1);
     if (!visor.hidden && e.key === "ArrowRight") moverVisor(1);
     if (!visor.hidden && e.key === "ArrowLeft") moverVisor(-1);
   });
