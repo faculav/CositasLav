@@ -215,8 +215,8 @@
     // hookX / hookXb: dónde está el gancho en cada foto (0 = izquierda, 1 = derecha)
     { id: "col-tierra", img: "images/perch-col-tierra.webp?v=5", hookX: 0.5 },
     { id: "col-ocre",   img: "images/perch-col-ocre.webp?v=5", hookX: 0.5 },
-    { id: "pec-cria",   img: "images/perch-pec-cria.webp?v=5", espalda: "images/perch-pec-cria-b.webp?v=5", hookX: 0.483, hookXb: 0.487 },
-    { id: "cha-cruz",   img: "images/perch-cha-cruz.webp?v=5", espalda: "images/perch-cha-cruz-b.webp?v=5", hookX: 0.502, hookXb: 0.502 },
+    { id: "pec-cria",   img: "images/perch-pec-cria.webp?v=6", espalda: "images/perch-pec-cria-b.webp?v=6", hookX: 0.482, hookXb: 0.486 },
+    { id: "cha-cruz",   img: "images/perch-cha-cruz.webp?v=6", espalda: "images/perch-cha-cruz-b.webp?v=6", hookX: 0.506, hookXb: 0.495 },
     { id: "col-pampa",  img: "images/perch-col-pampa.webp?v=5", hookX: 0.5 },
     { id: "col-greda",  img: "images/perch-col-greda.webp?v=5", hookX: 0.5 }
   ].filter(function (x) { return producto(x.id); });
