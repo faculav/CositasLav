@@ -213,17 +213,13 @@
      mueve. Clic (o segundo toque) la descuelga y se puede girar arrastrando. */
   var PIEZAS = [
     // hookX / hookXb: dónde está el gancho en cada foto (0 = izquierda, 1 = derecha)
-    { id: "col-tierra", img: "images/perch-col-tierra.webp?v=5", hookX: 0.5 },
-    { id: "col-ocre",   img: "images/perch-col-ocre.webp?v=5", hookX: 0.5 },
     { id: "pec-cria",   img: "images/perch-pec-cria.webp?v=6", espalda: "images/perch-pec-cria-b.webp?v=6", hookX: 0.482, hookXb: 0.486 },
-    { id: "cha-cruz",   img: "images/perch-cha-cruz.webp?v=6", espalda: "images/perch-cha-cruz-b.webp?v=6", hookX: 0.506, hookXb: 0.495 },
-    { id: "col-pampa",  img: "images/perch-col-pampa.webp?v=5", hookX: 0.5 },
-    { id: "col-greda",  img: "images/perch-col-greda.webp?v=5", hookX: 0.5 }
+    { id: "cha-cruz",   img: "images/perch-cha-cruz.webp?v=6", espalda: "images/perch-cha-cruz-b.webp?v=6", hookX: 0.506, hookXb: 0.495 }
   ].filter(function (x) { return producto(x.id); });
   var riel = document.getElementById("riel");
   var perchero = { abierto: false, cerrar: function () {}, girar: function () {} };
   if (riel && PIEZAS.length) (function () {
-    var ASPECT = 200 / 310, ZOOM = 1.14, GAP = 0.03, MAX_H = 380, MIN_ANCHO = 170, CARRUSEL_H = 360;
+    var ASPECT = 200 / 310, ZOOM = 1.1, GAP = 0.06, MAX_H = 470, MIN_ANCHO = 170, CARRUSEL_H = 360;
     var n = PIEZAS.length, FAC_MEDIO = PIEZAS.reduce(function (a, x) { return a + (producto(x.id).cat === "collares" ? 0.74 : 1.02); }, 0) / PIEZAS.length, barra = riel.querySelector(".riel__barra");
     var nombreEl = document.getElementById("rielNombre"), infoEl = document.getElementById("rielInfo"), puntos = document.getElementById("rielPuntos");
     var tam = { ancho: 0, h: 300, carrusel: false }, activa = null, idxCarrusel = 0, abierta = null, oculta = null;
@@ -339,8 +335,8 @@
     function rotulo() {
       var i = tam.carrusel ? (activa == null ? idxCarrusel : activa) : activa;
       var p = i == null ? null : producto(PIEZAS[i].id);
-      nombreEl.textContent = p ? p.nombre : "Pasá por la barra";
-      infoEl.textContent = p ? precio(p.precio) + " · " + (TACTIL ? "Tocá de nuevo para descolgarla" : "Clic para descolgarla") : "Cada pieza se acerca al pasar";
+      nombreEl.textContent = p ? p.nombre : "Chalecos de gamuza";
+      infoEl.textContent = p ? precio(p.precio) + " · " + (TACTIL ? "Tocá de nuevo para descolgarla" : "Clic para descolgarla") : (TACTIL ? "Tocá uno para verlo de cerca" : "Pasá el mouse para acercarlos");
       [nombreEl, infoEl].forEach(function (e) { e.classList.remove("is-nuevo"); void e.offsetWidth; e.classList.add("is-nuevo"); });
     }
     function elegir(i) {
@@ -490,7 +486,7 @@
     perchero.cerrar = cerrar;
     perchero.girar = function () { girarA(ladoAct === "frente" ? "espalda" : "frente"); };
     det.addEventListener("click", function (e) { if (e.target.closest("[data-cerrar-det]")) cerrar(); });
-    document.getElementById("detLados").addEventListener("click", function (e) { var b = e.target.closest("button"); if (b) girarA(b.dataset.lado); });
+    document.getElementById("detLados").addEventListener("click", function (e) { var b = e.target.closest("button"); if (!b) return; if (b.dataset.lado) girarA(b.dataset.lado); });
     document.getElementById("detAgregar").addEventListener("click", function () { var p = producto(PIEZAS[abierta].id); agregar(p.id, 1); avisar(p.nombre + " — agregado"); });
     document.getElementById("detFicha").addEventListener("click", function () { var p = producto(PIEZAS[abierta].id); cerrar(); setTimeout(function () { abrirFicha(p); }, 420); });
     var arr = document.getElementById("detArrastre");

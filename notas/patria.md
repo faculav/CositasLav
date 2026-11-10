@@ -106,3 +106,4 @@ la página queda usable sin animaciones.
 - Fotos del perchero limpiadas: sin halo blanco ni sombras grises de la pared.
 - **Vuelta a plano (pedido de Facundo):** el 3D no convenció. Ahora las piezas cuelgan de frente; al pasar se agrandan (zoom) y las vecinas se corren hacia los costados, con balanceo. La pieza descolgada se mantiene (Frente/Espalda con fotos planas). Se borró `perchero3d.js`.
 - Fondo general más blanco: `--fondo:#fbfaf8`, `--caja:#f1eee8`.
+- Perchero solo con chalecos (se sacaron los collares). Sin sombras (en celular se veían raras). En la pieza abierta: Frente / Espalda / "Más fotos" (próximamente, desactivado).
