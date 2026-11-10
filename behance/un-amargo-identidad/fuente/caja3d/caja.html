@@ -6,7 +6,6 @@
 <script type="module">
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 
 const P = new URLSearchParams(location.search);
 const W = +(P.get('w') || 1600), H = +(P.get('h') || 1600);
@@ -40,30 +39,36 @@ const paper = (map) => new THREE.MeshStandardMaterial({ color: 0xffffff, map: ma
 
 const box = new THREE.Group(); scene.add(box);
 
-// cuerpo: +x derecho, -x izquierdo, +y arriba, -y abajo, +z frente, -z atrás
+// cuerpo hueco: +x derecho, -x izquierdo, +y arriba (abierto), -y abajo, +z frente, -z atrás
+const hidden = new THREE.MeshBasicMaterial({ visible: false });
 const body = new THREE.Mesh(new THREE.BoxGeometry(BW, BH, BW), [
-  paper(tex('derecho')), paper(tex('izquierdo')), paper(), paper(), paper(tex('frente')), paper(tex('detras'))
+  paper(tex('derecho')), paper(tex('izquierdo')), hidden, paper(), paper(tex('frente')), paper(tex('detras'))
 ]);
 body.position.y = BH / 2; body.castShadow = true; body.receiveShadow = true; box.add(body);
+const inner = new THREE.Mesh(new THREE.BoxGeometry(BW - 0.01, BH - 0.005, BW - 0.01),
+  [paper(), paper(), hidden, paper(), paper(), paper()].map(m => { const c = m.clone(); c.side = THREE.BackSide; c.color = new THREE.Color(0xf1eee6); return c; }));
+inner.position.y = BH / 2 + 0.003; inner.receiveShadow = true; box.add(inner);
 
-// tapa: un poco más grande que el cuerpo, cubre la franja superior
-const lid = new THREE.Group(); box.add(lid);
+// tapa de una pieza con bisagra en el borde de atrás; al cerrar cae sobre el frente y los costados
 const T = 0.012;
-const lidMesh = new THREE.Mesh(new RoundedBoxGeometry(BW + 2 * T, LID, BW + 2 * T, 2, 0.006), paper());
-lidMesh.castShadow = true; lidMesh.receiveShadow = true; lid.add(lidMesh);
-const lidBaseY = BH - LID / 2 + 0.002;
-lid.position.y = lidBaseY;
-
-// manijas de cinta negra, como en tu render
-const ribbonMat = new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.45, metalness: 0.05 });
-function handle(x) {
-  const pts = [new THREE.Vector3(0, LID / 2, BW * 0.30), new THREE.Vector3(0, LID / 2 + 0.55, BW * 0.24), new THREE.Vector3(0, LID / 2 + 0.78, 0), new THREE.Vector3(0, LID / 2 + 0.55, -BW * 0.24), new THREE.Vector3(0, LID / 2, -BW * 0.30)];
-  const curve = new THREE.CatmullRomCurve3(pts);
-  const g = new THREE.TubeGeometry(curve, 80, 0.028, 12, false);
-  g.scale(3.2, 1, 1); g.translate(x, 0, 0);
-  const m = new THREE.Mesh(g, ribbonMat); m.castShadow = true; return m;
+const lid = new THREE.Group(); box.add(lid);
+lid.position.set(0, BH, -BW / 2 - T); // eje de la bisagra
+const lidMat = paper();
+const part = (w, h, d, x, y, z) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), lidMat); m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true; lid.add(m); };
+const LW = BW + 2 * T, LD = BW + 2 * T;
+part(LW, T, LD, 0, T / 2, LD / 2);                           // panel superior
+part(LW, LID, T, 0, T - LID / 2, LD - T / 2);                // faldón frontal
+// solapas laterales: van por dentro de las paredes, solo se ven con la caja abierta
+const flapShape = new THREE.Shape(); const FD = BW * 0.92, FH = LID * 0.85;
+flapShape.moveTo(0, 0); flapShape.lineTo(FD, 0); flapShape.lineTo(FD - FH * 0.35, -FH); flapShape.lineTo(FH * 0.35, -FH); flapShape.lineTo(0, 0);
+const flapGeo = new THREE.ExtrudeGeometry(flapShape, { depth: T * 0.6, bevelEnabled: false });
+for (const sx of [-1, 1]) {
+  const f = new THREE.Mesh(flapGeo, lidMat); f.castShadow = true;
+  f.rotation.y = -Math.PI / 2;
+  f.position.set(sx * (BW / 2 - T * 1.2), 0, T + (LD - FD) / 2);
+  lid.add(f);
 }
-lid.add(handle(-0.33)); lid.add(handle(0.33));
+const lidBase = 0;
 
 // piso que solo recibe sombra
 const floor = new THREE.Mesh(new THREE.PlaneGeometry(30, 30), new THREE.ShadowMaterial({ opacity: 0.16 }));
@@ -81,7 +86,7 @@ window.setView = ({ az = 35, el = 18, dist = 8.6, lidUp = 0, ty = 1.05 }) => {
   const a = THREE.MathUtils.degToRad(az), e = THREE.MathUtils.degToRad(el);
   camera.position.set(Math.sin(a) * Math.cos(e) * dist, ty + Math.sin(e) * dist, Math.cos(a) * Math.cos(e) * dist);
   camera.lookAt(0, ty, 0);
-  lid.position.y = lidBaseY + lidUp;
+  lid.rotation.x = -THREE.MathUtils.degToRad(lidUp);
   renderer.render(scene, camera);
   return renderer.domElement.toDataURL('image/png');
 };
