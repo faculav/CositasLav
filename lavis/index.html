@@ -641,6 +641,9 @@ footer a:hover{color:var(--ink)}
 
 /* sin JavaScript (visores de archivos del celular): todo visible y sin animaciones */
 html:not(.js) .fade,html:not(.js) .fade *,html:not(.js) .hero .hcard,html:not(.js) .ln>span,html:not(.js) .h3-text p,html:not(.js) .h3-text .btn-line-w,html:not(.js) .h3-side,html:not(.js) .h3-foot,html:not(.js) .marquee,html:not(.js) .rv .w>span{opacity:1!important;transform:none!important;clip-path:none!important}
+html:not(.js) .hero .hcard,html:not(.js) .fade .hcard{filter:none!important}
+.nojs-note{display:none}
+html:not(.js) .nojs-note{display:block;position:relative;z-index:50;background:#fff;color:#111;font:500 14px/1.4 Inter,system-ui,sans-serif;padding:14px 18px;text-align:center;border-bottom:1px solid rgba(0,0,0,.1)}
 html:not(.js) .sheet,html:not(.js) .hero3d canvas,html:not(.js) .h3-light{display:none!important}
 html:not(.js) .hero3d{height:auto;min-height:0;padding:150px 0 120px}
 html:not(.js) .h3-text{position:relative;top:auto}
@@ -648,6 +651,7 @@ html:not(.js) .h3-side,html:not(.js) .h3-foot{position:relative;left:auto;right:
 </style>
 </head>
 <body>
+<div class="nojs-note">Estás viendo una versión simplificada. Para ver la silla 3D, las animaciones y la agenda, abrí esta página desde un link en Chrome o Safari.</div>
 <div class="bg-orbs" aria-hidden="true"></div>
 
 <header class="top" id="top">
