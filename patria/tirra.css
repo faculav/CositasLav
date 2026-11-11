@@ -245,7 +245,7 @@ body.menu-abierto .header .logo__claro{ display:none; } body.menu-abierto .heade
 .frase{ padding:clamp(80px,10vw,140px) var(--pad); border-top:1px solid var(--linea); border-bottom:1px solid var(--linea); text-align:center; overflow:hidden; }
 .frase__txt{
   margin:0; font-size:clamp(72px, 13vw, 220px); font-weight:700; line-height:.8; letter-spacing:-.075em; text-transform:lowercase;
-  background:url("images/piel-croco.jpg") center/120% auto; -webkit-background-clip:text; background-clip:text; color:transparent;
+  background:url("images/piel-croco.jpg?v=2") center/120% auto; -webkit-background-clip:text; background-clip:text; color:transparent;
 }
 .frase__pie{ margin:34px auto 0; max-width:32ch; color:var(--gris); }
 @supports not ((-webkit-background-clip:text) or (background-clip:text)){ .frase__txt{ color:var(--arena); background:none; } }
