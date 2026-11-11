@@ -1,0 +1,23 @@
+TÍTULO
+Lavis Studio — Rediseño web e identidad digital
+
+DESCRIPCIÓN CORTA (subtítulo)
+Rediseño de la web de una barbería con visagismo en El Pinar, Uruguay: del sitio genérico a una experiencia premium donde reservar lleva un minuto.
+
+TEXTO DEL PROYECTO
+Lavis Studio es una barbería con visagismo en El Pinar, Uruguay: antes de cortar, analizan la cara de cada cliente para elegir el corte que le queda. Con 5.0 en Google y 390 reseñas, el negocio estaba a la altura; su web no. Parecía una plantilla automática, con demasiados elementos compitiendo y un mensaje de entrada negativo.
+
+El objetivo fue uno: que reservar lleve un minuto. A partir de una auditoría del sitio, la agenda y la cuponera existentes, definimos un sistema monocromático y minimalista donde la fotografía real pone el color, y una única excepción: el plata, reservado para Lavis Members.
+
+La portada gira alrededor de una silla de barbero modelada en 3D en el navegador. Un foco sigue al cursor, proyecta la sombra y levanta polvo en el haz. Debajo, el método se cuenta palabra por palabra, los antes y después reales se reproducen solos y cada servicio y cada barbero abren la agenda con esa opción ya elegida. La reserva se resuelve en tres pasos sin salir de la página, conectada al sistema de turnos existente.
+
+Entregables: auditoría, dirección de arte, diseño y desarrollo web, agenda online y manual de marca.
+
+CAMPOS
+Herramientas: HTML, CSS, JavaScript, three.js
+Áreas creativas: Web Design, UI/UX, Branding, Interaction Design
+Etiquetas: barbería, barbershop, web design, ui design, ux, landing page, 3d web, three.js, minimal, black and white, branding, uruguay, booking, glassmorphism
+
+ORDEN DE LAS IMÁGENES
+cover.jpg → portada del proyecto (1616 × 1264)
+p01 a p13 → subir en orden
