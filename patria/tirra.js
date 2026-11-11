@@ -603,9 +603,33 @@
   G.from(".header", { opacity: 0, duration: 1.4, delay: 0.6 });
   G.to(".hero__txt", { opacity: 0, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
 
-  // títulos y textos: aparecen suave
-  document.querySelectorAll(".titulo, .intro__txt, .eti, .frase__pie, .taller__txt > p, .taller__lista li, .contacto__pie").forEach(function (el) {
+  // etiquetas y lista: aparecen suave
+  document.querySelectorAll(".eti, .taller__lista li").forEach(function (el) {
     G.from(el, { y: 40, opacity: 0, duration: 1.4, ease: "expo.out", scrollTrigger: { trigger: el, start: "top 90%" } });
+  });
+
+  // "texto mágico": las palabras se van encendiendo una por una con el scroll
+  function partirEnPalabras(el) {
+    var palabras = [];
+    (function recorrer(nodo) {
+      Array.prototype.slice.call(nodo.childNodes).forEach(function (h) {
+        if (h.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          h.textContent.split(/(\s+)/).forEach(function (t) {
+            if (!t) return;
+            if (/^\s+$/.test(t)) { frag.appendChild(document.createTextNode(" ")); return; }
+            var sp = document.createElement("span"); sp.className = "mt"; sp.textContent = t; frag.appendChild(sp); palabras.push(sp);
+          });
+          nodo.replaceChild(frag, h);
+        } else if (h.nodeType === 1 && h.tagName !== "BR") recorrer(h);
+      });
+    })(el);
+    return palabras;
+  }
+  document.querySelectorAll(".titulo, .intro__txt, .frase__pie, .taller__txt > p, .contacto__pie").forEach(function (el) {
+    var ps = partirEnPalabras(el); if (!ps.length) return;
+    var tl = G.timeline({ scrollTrigger: { trigger: el, start: "top 90%", end: "top 40%", scrub: 0.4 } });
+    ps.forEach(function (sp, i) { tl.fromTo(sp, { opacity: 0.14 }, { opacity: 1, duration: 1, ease: "none" }, i * 0.7); });
   });
 
   // franjas: entran una tras otra

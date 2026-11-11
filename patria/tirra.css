@@ -49,6 +49,8 @@ h1,h2,h3,h4{ margin:0; font-weight:400; }
 }
 .boton:hover{ background:#3a2c22; }
 
+.mt{ display:inline-block; will-change:opacity; }
+
 /* ---------- header ---------- */
 .header{
   position:fixed; top:0; left:0; right:0; z-index:60;

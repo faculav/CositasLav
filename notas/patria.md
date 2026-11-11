@@ -120,3 +120,4 @@ la página queda usable sin animaciones.
 - Galería: se sacó la foto de las pulseras sobre el caballo (`ig-1.jpg`); ahora 2 fotos grandes arriba y 3 abajo.
 - Pendiente: textura de croco nueva (Facundo pasó referencia de croco negro brillante; falta el archivo).
 - Tronco del exhibidor acortado a la mitad (se quitó una franja del medio con fundido). Los collares sobre el busto siguen siendo montajes de fotos puestas en persona: Facundo dice que no se ven reales → hacen falta fotos/imágenes de cada collar ya puesto en el busto.
+- Texto mágico: títulos, intro, frase, texto del taller y contacto se encienden palabra por palabra con el scroll (GSAP ScrollTrigger con scrub; palabras en `span.mt`). Referencia: componente magic-text de 21st.dev (no se pudo abrir el sitio desde la sesión; hecho por descripción).
