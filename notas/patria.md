@@ -119,3 +119,4 @@ la página queda usable sin animaciones.
 - Colección: los chalecos usan las fotos del perchero (`perch-*.webp` frente/espalda).
 - Galería: se sacó la foto de las pulseras sobre el caballo (`ig-1.jpg`); ahora 2 fotos grandes arriba y 3 abajo.
 - Pendiente: textura de croco nueva (Facundo pasó referencia de croco negro brillante; falta el archivo).
+- Tronco del exhibidor acortado a la mitad (se quitó una franja del medio con fundido). Los collares sobre el busto siguen siendo montajes de fotos puestas en persona: Facundo dice que no se ven reales → hacen falta fotos/imágenes de cada collar ya puesto en el busto.

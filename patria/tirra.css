@@ -193,7 +193,7 @@ body.menu-abierto .header .logo__claro{ display:none; } body.menu-abierto .heade
 .collares__cabeza .eti{ margin:0; }
 .collares__fila{ display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(12px,2vw,32px); }
 .exhib{ display:flex; flex-direction:column; align-items:center; gap:4px; padding:0; text-align:center; cursor:pointer; }
-.exhib__marco{ position:relative; display:block; width:100%; aspect-ratio:900/1165; margin-bottom:10px; }
+.exhib__marco{ position:relative; display:block; width:100%; aspect-ratio:900/945; margin-bottom:10px; }
 .exhib__base{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; mix-blend-mode:multiply; transition:transform 1s var(--ease); transform-origin:50% 100%; }
 .exhib__collar{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; transition:transform 1s var(--ease); transform-origin:50% 100%; }
 .exhib:hover .exhib__base, .exhib:hover .exhib__collar{ transform:scale(1.03); }

@@ -558,8 +558,8 @@
       var p = producto("col-" + nombre); if (!p) return;
       var b = document.createElement("button");
       b.type = "button"; b.className = "exhib"; b.setAttribute("aria-label", "Ver " + p.nombre);
-      b.innerHTML = '<span class="exhib__marco"><img class="exhib__base" src="images/exhibidor.jpg" alt="" loading="lazy">' +
-        '<img class="exhib__collar" src="images/collar-' + nombre + '.webp" alt="' + p.nombre + '" loading="lazy"></span>' +
+      b.innerHTML = '<span class="exhib__marco"><img class="exhib__base" src="images/exhibidor.jpg?v=2" alt="" loading="lazy">' +
+        '<img class="exhib__collar" src="images/collar-' + nombre + '.webp?v=2" alt="' + p.nombre + '" loading="lazy"></span>' +
         '<span class="exhib__nombre">' + p.nombre + '</span><span class="exhib__precio">' + precio(p.precio) + '</span>';
       b.addEventListener("click", function () { abrirFicha(p); });
       filaCol.appendChild(b);
