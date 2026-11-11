@@ -549,17 +549,15 @@
   })();
 
   /* ---------- los collares: busto sobre tronco ----------
-     Cada collar es el real (tira de cuero, argolla y piedra) recortado de su
-     foto y apoyado sobre el busto: images/collar-*.webp, mismo tamaño que
-     images/exhibidor.jpg (script: images/collar-en-busto.py). Sin animación. */
+     Cada collar tiene su propia imagen ya puesto en el busto
+     (images/exhibidor-<nombre>.jpg, con el fondo emparejado a blanco). */
   var filaCol = document.getElementById("collaresFila");
   if (filaCol) {
-    ["tierra", "ocre", "pampa", "greda"].forEach(function (nombre) {
+    ["tierra", "pampa", "ocre", "greda"].forEach(function (nombre) {
       var p = producto("col-" + nombre); if (!p) return;
       var b = document.createElement("button");
       b.type = "button"; b.className = "exhib"; b.setAttribute("aria-label", "Ver " + p.nombre);
-      b.innerHTML = '<span class="exhib__marco"><img class="exhib__base" src="images/exhibidor.jpg?v=2" alt="" loading="lazy">' +
-        '<img class="exhib__collar" src="images/collar-' + nombre + '.webp?v=2" alt="' + p.nombre + '" loading="lazy"></span>' +
+      b.innerHTML = '<span class="exhib__marco"><img class="exhib__base" src="images/exhibidor-' + nombre + '.jpg" alt="' + p.nombre + ' en su exhibidor" loading="lazy"></span>' +
         '<span class="exhib__nombre">' + p.nombre + '</span><span class="exhib__precio">' + precio(p.precio) + '</span>';
       b.addEventListener("click", function () { abrirFicha(p); });
       filaCol.appendChild(b);
