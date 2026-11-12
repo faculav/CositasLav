@@ -136,3 +136,7 @@ la página queda usable sin animaciones.
 - Ficha de producto: flechas flotantes sobre la foto, deslizar con el dedo y teclas ←/→.
 - Sección "Los collares" en celular: flechas para pasar de collar.
 - Brazaletes Brava y Sombra: fondo blanqueado para que no se note el recuadro gris.
+
+### Pieles: nuevas fotos de Cebra y Gamuza
+- `piel-cebra.jpg` y `piel-gamuza.jpg` reemplazadas por las fotos de la usuaria (ampliadas). Textos: "Pelo estampado blanco y negro" y "color chocolate".
+- Degradé oscuro abajo en cada franja para que el texto blanco se lea sobre pieles claras (cebra).
