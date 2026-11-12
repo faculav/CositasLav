@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 <link rel="preload" href="images/hero-720.mp4?v=2" as="video" type="video/mp4">
-<link rel="stylesheet" href="tirra.css?v=26">
+<link rel="stylesheet" href="tirra.css?v=27">
 </head>
 <body>
 
@@ -134,7 +134,11 @@
     <h2 class="titulo">Los <strong>collares</strong></h2>
     <p class="eti">Cuero vacuno y piedra natural · tocá uno para verlo</p>
   </div>
+  <div class="collares__marco">
   <div class="collares__fila" id="collaresFila"></div>
+  <button class="detalle__flecha collares__flecha detalle__flecha--izq" id="colPrev" type="button" aria-label="Collar anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <button class="detalle__flecha collares__flecha detalle__flecha--der" id="colNext" type="button" aria-label="Collar siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
 </section>
 
 <section class="pieles" id="pieles">
@@ -244,8 +248,10 @@
   <div class="ficha__fondo" data-cerrar></div>
   <div class="ficha__caja">
     <button class="ficha__cerrar" data-cerrar aria-label="Cerrar">Cerrar</button>
-    <div class="ficha__galeria">
-      <div class="ficha__foto" id="fichaFoto"><img id="fichaImg" src="" alt=""></div>
+    <div class="ficha__galeria" id="fichaGaleria">
+      <div class="ficha__foto" id="fichaFoto"><img id="fichaImg" src="" alt="">
+        <button class="detalle__flecha ficha__flecha detalle__flecha--izq" id="fichaPrev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button class="detalle__flecha ficha__flecha detalle__flecha--der" id="fichaNext" type="button" aria-label="Foto siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button></div>
       <div class="ficha__miniaturas" id="fichaMinis"></div>
     </div>
     <div class="ficha__info">
@@ -290,7 +296,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="productos.js?v=31"></script>
-<script src="tirra.js?v=33"></script>
+<script src="productos.js?v=32"></script>
+<script src="tirra.js?v=34"></script>
 </body>
 </html>

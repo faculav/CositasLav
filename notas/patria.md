@@ -129,3 +129,10 @@ la página queda usable sin animaciones.
 - El título "Pieles de nuestra tierra" desaparecía si entrabas por un link (ej. #perchero) y subías: se sacó el `scroll-behavior:smooth` del CSS (rompía las medidas de GSAP) y el desplazamiento suave ahora lo hace el JS.
 - El video arranca antes: la versión liviana (720p, 1,3 MB) se pide directo desde el HTML con preload.
 - Fichas de collares: la foto se ve entera (contain), y en las imágenes con texto el logo TIRRA se subió para que no quede cortado.
+
+### Collares: sin repetir maniquíes + flechas
+- En Colección (y en el carrito) los collares muestran la foto en el cuello, no el busto (el busto queda solo en la sección "Los collares").
+- Tarjetas sin segunda foto ya no se vuelven blancas al pasar el mouse (hacen un zoom suave).
+- Ficha de producto: flechas flotantes sobre la foto, deslizar con el dedo y teclas ←/→.
+- Sección "Los collares" en celular: flechas para pasar de collar.
+- Brazaletes Brava y Sombra: fondo blanqueado para que no se note el recuadro gris.

@@ -66,9 +66,9 @@
     d.className = "producto";
     d.dataset.cat = p.cat;
     d.innerHTML =
-      '<div class="producto__media">' +
+      '<div class="producto__media' + (p.img2 ? "" : " solo") + '">' +
         (p.tag ? '<span class="producto__tag">' + p.tag + "</span>" : "") +
-        '<img class="a" src="' + p.img + '" alt="' + p.nombre + '" loading="lazy">' +
+        '<img class="a' + (p.cat === "collares" ? " plena" : "") + '" src="' + p.img + '" alt="' + p.nombre + '" loading="lazy">' +
         (p.img2 ? '<img class="b' + (/\.webp/.test(p.img2) ? " plano" : "") + '" src="' + p.img2 + '" alt="" loading="lazy">' : "") +
       "</div>" +
       '<div class="producto__info"><span class="producto__nombre">' + p.nombre + '</span><span class="producto__precio">' + precio(p.precio) + "</span></div>" +
@@ -111,6 +111,11 @@
     fichaImg.style.padding = fotos[fotoIdx] === actual.img ? "" : "0";
     fichaMinis.querySelectorAll("button").forEach(function (b, k) { b.classList.toggle("is-activa", k === fotoIdx); });
   }
+  document.getElementById("fichaPrev").addEventListener("click", function (e) { e.stopPropagation(); mostrarFoto(fotoIdx - 1); });
+  document.getElementById("fichaNext").addEventListener("click", function (e) { e.stopPropagation(); mostrarFoto(fotoIdx + 1); });
+  var fx = null, fichaFotoEl = document.getElementById("fichaFoto");
+  fichaFotoEl.addEventListener("touchstart", function (e) { fx = e.touches[0].clientX; }, { passive: true });
+  fichaFotoEl.addEventListener("touchend", function (e) { if (fx == null) return; var dx = e.changedTouches[0].clientX - fx; fx = null; if (Math.abs(dx) > 40 && fotos.length > 1) { fichaFotoEl.dataset.desliz = "1"; mostrarFoto(fotoIdx + (dx < 0 ? 1 : -1)); } });
   function abrirFicha(p) {
     actual = p; cantidad = 1; fichaCant.textContent = "1";
     // los collares abren con sus fotos puestas: primero limpia, después con el texto
@@ -127,6 +132,7 @@
       fichaMinis.appendChild(b);
     });
     fichaMinis.hidden = fotos.length < 2;
+    document.getElementById("fichaGaleria").classList.toggle("una-foto", fotos.length < 2);
     fichaImg.onerror = function () { if (fotos.length > 1) { fotos.splice(fotoIdx, 1); if (fichaMinis.children[fotoIdx]) fichaMinis.children[fotoIdx].remove(); mostrarFoto(0); } };
     mostrarFoto(0);
     ficha.hidden = false; requestAnimationFrame(function () { ficha.classList.add("is-abierta"); });
@@ -137,7 +143,7 @@
   document.getElementById("fichaMenos").addEventListener("click", function () { cantidad = Math.max(1, cantidad - 1); fichaCant.textContent = cantidad; });
   document.getElementById("fichaMas").addEventListener("click", function () { cantidad = Math.min(20, cantidad + 1); fichaCant.textContent = cantidad; });
   document.getElementById("fichaAgregar").addEventListener("click", function () { agregar(actual.id, cantidad); cerrarFicha(); avisar(actual.nombre + " — agregado"); });
-  document.getElementById("fichaFoto").addEventListener("click", function () { abrirVisor(); });
+  document.getElementById("fichaFoto").addEventListener("click", function () { if (this.dataset.desliz) { delete this.dataset.desliz; return; } abrirVisor(); });
 
   /* ---------- visor ---------- */
   var visor = document.getElementById("visor"), visorImg = document.getElementById("visorImg");
@@ -563,6 +569,17 @@
       b.addEventListener("click", function () { abrirFicha(p); });
       filaCol.appendChild(b);
     });
+    // flechas para pasar de collar en celular (la fila se desliza de costado)
+    var colPrev = document.getElementById("colPrev"), colNext = document.getElementById("colNext");
+    function pasoCol() { var e = filaCol.querySelector(".exhib"); return e ? e.getBoundingClientRect().width + 4 : 300; }
+    function estadoCol() {
+      colPrev.disabled = filaCol.scrollLeft < 8;
+      colNext.disabled = filaCol.scrollLeft + filaCol.clientWidth > filaCol.scrollWidth - 8;
+    }
+    colPrev.addEventListener("click", function () { filaCol.scrollBy({ left: -pasoCol(), behavior: "smooth" }); });
+    colNext.addEventListener("click", function () { filaCol.scrollBy({ left: pasoCol(), behavior: "smooth" }); });
+    filaCol.addEventListener("scroll", estadoCol, { passive: true });
+    window.addEventListener("resize", estadoCol); estadoCol();
   }
 
   /* ---------- links internos: desplazamiento suave (sin scroll-behavior en CSS, que rompe ScrollTrigger) ---------- */
@@ -585,6 +602,7 @@
   menu.addEventListener("click", function (e) { if (e.target.closest("a")) abrirMenu(false); });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") { if (!visor.hidden) cerrarVisor(); else if (!ficha.hidden) cerrarFicha(); else if (carritoEl.classList.contains("is-abierto")) abrirCarrito(false); else if (perchero.abierto) perchero.cerrar(); else abrirMenu(false); }
+    if (!ficha.hidden && visor.hidden && (e.key === "ArrowRight" || e.key === "ArrowLeft")) mostrarFoto(fotoIdx + (e.key === "ArrowRight" ? 1 : -1));
     if (perchero.abierto && ficha.hidden && (e.key === "ArrowRight" || e.key === "ArrowLeft")) perchero.girar(e.key === "ArrowRight" ? 1 : -1);
     if (!visor.hidden && e.key === "ArrowRight") moverVisor(1);
     if (!visor.hidden && e.key === "ArrowLeft") moverVisor(-1);
