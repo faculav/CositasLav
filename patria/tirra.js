@@ -107,13 +107,14 @@
     fotoIdx = (i + fotos.length) % fotos.length; fichaImg.src = fotos[fotoIdx]; fichaImg.alt = actual.nombre;
     // la foto en fondo blanco se funde con el fondo; las de ambiente se ven completas
     fichaImg.style.mixBlendMode = fotos[fotoIdx] === actual.img ? "multiply" : "normal";
-    fichaImg.style.objectFit = fotos[fotoIdx] === actual.img ? "contain" : "cover";
+    fichaImg.style.objectFit = (fotos[fotoIdx] === actual.img || actual.ficha) ? "contain" : "cover";   // las fotos de collares se ven enteras (con su texto)
     fichaImg.style.padding = fotos[fotoIdx] === actual.img ? "" : "0";
     fichaMinis.querySelectorAll("button").forEach(function (b, k) { b.classList.toggle("is-activa", k === fotoIdx); });
   }
   function abrirFicha(p) {
     actual = p; cantidad = 1; fichaCant.textContent = "1";
-    fotos = [p.img, p.img2].concat(p.fotos || []).filter(Boolean).filter(function (f, i, arr) { return arr.indexOf(f) === i; });
+    // los collares abren con sus fotos puestas: primero limpia, después con el texto
+    fotos = (p.ficha || [p.img, p.img2].concat(p.fotos || [])).filter(Boolean).filter(function (f, i, arr) { return arr.indexOf(f) === i; });
     document.getElementById("fichaNombre").textContent = p.nombre;
     document.getElementById("fichaCat").textContent = NOMBRE_CAT[p.cat] || "";
     document.getElementById("fichaPrecio").textContent = precio(p.precio);
