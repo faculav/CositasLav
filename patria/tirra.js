@@ -32,7 +32,7 @@
   if (video) {
     video.muted = true; video.defaultMuted = true;
     var mp4 = video.canPlayType('video/mp4; codecs="avc1.4D401F"');
-    video.src = !mp4 ? "images/hero-720.webm?v=2" : (window.innerWidth < 900 ? video.dataset.chico : video.dataset.grande);
+    if (!mp4) video.src = "images/hero-720.webm?v=2";   // el mp4 liviano ya viene en el HTML y empieza a bajar al abrir la página
     var enPantalla = true, intentos = 0, trabado = null;
     var darPlay = function () { if (!enPantalla || document.hidden) return; var pr = video.play(); if (pr && pr.catch) pr.catch(function () {}); };
     video.addEventListener("error", function () { if (video.src.indexOf(".webm") < 0) { video.src = "images/hero-720.webm?v=2"; darPlay(); } });
@@ -565,6 +565,16 @@
     });
   }
 
+  /* ---------- links internos: desplazamiento suave (sin scroll-behavior en CSS, que rompe ScrollTrigger) ---------- */
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest('a[href^="#"]'); if (!a) return;
+    var id = a.getAttribute("href"); if (id.length < 2) return;
+    var dest = document.querySelector(id); if (!dest) return;
+    e.preventDefault();
+    window.scrollTo({ top: dest.getBoundingClientRect().top + window.scrollY - 60, behavior: REDUCIR ? "auto" : "smooth" });
+    if (history.replaceState) history.replaceState(null, "", id);
+  });
+
   /* ---------- menú ---------- */
   var burger = document.getElementById("burger"), menu = document.getElementById("menuMovil");
   function abrirMenu(si) {
@@ -596,11 +606,15 @@
   /* ---------- animaciones (GSAP) ---------- */
   if (!G || !ST || REDUCIR) return;
 
+  // si la página abre más abajo (por ej. con #perchero), recalcular posiciones al terminar de cargar
+  window.addEventListener("load", function () { ST.refresh(); });
+  setTimeout(function () { ST.refresh(); }, 800);
+
   // portada: el título sube despacio al cargar
   G.from(".hero__titulo > *", { yPercent: 100, opacity: 0, duration: 1.8, ease: "expo.out", stagger: 0.12, delay: 0.2 });
   G.from(".hero__pie", { opacity: 0, duration: 1.4, delay: 0.9 });
   G.from(".header", { opacity: 0, duration: 1.4, delay: 0.6 });
-  G.to(".hero__txt", { opacity: 0, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+  G.fromTo(".hero__txt", { opacity: 1 }, { opacity: 0, immediateRender: false, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
 
   // etiquetas y lista: aparecen suave
   document.querySelectorAll(".eti, .taller__lista li").forEach(function (el) {

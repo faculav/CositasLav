@@ -22,7 +22,7 @@
   --ease:cubic-bezier(.19,1,.22,1);
 }
 *,*::before,*::after{ box-sizing:border-box; }
-html{ scroll-behavior:smooth; }
+html{ scroll-behavior:auto; }
 body{
   margin:0; background:var(--fondo); color:var(--tinta);
   font-family:var(--ui); font-size:14px; line-height:1.6; font-weight:400;
@@ -297,8 +297,8 @@ body.menu-abierto .header .logo__claro{ display:none; } body.menu-abierto .heade
 .ficha.is-abierta .ficha__caja{ transform:none; }
 .ficha__cerrar{ position:absolute; top:22px; right:var(--pad); z-index:2; font-size:11px; letter-spacing:.18em; text-transform:uppercase; }
 .ficha__galeria{ background:var(--caja); display:flex; flex-direction:column; }
-.ficha__foto{ flex:1; min-height:60vh; cursor:zoom-in; overflow:hidden; }
-.ficha__foto img{ width:100%; height:100%; object-fit:contain; padding:8%; mix-blend-mode:multiply; }
+.ficha__foto{ position:relative; flex:1; min-height:60vh; cursor:zoom-in; overflow:hidden; }
+.ficha__foto img{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; padding:8%; mix-blend-mode:multiply; }
 .ficha__miniaturas{ display:flex; gap:6px; padding:10px; }
 .ficha__miniaturas button{ width:64px; height:80px; overflow:hidden; opacity:.45; transition:opacity .3s; background:var(--hueso); }
 .ficha__miniaturas button img{ width:100%; height:100%; object-fit:cover; mix-blend-mode:multiply; }

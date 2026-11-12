@@ -124,3 +124,8 @@ la página queda usable sin animaciones.
 - Collares: ahora cada uno usa la imagen que pasó Facundo ya puesto en el busto sobre tronco (`images/exhibidor-<nombre>.jpg`). Ojo: la imagen usada para **Tierra** muestra tira negra y piedra gris (parecida al Greda); falta confirmar/recibir la del Tierra real (tira marrón, piedra ámbar).
 - Croco: `piel-croco.jpg` reemplazada por la foto de Facundo (croco negro brillante), usada en la franja Croco y en las letras de «Hecho a mano». La foto sobre el caballo (`amb-pulseras.jpg`) se sacó también de las pulseras de la Colección; `ig-1.jpg` queda solo para v1/v2.
 - Collares, ficha: 1) foto puesta en el cuello limpia (`cuello-<nombre>.jpg`), 2) la misma con el texto «Collar X / Hecho a mano con cuero vacuno + piedra natural. Producto Uruguayo.» y logo (`cuello-<nombre>-texto.jpg`). La del Greda es la original; su versión limpia se hizo borrando el texto. Las otras tres llevan el texto armado con `images/texto-collar.py` (Inter). En la Colección: foto en busto y, al pasar el mouse, la del cuello.
+
+### Arreglos: título del video, arranque del video y fotos de collares
+- El título "Pieles de nuestra tierra" desaparecía si entrabas por un link (ej. #perchero) y subías: se sacó el `scroll-behavior:smooth` del CSS (rompía las medidas de GSAP) y el desplazamiento suave ahora lo hace el JS.
+- El video arranca antes: la versión liviana (720p, 1,3 MB) se pide directo desde el HTML con preload.
+- Fichas de collares: la foto se ve entera (contain), y en las imágenes con texto el logo TIRRA se subió para que no quede cortado.
