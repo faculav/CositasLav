@@ -144,3 +144,4 @@ la página queda usable sin animaciones.
 ### Reel de marca (redes)
 - `patria/tirra-reel.mp4`: video vertical 1080×1920, 12 s, sin música. Logo fijo al centro y fondos que cambian cada ~0,5 s (paleta, caballos, pieles, etiqueta, bolsa kraft, parche de cuero, caballo con la marca, manada, taller, cierre).
 - Se genera con `patria/images/reel-marca.py` (necesita los recortes verticales del video del inicio en una carpeta `clip/` junto al script).
+- v2: mismo ritmo que la referencia (52 cortes en 8,4 s: arranca cada 2 cuadros y frena hasta 20), sonido propio sintetizado (bajo grave + golpe en cada corte), logo siempre en el mismo lugar con centrado óptico, escenas alternando oscuro/claro/caramelo, siluetas en negativo, mockups (etiqueta, bolsa, parche, chaleco con logo).
