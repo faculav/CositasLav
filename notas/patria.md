@@ -140,3 +140,7 @@ la página queda usable sin animaciones.
 ### Pieles: nuevas fotos de Cebra y Gamuza
 - `piel-cebra.jpg` y `piel-gamuza.jpg` reemplazadas por las fotos de la usuaria (ampliadas). Textos: "Pelo estampado blanco y negro" y "color chocolate".
 - Degradé oscuro abajo en cada franja para que el texto blanco se lea sobre pieles claras (cebra).
+
+### Reel de marca (redes)
+- `patria/tirra-reel.mp4`: video vertical 1080×1920, 12 s, sin música. Logo fijo al centro y fondos que cambian cada ~0,5 s (paleta, caballos, pieles, etiqueta, bolsa kraft, parche de cuero, caballo con la marca, manada, taller, cierre).
+- Se genera con `patria/images/reel-marca.py` (necesita los recortes verticales del video del inicio en una carpeta `clip/` junto al script).
